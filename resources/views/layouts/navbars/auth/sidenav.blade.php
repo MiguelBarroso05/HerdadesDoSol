@@ -1,0 +1,95 @@
+<aside class="bg-white shadow-lg rounded-xl my-3 fixed left-0 top-0 h-screen w-64 p-4" id="sidenav-main">
+    <!-- Sidebar header -->
+    <div class="mb-4">
+        <a class="flex items-center space-x-3" href="{{ route('home') }}">
+            <img src="{{ asset('./imgs/logo/logo.png') }}" class="h-12" alt="main_logo">
+            <span class="font-bold text-gray-700">Herdades Do Sol</span>
+        </a>
+    </div>
+    <!-- Horizontal divider -->
+    <hr class="border-gray-300">
+
+    <!-- Sidebar navigation -->
+    <div class="mt-4">
+        <ul class="space-y-2">
+            <!-- Dashboard Link -->
+            <li>
+                <a href="{{ route('dashboard') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'home' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="ni ni-tv-2 text-primary text-lg"></i>
+                    <span class="ml-3">Dashboard</span>
+                </a>
+            </li>
+
+            <!-- estates Section Header -->
+            <li class="mt-4">
+                <h6 class="px-3 text-xs uppercase font-bold text-gray-400">Estates</h6>
+            </li>
+
+            <!-- estates Link -->
+            <li>
+                <a href="{{ route('estates.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'estates.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="fa-solid fa-house-chimney text-dark text-lg"></i>
+                    <span class="ml-3">Estates</span>
+                </a>
+            </li>
+
+            <!-- Users Section Header -->
+            <li class="mt-4">
+                <h6 class="px-3 text-xs uppercase font-bold text-gray-400">Users</h6>
+            </li>
+
+            <!-- Profile Link -->
+            <li>
+                <a href="{{ route('profile') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'profile' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="ni ni-single-02 text-dark text-lg"></i>
+                    <span class="ml-3">Profile</span>
+                </a>
+            </li>
+
+            <!-- Users Link -->
+            <li>
+                <a href="{{ route('users.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'users.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="ni ni-single-02 text-dark text-lg"></i>
+                    <span class="ml-3">Users</span>
+                </a>
+            </li>
+
+            <!-- Pages Section Header -->
+            <li class="mt-4">
+                <h6 class="px-3 text-xs uppercase font-bold text-gray-400">Pages</h6>
+            </li>
+
+            <!-- Activities Link -->
+            <li>
+                <a href="{{ route('activities.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'activities.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="ni ni-compass-04 text-info text-lg"></i>
+                    <span class="ml-3">Activities</span>
+                </a>
+            </li>
+
+            <!-- Activity Types Link -->
+            <li>
+                <a href="{{ route('activity_types.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'activity_types.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="ni ni-compass-04 text-secondary text-lg"></i>
+                    <span class="ml-3">Activity Types</span>
+                </a>
+            </li>
+
+            <!-- Accommodations Link -->
+            <li>
+                <a href="{{ route('accommodations.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'accommodations.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="fa-solid fa-campground text-danger text-lg"></i>
+                    <span class="ml-3">Accommodations</span>
+                </a>
+            </li>
+
+            <!-- Accommodation Types Link -->
+            <li>
+                <a href="{{ route('accommodation_types.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'accommodation_types.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
+                    <i class="fa-solid fa-campground text-secondary text-lg"></i>
+                    <span class="ml-3">Accommodation Types</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
