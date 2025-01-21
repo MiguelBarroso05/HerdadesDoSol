@@ -4,22 +4,26 @@
         <div class="modal-content">
             <div class="hs-col-10 hs-align-self-center">
                 <div class="modal-body">
-                    <div class="hs-d-flex hs-justify-content-between">
+                    <div class="hs-d-flex hs-justify-content-between hs-mb-md-4">
                         <h5 class="modal-title hs-align-self-center hs-text-uppercase" style="color: black !important;"
                             id="exampleModalLabel">{{$address->pivot->addressIdentifier}} ADDRESS</h5>
                         <div class="hs-d-flex hs-align-items-center">
                             <x-custom-button type="fav" route="{{null}}"/>
-                            <a id="openEditAddressModal{{$address->id}}"  class="mx-2"><i class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer" ></i></a>
-                            <button id="openDeletionModal{{$address->id}}" type="button" style="border: none; background-color: transparent">
+                            <a id="openEditAddressModal{{$address->id}}" class="mx-2"><i
+                                    class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer"></i></a>
+                            <button id="openDeletionModal{{$address->id}}" type="button" class="mx-2"
+                                    style="border: none; background-color: transparent">
                                 <i class="bi bi-trash hs-fs-5" style="color: red"></i>
                             </button>
                             <x-custom-button type="close" route="{{null}}"/>
                         </div>
                     </div>
                     <div class="hs-row">
+                        <div class="hs-col-md-6 hs-d-flex">
+                            <p><strong>Identifier:</strong> {{ $address->pivot->addressIdentifier ?? 'none' }}</p>
+                        </div>
                         <div class="hs-col-md-6">
-                            <p><strong>Address Identifier:</strong> {{ $address->pivot->addressIdentifier ?? 'none' }}
-                            </p>
+                            <p><strong>Phone Number:</strong> {{ $address->pivot->addressPhone ?? 'none' }}</p>
                         </div>
                         <div class="hs-col-md-6">
                             <p><strong>Country:</strong> {{ $address->country }}</p>
@@ -28,13 +32,10 @@
                             <p><strong>City:</strong> {{ $address->city }}</p>
                         </div>
                         <div class="hs-col-md-6">
-                            <p><strong>Street:</strong> {{ $address->street }}</p>
-                        </div>
-                        <div class="hs-col-md-6">
                             <p><strong>Zipcode:</strong> {{ $address->zipcode }}</p>
                         </div>
                         <div class="hs-col-md-6">
-                            <p><strong>Address Phone:</strong> {{ $address->pivot->addressPhone ?? 'none' }}</p>
+                            <p><strong>Street:</strong> {{ $address->street }}</p>
                         </div>
                     </div>
                 </div>

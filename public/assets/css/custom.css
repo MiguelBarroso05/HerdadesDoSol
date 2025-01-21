@@ -1,138 +1,220 @@
-/* App layout */
+
+:root {
+    --tw-ring-color: #FFBF65 !important;
+}
+
+
+
+    /* App layout */
 .app-image {
     background-image: url('../../imgs/pages/app_banner.jpg') !important;
     background-position-y: 65%;
     background-position-x: 50%;
 }
 
-/* Colors */
-.primary-color{
-    color: #FFBF65;
-}
-
-/* Nav bar */
-.logo {
-    height: 40px;
-    width: 40px;
-}
-.dropdown-guest {
-    top: 55px !important;
-    left: -141px !important;
-}
-.dropdown-auth {
-    top: 55px !important;
-    left: -141px !important;
-}
-
-
-
-/* Side bar */
-.nav-side {
-    height: auto !important;
-}
-.hs-bg-card {
-    background-color: #f6f6f6;
-    opacity: 0.82;
-}
-
-
-/* Home page */
-.home-image {
-    background-image: url('../../imgs/pages/home_banner.png') !important;
-    background-size: cover;
-}
-
-/* Input labels */
-label{
-    font-size: 16px;
-    font-weight: normal;
-    color: black !important;
-}
-
-.form-control:focus{
-    border-color: #FFBF65 !important;
-}
-
-/* Input placeholder */
-input::placeholder{
-    opacity: 0.5 !important;
-}
-
-
-/* Sign In page */
-.signin-image {
-    background-image: url('../../imgs/pages/sign_in.jpg') !important;
-    background-size: cover;
-}
-
-
-/* Sign Up page */
-.signup-image {
-    background-image: url('../../imgs/pages/sign_up.jpg') !important;
-    background-size: cover;
-}
-
-
-/* Styles */
-.custom-dropdown {
-    appearance: none;
-    background: url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat right 1rem center;
-    background-size: 1rem;
-    padding-right: 2rem;
-}
-
-
-select::-ms-expand {
-    display: none;
-}
-
-
-.auto-resize {
-    overflow: hidden;
-    resize: none;
-}
-
-.modal-backdrop.show {
-    backdrop-filter: blur(5px); /* Nível de desfoque */
-}
-
-.searchbar{
-    width: 350px !important;
-    height: 40px !important;
-    background-color: #ECE6F0 !important;
-    border-radius: 20px !important;
-}
-
-input.form-control::placeholder {
-    color: #49454F;
-}
-
-.fa-search{
-    color: #49454F;
-}
-
-.input-group .form-control:focus{
-    border: 0 !important;
-    border-radius: 20px !important;
-}
-
-/* Mobile */
-@media only screen and (max-width: 768px) {
-    .mobile-hidden {
-        display: none !important;
+    .col-admin {
+        padding: 0 !important;
+        margin-left: 282px !important;
+        width: 84% !important;
     }
-}
-.container_profile{
-    height: 650px;
-
-}
 
 
-/* Bootstrap */
-a {
-    text-decoration: none;
-}
+    /* Colors */
 
-.hs-nav-top {
-    width: 1650px;
-}
+    .primary-color{
+        color: #FFBF65 !important;
+    }
+
+    p, a, span, h1, h2, h3, h4, h5, h6{
+        color: #1E1E1E !important;
+    }
+
+    .text-secondary{
+        color: #757575 !important;
+    }
+
+    /* Nav bar */
+    .logo {
+        height: 40px;
+        width: 40px;
+    }
+    .dropdown-guest {
+        top: 55px !important;
+        left: -141px !important;
+    }
+    .dropdown-auth {
+        top: 55px !important;
+        left: -141px !important;
+    }
+
+    .hs-input-group > .hs-form-control {
+        height: 40px !important;
+    }
+
+
+    /* Admin Side bar */
+    .sidenav-admin {
+        margin-left: 10px;
+        min-height: 95vh;
+    }
+
+    .side-logo {
+        margin-left: 5px;
+    }
+
+    .top-nav-format {
+        width: 87%;
+        margin-left: 244px;
+        align-items: end;
+    }
+
+    .top-nav-form {
+        z-index: 10;
+    }
+
+    .top-nav-form-color{
+        color: white;
+    }
+
+    .top-nav-form-color:hover{
+        color: darkorange;
+    }
+
+
+    /* Client Side bar */
+    .nav-side {
+        height: auto !important;
+    }
+    .hs-bg-card {
+        background-color: #f6f6f6;
+        opacity: 0.82;
+    }
+
+
+    /* Home page */
+    .home-image {
+        background-image: url('../../imgs/pages/home_banner.png') !important;
+        background-size: cover;
+    }
+
+
+    /* Input labels */
+    label{
+        font-size: 16px;
+        font-weight: normal;
+        color: black !important;
+    }
+
+    .form-control:focus{
+        border-color: #FFBF65 !important;
+    }
+
+    /* Input placeholder */
+    input::placeholder{
+        opacity: 0.5 !important;
+    }
+
+
+    /* Sign In page */
+    .signin-image {
+        background-image: url('../../imgs/pages/sign_in.jpg') !important;
+        background-size: cover;
+    }
+
+
+    /* Sign Up page */
+    .signup-image {
+        background-image: url('../../imgs/pages/sign_up.jpg') !important;
+        background-size: cover;
+    }
+
+
+    /* Styles */
+    .custom-dropdown {
+        appearance: none;
+        background: url('https://cdn-icons-png.flaticon.com/512/60/60995.png') no-repeat right 1rem center;
+        background-size: 1rem;
+        padding-right: 2rem;
+    }
+
+
+    select::-ms-expand {
+        display: none;
+    }
+
+
+    .auto-resize {
+        overflow: hidden;
+        resize: none;
+    }
+
+    .modal-backdrop.show {
+        backdrop-filter: blur(5px); /* Nível de desfoque */
+    }
+
+    .searchbar{
+        width: 350px !important;
+        height: 40px !important;
+        background-color: #ECE6F0 !important;
+        border-radius: 20px !important;
+    }
+
+    .hs-form-control{
+        height: 34px !important;
+        line-height: 16px !important;
+    }
+
+    input.hs-form-control::placeholder {
+        color: #49454F;
+    }
+
+    .hs-form-control:focus{
+        border-color: #FFBF65 !important;
+    }
+
+    .fa-search{
+        color: #49454F;
+    }
+
+    .hs-input-group .hs-form-control:focus{
+        border: 0 !important;
+        border-radius: 20px !important;
+    }
+
+
+    /* Mobile */
+    @media only screen and (max-width: 768px) {
+        .mobile-hidden {
+            display: none !important;
+        }
+    }
+    .container_profile{
+        height: 650px;
+
+    }
+
+
+    /* Bootstrap */
+    a {
+        text-decoration: none;
+    }
+
+    .hs-nav-top {
+        width: 1650px;
+    }
+
+
+    .custom-select label{
+        height: 34px;
+        line-height: 16px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .custom-select ul{
+        padding: 0;
+    }
+
+
+
+

@@ -1,8 +1,9 @@
-@extends('layouts.app', ['class' => 'hs-g-sidenav-show hs-bg-gray-100'])
+@extends('layouts.app')
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="hs-container-fluid hs-py-4 hs-flex-grow-1">
+
+    <div class="hs-container-fluid hs-py-4 hs-flex-grow-1 col-admin">
         <div class="hs-row">
             <!-- Total Users -->
             <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
@@ -113,57 +114,6 @@
                             <canvas id="chart-line" class="hs-chart-canvas" height="300"></canvas>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Slideshow -->
-        <div class="hs-col-lg-5">
-            <div class="hs-card hs-card-carousel hs-overflow-hidden hs-h-100 hs-p-0">
-                <div id="carouselExampleCaptions" class="hs-carousel hs-slide hs-h-100" data-bs-ride="carousel">
-                    <div class="hs-carousel-inner hs-border-radius-lg hs-h-100">
-                        <!-- Slide 1 -->
-                        <div class="hs-carousel-item hs-h-100 hs-active app-image">
-                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
-                                    <i class="ni ni-compass-04 hs-text-dark hs-opacity-10"></i>
-                                </div>
-                                <h5 class="hs-text-white hs-mb-1">Discover Unique Destinations</h5>
-                                <p>Explore handpicked accommodations and activities designed to create unforgettable memories.</p>
-                            </div>
-                        </div>
-
-                        <!-- Slide 2 -->
-                        <div class="hs-carousel-item hs-h-100 signup-image">
-                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
-                                    <i class="ni ni-world-2 hs-text-dark hs-opacity-10"></i>
-                                </div>
-                                <h5 class="hs-text-white hs-mb-1">Adventures Tailored for You</h5>
-                                <p>Whether you're seeking relaxation or adventure, we have the perfect experience waiting for you.</p>
-                            </div>
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="hs-carousel-item hs-h-100 home-image">
-                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
-                                    <i class="ni ni-send hs-text-dark hs-opacity-10"></i>
-                                </div>
-                                <h5 class="hs-text-white hs-mb-1">Plan Your Perfect Getaway</h5>
-                                <p>From accommodations to activities, customize every detail to suit your needs and preferences.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="hs-carousel-control-prev hs-w-5 hs-me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                        <span class="hs-carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-
-                    <button class="hs-carousel-control-next hs-w-5 hs-me-3" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                        <span class="hs-carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
                 </div>
             </div>
         </div>
@@ -299,83 +249,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Categories -->
-        <div class="hs-col-lg-5">
-            <div class="hs-card">
-                <div class="hs-card-header hs-pb-0 hs-p-3">
-                    <h6 class="hs-mb-0">Categories</h6>
-                </div>
-                <div class="hs-card-body hs-p-3">
-                    <ul class="hs-list-group">
-                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
-                            <div class="hs-d-flex hs-align-items-center">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
-                                    <i class="ni ni-mobile-button hs-text-white hs-opacity-10"></i>
-                                </div>
-                                <div class="hs-d-flex hs-flex-column">
-                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Devices</h6>
-                                    <span class="hs-text-xs">250 in stock, <span class="hs-font-weight-bold">346+ sold</span></span>
-                                </div>
-                            </div>
-                            <div class="hs-d-flex">
-                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
-                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </li>
-                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
-                            <div class="hs-d-flex hs-align-items-center">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
-                                    <i class="ni ni-tag hs-text-white hs-opacity-10"></i>
-                                </div>
-                                <div class="hs-d-flex hs-flex-column">
-                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Tickets</h6>
-                                    <span class="hs-text-xs">123 closed, <span class="hs-font-weight-bold">15 open</span></span>
-                                </div>
-                            </div>
-                            <div class="hs-d-flex">
-                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
-                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </li>
-                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
-                            <div class="hs-d-flex hs-align-items-center">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
-                                    <i class="ni ni-box-2 hs-text-white hs-opacity-10"></i>
-                                </div>
-                                <div class="hs-d-flex hs-flex-column">
-                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Error logs</h6>
-                                    <span class="hs-text-xs">1 is active, <span class="hs-font-weight-bold">40 closed</span></span>
-                                </div>
-                            </div>
-                            <div class="hs-d-flex">
-                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
-                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </li>
-                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-border-radius-lg">
-                            <div class="hs-d-flex hs-align-items-center">
-                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
-                                    <i class="ni ni-satisfied hs-text-white hs-opacity-10"></i>
-                                </div>
-                                <div class="hs-d-flex hs-flex-column">
-                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Happy users</h6>
-                                    <span class="hs-text-xs hs-font-weight-bold">+ 430</span>
-                                </div>
-                            </div>
-                            <div class="hs-d-flex">
-                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
-                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>

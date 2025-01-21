@@ -37,7 +37,7 @@
                  class="bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
                 <div>
                     <div class="hs-d-flex hs-justify-content-between hs-w-100">
-                        <p>BASIC INFORMATION</p>
+                        <p class="text-secondary">BASIC INFORMATION</p>
                         <x-custom-button type="edit" route="{{route('personal-info.edit', ['user'=>auth()->user()])}}"/>
                     </div>
                     <div class="hs-row" style="height: 240px">
@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div>
-                    <p>ADDRESS INFORMATION</p>
+                    <p class="text-secondary">ADDRESS INFORMATION</p>
                     <div class="hs-row hs-mx-auto hs-justify-content-between" style="min-height: 155px;">
                         @foreach(auth()->user()->addresses as $address)
                             <x-address-card :address="$address"/>

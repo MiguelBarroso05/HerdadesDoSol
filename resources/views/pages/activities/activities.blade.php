@@ -1,94 +1,97 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app')
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Activities'])
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
-                <!-- Success Message -->
-                <x-success-message />
 
-                <x-warning-message :session="'warning_activities'"/>
+    <div class="col-admin">
+        <div class="hs-container-fluid hs-py-4">
+            <div class="hs-row">
+                <div class="hs-col-12">
+                    <!-- Success Message -->
+                    <x-success-message />
 
-                <!-- Card container for the Activities table -->
-                <div class="hs-card mb-4">
-                    <div class="hs-card-header pb-0 d-flex justify-content-between">
-                        <h6>Activities table</h6>
-                        <!-- Search Bar -->
-                        <x-search-bar :searchbarName="'search_activities'" />
-                        <!-- Button to create a new activity -->
-                        <x-custom-button type="createNew" route="{{ route('activities.create') }}"/>
-                    </div>
-                    <div class="hs-card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                <tr>
-                                    <!-- Column headers -->
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Activity
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Type
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Last Update
-                                    </th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <!-- Loop through the $activities collection to display each activity -->
-                                @foreach($activities as $activity)
+                    <x-warning-message :session="'warning_activities'"/>
+
+                    <!-- Card container for the Activities table -->
+                    <div class="hs-card hs-mb-4">
+                        <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
+                            <h6>Activities table</h6>
+                            <!-- Search Bar -->
+                            <x-search-bar :searchbarName="'search_activities'" />
+                            <!-- Button to create a new activity -->
+                            <x-custom-button type="createNew" route="{{ route('activities.create') }}"/>
+                        </div>
+                        <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">
+                            <div class="hs-table-responsive hs-p-0">
+                                <table class="hs-table hs-align-items-center hs-mb-0">
+                                    <thead>
                                     <tr>
-                                        <!-- Activity info column -->
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <!-- Activity image -->
-                                                <div>
-                                                    <img
-                                                        src="{{ $activity->img ? asset('storage/'.$activity->img) : asset('/imgs/users/no-image.png') }}"
-                                                        class="hs-avatar hs-avatar-sm me-3" alt="Activity image">
+                                        <!-- Column headers -->
+                                        <th class="hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                            Activity
+                                        </th>
+                                        <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                            Type
+                                        </th>
+                                        <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                            Last Update
+                                        </th>
+                                        <th class="hs-text-secondary hs-opacity-7"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- Loop through the $activities collection to display each activity -->
+                                    @foreach($activities as $activity)
+                                        <tr>
+                                            <!-- Activity info column -->
+                                            <td>
+                                                <div class="hs-d-flex hs-px-2 hs-py-1">
+                                                    <!-- Activity image -->
+                                                    <div>
+                                                        <img
+                                                            src="{{ $activity->img ? asset('storage/'.$activity->img) : asset('/imgs/users/no-image.png') }}"
+                                                            class="hs-avatar hs-avatar-sm hs-me-3" alt="Activity image">
+                                                    </div>
+                                                    <!-- Activity name -->
+                                                    <div class="hs-d-flex hs-flex-column hs-justify-content-center">
+                                                        <h6 class="hs-mb-0 hs-text-sm">{{ $activity->name }}</h6>
+                                                    </div>
                                                 </div>
-                                                <!-- Activity name -->
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $activity->name }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
+                                            </td>
 
-                                        <!-- Activity type column -->
-                                        <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">
+                                            <!-- Activity type column -->
+                                            <td class="hs-align-middle hs-text-center">
+                                        <span class="hs-text-secondary hs-text-xs hs-font-weight-bold">
                                             {{ $activity->activity_types->name }}
                                         </span>
-                                        </td>
+                                            </td>
 
-                                        <!-- Last update column -->
-                                        <td class="align-middle text-center">
-                                        <span class="text-secondary text-xs font-weight-bold">
+                                            <!-- Last update column -->
+                                            <td class="hs-align-middle hs-text-center">
+                                        <span class="hs-text-secondary hs-text-xs hs-font-weight-bold">
                                             {{ $activity->updated_at }}
                                         </span>
-                                        </td>
+                                            </td>
 
-                                        <!-- Action buttons -->
-                                        <td class="align-middle d-flex justify-content-evenly">
-                                            <!-- Show button -->
-                                            <x-custom-button type="show" route="{{ route('activities.show', $activity) }}"/>
+                                            <!-- Action buttons -->
+                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
+                                                <!-- Show button -->
+                                                <x-custom-button type="show" route="{{ route('activities.show', $activity) }}"/>
 
-                                            <!-- Edit button -->
-                                            <x-custom-button type="edit" route="{{ route('activities.edit', $activity) }}"/>
+                                                <!-- Edit button -->
+                                                <x-custom-button type="edit" route="{{ route('activities.edit', $activity) }}"/>
 
-                                            <!-- Delete button  -->
-                                            <x-custom-button type="delete" route="{{ route('activities.destroy', ['activity' => $activity]) }}"/>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <!-- Pagination -->
-                            <div class="d-flex justify-content-center mt-4">
-                                {{ $activities->links('vendor.pagination.custom') }}
+                                                <!-- Delete button  -->
+                                                <x-custom-button type="delete" route="{{ route('activities.destroy', ['activity' => $activity]) }}"/>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <!-- Pagination -->
+                                <div class="hs-d-flex hs-justify-content-center hs-mt-4">
+                                    {{ $activities->links('vendor.pagination.custom') }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,6 +99,7 @@
             </div>
         </div>
     </div>
+
     @push('js')
         <script>
             <!-- Script to auto-hide the message -->

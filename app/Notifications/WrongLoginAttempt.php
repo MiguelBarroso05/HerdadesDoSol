@@ -52,7 +52,7 @@ class WrongLoginAttempt extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'subject' => 'Security Alert: Unauthorized Login Attempt',
+            'subject' => 'Security Alert!',
             'body' => 'We have detected an unauthorized attempt to access your account.'
         ];
     }

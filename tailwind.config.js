@@ -6,6 +6,7 @@ export default {
             require("./vendor/wireui/wireui/tailwind.config.js")
     ],
     content: [
+        'node_modules/preline/dist/*.js',
         "./vendor/wireui/wireui/src/*.php",
         "./vendor/wireui/wireui/ts/**/*.ts",
         "./vendor/wireui/wireui/src/WireUi/**/*.php",
@@ -21,9 +22,13 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                primary: '#FFBF65',
+            },
         },
     },
     plugins: [
         require('@tailwindcss/forms'),
+        require('preline/plugin'),
     ],
 };

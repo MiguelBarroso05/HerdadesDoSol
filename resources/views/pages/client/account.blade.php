@@ -49,15 +49,15 @@
         <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
             <div style="width: 78%; display:flex; justify-content:space-between;">
-                <div class="hs-col-md-8">
+                <div class="hs-col-md-8" >
                     <div class="hs-row" style="width: 95% !important; min-height: 400px">
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
                                  style="background-color: #303030">
-                                Personal Information
+                                <i class="bi bi-person-fill hs-pe-3"></i>Personal Information
                             </div>
                             <div class="hs-px-6 hs-py-3">
-                                <p>BASIC INFORMATION</p>
+                                <p class="text-secondary">BASIC INFORMATION</p>
                                 <div class="hs-row hs-mb-3">
                                     <div class="hs-col-md-5">
                                         <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="hs-row">
-                                    <p>MAIN ADDRESS INFORMATION</p>
+                                    <p class="text-secondary">MAIN ADDRESS INFORMATION</p>
                                     @if(auth()->user()->addresses()->first())
                                         <div class="hs-col-md-5">
                                             <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
@@ -128,7 +128,7 @@
                     <div class="hs-row hs-mt-5" style="width: 95% !important">
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-black hs-bg-white">
-                                Wishlist
+                                <i class="bi bi-star hs-pe-3"></i>Wishlist
                             </div>
                             <div class="hs-row hs-d-flex hs-justify-content-around hs-mx-1">
                                 <div class="hs-border hs-border-2 hs-my-2 hs-rounded-3 hs-p-3 hs-bg-white"
@@ -180,7 +180,7 @@
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
                                  style="background-color: #437546 !important">
-                                Payment Method
+                                <i class="bi bi-credit-card-2-back hs-pe-3"></i>Payment Method
                             </div>
                             <div class="hs-px-6 hs-py-3">
                                 <div class="hs-row hs-mt-1" style="margin-bottom: 60px">
@@ -209,7 +209,7 @@
                     <div class="hs-row hs-m-0 hs-mt-5">
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-black hs-bg-white">
-                                Last Order
+                                <i class="bi bi-book hs-pe-3"></i>Last Order
                             </div>
                             <div class="hs-row hs-p-0 hs-d-flex hs-justify-content-center">
                                 <p class="hs-d-flex hs-justify-content-center hs-fw-bolder hs-m-0"

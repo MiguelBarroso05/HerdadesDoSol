@@ -1,3 +1,6 @@
+@php use App\Models\Estate;
+ use App\Models\Allergy;
+ @endphp
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
@@ -10,11 +13,11 @@
             background-position: center;
         }
 
-        .card img {
+        .hs-card img {
             width: 50px;
         }
 
-        .main-content {
+        .hs-main-content {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 10px;
@@ -32,7 +35,7 @@
                 <form action="{{ route('personal-info.update', $user) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <p>PERSONAL INFORMATION</p>
+                    <p class="text-secondary">PERSONAL INFORMATION</p>
                     <div class="hs-d-flex hs-justify-content-between">
                         <div class="hs-d-flex hs-flex-column hs-justify-content-between"
                              style="width: 770px; height: 395px;">
@@ -69,7 +72,7 @@
                                         <div class="hs-form-group">
                                             <label for="phone" class="hs-form-control-label">Phone Number</label>
                                             <input class="hs-form-control @error('phone') hs-is-invalid @enderror" type="text"
-                                                   name="phone" value="{{ old('phone', $user->phone) ?? 'none'}}">
+                                                   name="phone" value="{{ old('phone', $user->phone)}}">
                                             @error('phone')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -104,7 +107,7 @@
                                         <div class="hs-form-group">
                                             <label for="nif" class="hs-form-control-label">Nif</label>
                                             <input class="hs-form-control @error('nif') hs-is-invalid @enderror" type="text"
-                                                   name="nif" value="{{ old('nif', $user->nif) ?? 'none'}}">
+                                                   name="nif" value="{{ old('nif', $user->nif)}}">
                                             @error('nif')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -115,56 +118,56 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="birthdate" class="hs-form-control-label">Birth Date</label>
-                                            <input class="form-control @error('birthdate') is-invalid @enderror"
+                                            <input class="hs-form-control @error('birthdate') hs-is-invalid @enderror"
                                                    name="birthdate" type="date"
                                                    value="{{ old('birthdate', $user->birthdate) }}">
                                             @error('birthdate')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="d-flex justify-content-between">
+                                <div class="hs-d-flex hs-justify-content-between">
                                     <!-- Email Input -->
                                     <div style="width: 483px;">
-                                        <div class="form-group">
-                                            <label for="email" class="form-control-label">Email address</label>
-                                            <input class="form-control @error('email') is-invalid @enderror"
+                                        <div class="hs-form-group">
+                                            <label for="email" class="hs-form-control-label">Email address</label>
+                                            <input class="hs-form-control @error('email') hs-is-invalid @enderror"
                                                    type="email"
                                                    name="email" value="{{ old('email', $user->email) }}">
                                             @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
-                                    <div style="width: 195px;" class="d-flex justify-content-between">
+                                    <div style="width: 195px;" class="hs-d-flex hs-justify-content-between">
                                         <!-- Group Size Input -->
                                         <div style="width: 90px;">
-                                            <div class="form-group">
-                                                <label for="standard_group" class="form-control-label">Group
+                                            <div class="hs-form-group">
+                                                <label for="standard_group" class="hs-form-control-label">Group
                                                     Size</label>
                                                 <input
-                                                    class="form-control @error('standard_group') is-invalid @enderror"
+                                                    class="hs-form-control @error('standard_group') hs-is-invalid @enderror"
                                                     type="text"
                                                     name="standard_group"
                                                     value="{{ old('standard_group', $user->standard_group) }}">
                                                 @error('standard_group')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="hs-invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
 
                                         <!-- Children Input -->
                                         <div style="width: 90px;">
-                                            <div class="form-group">
-                                                <label for="children" class="form-control-label">Children</label>
-                                                <input class="form-control @error('children') is-invalid @enderror"
+                                            <div class="hs-form-group">
+                                                <label for="children" class="hs-form-control-label">Children</label>
+                                                <input class="hs-form-control @error('children') hs-is-invalid @enderror"
                                                        type="text"
                                                        name="children" value="{{ old('children', $user->children) }}">
                                                 @error('children')
-                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                <div class="hs-invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
@@ -172,12 +175,12 @@
                                 </div>
                             </div>
                             <div>
+                                <p class="text-secondary">USER INFORMATION</p>
                                 <!-- Preferences Input -->
-                                <p>PERSONAL INFORMATION</p>
                                 <div>
-                                    <label for="language" class="form-control-label">Preferences</label>
+                                    <label for="language" class="hs-form-control-label">Preferences</label>
                                     <select
-                                        class="form-control custom-dropdown @error('language') is-invalid @enderror"
+                                        class="hs-form-control custom-dropdown @error('language') hs-is-invalid @enderror"
                                         name="language" id="language-input">
                                         @foreach($languages as $language)
                                             <option
@@ -188,28 +191,28 @@
                                         @endforeach
                                     </select>
                                     @error('language')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="hs-invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                         </div>
                         <div style="width: 390px; height: 395px;"
-                             class="d-flex flex-column justify-content-between align-items-end">
+                             class="hs-d-flex hs-flex-column hs-justify-content-between hs-align-items-end">
                             <img
-                                src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('/imgs/users/no-image.png') }}"
-                                alt="" class="img-fluid rounded-3" style="width: 240px">
+                                src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                alt="" class="hs-img-fluid hs-rounded-3" style="width: 240px">
 
                             <!-- Profile Image Upload -->
                             <div style="width: 240px;">
-                                <input type="file" class="form-control" name="img" id="inputGroupFile02"
+                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
                                        accept="image/*">
                             </div>
 
                             <!-- Language Input -->
                             <div style="width: 240px;">
-                                <label for="language" class="form-control-label">Prefered Language</label>
+                                <label for="language" class="hs-form-control-label">Prefered Language</label>
                                 <select
-                                    class="form-control custom-dropdown @error('language') is-invalid @enderror"
+                                    class="hs-form-control custom-dropdown @error('language') hs-is-invalid @enderror"
                                     name="language" id="language-input">
                                     @foreach($languages as $language)
                                         <option
@@ -220,56 +223,35 @@
                                     @endforeach
                                 </select>
                                 @error('language')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between" style="margin-top: 1rem;">
+                    <div class="hs-d-flex hs-justify-content-between" style="margin-top: 1rem;">
                         <div style="width: 468px;">
-                            <div class="form-group">
-                                <label for="language" class="form-control-label">Favourite Estates</label>
-                                <select
-                                    class="form-control custom-dropdown @error('language') is-invalid @enderror"
-                                    name="language" id="language-input">
-                                    @foreach($languages as $language)
-                                        <option
-                                            value="{{ $language->id }}"
-                                            {{$user->language == $language->id ? 'selected' : '' }}>
-                                            {{ $language->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="hs-form-group">
+                                <label for="language" class="hs-form-control-label">Favourite Estates</label>
+                                <x-multiple-input :objectToList="Estate::all()"/>
                                 @error('language')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div style="width: 583px;">
-                            <div class="form-group">
-                                <label for="language" class="form-control-label">Allergies</label>
-                                <select
-                                    class="form-control custom-dropdown @error('language') is-invalid @enderror"
-                                    name="language" id="language-input">
-                                    @foreach($languages as $language)
-                                        <option
-                                            value="{{ $language->id }}"
-                                            {{$user->language == $language->id ? 'selected' : '' }}>
-                                            {{ $language->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('language')
-                                <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="hs-form-group">
+                                <label for="allergies" class="hs-form-control-label">Allergies</label>
+                                <x-multiple-input :objectToList="Allergy::all()"/>
+                                @error('allergies')
+                                <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="hs-d-flex hs-justify-content-between">
                         <x-custom-button type="update" route="{{null}}"/>
                         <x-custom-button type="cancel" route="{{route('personal-info')}}"/>
                     </div>
-
                 </form>
             </div>
         </div>

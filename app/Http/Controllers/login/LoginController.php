@@ -45,7 +45,7 @@ class LoginController extends Controller
                 return redirect()->intended('dashboard');
             }
 
-            return redirect()->intended('teste');
+            return redirect()->intended('/');
         }
 
         $this->incrementLoginAttempts($request);

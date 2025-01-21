@@ -6,7 +6,7 @@
         justify-content: space-between;
         color: black;
         width: 15%;
-        height: 692.69px;
+        height: 693px;
     }
 
     .hs-sidebar .active {

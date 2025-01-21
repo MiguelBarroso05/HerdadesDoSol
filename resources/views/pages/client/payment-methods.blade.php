@@ -105,7 +105,7 @@
 
 
     </style>
-    <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 p-2 hs-flex-grow-1">
+    <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
             <div style="width: 1280px; display: flex;" class="hs-bg-card hs-rounded-3 hs-m-0">
@@ -127,15 +127,27 @@
                 <div class="hs-p-4">
                     <div class="hs-p-4">
                         <p>BILLING INFORMATION</p>
-                        <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information provided for
+                        <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
+                            provided for
                             biling
                             <x-plus-button onclick="toggleComponents()"/>
                         </div>
-                        <div class="hs-justify-content-between" style="width: 450px; display: none;" id="payment-methods">
+                        <div class="hs-row">
+                            <div class="hs-col-md-6">
+                                <p><strong>Name: </strong>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</p>
+                                <p><strong>Email: </strong>{{auth()->user()->email}}</p>
+                            </div>
+                            <div class="hs-col-md-6">
+                                <p><strong>NIF: </strong>{{auth()->user()->nif}}</p>
+                                <p><strong>Phone: </strong>{{auth()->user()->phone}}</p>
+                            </div>
+                        </div>
+                        <div class="hs-justify-content-between" style="width: 450px; display: none;"
+                             id="payment-methods">
                             <x-payment-method-button id="billing-default" text="Use your personal information"
-                                                     icon="bi bi-arrow-right-circle payment-button-icon mr-custom-15"/>
-                            <x-payment-method-button id="billing-new" text="Create new billing information"
-                                                     icon="bi bi-plus-circle payment-button-icon mr-custom-15"/>
+                                                     icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
+                            <x-payment-method-button id="billing-new-button" text="Create new billing information"
+                                                     icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
                         </div>
                         <div class="hs-py-4">
                             <p>ADDRESS INFORMATION</p>
@@ -146,107 +158,30 @@
                             <div class="hs-justify-content-between" style="width: 450px; display: none;"
                                  id="payment1-methods">
                                 <x-payment-method-button id="address-default" text="Use one of your addresses"
-                                                         icon="bi bi-arrow-right-circle payment-button-icon mr-custom-15"/>
+                                                         icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
                                 <x-payment-method-button id="address-new" text="Create new address information"
-                                                         icon="bi bi-plus-circle payment-button-icon mr-custom-15"/>
+                                                         icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
                             </div>
                         </div>
 
                         <div class="hs-py-4 hs-mt-custom-80">
                             <p>PAYMENT INFORMATION</p>
-                            <div class="hs-text-black hs-icon-text-container">No payment method defined, consider inserting a
+                            <div class="hs-text-black hs-icon-text-container">No payment method defined, consider
+                                inserting a
                                 method to facilitate payment
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div wire:ignore.self class="hs-modal hs-fade" id="aa" tabindex="-1"
-                 @if ($errors->any()) style="display: block;" @endif>
-                <div class="hs-modal-dialog hs-modal-dialog-centered" style="max-width: 40%">
-                    <form wire:submit.prevent="submit">
-                        <div class="hs-modal-content">
-                            <div class="hs-col-10 hs-align-self-center">
-                                <div class="hs-modal-body">
-                                    <div class="hs-d-flex hs-justify-content-between">
-                                        <h5 class="hs-modal-title hs-align-self-center" style="color: black !important;"
-                                            id="exampleModalLabel">BILLING INFORMATION</h5>
-                                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                                            <i class="bi bi-x fs-3" style="color: black !important;"></i>
-                                        </a>
-                                    </div>
-                                    <div>
-                                        <p>PERSONAL INFORMATION</p>
-                                    </div>
-                                    <div class="hs-row">
-                                        <!-- Name Input -->
-                                        <div class="hs-col-md-8">
-                                            <div class="hs-form-group">
-                                                <label for="name" class="hs-form-control-label">Name</label>
-                                                <input
-                                                    class="hs-form-control @error('name') is-invalid @enderror"
-                                                    type="text" wire:model.defer="name"
-                                                    placeholder="Name">
-                                                @error('name')
-                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <!-- NIF Input -->
-                                        <div class="hs-col-md-4">
-                                            <div class="hs-form-group">
-                                                <label for="nif" class="hs-form-control-label">NIF</label>
-                                                <input
-                                                    class="hs-form-control @error('nif') is-invalid @enderror"
-                                                    type="text" wire:model.defer="nif"
-                                                    placeholder="NIF">
-                                                @error('nif')
-                                                <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <!-- Email Input -->
-                                        <div class="hs-col-md-8">
-                                            <div class="hs-form-group">
-                                                <label for="email" class="hs-form-control-label">Email</label>
-                                                <input
-                                                    class="hs-form-control @error('email') is-invalid @enderror"
-                                                    type="text" wire:model.defer="email"
-                                                    placeholder="Email">
-                                                @error('email')
-                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <!-- Phone Number Input -->
-                                        <div class="hs-col-md-4">
-                                            <div class="hs-form-group">
-                                                <label for="phone" class="hs-form-control-label">Phone Number</label>
-                                                <input
-                                                    class="hs-form-control @error('phone') is-invalid @enderror"
-                                                    type="text" wire:model.defer="phone"
-                                                    placeholder="+000 000 000 000">
-                                                @error('phone')
-                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="hs-d-flex hs-justify-content-end">
-                                            <x-custom-button type="create" route="{{null}}"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()"/>
         </div>
     </main>
 @endsection
 @push('js')
     <script>
-        document.getElementById('billing-new').addEventListener('click', function () {
-            let modal = new bootstrap.Modal(document.getElementById(''));
+        document.getElementById('billing-new-button').addEventListener('click', function () {
+            let modal = new bootstrap.Modal(document.getElementById('billing-new'));
             modal.show();
         });
 

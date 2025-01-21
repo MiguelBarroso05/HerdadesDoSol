@@ -32,19 +32,16 @@ Route::group(['middleware' => 'guest'], function () {
     #Routes Auth
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.perform')->middleware('throttle:5,1');
-
-    ### Route Dev ###
-    Route::get('/login/admin', [LoginController::class, 'loginAdmin'])->name('login.admin');
-    Route::get('/login/client', [LoginController::class, 'loginClient'])->name('login.client');
-
-    ### ###
-
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
     Route::get('/reset-password', [ResetPassword::class, 'show'])->name('reset-password');
     Route::post('/reset-password', [ResetPassword::class, 'send'])->name('reset.perform');
     Route::get('/change-password', [ChangePassword::class, 'show'])->name('change-password');
     Route::post('/change-password', [ChangePassword::class, 'update'])->name('change.perform');
+
+    ### Route Dev ###
+    Route::get('/login/admin', [LoginController::class, 'loginAdmin'])->name('login.admin');
+    Route::get('/login/client', [LoginController::class, 'loginClient'])->name('login.client');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -62,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/history', function () { return view('client.history');})->name('history');
     Route::get('/reviews', function () { return view('client.reviews');})->name('reviews');
     Route::get('/support', function () { return view('client.support');})->name('support');
+    Route::get('/reservations', function () { return view('pages.reservations.create');})->name('client-create-reservations');
 
     #Routes Address
     Route::put('/users/{user}/storeAddress', [UserController::class, 'storeAddress'])->name('users.storeAddress');

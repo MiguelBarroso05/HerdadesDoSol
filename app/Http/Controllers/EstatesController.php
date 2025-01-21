@@ -15,7 +15,7 @@ class EstatesController extends Controller
     public function index()
     {
         $estates = Estate::all();
-        return view('estates.index', compact('estates'));
+        return view('pages.estates.index', compact('estates'));
     }
 
     /**
@@ -23,7 +23,7 @@ class EstatesController extends Controller
      */
     public function create()
     {
-        return view('estates.create');
+        return view('pages.estates.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class EstatesController extends Controller
             $estate->name = $validated['name'];
             $estate->address_id = $alreadyExistsaddrees->id;
             $estate->save();
-            return redirect()->route('estates.index');
+            return redirect()->route('pages.estates.index');
         }
         else {
             $address = new Address();
@@ -61,7 +61,7 @@ class EstatesController extends Controller
             $estate->name = $validated['name'];
             $estate->address_id = $address->id;
             $estate->save();
-            return redirect()->route('estates.index');
+            return redirect()->route('pages.estates.index');
         }
     }
 

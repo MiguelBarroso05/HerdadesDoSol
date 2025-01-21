@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbars.guest.navbar')
 
-    <main class="main-content mt-0 flex-grow-1">
+    <main class="hs-main-content mt-0 hs-flex-grow-1">
         <!-- Hero -->
         <section class="hs-bg-cover hs-bg-center hs-align-items-center hs-justify-center hs-text-center home-image hs-min-vh-100">
             <div class="text-white">

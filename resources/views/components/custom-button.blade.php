@@ -56,7 +56,7 @@
 @endif
 
 @if($type == "close")
-    <a type="button" data-bs-dismiss="modal" aria-label="Close">
+    <a type="button" data-bs-dismiss="modal" aria-label="Close" class="mx-3">
         <i class="bi bi-x hs-fs-3" style="color: black !important;"></i>
     </a>
 @endif

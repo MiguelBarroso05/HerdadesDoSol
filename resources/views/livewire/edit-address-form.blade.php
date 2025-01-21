@@ -6,7 +6,8 @@
                 <div class="hs-col-10 hs-align-self-center">
                     <div class="modal-body">
                         <div class="hs-d-flex hs-justify-content-between">
-                            <h5 class="modal-title hs-align-self-center hs-text-uppercase" style="color: black !important;"
+                            <h5 class="modal-title hs-align-self-center hs-text-uppercase"
+                                style="color: black !important;"
                                 id="exampleModalLabel">EDIT {{$addressIdentifier}} ADDRESS</h5>
                             <a type="button" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="bi bi-x hs-fs-3" style="color: black !important;"></i>
@@ -84,7 +85,9 @@
                                     <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
-                            <x-custom-button type="create" route="{{null}}"/>
+                            <div class="hs-d-flex hs-justify-content-end">
+                                <x-custom-button type="update" route="{{null}}"/>
+                            </div>
                         </div>
                     </div>
                 </div>

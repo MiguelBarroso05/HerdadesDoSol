@@ -83,9 +83,15 @@ class UserController extends Controller
         $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
         $countries = $response->json();
         $countries = Arr::sort($countries);
-        $roles = Role::all()->pluck('name', 'id');
         $languages = DB::table('languages')->get();
-        return view('pages.users.edit', compact('user', 'roles', 'languages', 'countries'));
+
+        if (auth()->user()->HasRole('admin')){
+            $roles = Role::all()->pluck('name', 'id');
+            return view('pages.users.edit', compact('user', 'roles', 'languages', 'countries'));
+        }
+        if (auth()->user()->HasRole('client')){
+            return view('pages.client.edit-personal-info', compact('user', 'languages', 'countries'));
+        }
     }
 
     /**
@@ -103,9 +109,13 @@ class UserController extends Controller
 
             $this->userstoreimg($request, $user);
 
-            $user->roles()->sync([$request->role]);
-
-            return redirect()->route('users.index')->with('success', 'User updated successfully');
+            if (auth()->user()->HasRole('admin')){
+                $user->roles()->sync([$request->role]);
+                return redirect()->route('users.index')->with('success', 'User updated successfully');
+            }
+            if (auth()->user()->HasRole('client')){
+                return redirect()->route('personal-info');
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error updating user: ' . $e->getMessage());
         }

@@ -25,7 +25,7 @@
                     <!-- Navbar Menu -->
                     <ul class="hs-navbar-nav hs-justify-content-end hs-col-4">
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
-                            <a href="javascript:;" class="hs-nav-link hs-text-black hs-p-0 hs-fw-bold">
+                            <a href="{{route('client.accommodations.index')}}" class="hs-nav-link hs-text-black hs-p-0 hs-fw-bold">
                                 Accommodations
                             </a>
                         </li>
@@ -68,7 +68,10 @@
                                             {{ auth()->user()->balance . "$" }}
                                         </p>
                                     </x-dropdown.item>
-                                    <x-dropdown.item separator id="notifications-button">
+                                    <x-dropdown.item separator href="{{route('account')}}">
+                                        Profile
+                                    </x-dropdown.item>
+                                    <x-dropdown.item id="notifications-button">
                                         Notifications
                                     </x-dropdown.item>
                                     <x-dropdown.item>
@@ -93,17 +96,32 @@
                                     </form>
                                 </x-dropdown>
 
-                                    <!-- Dropdown para Notifications -->
-                                    <div id="notifications-dropdown"
-                                         class="hs-bg-white hs-shadow hs-p-3 hs-border-radius-md hs-d-none"
-                                         style="position: absolute; top: 55px; left: -229px; width: 300px; z-index: 999;">
-                                        <h6 class="hs-fw-bold hs-mb-2">Notifications</h6>
-                                        <ul class="hs-list-unstyled">
-                                            <li class="hs-py-2">Notification 1</li>
-                                            <li class="hs-py-2">Notification 2</li>
-                                            <li class="hs-py-2">Notification 3</li>
-                                        </ul>
+                                <div id="notifications-dropdown"
+                                     class="hs-bg-white hs-shadow hs-py-3 hs-border-radius-md hs-d-none"
+                                     style="position: absolute; top: 55px; left: -229px; width: 300px; z-index: 999;">
+                                    <div class="hs-d-flex hs-align-items-center hs-flex-column">
+                                        <p class="hs-mb-2">Notifications</p>
+                                        <div style="width: 100%; height: 1px; background-color: #D9D9D9"></div>
                                     </div>
+                                    <ul style="list-style-type:disc;">
+
+                                        <li class="hs-py-2">
+                                            <h6 class="hs-m-0" style="font-size: 15px">TESTE!</h6>
+                                            <p class="hs-m-0" style="font-size: 12px">LOREM FSDKJFHSDK</p>
+                                        </li>
+                                        <li class="hs-py-2">
+                                            <h6 class="hs-m-0" style="font-size: 15px">TESTE!</h6>
+                                            <p class="hs-m-0" style="font-size: 12px">LOREM FSDKJFHSDK</p>
+                                        </li>
+                                        @foreach(auth()->user()->notifications as $notification)
+
+                                            <li class="hs-py-2">
+                                                <h6 class="hs-m-0" style="font-size: 15px">{{$notification->data['subject']}}</h6>
+                                                <p class="hs-m-0" style="font-size: 12px">{{$notification->data['body']}}</p>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </li>
 
 

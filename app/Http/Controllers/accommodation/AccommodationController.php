@@ -20,7 +20,7 @@ class AccommodationController extends Controller
 
         }
         $accommodations = accommodation::with('accommodation_types')->get();
-        return view('client.accommodations.index', compact('accommodations'));
+        return view('pages.client.accommodations.index', compact('accommodations'));
     }
 
     /**
