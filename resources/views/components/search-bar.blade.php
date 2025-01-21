@@ -1,10 +1,11 @@
 <form method="get">
-    <div class="input-group searchbar">
+    <div class="hs-input-group searchbar">
         <!-- Search Input -->
-        <input type="text" class="form-control p-0 ps-4 border-0 bg-transparent white" name="{{$searchbarName}}" placeholder="search">
+        <input type="text" class="hs-form-control hs-p-0 hs-ps-4 hs-border-0 hs-bg-transparent hs-white"
+               name="{{$searchbarName}}" placeholder="search">
         <!-- Search Icon -->
-        <button type="submit" class="input-group-text text-body border-0 bg-transparent">
-            <i class="fas fa-search fs-6" aria-hidden="true"></i>
+        <button type="submit" class="hs-input-group-text hs-text-body hs-border-0 hs-bg-transparent">
+            <i class="bi bi-search"></i>
         </button>
     </div>
 </form>

@@ -1,112 +1,170 @@
 @php
-    use App\Models\accommodation\AccommodationType;
-    $accommodation_types = AccommodationType::all();
-    $user = auth()->user();
+    $user = auth()->user()
 @endphp
 
-<div class="container sticky top-0 z-50 mx-auto max-w-6xl">
-    <div class="row">
-        <div class="tw-columns-12">
+<div class="hs-container hs-position-sticky hs-z-index-sticky hs-top-0" style="max-width: 1650px !important;">
+    <div class="hs-row">
+        <div class="hs-col-12">
             <!-- Navbar -->
-            <nav class="flex items-center justify-between bg-white shadow-md rounded-lg py-4 px-6 mt-4">
-                <div class="flex items-center space-x-4">
-                    <a class="flex items-center space-x-2 font-bold text-black" href="{{ route('home') }}">
-                        <img src="{{ asset('../imgs/logo/logo.png') }}" alt="Logo" class="h-10">
-                        <span class="text-xl">Herdades do Sol</span>
-                    </a>
-                </div>
-                <div class="flex-grow max-w-md mx-auto">
-                    <!-- Search Bar -->
-                    <x-search-bar :searchbarName="'nome a definir'" />
-                </div>
-                <ul class="flex items-center space-x-6">
-                    <!-- Dropdown Menu for Accommodations -->
-                    <li class="relative group">
-                        <button class="text-black font-bold">Accommodations</button>
-                        <ul class="absolute left-0 hidden group-hover:block bg-white shadow-md rounded-lg py-2 w-48">
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="{{ route('client.accommodations.index') }}">All</a></li>
-                            @foreach($accommodation_types as $accommodation_type)
-                                <li class="px-4 py-2 hover:bg-gray-100">
-                                    <a href="#">{{ $accommodation_type->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-
-                    <!-- Activities -->
-                    <li><a href="#" class="text-black font-bold">Activities</a></li>
-                    <li><a href="{{ route('products.index') }}" class="text-black font-bold">Products</a></li>
-                    <li><a href="#" class="text-black font-bold">Locations</a></li>
-
-                    <!-- Cart -->
-                    <li>
-                        <a href="#" class="text-black text-lg">
-                            <i class="bi bi-cart3"></i>
+            <nav
+                class="hs-navbar hs-navbar-expand-lg hs-border-radius-lg hs-top-0 hs-z-index-3 hs-shadow hs-position-absolute hs-mt-4 hs-py-2 hs-start-0 hs-end-0 hs-mx-3 hs-bg-white">
+                <div class="hs-container-fluid">
+                    <div class="hs-d-flex hs-align-items-center hs-col-4">
+                        <a class="hs-navbar-brand hs-font-weight-bolder hs-ms-lg-0 hs-d-flex hs-align-items-center"
+                           href="{{ route('home') }}">
+                            <img src="{{ asset('../imgs/logo/logo.png') }}" class="logo">
+                            <span
+                                class="hs-fs-5 hs-fw-bolder hs-align-middle hs-text-black hs-ms-4">Herdades do Sol</span>
                         </a>
-                    </li>
-
-                    @auth
-                        <!-- Notifications -->
-                        <li class="relative group">
-                            <button class="text-black text-lg">
-                                <i class="bi bi-bell"></i>
-                            </button>
-                            <ul class="absolute right-0 hidden group-hover:block bg-white shadow-md rounded-lg py-2 w-56">
-                                @foreach($user->notifications as $notification)
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        {{ $notification->data['subject'] }}
-                                    </li>
-                                @endforeach
-                            </ul>
+                        <i class="ni ni-world hs-align-items-center "></i>
+                    </div>
+                    <div class="hs-input-group hs-col-4 hs-w-20">
+                        <!-- Search Bar -->
+                        <x-search-bar :searchbarName="'nome a definir'"/>
+                    </div>
+                    <!-- Navbar Menu -->
+                    <ul class="hs-navbar-nav hs-justify-content-end hs-col-4">
+                        <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
+                            <a href="javascript:;" class="hs-nav-link hs-text-black hs-p-0 hs-fw-bold">
+                                Accommodations
+                            </a>
                         </li>
-
-                        <!-- User Profile Dropdown -->
-                        <li class="relative group">
-                            <button>
-                                <img
-                                    class="rounded-full w-8 h-8 object-cover"
-                                    src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
-                                    alt="Avatar"
-                                >
-                            </button>
-                            <ul class="absolute right-0 hidden group-hover:block bg-white shadow-md rounded-lg py-2 w-56">
-                                <li class="px-4 py-2 hover:bg-gray-100">
-                                    {{ auth()->user()->firstname . ' ' . auth()->user()->lastname . ' - ' . auth()->user()->balance . '$' }}
-                                </li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="{{ route('account') }}">Profile</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100">
-                                    <a href="#" data-modal-toggle="notificationsModal">Notifications</a>
-                                </li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Orders</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Wishlist</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="#">History</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Help</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100">
-                                    <form method="post" action="{{ route('logout') }}">
+                        <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
+                            <a href="" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
+                                Activities
+                            </a>
+                        </li>
+                        <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
+                            <a href="{{ route('products.index') }}" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
+                                Products
+                            </a>
+                        </li>
+                        <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
+                            <a href="" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
+                                Locations
+                            </a>
+                        </li>
+                        <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center hs-ps-4">
+                            <a href="" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0"
+                               style="font-size: 18px !important;">
+                                <i class="bi bi-cart3"></i>
+                            </a>
+                        </li>
+                        @auth()
+                            <!-- User img with dropdown -->
+                            <li class="hs-nav-item hs-dropdown hs-d-flex">
+                                <x-dropdown class="dropdown-auth" height="h-[300px]">
+                                    <x-slot name="trigger">
+                                        <img class="hs-rounded-circle"
+                                             style="width: 30px; height: 30px; object-fit: fill"
+                                             src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                             alt="Avatar">
+                                    </x-slot>
+                                    <x-dropdown.item class="hs-justify-content-between hs-mx-2">
+                                        <p class="hs-m-0">
+                                            {{ auth()->user()->firstname . " " . auth()->user()->lastname }}
+                                        </p>
+                                        <p class="hs-m-0">
+                                            {{ auth()->user()->balance . "$" }}
+                                        </p>
+                                    </x-dropdown.item>
+                                    <x-dropdown.item separator id="notifications-button">
+                                        Notifications
+                                    </x-dropdown.item>
+                                    <x-dropdown.item>
+                                        Orders
+                                    </x-dropdown.item>
+                                    <x-dropdown.item>
+                                        Wishlist
+                                    </x-dropdown.item>
+                                    <x-dropdown.item>
+                                        History
+                                    </x-dropdown.item>
+                                    <x-dropdown.item separator>
+                                        Help
+                                    </x-dropdown.item>
+                                    <form method="post" action="{{ route('logout') }}" id="logout-form">
                                         @csrf
-                                        <button type="submit" class="w-full text-left">Logout</button>
+                                        <button type="submit" class="hs-w-100">
+                                            <x-dropdown.item>
+                                                Logout
+                                            </x-dropdown.item>
+                                        </button>
                                     </form>
-                                </li>
-                            </ul>
-                        </li>
-                    @endauth
+                                </x-dropdown>
 
-                    @guest
-                        <!-- Guest Options -->
-                        <li class="relative group">
-                            <button class="text-lg">
-                                <i class="bi bi-person"></i>
-                            </button>
-                            <ul class="absolute right-0 hidden group-hover:block bg-white shadow-md rounded-lg py-2 w-48">
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="{{ route('login') }}">Login</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="{{ route('register') }}">Register</a></li>
-                                <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Help</a></li>
-                            </ul>
-                        </li>
-                    @endguest
-                </ul>
+                                    <!-- Dropdown para Notifications -->
+                                    <div id="notifications-dropdown"
+                                         class="hs-bg-white hs-shadow hs-p-3 hs-border-radius-md hs-d-none"
+                                         style="position: absolute; top: 55px; left: -229px; width: 300px; z-index: 999;">
+                                        <h6 class="hs-fw-bold hs-mb-2">Notifications</h6>
+                                        <ul class="hs-list-unstyled">
+                                            <li class="hs-py-2">Notification 1</li>
+                                            <li class="hs-py-2">Notification 2</li>
+                                            <li class="hs-py-2">Notification 3</li>
+                                        </ul>
+                                    </div>
+                            </li>
+
+
+                        @endauth
+
+                        @guest()
+                            <!-- User icon with dropdown -->
+                            <li class="hs-nav-item hs-dropdown hs-d-flex hs-justify-content-center hs-align-items-center">
+
+                                <x-dropdown position="bottom" width="w-[203px]" class="dropdown-guest">
+                                    <x-slot name="trigger">
+                                        <i class="bi bi-person" style="font-size: 20px !important;"></i>
+                                    </x-slot>
+                                    <x-dropdown.item href="{{ route('login') }}">
+                                        <i class="bi bi-check2-square hs-me-2" style="font-size: 18px !important;"></i>
+                                        Login
+                                    </x-dropdown.item>
+                                    <x-dropdown.item separator href="{{ route('register') }}">
+                                        <i class="bi bi-plus-circle hs-me-2" style="font-size: 18px !important;"></i>
+                                        Register
+                                    </x-dropdown.item>
+                                    <x-dropdown.item separator>
+                                        <i class="bi bi-question-circle hs-me-2"
+                                           style="font-size: 18px !important;"></i> Help
+                                    </x-dropdown.item>
+                                </x-dropdown>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </nav>
-            <!-- End Navbar -->
+
         </div>
     </div>
 </div>
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const notificationsButton = document.getElementById('notifications-button');
+            const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+            // Toggle the visibility of the notifications dropdown
+            notificationsButton.addEventListener('click', function () {
+                if (notificationsDropdown.classList.contains('hs-d-none')) {
+                    notificationsDropdown.classList.remove('hs-d-none');
+                    notificationsDropdown.classList.add('hs-d-block');
+                } else {
+                    notificationsDropdown.classList.remove('hs-d-block');
+                    notificationsDropdown.classList.add('hs-d-none');
+                }
+            });
+
+            // Optional: Close dropdown when clicking outside
+            document.addEventListener('click', function (event) {
+                if (!notificationsButton.contains(event.target) &&
+                    !notificationsDropdown.contains(event.target)) {
+                    notificationsDropdown.classList.add('hs-d-none');
+                    notificationsDropdown.classList.remove('hs-d-block');
+                }
+            });
+        });
+    </script>
+
+@endpush

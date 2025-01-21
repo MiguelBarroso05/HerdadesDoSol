@@ -11,15 +11,15 @@
                 <x-warning-message :session="'warning_activities'"/>
 
                 <!-- Card container for the Activities table -->
-                <div class="card mb-4">
-                    <div class="card-header pb-0 d-flex justify-content-between">
+                <div class="hs-card mb-4">
+                    <div class="hs-card-header pb-0 d-flex justify-content-between">
                         <h6>Activities table</h6>
                         <!-- Search Bar -->
                         <x-search-bar :searchbarName="'search_activities'" />
                         <!-- Button to create a new activity -->
                         <x-custom-button type="createNew" route="{{ route('activities.create') }}"/>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
+                    <div class="hs-card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -48,7 +48,7 @@
                                                 <div>
                                                     <img
                                                         src="{{ $activity->img ? asset('storage/'.$activity->img) : asset('/imgs/users/no-image.png') }}"
-                                                        class="avatar avatar-sm me-3" alt="Activity image">
+                                                        class="hs-avatar hs-avatar-sm me-3" alt="Activity image">
                                                 </div>
                                                 <!-- Activity name -->
                                                 <div class="d-flex flex-column justify-content-center">

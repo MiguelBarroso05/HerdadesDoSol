@@ -1,20 +1,17 @@
 <div
-    class="bg-white p-3 rounded-3 d-flex justify-content-between flex-column ms-2 z-index-0"
+    class="hs-bg-white hs-p-3 hs-rounded-3 hs-d-flex hs-justify-content-between hs-flex-column z-index-0"
     style="border: 1px solid #D9D9D9; width: 350px; height: 155px; cursor: pointer;"
     id="clickableDiv{{$address->id}}">
-    <div class="d-flex">
-        <div class="col-md-10">
-            <span class="d-flex fw-bolder text-uppercase"
+    <div class="hs-d-flex">
+        <div class="hs-col-md-10">
+            <span class="hs-d-flex hs-fw-bolder hs-text-uppercase"
                   style="font-size: 18px"> {{ $address->pivot->addressIdentifier ?? 'none'}} </span>
-            <span class="d-flex"> {{ $address->city }} </span>
-        </div>
-        <div class="col-md-2 d-flex justify-content-end z-index-3">
-            <x-custom-button type="fav" route="{{null}}"/>
+            <span class="hs-d-flex"> {{ $address->city }} </span>
         </div>
     </div>
     <div>
-        <span class="d-flex"> {{ $address->zipcode }} </span>
-        <span class="d-flex"> {{ $address->street }} </span>
+        <span class="hs-d-flex"> {{ $address->zipcode }} </span>
+        <span class="hs-d-flex"> {{ $address->street }} </span>
     </div>
 </div>
 @push('js')

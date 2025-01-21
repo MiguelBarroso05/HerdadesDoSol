@@ -51,10 +51,12 @@ Route::group(['middleware' => 'auth'], function () {
     #Route Clients
     Route::resource( 'products', ProductController::class);
     Route::get('/client/accommodations', [AccommodationController::class, 'index'])->name('client.accommodations.index');
-    Route::get('/account', function () { return view('client.account');})->name('account');
+    Route::get('/account', function () { return view('pages.client.account');})->name('account');
 
-    Route::get('/personal-info', function () { return view('client.personal-info');})->name('personal-info');
-    Route::get('/payment-methods', function () { return view('client.payment-methods');})->name('payment-methods');
+    Route::get('/personal-info', function () { return view('pages.client.personal-info');})->name('personal-info');
+    Route::get('/personal-info/{user}', [UserController::class, 'edit'])->name('personal-info.edit');
+    Route::put('/personal-info/{user}', [UserController::class, 'update'])->name('personal-info.update');
+    Route::get('/payment-methods', function () { return view('pages.client.payment-methods');})->name('payment-methods');
     Route::get('/orders', function () { return view('client.orders');})->name('orders');
     Route::get('/wishlist', function () { return view('client.wishlist');})->name('wishlist');
     Route::get('/history', function () { return view('client.history');})->name('history');
@@ -75,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/dashboard/sales_overview', [HomeController::class, 'salesOverview'])->name('sales.overview');
 
-        #Routes Estates
+        #Routes estates
         Route::resource('estates', EstatesController::class);
 
         #Routes Users

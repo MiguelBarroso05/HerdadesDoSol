@@ -10,75 +10,110 @@
             background-position: center;
         }
 
-        .bg-card {
-            background-color: #f6f6f6;
-            opacity: 0.82;
+
+        .hs-sidebar {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: black;
+            width: 15%
+        }
+
+        .hs-sidebar .active {
+            background-color: rgb(255, 172, 57);
+            border-radius: 0.75rem;
+        }
+
+        .hs-sidebar a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .hs-card img {
+            width: 50px;
+        }
+
+        .hs-main-content {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .wishlist-card img {
+            width: 100%;
+            border-radius: 8px;
         }
     </style>
-    <main class="w-11/12 md:w-11/12 mx-auto mt-8 p-2 flex-grow">
+    <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <x-success-message/>
-        <div class="flex justify-between">
-            <x-client-side-bar />
-            <div class="w-4/5 flex justify-between">
-                <div class="w-full md:w-8/12">
-                    <div class="flex w-full min-h-[400px]">
-                        <div class="px-0 rounded-3xl bg-card">
-                            <div class="py-3 px-3 bg-[#303030] w-full rounded-3xl text-white">
+        <div class="hs-d-flex hs-justify-content-between">
+            <x-client-side-bar/>
+            <div style="width: 78%; display:flex; justify-content:space-between;">
+                <div class="hs-col-md-8">
+                    <div class="hs-row" style="width: 95% !important; min-height: 400px">
+                        <div class="hs-px-0 hs-rounded-3 hs-bg-card">
+                            <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
+                                 style="background-color: #303030">
                                 Personal Information
                             </div>
-                            <div class="px-6 py-3">
+                            <div class="hs-px-6 hs-py-3">
                                 <p>BASIC INFORMATION</p>
-                                <div class="flex flex-wrap mb-3">
-                                    <div class="w-5/12">
-                                        <p class="flex"><strong class="pr-2">Name:</strong>
+                                <div class="hs-row hs-mb-3">
+                                    <div class="hs-col-md-5">
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
                                             {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
                                         </p>
-                                        <p class="flex"><strong class="pr-2">Birth Date:</strong>
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
                                             {{ auth()->user()->birthdate }}</p>
-                                        <p class="flex"><strong class="pr-2">Email:</strong>
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
                                             {{ auth()->user()->email }}
                                         </p>
                                     </div>
-                                    <div class="w-4/12">
-                                        <p class="flex"><strong class="pr-2">NIF:</strong>{{ auth()->user()->nif ?? 'none' }}</p>
-                                        <p class="flex"><strong class="pr-2">Phone:</strong>{{ auth()->user()->phone ?? 'none' }}</p>
+                                    <div class="hs-col-md-4">
+                                        <p class="hs-d-flex"><strong
+                                                class="hs-pe-2">NIF:</strong>{{ auth()->user()->nif ?? 'none' }}</p>
+                                        <p class="hs-d-flex"><strong
+                                                class="hs-pe-2">Phone:</strong>{{ auth()->user()->phone ?? 'none' }}</p>
                                     </div>
-                                    <div class="w-3/12 text-right">
+                                    <div class="hs-col-md-3 hs-text-end">
                                         <img
                                             src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('/imgs/users/no-image.png') }}"
-                                            alt="" class="img-fluid rounded-3xl" style="width: 100px">
+                                            alt="" class="hs-img-fluid hs-rounded-3" style="width: 100px">
                                     </div>
                                 </div>
-                                <div class="flex flex-wrap">
+                                <div class="hs-row">
                                     <p>MAIN ADDRESS INFORMATION</p>
                                     @if(auth()->user()->addresses()->first())
-                                        <div class="w-5/12">
-                                            <p class="flex pr-2"><strong class="pr-2"
+                                        <div class="hs-col-md-5">
+                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
                                                 >Country:</strong>{{auth()->user()->addresses()->first()->country}}
                                             </p>
-                                            <p class="flex pr-2"><strong class="pr-2"
+                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
                                                 >Postal-code:</strong>{{auth()->user()->addresses()->first()->zipcode}}
                                             </p>
                                         </div>
-                                        <div class="w-7/12">
-                                            <p class="flex pr-2"><strong class="pr-2"
+                                        <div class="hs-col-md-7">
+                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
                                                 >City:</strong>{{auth()->user()->addresses()->first()->city}}
                                             </p>
-                                            <p class="flex pr-2"><strong class="pr-2"
+                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
                                                 >Address:</strong>{{auth()->user()->addresses()->first()->street}}
                                             </p>
                                         </div>
                                     @else
-                                        <div class="w-6/12">
-                                            <p class="font-bold">Consider adding your preferred location to simplify
+                                        <div class="hs-col-md-6">
+                                            <p class="hs-fw-bolder">Consider adding your preferred location to simplify
                                                 your purchases</p>
                                         </div>
-                                        <div class="w-6/12 flex justify-end">
-                                            <button type="button" class="btn mb-0 w-9/12 h-100 text-3xl"
-                                                    style="box-shadow: none; border: 2px solid #437546; color: #437546;"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#clientAddAddressModal">
-                                                <i class="bi bi-plus-circle font-bold"></i>
+                                        <div class="hs-col-md-6 hs-d-flex hs-justify-content-end">
+                                            <button
+                                                type="button"
+                                                id="teste"
+                                                class="hs-btn hs-mb-0 hs-w-90 hs-h-100 hs-fs-3"
+                                                style="box-shadow: none; border: 2px solid #437546; color: #437546;"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#clientAddAddressModal">
+                                                <i class="bi bi-plus-circle hs-fw-bolder"></i>
                                             </button>
                                         </div>
                                     @endif
@@ -86,46 +121,52 @@
                             </div>
                         </div>
                     </div>
-                    <livewire:address-form :user="auth()->user()" :modalIdName="'clientAddAddressModal'" :redirectUrl="url()->current()"/>
-                    <div class="row mt-5 w-full">
-                        <div class="px-0 rounded-3xl bg-card">
-                            <div class="py-3 px-3 bg-white w-full rounded-3xl text-black">
+                    <livewire:address-form
+                        :user="auth()->user()"
+                        :modalIdName="'clientAddAddressModal'"
+                        :redirectUrl="url()->current()"/>
+                    <div class="hs-row hs-mt-5" style="width: 95% !important">
+                        <div class="hs-px-0 hs-rounded-3 hs-bg-card">
+                            <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-black hs-bg-white">
                                 Wishlist
                             </div>
-                            <div class="flex justify-around mx-1">
-                                <div class="border-2 my-2 rounded-3xl p-3 bg-white w-1/3">
-                                    <h6 class="my-0 text-xl">Activity</h6>
-                                    <p class="my-0">Hiking</p>
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col items-end">
-                                            <p class="my-0 text-lg"><strong>1 Hour</strong></p>
-                                            <p class="my-0 text-lg">Lorem</p>
+                            <div class="hs-row hs-d-flex hs-justify-content-around hs-mx-1">
+                                <div class="hs-border hs-border-2 hs-my-2 hs-rounded-3 hs-p-3 hs-bg-white"
+                                     style="width: 30%">
+                                    <h6 class="hs-my-0" style="font-size: 24px">Activity</h6>
+                                    <p class="hs-my-0">Hiking</p>
+                                    <div class="hs-d-flex hs-justify-content-between">
+                                        <div style="display: flex; justify-content: end; flex-direction: column">
+                                            <p class="hs-my-0" style="font-size: 16px"><strong>1 Hour</strong></p>
+                                            <p class="hs-my-0" style="font-size: 16px">Lorem</p>
                                         </div>
-                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="rounded-3xl"
+                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="hs-rounded-3"
                                              style="width:70px">
                                     </div>
                                 </div>
-                                <div class="border-2 my-2 rounded-3xl p-3 bg-white w-1/3">
-                                    <h6 class="my-0 text-xl">Activity</h6>
-                                    <p class="my-0">Hiking</p>
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col items-end">
-                                            <p class="my-0 text-lg"><strong>1 Hour</strong></p>
-                                            <p class="my-0 text-lg">Lorem</p>
+                                <div class="hs-border hs-border-2 hs-my-2 hs-rounded-3 hs-p-3 hs-bg-white"
+                                     style="width: 30%">
+                                    <h6 class="hs-my-0" style="font-size: 24px">Activity</h6>
+                                    <p class="hs-my-0">Hiking</p>
+                                    <div class="hs-d-flex hs-justify-content-between">
+                                        <div style="display: flex; justify-content: end; flex-direction: column">
+                                            <p class="hs-my-0" style="font-size: 16px"><strong>1 Hour</strong></p>
+                                            <p class="hs-my-0" style="font-size: 16px">Lorem</p>
                                         </div>
-                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="rounded-3xl"
+                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="hs-rounded-3"
                                              style="width:70px">
                                     </div>
                                 </div>
-                                <div class="border-2 my-2 rounded-3xl p-3 bg-white w-1/3">
-                                    <h6 class="my-0 text-xl">Activity</h6>
-                                    <p class="my-0">Hiking</p>
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col items-end">
-                                            <p class="my-0 text-lg"><strong>1 Hour</strong></p>
-                                            <p class="my-0 text-lg">Lorem</p>
+                                <div class="hs-border hs-border-2 hs-my-2 hs-rounded-3 hs-p-3 hs-bg-white"
+                                     style="width: 30%">
+                                    <h6 class="hs-my-0" style="font-size: 24px">Activity</h6>
+                                    <p class="hs-my-0">Hiking</p>
+                                    <div class="hs-d-flex hs-justify-content-between">
+                                        <div style="display: flex; justify-content: end; flex-direction: column">
+                                            <p class="hs-my-0" style="font-size: 16px"><strong>1 Hour</strong></p>
+                                            <p class="hs-my-0" style="font-size: 16px">Lorem</p>
                                         </div>
-                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="rounded-3xl"
+                                        <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="hs-rounded-3"
                                              style="width:70px">
                                     </div>
                                 </div>
@@ -134,48 +175,58 @@
                     </div>
                 </div>
 
-                <div class="w-full md:w-4/12 flex">
-                    <div class="flex flex-wrap">
-                        <div class="px-0 rounded-3xl bg-card">
-                            <div class="py-3 px-3 bg-[#437546] w-full rounded-3xl text-white">
+                <div class="hs-col-md-4">
+                    <div class="hs-row hs-m-0">
+                        <div class="hs-px-0 hs-rounded-3 hs-bg-card">
+                            <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
+                                 style="background-color: #437546 !important">
                                 Payment Method
                             </div>
-                            <div class="px-6 py-3">
-                                <div class="flex mt-1 mb-12">
-                                    <div class="py-3">
-                                        <p class="flex"><strong class="pr-2">Method:</strong></p>
+                            <div class="hs-px-6 hs-py-3">
+                                <div class="hs-row hs-mt-1" style="margin-bottom: 60px">
+                                    <div class="hs-py-3">
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Method:</strong></p>
                                     </div>
-                                    <p class="flex"><strong class="pr-2">Name:</strong></p>
-                                    <p class="flex"><strong class="pr-2">Number:</strong></p>
-                                    <div class="flex justify-between">
-                                        <p class="flex"><strong class="pr-2">Expiration Date: 24/07</strong></p>
-                                        <p class="flex"><strong class="pr-2">CVV: ***</strong></p>
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
+                                    </p>
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Number:</strong>
+                                    </p>
+                                    <div class="hs-d-flex hs-justify-content-between">
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Expiration Date: 24/07</strong>
+                                        </p>
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">CVV: ***</strong>
+                                        </p>
                                     </div>
                                 </div>
-                                <div class="flex justify-center">
-                                    <button type="button" class="btn btn-light flex items-center h-8">
-                                        Payment Methods
+                                <div class="hs-d-flex hs-justify-content-center">
+                                    <button type="button" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
+                                            style="height: 31px">Payment Methods
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-wrap mt-5">
-                        <div class="px-0 rounded-3xl bg-card">
-                            <div class="py-3 px-3 bg-white w-full rounded-3xl text-black">
+                    <div class="hs-row hs-m-0 hs-mt-5">
+                        <div class="hs-px-0 hs-rounded-3 hs-bg-card">
+                            <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-black hs-bg-white">
                                 Last Order
                             </div>
-                            <div class="flex justify-center py-2">
-                                <p class="flex justify-center font-bold m-0 text-sm">Order nº
+                            <div class="hs-row hs-p-0 hs-d-flex hs-justify-content-center">
+                                <p class="hs-d-flex hs-justify-content-center hs-fw-bolder hs-m-0"
+                                   style="font-size: 14px;">Order nº
                                     XD234FD112E</p>
-                                <p class="flex justify-center font-bold m-0 text-sm">10 Janeiro 2024<!-- Order Date --></p>
+                                <p class="hs-d-flex hs-justify-content-center hs-fw-bolder hs-m-0"
+                                   style="font-size: 14px;">10
+                                    Janeiro
+                                    2024<!-- Order Date --></p>
                             </div>
-                            <div class="flex justify-center py-2">
-                                <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="rounded-3xl"
+                            <div class="hs-d-flex hs-justify-content-center hs-pt-2 hs-pb-3">
+                                <img src="{{ asset('/imgs/users/no-image.png') }}" alt="" class="hs-rounded-3"
                                      style="width:70px">
                             </div>
-                            <div class="flex justify-center">
-                                <button type="button" class="btn btn-light flex items-center h-8">
+                            <div class="hs-d-flex hs-justify-content-center">
+                                <button type="button" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
+                                        style="height: 31px">
                                     My Orders
                                 </button>
                             </div>

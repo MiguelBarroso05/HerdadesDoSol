@@ -30,88 +30,96 @@
             border-radius: 8px;
         }
     </style>
-    <main class="col-md-11 w-85 align-self-center mt-8 p-2  flex-grow-1">
-        <div class="d-flex justify-content-between">
+    <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
+        <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
-            <div style="width: 78%;" class="bg-card rounded-3 p-5 d-flex flex-column justify-content-between">
+            <div style="width: 78%;"
+                 class="bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
                 <div>
-                    <div class="d-flex justify-content-between w-100">
+                    <div class="hs-d-flex hs-justify-content-between hs-w-100">
                         <p>BASIC INFORMATION</p>
-                        <a href="" style="font-size: 1.5rem;"><i class="bi bi-pencil-square"></i></a>
+                        <x-custom-button type="edit" route="{{route('personal-info.edit', ['user'=>auth()->user()])}}"/>
                     </div>
-                    <div class="row" style="height: 240px">
-                        <div class="col-md-3 d-flex flex-column justify-content-between">
-                            <p class="d-flex"><strong class="pe-2">Name:</strong>
+                    <div class="hs-row" style="height: 240px">
+                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-between">
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
                                 {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Nationality:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Nationality:</strong>
                                 {{ auth()->user()->nationality }}</p>
-                            <p class="d-flex"><strong class="pe-2">Birth Date:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
                                 {{ auth()->user()->birthdate }}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Allergies:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Allergies:</strong>
                                 {{ auth()->user()->allergies->isNotEmpty() ? auth()->user()->allergies->pluck('name')->implode(', ') : 'none' }}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Language:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Language:</strong>
                                 {{ auth()->user()->language()->name }}
                             </p>
                         </div>
-                        <div class="col-md-3 d-flex flex-column justify-content-between">
-                            <p class="d-flex"><strong class="pe-2">Phone:</strong>
+                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-between">
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Phone:</strong>
                                 {{ auth()->user()->phone ?? 'none'}}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Standard Group:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Standard Group:</strong>
                                 {{ auth()->user()->standard_group }}</p>
-                            <p class="d-flex"><strong class="pe-2">Email:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
                                 {{ auth()->user()->email }}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Preferences:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Preferences:</strong>
                                 {{ auth()->user()->preferences->isNotEmpty() ? auth()->user()->preferences->pluck('name')->implode(', ') : 'none' }}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Favourite Estates:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Favourite Estates:</strong>
                                 {{ auth()->user()->fav_estates->isNotEmpty() ? auth()->user()->fav_estates->pluck('name')->implode(', ') : 'none' }}
                             </p>
                         </div>
-                        <div class="col-md-3 d-flex flex-column justify-content-top">
-                            <p class="d-flex"><strong class="pe-2">NIF:</strong>
+                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-top">
+                            <p class="hs-d-flex"><strong class="hs-pe-2">NIF:</strong>
                                 {{ auth()->user()->nif ?? 'none'}}
                             </p>
-                            <p class="d-flex"><strong class="pe-2">Children nº:</strong>
+                            <p class="hs-d-flex"><strong class="hs-pe-2">Children nº:</strong>
                                 {{ auth()->user()->children }}</p>
                         </div>
-                        <div class="col-md-3 text-end">
+                        <div class="hs-col-md-3 hs-text-end">
                             <img
-                                src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('/imgs/users/no-image.png') }}"
-                                alt="" class="img-fluid rounded-3" style="width: 200px">
+                                src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                alt="" class="hs-img-fluid hs-rounded-3" style="width: 200px">
                         </div>
                     </div>
                 </div>
                 <div>
                     <p>ADDRESS INFORMATION</p>
-                    <div class="row mx-auto justify-content-between" style="min-height: 155px;">
+                    <div class="hs-row hs-mx-auto hs-justify-content-between" style="min-height: 155px;">
                         @foreach(auth()->user()->addresses as $address)
                             <x-address-card :address="$address"/>
                         @endforeach
 
                         @if(auth()->user()->addresses->count() < 3)
                             <button type="button"
-                                    class="bg-white p-3 rounded-3 d-flex justify-content-center align-items-center fs-2 ms-2"
+                                    class="hs-bg-white hs-p-3 hs-rounded-3 hs-d-flex hs-justify-content-center hs-align-items-center hs-fs-2"
                                     style="border: 1px dashed  #437546; width: 350px; height: 155px; color: #437546;"
                                     data-bs-toggle="modal"
                                     data-bs-target="#clientAddAddressModal">
-                                <i class="bi bi-plus-circle fw-bolder"></i>
+                                <i class="bi bi-plus-circle hs-fw-bolder"></i>
                             </button>
                         @endif
 
-                        @for ($i = count(auth()->user()->addresses); $i < 2; $i++)
-                            <div class="ms-2" style="width: 350px; height: 155px;"></div>
-                        @endfor
+                        @if(auth()->user()->addresses->count() == 0)
+                            <div class="hs-text-center hs-align-content-center" style="width: 350px; height: 155px;">
+                                Consider adding your preferred location to simplify your purchases
+                            </div>
+                            <div class="hs-ms-2" style="width: 350px; height: 155px;"></div>
 
+                        @elseif(auth()->user()->addresses->count() != 0)
+                            @for ($i = auth()->user()->addresses->count(); $i < 2; $i++)
+                                <div class="hs-ms-2" style="width: 350px; height: 155px;"></div>
+                            @endfor
+                        @endif
                     </div>
                 </div>
             </div>
             @foreach(auth()->user()->addresses as $address)
-                <livewire:show-address-modal :address="$address" :user="auth()->user()" />
+                <x-show-address-modal :address="$address" :user="auth()->user()"/>
             @endforeach
             <livewire:address-form :user="auth()->user()" :modalIdName="'clientAddAddressModal'"
                                    :redirectUrl="url()->current()"/>

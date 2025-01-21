@@ -2,16 +2,16 @@
 
 @section('content')
     @include('layouts.navbars.guest.navbar')
-    <main class="main-content  mt-0 flex-grow-1">
+    <main class="hs-main-content hs-mt-0 hs-flex-grow-1">
         <!-- Horizontal banner -->
         <section>
-            <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg signup-image">
-                <span class="mask bg-gradient-dark opacity-6"></span>
-                <div class="container mobile-hidden">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6 text-center mx-auto">
-                            <h1 class="text-white mb-2 mt-5 mt-md-7">Herdades do Sol!</h1>
-                            <p class="text-lead text-white">Start your journey with us and discover the harmony of nature and comfort. Create your account today and unlock exclusive experiences tailored just for you!</p>
+            <div class="hs-page-header hs-align-items-start hs-min-vh-50 hs-pt-5 hs-pb-11 hs-m-3 hs-border-radius-lg signup-image">
+                <span class="hs-mask hs-bg-gradient-dark hs-opacity-6"></span>
+                <div class="hs-container mobile-hidden">
+                    <div class="hs-row hs-justify-content-center">
+                        <div class="hs-col-lg-6 hs-text-center hs-mx-auto">
+                            <h1 class="hs-text-white hs-mb-2 hs-mt-5 hs-mt-md-7">Herdades do Sol!</h1>
+                            <p class="hs-text-lead hs-text-white">Start your journey with us and discover the harmony of nature and comfort. Create your account today and unlock exclusive experiences tailored just for you!</p>
                         </div>
                     </div>
                 </div>
@@ -20,67 +20,67 @@
 
         <!-- Form container -->
         <section>
-            <div class="container mb-4">
-                <div class="row mt-lg-n10 mt-md-n11 mt-n12 justify-content-center">
-                    <div class="col-xl-8 col-md-8 mx-auto">
-                        <div class="card z-index-0 shadow">
-                            <div class="card-body">
+            <div class="hs-container hs-mb-4">
+                <div class="hs-row hs-mt-lg-n10 hs-mt-md-n11 hs-mt-n12 hs-justify-content-center">
+                    <div class="hs-col-xl-8 hs-col-md-8 hs-mx-auto">
+                        <div class="hs-card hs-z-index-0 hs-shadow">
+                            <div class="hs-card-body">
                                 <form method="POST" action="{{ route('register.perform') }}">
                                     @csrf
                                     <!-- Email -->
-                                    <div class="mb-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" value="{{ old('email') }}">
-                                        @error('email') <p class='text-danger text-xs pt-1'>{{ $message }}</p> @enderror
+                                    <div class="hs-mb-3">
+                                        <input type="email" name="email" class="hs-form-control" placeholder="Email" aria-label="Email" value="{{ old('email') }}">
+                                        @error('email') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                     </div>
 
                                     <!-- Password and Confirm Password -->
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password">
-                                            @error('password') <p class='text-danger text-xs pt-1'>{{ $message }}</p> @enderror
+                                    <div class="hs-row">
+                                        <div class="hs-col-12 hs-col-md-6 hs-mb-3">
+                                            <input type="password" name="password" class="hs-form-control" placeholder="Password" aria-label="Password">
+                                            @error('password') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                         </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" aria-label="Password">
+                                        <div class="hs-col-12 hs-col-md-6 hs-mb-3">
+                                            <input type="password" name="password_confirmation" class="hs-form-control" placeholder="Confirm Password" aria-label="Password">
                                         </div>
                                     </div>
 
                                     <!-- First Name and Last Name -->
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <input type="text" name="firstname" class="form-control" placeholder="First Name" aria-label="Name" value="{{ old('firstname') }}">
-                                            @error('firstname') <p class='text-danger text-xs pt-1'>{{ $message }}</p> @enderror
+                                    <div class="hs-row">
+                                        <div class="hs-col-12 hs-col-md-6 hs-mb-3">
+                                            <input type="text" name="firstname" class="hs-form-control" placeholder="First Name" aria-label="Name" value="{{ old('firstname') }}">
+                                            @error('firstname') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                         </div>
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <input type="text" name="lastname" class="form-control" placeholder="Last Name" aria-label="Name" value="{{ old('lastname') }}">
-                                            @error('lastname') <p class='text-danger text-xs pt-1'>{{ $message }}</p> @enderror
+                                        <div class="hs-col-12 hs-col-md-6 hs-mb-3">
+                                            <input type="text" name="lastname" class="hs-form-control" placeholder="Last Name" aria-label="Name" value="{{ old('lastname') }}">
+                                            @error('lastname') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                         </div>
                                     </div>
 
                                     <!-- Birth Date -->
-                                    <div class="row">
-                                        <div class="col-12 col-md-6 mb-3">
-                                            <label class="form-check-label">
+                                    <div class="hs-row">
+                                        <div class="hs-col-12 hs-col-md-6 hs-mb-3">
+                                            <label class="hs-form-check-label">
                                                 Birth Date:
                                             </label>
-                                            <input type="date" name="birthdate" class="form-control" placeholder="Birth Date" aria-label="Birth Date" value="{{ old('birthdate') }}">
-                                            @error('birthdate') <p class='text-danger text-xs pt-1'>{{ $message }}</p> @enderror
+                                            <input type="date" name="birthdate" class="hs-form-control" placeholder="Birth Date" aria-label="Birth Date" value="{{ old('birthdate') }}">
+                                            @error('birthdate') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                         </div>
                                     </div>
 
                                     <!-- Terms and Conditions -->
-                                    <div class="form-check form-check-info text-start mb-3">
-                                        <input class="form-check-input" type="checkbox" name="terms" id="flexCheckDefault">
-                                        <label class="form-check-label" for="flexCheckDefault">
-                                            I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                                    <div class="hs-form-check hs-form-check-info hs-text-start hs-mb-3">
+                                        <input class="hs-form-check-input" type="checkbox" name="terms" id="flexCheckDefault">
+                                        <label class="hs-form-check-label" for="flexCheckDefault">
+                                            I agree to the <a href="javascript:;" class="hs-text-dark hs-font-weight-bolder">Terms and Conditions</a>
                                         </label>
-                                        @error('terms') <p class='text-danger text-xs'>{{ $message }}</p> @enderror
+                                        @error('terms') <p class='hs-text-danger hs-text-xs'>{{ $message }}</p> @enderror
                                     </div>
 
                                     <!-- Submit Button -->
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-primary w-100 my-4 mb-2">Sign up</button>
+                                    <div class="hs-text-center">
+                                        <button type="submit" class="hs-btn hs-btn-primary hs-w-100 hs-my-4 hs-mb-2">Sign up</button>
                                     </div>
-                                    <p class="text-sm mt-3 mb-0">Already have an account? <a href="{{ route('login') }}" class="text-dark font-weight-bolder">Sign in</a></p>
+                                    <p class="hs-text-sm hs-mt-3 hs-mb-0">Already have an account? <a href="{{ route('login') }}" class="hs-text-dark hs-font-weight-bolder">Sign in</a></p>
                                 </form>
                             </div>
                         </div>

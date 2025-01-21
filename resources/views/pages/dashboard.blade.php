@@ -1,129 +1,389 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'hs-g-sidenav-show hs-bg-gray-100'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-    <div class="container mx-auto py-4 flex-grow">
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+    <div class="hs-container-fluid hs-py-4 hs-flex-grow-1">
+        <div class="hs-row">
             <!-- Total Users -->
-            <div class="bg-white shadow-md rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-1">
-                        <p class="text-sm font-semibold uppercase text-gray-500">Total Users</p>
-                        <h5 class="text-xl font-bold">{{ $totalUsers }}</h5>
-                    </div>
-                    <div class="w-12 h-12 bg-red-500 text-white flex items-center justify-center rounded-full">
-                        <i class="ni ni-world text-lg"></i>
+            <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
+                <div class="hs-card">
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-row">
+                            <div class="hs-col-8">
+                                <div class="hs-numbers">
+                                    <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">Total Users</p>
+                                    <h5 class="hs-font-weight-bolder">
+                                        {{ $totalUsers }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hs-col-4 hs-text-end">
+                                <div class="hs-icon hs-icon-shape hs-bg-gradient-danger hs-shadow-danger hs-text-center hs-rounded-circle">
+                                    <i class="ni ni-world hs-text-lg hs-opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- New Clients Today -->
-            <div class="bg-white shadow-md rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-1">
-                        <p class="text-sm font-semibold uppercase text-gray-500">New Clients Today</p>
-                        <h5 class="text-xl font-bold">{{ $newClientsToday }}</h5>
-                    </div>
-                    <div class="w-12 h-12 bg-green-500 text-white flex items-center justify-center rounded-full">
-                        <i class="ni ni-paper-diploma text-lg"></i>
+            <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
+                <div class="hs-card">
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-row">
+                            <div class="hs-col-8">
+                                <div class="hs-numbers">
+                                    <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">New Clients Today</p>
+                                    <h5 class="hs-font-weight-bolder">
+                                        {{ $newClientsToday }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hs-col-4 hs-text-end">
+                                <div class="hs-icon hs-icon-shape hs-bg-gradient-success hs-shadow-success hs-text-center hs-rounded-circle">
+                                    <i class="ni ni-paper-diploma hs-text-lg hs-opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Total Activities -->
-            <div class="bg-white shadow-md rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-1">
-                        <p class="text-sm font-semibold uppercase text-gray-500">Total Activities</p>
-                        <h5 class="text-xl font-bold">{{ $totalActivities }}</h5>
-                    </div>
-                    <div class="w-12 h-12 bg-blue-500 text-white flex items-center justify-center rounded-full">
-                        <i class="ni ni-app text-lg"></i>
+            <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
+                <div class="hs-card">
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-row">
+                            <div class="hs-col-8">
+                                <div class="hs-numbers">
+                                    <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">Total Activities</p>
+                                    <h5 class="hs-font-weight-bolder">
+                                        {{ $totalActivities }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hs-col-4 hs-text-end">
+                                <div class="hs-icon hs-icon-shape hs-bg-gradient-info hs-shadow-info hs-text-center hs-rounded-circle">
+                                    <i class="ni ni-app hs-text-lg hs-opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Total Accommodations -->
-            <div class="bg-white shadow-md rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-1">
-                        <p class="text-sm font-semibold uppercase text-gray-500">Total Accommodations</p>
-                        <h5 class="text-xl font-bold">{{ $totalAccommodations }}</h5>
-                    </div>
-                    <div class="w-12 h-12 bg-indigo-500 text-white flex items-center justify-center rounded-full">
-                        <i class="ni ni-building text-lg"></i>
+            <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
+                <div class="hs-card">
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-row">
+                            <div class="hs-col-8">
+                                <div class="hs-numbers">
+                                    <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">Total Accommodations</p>
+                                    <h5 class="hs-font-weight-bolder">
+                                        {{ $totalAccommodations }}
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hs-col-4 hs-text-end">
+                                <div class="hs-icon hs-icon-shape hs-bg-gradient-primary hs-shadow-primary hs-text-center hs-rounded-circle">
+                                    <i class="ni ni-building hs-text-lg hs-opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Sales Overview -->
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-6">
-            <div class="bg-white shadow-md rounded-lg p-4">
-                <div class="mb-4">
-                    <h6 class="text-lg font-bold">Sales Overview</h6>
-                    <p class="text-sm text-gray-500">
-                        <i class="fa fa-arrow-up text-green-500"></i>
-                        <span class="font-bold">{{ $salesIncreasePercentage }}% more</span> in {{ $currentYear }}
-                    </p>
-                </div>
-                <div class="h-72">
-                    <canvas id="chart-line"></canvas>
+        <div class="hs-row hs-mt-4">
+            <div class="hs-col-lg-7 hs-mb-lg-0 hs-mb-4">
+                <div class="hs-card hs-z-index-2 hs-h-100">
+                    <div class="hs-card-header hs-pb-0 hs-pt-3 hs-bg-transparent">
+                        <h6 class="hs-text-capitalize">Sales Overview</h6>
+                        <p class="hs-text-sm hs-mb-0">
+                            <i class="fa fa-arrow-up hs-text-success"></i>
+                            <span class="hs-font-weight-bold"> {{ $salesIncreasePercentage }}% more</span> in {{ $currentYear }}
+                        </p>
+                    </div>
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-chart">
+                            <canvas id="chart-line" class="hs-chart-canvas" height="300"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Slideshow -->
-            <div class="bg-white shadow-md rounded-lg overflow-hidden">
-                <div id="carouselExampleCaptions" class="relative" data-bs-ride="carousel">
-                    <div class="relative overflow-hidden">
+        <!-- Slideshow -->
+        <div class="hs-col-lg-5">
+            <div class="hs-card hs-card-carousel hs-overflow-hidden hs-h-100 hs-p-0">
+                <div id="carouselExampleCaptions" class="hs-carousel hs-slide hs-h-100" data-bs-ride="carousel">
+                    <div class="hs-carousel-inner hs-border-radius-lg hs-h-100">
                         <!-- Slide 1 -->
-                        <div class="carousel-item active relative w-full h-72 bg-cover app-image">
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <div class="bg-white p-2 rounded-full">
-                                    <i class="ni ni-compass-04 text-gray-800"></i>
+                        <div class="hs-carousel-item hs-h-100 hs-active app-image">
+                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
+                                    <i class="ni ni-compass-04 hs-text-dark hs-opacity-10"></i>
                                 </div>
-                                <h5 class="text-xl font-bold">Discover Unique Destinations</h5>
-                                <p class="text-sm">Explore handpicked accommodations and activities designed to create unforgettable memories.</p>
+                                <h5 class="hs-text-white hs-mb-1">Discover Unique Destinations</h5>
+                                <p>Explore handpicked accommodations and activities designed to create unforgettable memories.</p>
                             </div>
                         </div>
 
                         <!-- Slide 2 -->
-                        <div class="carousel-item relative w-full h-72 bg-cover signup-image">
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <div class="bg-white p-2 rounded-full">
-                                    <i class="ni ni-world-2 text-gray-800"></i>
+                        <div class="hs-carousel-item hs-h-100 signup-image">
+                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
+                                    <i class="ni ni-world-2 hs-text-dark hs-opacity-10"></i>
                                 </div>
-                                <h5 class="text-xl font-bold">Adventures Tailored for You</h5>
-                                <p class="text-sm">Whether you're seeking relaxation or adventure, we have the perfect experience waiting for you.</p>
+                                <h5 class="hs-text-white hs-mb-1">Adventures Tailored for You</h5>
+                                <p>Whether you're seeking relaxation or adventure, we have the perfect experience waiting for you.</p>
                             </div>
                         </div>
 
                         <!-- Slide 3 -->
-                        <div class="carousel-item relative w-full h-72 bg-cover home-image">
-                            <div class="absolute bottom-4 left-4 text-white">
-                                <div class="bg-white p-2 rounded-full">
-                                    <i class="ni ni-send text-gray-800"></i>
+                        <div class="hs-carousel-item hs-h-100 home-image">
+                            <div class="hs-carousel-caption hs-d-none hs-d-md-block hs-bottom-0 hs-text-start hs-start-0 hs-ms-5">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-bg-white hs-text-center hs-border-radius-md hs-mb-3">
+                                    <i class="ni ni-send hs-text-dark hs-opacity-10"></i>
                                 </div>
-                                <h5 class="text-xl font-bold">Plan Your Perfect Getaway</h5>
-                                <p class="text-sm">From accommodations to activities, customize every detail to suit your needs and preferences.</p>
+                                <h5 class="hs-text-white hs-mb-1">Plan Your Perfect Getaway</h5>
+                                <p>From accommodations to activities, customize every detail to suit your needs and preferences.</p>
                             </div>
                         </div>
                     </div>
-                    <button class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
-                        <i class="fas fa-chevron-left"></i>
+                    <button class="hs-carousel-control-prev hs-w-5 hs-me-3" type="button"
+                            data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="hs-carousel-control-prev-icon" aria-hidden="true"></span>
                     </button>
-                    <button class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full">
-                        <i class="fas fa-chevron-right"></i>
+
+                    <button class="hs-carousel-control-next hs-w-5 hs-me-3" type="button"
+                            data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="hs-carousel-control-next-icon" aria-hidden="true"></span>
                     </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales by Country -->
+        <div class="hs-row hs-mt-4">
+            <div class="hs-col-lg-7 hs-mb-lg-0 hs-mb-4">
+                <div class="hs-card">
+                    <div class="hs-card-header hs-pb-0 hs-p-3">
+                        <div class="hs-d-flex hs-justify-content-between">
+                            <h6 class="hs-mb-2">Sales by Country</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hs-table-responsive">
+                    <table class="hs-table hs-align-items-center">
+                        <tbody>
+                            <tr>
+                                <td class="hs-w-30">
+                                    <div class="hs-d-flex hs-px-2 hs-py-1 hs-align-items-center">
+                                        <div class="hs-ms-4">
+                                            <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Country:</p>
+                                            <h6 class="hs-text-sm hs-mb-0">United States</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Sales:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">2500</h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Value:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">$230,900</h6>
+                                    </div>
+                                </td>
+                                <td class="hs-align-middle hs-text-sm">
+                                    <div class="hs-col hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Bounce:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">29.9%</h6>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="hs-w-30">
+                                    <div class="hs-d-flex hs-px-2 hs-py-1 hs-align-items-center">
+                                        <div class="hs-ms-4">
+                                            <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Country:</p>
+                                            <h6 class="hs-text-sm hs-mb-0">Germany</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Sales:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">3,900</h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Value:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">$440,000</h6>
+                                    </div>
+                                </td>
+                                <td class="hs-align-middle hs-text-sm">
+                                    <div class="hs-col hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Bounce:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">40.22%</h6>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="hs-w-30">
+                                    <div class="hs-d-flex hs-px-2 hs-py-1 hs-align-items-center">
+                                        <div class="hs-ms-4">
+                                            <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Country:</p>
+                                            <h6 class="hs-text-sm hs-mb-0">Great Britain</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Sales:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">1,400</h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Value:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">$190,700</h6>
+                                    </div>
+                                </td>
+                                <td class="hs-align-middle hs-text-sm">
+                                    <div class="hs-col hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Bounce:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">23.44%</h6>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="hs-w-30">
+                                    <div class="hs-d-flex hs-px-2 hs-py-1 hs-align-items-center">
+                                        <div class="hs-ms-4">
+                                            <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Country:</p>
+                                            <h6 class="hs-text-sm hs-mb-0">Brazil</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Sales:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">562</h6>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Value:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">$143,960</h6>
+                                    </div>
+                                </td>
+                                <td class="hs-align-middle hs-text-sm">
+                                    <div class="hs-col hs-text-center">
+                                        <p class="hs-text-xs hs-font-weight-bold hs-mb-0">Bounce:</p>
+                                        <h6 class="hs-text-sm hs-mb-0">32.14%</h6>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="hs-col-lg-5">
+            <div class="hs-card">
+                <div class="hs-card-header hs-pb-0 hs-p-3">
+                    <h6 class="hs-mb-0">Categories</h6>
+                </div>
+                <div class="hs-card-body hs-p-3">
+                    <ul class="hs-list-group">
+                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
+                            <div class="hs-d-flex hs-align-items-center">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
+                                    <i class="ni ni-mobile-button hs-text-white hs-opacity-10"></i>
+                                </div>
+                                <div class="hs-d-flex hs-flex-column">
+                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Devices</h6>
+                                    <span class="hs-text-xs">250 in stock, <span class="hs-font-weight-bold">346+ sold</span></span>
+                                </div>
+                            </div>
+                            <div class="hs-d-flex">
+                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
+                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
+                            <div class="hs-d-flex hs-align-items-center">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
+                                    <i class="ni ni-tag hs-text-white hs-opacity-10"></i>
+                                </div>
+                                <div class="hs-d-flex hs-flex-column">
+                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Tickets</h6>
+                                    <span class="hs-text-xs">123 closed, <span class="hs-font-weight-bold">15 open</span></span>
+                                </div>
+                            </div>
+                            <div class="hs-d-flex">
+                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
+                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-mb-2 hs-border-radius-lg">
+                            <div class="hs-d-flex hs-align-items-center">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
+                                    <i class="ni ni-box-2 hs-text-white hs-opacity-10"></i>
+                                </div>
+                                <div class="hs-d-flex hs-flex-column">
+                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Error logs</h6>
+                                    <span class="hs-text-xs">1 is active, <span class="hs-font-weight-bold">40 closed</span></span>
+                                </div>
+                            </div>
+                            <div class="hs-d-flex">
+                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
+                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li class="hs-list-group-item hs-border-0 hs-d-flex hs-justify-content-between hs-ps-0 hs-border-radius-lg">
+                            <div class="hs-d-flex hs-align-items-center">
+                                <div class="hs-icon hs-icon-shape hs-icon-sm hs-me-3 hs-bg-gradient-dark hs-shadow hs-text-center">
+                                    <i class="ni ni-satisfied hs-text-white hs-opacity-10"></i>
+                                </div>
+                                <div class="hs-d-flex hs-flex-column">
+                                    <h6 class="hs-mb-1 hs-text-dark hs-text-sm">Happy users</h6>
+                                    <span class="hs-text-xs hs-font-weight-bold">+ 430</span>
+                                </div>
+                            </div>
+                            <div class="hs-d-flex">
+                                <button class="hs-btn hs-btn-link hs-btn-icon-only hs-btn-rounded hs-btn-sm hs-text-dark hs-icon-move-right hs-my-auto">
+                                    <i class="ni ni-bold-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-
 @push('js')
-    <script src="{{asset('./assets/js/plugins/chartjs.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             fetch('/dashboard/sales_overview')

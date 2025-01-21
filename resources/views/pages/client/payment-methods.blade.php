@@ -10,44 +10,44 @@
             background-position: center;
         }
 
-        .bg-card {
+        .hs-bg-card {
             background-color: #f6f6f6;
             opacity: 0.82;
         }
 
-        .card img {
+        .hs-card img {
             width: 50px;
         }
 
-        .main-content {
+        .hs-main-content {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 10px;
         }
 
-        .wishlist-card img {
+        .hs-wishlist-card img {
             width: 100%;
             border-radius: 8px;
         }
 
-        .bg-custom-light {
+        .hs-bg-custom-light {
             background-color: #e3e3e3;
         }
 
-        .text-card-pm {
+        .hs-text-card-pm {
             font-size: 0.9rem;
             color: #949494;
         }
 
-        .text-black {
+        .hs-text-black {
             color: black;
         }
 
-        .border-custom-black {
+        .hs-border-custom-black {
             border: 1px solid #BFBFBF;
         }
 
-        .dashed-box {
+        .hs-dashed-box {
             border: 2px dashed #437546;
             background-color: #fff;
             width: 240px;
@@ -57,7 +57,7 @@
             align-items: center;
         }
 
-        .billing-dashed-box {
+        .hs-billing-dashed-box {
             border: 1px solid #437546;
             background-color: #fff;
             width: 205px;
@@ -67,36 +67,36 @@
             align-items: center;
         }
 
-        .box-icon {
+        .hs-box-icon {
             color: #437546;
             font-size: 23px;
             -webkit-text-stroke: 2px;
         }
 
-        .payment-button-icon {
+        .hs-payment-button-icon {
             color: #437546;
             font-size: 23px;
             -webkit-text-stroke: 1px;
         }
 
-        .ml-custom-20 {
+        .hs-ml-custom-20 {
             margin-left: 20px;
         }
 
-        .mr-custom-15 {
+        .hs-mr-custom-15 {
             margin-right: 15px;
         }
 
-        .mt-custom-80 {
+        .hs-mt-custom-80 {
             margin-top: 80px;
         }
 
-        .icon-text-container {
+        .hs-icon-text-container {
             align-items: center;
             justify-content: center;
         }
 
-        .payment-button-text {
+        .hs-payment-button-text {
             color: #70777c;
             font-size: 12px;
             margin-right: 10px;
@@ -105,71 +105,71 @@
 
 
     </style>
-    <main class="col-md-11 w-85 align-self-center mt-8 p-2  flex-grow-1">
-        <div class="d-flex justify-content-between">
+    <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 p-2 hs-flex-grow-1">
+        <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
-            <div style="width: 1280px; display: flex;" class="bg-card rounded-3 m-0">
-                <div style="width: 320px;" class="bg-custom-light border h-100 rounded-3 m-0 p-0 ">
-                    <div class="p-4 ml-5">
-                        <div class="text-black fs-5 fw-bold pb-1">
+            <div style="width: 1280px; display: flex;" class="hs-bg-card hs-rounded-3 hs-m-0">
+                <div style="width: 320px;" class="hs-bg-custom-light hs-border hs-h-100 hs-rounded-3 hs-m-0 hs-p-0 ">
+                    <div class="hs-p-4 hs-ml-5">
+                        <div class="hs-text-black hs-fs-5 hs-fw-bold hs-pb-1">
                             Payment Method
                         </div>
-                        <div class="text-card-pm">
+                        <div class="hs-text-card-pm">
                             Cards and Billing
                         </div>
                     </div>
-                    <div class="border-custom-black w-100"></div>
-                    <div class="dashed-box m-4 rounded-3">
-                        <i class="bi bi-plus-circle box-icon"></i>
+                    <div class="hs-border-custom-black hs-w-100"></div>
+                    <div class="hs-dashed-box hs-m-4 hs-rounded-3">
+                        <i class="bi bi-plus-circle hs-box-icon"></i>
                     </div>
                 </div>
 
-                <div class="p-4">
-                    <div class="p-4">
+                <div class="hs-p-4">
+                    <div class="hs-p-4">
                         <p>BILLING INFORMATION</p>
-                        <div class="text-black icon-text-container" id="billing-info">No client information provided for
+                        <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information provided for
                             biling
                             <x-plus-button onclick="toggleComponents()"/>
                         </div>
-                        <div class="justify-content-between" style="width: 450px; display: none;" id="payment-methods">
-                            <x-payment-method-button id="billing-defalt" text="Use your personal information"
+                        <div class="hs-justify-content-between" style="width: 450px; display: none;" id="payment-methods">
+                            <x-payment-method-button id="billing-default" text="Use your personal information"
                                                      icon="bi bi-arrow-right-circle payment-button-icon mr-custom-15"/>
                             <x-payment-method-button id="billing-new" text="Create new billing information"
                                                      icon="bi bi-plus-circle payment-button-icon mr-custom-15"/>
                         </div>
-                        <div class="py-4">
+                        <div class="hs-py-4">
                             <p>ADDRESS INFORMATION</p>
-                            <div class="text-black icon-text-container" id="billing1-info">No address information
+                            <div class="hs-text-black hs-icon-text-container" id="billing1-info">No address information
                                 defined
                                 <x-plus-button onclick="toggleComponents1()"/>
                             </div>
-                            <div class="justify-content-between" style="width: 450px; display: none;"
+                            <div class="hs-justify-content-between" style="width: 450px; display: none;"
                                  id="payment1-methods">
-                                <x-payment-method-button id="address-defalt" text="Use one of your addresses"
+                                <x-payment-method-button id="address-default" text="Use one of your addresses"
                                                          icon="bi bi-arrow-right-circle payment-button-icon mr-custom-15"/>
                                 <x-payment-method-button id="address-new" text="Create new address information"
                                                          icon="bi bi-plus-circle payment-button-icon mr-custom-15"/>
                             </div>
                         </div>
 
-                        <div class="py-4 mt-custom-80">
+                        <div class="hs-py-4 hs-mt-custom-80">
                             <p>PAYMENT INFORMATION</p>
-                            <div class="text-black icon-text-container">No payment method defined, consider inserting a
+                            <div class="hs-text-black hs-icon-text-container">No payment method defined, consider inserting a
                                 method to facilitate payment
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div wire:ignore.self class="modal fade" id="AlterarDepois" tabindex="-1"
+            <div wire:ignore.self class="hs-modal hs-fade" id="aa" tabindex="-1"
                  @if ($errors->any()) style="display: block;" @endif>
-                <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
+                <div class="hs-modal-dialog hs-modal-dialog-centered" style="max-width: 40%">
                     <form wire:submit.prevent="submit">
-                        <div class="modal-content">
-                            <div class="col-10 align-self-center">
-                                <div class="modal-body">
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="modal-title align-self-center" style="color: black !important;"
+                        <div class="hs-modal-content">
+                            <div class="hs-col-10 hs-align-self-center">
+                                <div class="hs-modal-body">
+                                    <div class="hs-d-flex hs-justify-content-between">
+                                        <h5 class="hs-modal-title hs-align-self-center" style="color: black !important;"
                                             id="exampleModalLabel">BILLING INFORMATION</h5>
                                         <a type="button" data-bs-dismiss="modal" aria-label="Close">
                                             <i class="bi bi-x fs-3" style="color: black !important;"></i>
@@ -178,26 +178,26 @@
                                     <div>
                                         <p>PERSONAL INFORMATION</p>
                                     </div>
-                                    <div class="row">
+                                    <div class="hs-row">
                                         <!-- Name Input -->
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="name" class="form-control-label">Name</label>
+                                        <div class="hs-col-md-8">
+                                            <div class="hs-form-group">
+                                                <label for="name" class="hs-form-control-label">Name</label>
                                                 <input
-                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    class="hs-form-control @error('name') is-invalid @enderror"
                                                     type="text" wire:model.defer="name"
                                                     placeholder="Name">
                                                 @error('name')
-                                                <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                             </div>
                                         </div>
 
                                         <!-- NIF Input -->
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="nif" class="form-control-label">NIF</label>
+                                        <div class="hs-col-md-4">
+                                            <div class="hs-form-group">
+                                                <label for="nif" class="hs-form-control-label">NIF</label>
                                                 <input
-                                                    class="form-control @error('nif') is-invalid @enderror"
+                                                    class="hs-form-control @error('nif') is-invalid @enderror"
                                                     type="text" wire:model.defer="nif"
                                                     placeholder="NIF">
                                                 @error('nif')
@@ -206,35 +206,33 @@
                                         </div>
 
                                         <!-- Email Input -->
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label for="email" class="form-control-label">Email</label>
+                                        <div class="hs-col-md-8">
+                                            <div class="hs-form-group">
+                                                <label for="email" class="hs-form-control-label">Email</label>
                                                 <input
-                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    class="hs-form-control @error('email') is-invalid @enderror"
                                                     type="text" wire:model.defer="email"
                                                     placeholder="Email">
                                                 @error('email')
-                                                <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                             </div>
                                         </div>
 
                                         <!-- Phone Number Input -->
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="phone" class="form-control-label">Phone Number</label>
+                                        <div class="hs-col-md-4">
+                                            <div class="hs-form-group">
+                                                <label for="phone" class="hs-form-control-label">Phone Number</label>
                                                 <input
-                                                    class="form-control @error('phone') is-invalid @enderror"
+                                                    class="hs-form-control @error('phone') is-invalid @enderror"
                                                     type="text" wire:model.defer="phone"
                                                     placeholder="+000 000 000 000">
                                                 @error('phone')
-                                                <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-end">
-                                        <div class="col-md-4">
+                                    <div class="hs-d-flex hs-justify-content-end">
                                             <x-custom-button type="create" route="{{null}}"/>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -247,6 +245,11 @@
 @endsection
 @push('js')
     <script>
+        document.getElementById('billing-new').addEventListener('click', function () {
+            let modal = new bootstrap.Modal(document.getElementById(''));
+            modal.show();
+        });
+
         function toggleComponents() {
             const billingInfo = document.getElementById('billing-info') || document.getElementById('billing1-info');
             const paymentMethods = document.getElementById('payment-methods') || document.getElementById('payment1-methods');

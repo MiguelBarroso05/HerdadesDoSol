@@ -3,13 +3,4 @@
     <i class="{{$icon}}"></i>
 </div>
 
-@push('js')
-    <script>
-        document.getElementById('{{$id}}').addEventListener('click', function () {
-            let modal = new bootstrap.Modal(document.getElementById('AlterarDepois'));
-            modal.show();
-        });
-    </script>
-@endpush
-
 

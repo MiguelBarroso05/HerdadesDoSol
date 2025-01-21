@@ -11,7 +11,7 @@
                     @method('PUT')
 
                     <!-- Activity Card -->
-                    <div class="card-body p-3">
+                    <div class="hs-card-body p-3">
                         <div class="row gx-4">
                             <!-- Activity Image Section -->
                             <div class="col-auto">
@@ -37,8 +37,8 @@
                     <x-general-errors />
 
                     <!-- Activity Information Card -->
-                    <div class="card">
-                        <div class="card-header pb-0">
+                    <div class="hs-card">
+                        <div class="hs-card-header pb-0">
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="mb-0">Edit Activity</p>
 
@@ -52,14 +52,14 @@
                             </div>
                         </div>
 
-                        <div class="card-body">
+                        <div class="hs-card-body">
                             <p class="text-uppercase text-sm">Information</p>
                             <div class="row">
                                 <!-- Activity Image Input -->
                                 <div class="col-md-6">
                                     <label for="example-text-input"
-                                           class="form-control-label">Image</label>
-                                    <input type="file" class="form-control" name="img" id="inputGroupFile02"
+                                           class="hs-form-control-label">Image</label>
+                                    <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
                                            accept="image/*" value="{{old('img', $activity->img)}}">
                                 </div>
 
@@ -67,8 +67,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input"
-                                               class="form-control-label">Name</label>
-                                        <input class="form-control @error('name') is-invalid @enderror"
+                                               class="hs-form-control-label">Name</label>
+                                        <input class="hs-form-control @error('name') is-invalid @enderror"
                                                type="text" name="name"
                                                value="{{old('name', $activity->name)}}">
                                         @error('name')
@@ -84,9 +84,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input"
-                                               class="form-control-label">Type</label>
+                                               class="hs-form-control-label">Type</label>
                                         <select
-                                            class="form-control custom-dropdown @error('activity_type_id') is-invalid @enderror"
+                                            class="hs-form-control custom-dropdown @error('activity_type_id') is-invalid @enderror"
                                             name="activity_type_id" id="activity-select">
                                             @foreach($activity_types as $activity_type)
                                                 <option value="{{$activity_type->id}}" {{ old('activity_type_id', $activity->activity_type_id) == $activity_type->id ? 'selected' : '' }}>
@@ -102,9 +102,9 @@
                                 <!-- Activity Description Input -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="example-text-input" class="form-control-label">Description</label>
+                                        <label for="example-text-input" class="hs-form-control-label">Description</label>
                                         <textarea
-                                            class="form-control auto-resize @error('description') is-invalid @enderror"
+                                            class="hs-form-control auto-resize @error('description') is-invalid @enderror"
                                             name="description" rows="1"
                                             type="text" >{{old('description', $activity->description)}}</textarea>
                                         @error('description')
@@ -130,4 +130,3 @@
         </script>
     @endpush
 @endsection
-

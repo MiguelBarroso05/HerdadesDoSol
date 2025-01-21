@@ -2,38 +2,38 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Accommodation Types'])
-    <div class="container-fluid py-4">
-        <div class="row">
-            <div class="col-12">
+    <div class="hs-container-fluid hs-py-4">
+        <div class="hs-row">
+            <div class="hs-col-12">
                 <!-- Success Message -->
                 @if(session('success'))
-                    <div id="success-alert" class="alert alert-success alert-dismissible fade show " role="alert">
+                    <div id="hs-success-alert" class="hs-alert hs-alert-success hs-alert-dismissible hs-fade hs-show " role="alert">
                         <strong>Success!</strong> {{ session('success') }}
                     </div>
                 @endif
 
                 <!-- accommodation Types Table -->
-                <div class="card mb-4">
-                    <div class="card-header pb-0 d-flex justify-content-between">
+                <div class="hs-card hs-mb-4">
+                    <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
                         <h6>Accommodation Types Table</h6>
                         <!-- Create New button -->
                         <x-custom-button type="createNew" route="{{ route('accommodation_types.create') }}"/>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                    <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">
+                        <div class="hs-table-responsive hs-p-0">
+                            <table class="hs-table hs-align-items-center hs-mb-0">
 
                                 <!-- Table Head -->
                                 <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                         Accommodation Type
                                     </th>
                                     <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                         Last Update
                                     </th>
-                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="hs-text-secondary hs-opacity-7"></th>
                                 </tr>
                                 </thead>
 
@@ -42,26 +42,26 @@
                                 @foreach($accommodation_types as $accommodation_type)
                                     <tr>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="hs-d-flex hs-px-2 hs-py-1">
                                                 <!-- Image -->
                                                 <div>
                                                     <img
                                                         src="{{ $accommodation_type->img ? asset('storage/'.$accommodation_type->img) : asset("/imgs/users/no-image.png") }}"
-                                                        class="avatar avatar-sm me-3" alt="#">
+                                                        class="hs-avatar hs-avatar-sm hs-me-3" alt="#">
                                                 </div>
                                                 <!-- Name -->
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $accommodation_type->name }}</h6>
+                                                <div class="hs-d-flex hs-flex-column hs-justify-content-center">
+                                                    <h6 class="hs-mb-0 hs-text-sm">{{ $accommodation_type->name }}</h6>
                                                 </div>
                                             </div>
                                         </td>
                                         <!-- Updated At -->
-                                        <td class="align-middle text-center">
+                                        <td class="hs-align-middle hs-text-center">
                                             <span
-                                                class="text-secondary text-xs font-weight-bold">{{$accommodation_type->updated_at}}</span>
+                                                class="hs-text-secondary hs-text-xs hs-font-weight-bold">{{$accommodation_type->updated_at}}</span>
                                         </td>
                                         <!-- Action Buttons -->
-                                        <td class="align-middle d-flex justify-content-evenly">
+                                        <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
                                             <!-- Edit button -->
                                             <x-custom-button type="edit" route="{{ route('accommodation_types.edit', $accommodation_type) }}"/>
 
@@ -73,7 +73,7 @@
                                 </tbody>
                             </table>
                             <!-- Pagination -->
-                            <div class="d-flex justify-content-center mt-4">
+                            <div class="hs-d-flex hs-justify-content-center hs-mt-4">
                                 {{ $accommodation_types->links('vendor.pagination.custom') }}
                             </div>
                         </div>
@@ -86,12 +86,12 @@
         <script>
             <!-- Script to auto-hide the success message -->
             document.addEventListener('DOMContentLoaded', function () {
-                const successAlert = document.getElementById('success-alert');
+                const successAlert = document.getElementById('hs-success-alert');
 
                 if (successAlert) {
                     setTimeout(() => {
-                        successAlert.classList.remove('show');
-                        successAlert.classList.add('fade');
+                        successAlert.classList.remove('hs-show');
+                        successAlert.classList.add('hs-fade');
                         setTimeout(() => {
                             successAlert.remove();
                         }, 300); // Fade-out animation
@@ -101,6 +101,3 @@
         </script>
     @endpush
 @endsection
-
-
-

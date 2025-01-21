@@ -20,12 +20,12 @@
                 </a>
             </li>
 
-            <!-- Estates Section Header -->
+            <!-- estates Section Header -->
             <li class="mt-4">
                 <h6 class="px-3 text-xs uppercase font-bold text-gray-400">Estates</h6>
             </li>
 
-            <!-- Estates Link -->
+            <!-- estates Link -->
             <li>
                 <a href="{{ route('estates.index') }}" class="flex items-center p-2 rounded-lg transition-colors {{ Route::currentRouteName() == 'estates.index' ? 'bg-gray-200 text-gray-900' : 'hover:bg-gray-100 text-gray-600' }}">
                     <i class="fa-solid fa-house-chimney text-dark text-lg"></i>

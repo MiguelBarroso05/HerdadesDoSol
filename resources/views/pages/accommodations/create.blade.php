@@ -2,18 +2,18 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'accommodation'])
-    <div class="container-fluid py-4 mt-8">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <div class="hs-container-fluid hs-py-4 hs-mt-8">
+        <div class="hs-row hs-justify-content-center">
+            <div class="hs-col-md-8">
                 <form method="POST" action="{{route('accommodations.store')}}">
                     @csrf
                     <!-- accommodation Card -->
-                    <div class="card-body p-3">
-                        <div class="row gx-4">
+                    <div class="hs-card-body hs-p-3">
+                        <div class="hs-row hs-gx-4">
                             <!-- accommodation Name Section -->
-                            <div class="col-auto my-auto">
-                                <div class="h-100">
-                                    <h5 class="mb-1">
+                            <div class="hs-col-auto hs-my-auto">
+                                <div class="hs-h-100">
+                                    <h5 class="hs-mb-1">
                                         New Accommodation
                                     </h5>
                                 </div>
@@ -25,10 +25,10 @@
                     <x-general-errors />
 
                     <!-- accommodation Information Card -->
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <p class="mb-0">Create Accommodation</p>
+                    <div class="hs-card">
+                        <div class="hs-card-header hs-pb-0">
+                            <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
+                                <p class="hs-mb-0">Create Accommodation</p>
                                 <div>
                                     <!-- Create -->
                                     <x-custom-button type="create" route={{null}}/>
@@ -37,18 +37,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="hs-card-body">
                             <!-- accommodation Information Section -->
-                            <p class="text-uppercase text-sm">Information</p>
-                            <div class="row">
+                            <p class="hs-text-uppercase hs-text-sm">Information</p>
+                            <div class="hs-row">
 
                                 <!-- accommodation Type Input -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                <div class="hs-col-md-6">
+                                    <div class="hs-form-group">
                                         <label for="example-text-input"
-                                               class="form-control-label">Type</label>
+                                               class="hs-form-control-label">Type</label>
                                         <select
-                                            class="form-control custom-dropdown @error('accommodation_type_id') is-invalid @enderror"
+                                            class="hs-form-control hs-custom-dropdown @error('accommodation_type_id') is-invalid @enderror"
                                             name="accommodation_type_id" id="room-select">
                                             @foreach($accommodation_types as $accommodation_type)
                                                 <option value="{{$accommodation_type->id}}">
@@ -57,17 +57,17 @@
                                             @endforeach
                                         </select>
                                         @error('accommodation_type_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <!-- accommodation Size Input -->
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                <div class="hs-col-md-6">
+                                    <div class="hs-form-group">
                                         <label for="example-text-input"
-                                               class="form-control-label">Size</label>
-                                        <select class="form-control custom-dropdown @error('size') is-invalid @enderror"
+                                               class="hs-form-control-label">Size</label>
+                                        <select class="hs-form-control hs-custom-dropdown @error('size') is-invalid @enderror"
                                                 name="size" id="room-select">
                                             @foreach ([1, 2, 3, 4, 5, 6] as $size)
                                                 <option
@@ -78,21 +78,21 @@
                                             @endforeach
                                         </select>
                                         @error('size')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
 
                                 <!-- accommodation Description Input -->
-                                <div class="col-md-12">
-                                    <div class="form-group">
+                                <div class="hs-col-md-12">
+                                    <div class="hs-form-group">
                                         <label for="example-text-input"
-                                               class="form-control-label">Description</label>
+                                               class="hs-form-control-label">Description</label>
                                         <textarea
-                                            class="form-control auto-resize @error('description') is-invalid @enderror"
+                                            class="hs-form-control hs-auto-resize @error('description') is-invalid @enderror"
                                             name="description" rows="1">{{old('description')}}</textarea>
                                         @error('description')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
     @push('js')
         <script>
             document.addEventListener('input', function (event) {
-                if (event.target.tagName === 'TEXTAREA' && event.target.classList.contains('auto-resize')) {
+                if (event.target.tagName === 'TEXTAREA' && event.target.classList.contains('hs-auto-resize')) {
                     event.target.style.height = 'auto';
                     event.target.style.height = event.target.scrollHeight + 'px';
                 }
