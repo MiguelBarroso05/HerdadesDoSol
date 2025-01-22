@@ -20,6 +20,7 @@ class DropdownInput extends Component
         public $object,
         public User $user,
         public $paramter,
+        public $optionText,
     )
     {
         //

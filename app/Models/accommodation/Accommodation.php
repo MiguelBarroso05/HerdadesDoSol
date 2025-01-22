@@ -2,6 +2,7 @@
 
 namespace App\Models\accommodation;
 
+use App\Models\Estate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -20,5 +21,9 @@ class Accommodation extends Model
     public function accommodation_types()
     {
         return $this->belongsTo(AccommodationType::class, 'accommodation_type_id');
+    }
+    public function estate()
+    {
+        return $this->belongsToMany(Estate::class ,'estates_accommodations');
     }
 }

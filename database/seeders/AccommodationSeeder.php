@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\accommodation\Accommodation;
+use App\Models\Estate;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -40,5 +41,12 @@ class AccommodationSeeder extends Seeder
             ],
         ]);
         Accommodation::factory(5)->create();
+        $accommodations = Accommodation::all();
+        $estates = Estate::all();
+        foreach ($accommodations as $accommodation) {
+            $estate = $estates->random();
+            $accommodation->estate()->attach($estate);
+            $accommodation->save();
+        }
     }
 }

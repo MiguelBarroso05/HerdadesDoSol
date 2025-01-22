@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\accommodation\Accommodation;
 use App\Models\Estate;
 use App\Models\user\Address;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -10,11 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class EstatesSeeder extends Seeder
 {
+   
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        $count = 1;
         DB::table('estates')->insert([
             'name' => 'Herdade Verão',
             'address_id' => 1,

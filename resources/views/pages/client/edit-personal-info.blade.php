@@ -212,6 +212,7 @@
                             <div style="width: 240px;">
                                 <label for="language" class="hs-form-control-label">Prefered Language</label>
                                 <x-dropdown-input
+                                    :optionText="'name'"
                                     :multiple="false"
                                     :placeholder="'Select your prefered language...'"
                                     :fixed="'top'"
@@ -231,6 +232,7 @@
                             <div class="hs-form-group">
                                 <label for="fav_estate" class="hs-form-control-label">Favourite Estate</label>
                                 <x-dropdown-input
+                                    :optionText="'name'"
                                     :multiple="false"
                                     :placeholder="'Add your fav estate...'"
                                     :fixed="'top'"
