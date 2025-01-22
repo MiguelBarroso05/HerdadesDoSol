@@ -19,6 +19,14 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('invoice', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('billing_id');
+            $table->unsignedBigInteger('payment_id');
+            $table->date('payment_date');
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -27,5 +35,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
+        Schema::dropIfExists('invoice');
     }
 };

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             AccommodationSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
+            AllergySeeder::class,
         ]);
 
 

@@ -211,17 +211,15 @@
                             <!-- Language Input -->
                             <div style="width: 240px;">
                                 <label for="language" class="hs-form-control-label">Prefered Language</label>
-                                <select
-                                    class="hs-form-control custom-dropdown @error('language') hs-is-invalid @enderror"
-                                    name="language" id="language-input">
-                                    @foreach($languages as $language)
-                                        <option
-                                            value="{{ $language->id }}"
-                                            {{$user->language == $language->id ? 'selected' : '' }}>
-                                            {{ $language->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <x-dropdown-input
+                                    :multiple="false"
+                                    :placeholder="'Select your prefered language...'"
+                                    :fixed="'top'"
+                                    :name="'language'"
+                                    :object="$languages"
+                                    :user="$user"
+                                    :paramter="$user->language"
+                                />
                                 @error('language')
                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -231,9 +229,17 @@
                     <div class="hs-d-flex hs-justify-content-between" style="margin-top: 1rem;">
                         <div style="width: 468px;">
                             <div class="hs-form-group">
-                                <label for="language" class="hs-form-control-label">Favourite Estates</label>
-                                <x-multiple-input :objectToList="Estate::all()"/>
-                                @error('language')
+                                <label for="fav_estate" class="hs-form-control-label">Favourite Estate</label>
+                                <x-dropdown-input
+                                    :multiple="false"
+                                    :placeholder="'Add your fav estate...'"
+                                    :fixed="'top'"
+                                    :name="'fav_estate'"
+                                    :object="Estate::all()"
+                                    :user="$user"
+                                    :paramter="$user->fav_estate"
+                                />
+                                @error('fav_estate')
                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -241,7 +247,7 @@
                         <div style="width: 583px;">
                             <div class="hs-form-group">
                                 <label for="allergies" class="hs-form-control-label">Allergies</label>
-                                <x-multiple-input :objectToList="Allergy::all()"/>
+                                <x-allergies-dropdown-input :user="$user"/>
                                 @error('allergies')
                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                 @enderror

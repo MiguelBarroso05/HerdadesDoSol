@@ -4,20 +4,14 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Collection;
 use Illuminate\View\Component;
 
-class MultipleInput extends Component
+class SimpleDropdownInput extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public $object,
-        public string $placeholder,
-        public string $fixed,
-        public string $name,
-    )
+    public function __construct()
     {
         //
     }
@@ -27,6 +21,6 @@ class MultipleInput extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.multiple-input');
+        return view('components.simple-dropdown-input');
     }
 }

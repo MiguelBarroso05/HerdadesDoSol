@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressRequest;
 use App\Http\Requests\user\UserRequest;
+use App\Models\Allergy;
 use App\Models\user\Address;
 use App\Models\user\User;
 use Illuminate\Http\Request;

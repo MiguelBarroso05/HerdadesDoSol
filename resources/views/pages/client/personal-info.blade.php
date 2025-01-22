@@ -70,7 +70,7 @@
                                 {{ auth()->user()->preferences->isNotEmpty() ? auth()->user()->preferences->pluck('name')->implode(', ') : 'none' }}
                             </p>
                             <p class="hs-d-flex"><strong class="hs-pe-2">Favourite Estates:</strong>
-                                {{ auth()->user()->fav_estates->isNotEmpty() ? auth()->user()->fav_estates->pluck('name')->implode(', ') : 'none' }}
+                                {{ auth()->user()->fav_estate ? auth()->user()->fav_estate : 'none' }}
                             </p>
                         </div>
                         <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-top">

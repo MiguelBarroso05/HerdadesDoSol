@@ -44,16 +44,6 @@ return new class extends Migration
             $table->foreign('preference_id')->references('id')->on('preferences');
         });
 
-        Schema::create('users_fav_estates', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('estate_id');
-            $table->softDeletes();
-
-            $table->primary(['user_id', 'estate_id']);
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('estate_id')->references('id')->on('estates');
-        });
-
         //estates pivot tables
         Schema::create('estates_accommodations', function (Blueprint $table) {
             $table->foreignId('estate_id')->constrained()->onDelete('cascade');
@@ -111,7 +101,6 @@ return new class extends Migration
         Schema::dropIfExists('users_addresses');
         Schema::dropIfExists('users_allergies');
         Schema::dropIfExists('users_preferences');
-        Schema::dropIfExists('fav_estates');
 
         //estates pivot tables
         Schema::dropIfExists('estates_accommodations');

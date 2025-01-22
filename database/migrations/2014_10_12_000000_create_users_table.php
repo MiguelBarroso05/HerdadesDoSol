@@ -32,6 +32,7 @@ return new class extends Migration {
             $table->integer('children')->default(0);
             $table->string('phone')->nullable();
             $table->unsignedBigInteger('language')->default(1);
+            $table->unsignedBigInteger('fav_estate')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

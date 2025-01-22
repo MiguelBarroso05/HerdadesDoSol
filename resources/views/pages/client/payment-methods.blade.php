@@ -128,11 +128,10 @@
                     <div class="hs-p-4">
                         <p>BILLING INFORMATION</p>
                         <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
-                            provided for
-                            biling
+                            provided for biling
                             <x-plus-button onclick="toggleComponents()"/>
                         </div>
-                        <div class="hs-row">
+                        <div class="hs-row" id="personal-info">
                             <div class="hs-col-md-6">
                                 <p><strong>Name: </strong>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</p>
                                 <p><strong>Email: </strong>{{auth()->user()->email}}</p>
@@ -159,22 +158,21 @@
                                  id="payment1-methods">
                                 <x-payment-method-button id="address-default" text="Use one of your addresses"
                                                          icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
-                                <x-payment-method-button id="address-new" text="Create new address information"
+                                <x-payment-method-button id="address-new-button" text="Create new address information"
                                                          icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
                             </div>
                         </div>
-
                         <div class="hs-py-4 hs-mt-custom-80">
                             <p>PAYMENT INFORMATION</p>
                             <div class="hs-text-black hs-icon-text-container">No payment method defined, consider
-                                inserting a
-                                method to facilitate payment
+                                inserting a method to facilitate payment
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()"/>
+            <livewire:new-address-billing-modal :modalIdName="'address-new'" :user="auth()->user()" />
         </div>
     </main>
 @endsection
@@ -182,6 +180,11 @@
     <script>
         document.getElementById('billing-new-button').addEventListener('click', function () {
             let modal = new bootstrap.Modal(document.getElementById('billing-new'));
+            modal.show();
+        });
+
+        document.getElementById('address-new-button').addEventListener('click', function () {
+            let modal = new bootstrap.Modal(document.getElementById('address-new'));
             modal.show();
         });
 

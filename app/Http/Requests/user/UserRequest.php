@@ -39,6 +39,7 @@ class UserRequest extends FormRequest
             'role' => 'nullable|exists:roles,id',
             'img' => 'nullable|image|max:2048',
             'balance' => 'nullable|numeric|min:0',
+            'fav_estate' => 'nullable',
         ];
     }
 
