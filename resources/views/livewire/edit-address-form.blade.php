@@ -3,15 +3,15 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
         <form wire:submit.prevent="submit">
             <div class="modal-content">
+                <div class="hs-d-flex hs-justify-content-end div-close">
+                    <x-custom-button type="close" route="{{null}}"/>
+                </div>
                 <div class="hs-col-10 hs-align-self-center">
                     <div class="modal-body">
-                        <div class="hs-d-flex hs-justify-content-between">
+                        <div class="hs-d-flex hs-justify-content-between hs-mb-md-4">
                             <h5 class="modal-title hs-align-self-center hs-text-uppercase"
                                 style="color: black !important;"
                                 id="exampleModalLabel">EDIT {{$addressIdentifier}} ADDRESS</h5>
-                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="bi bi-x hs-fs-3" style="color: black !important;"></i>
-                            </a>
                         </div>
                         <div class="hs-row">
                             <!-- Identifier Input -->

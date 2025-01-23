@@ -82,7 +82,7 @@ class User extends Authenticatable
     public function addresses(){
         return $this->belongsToMany(Address::class, 'users_addresses')
             ->withTimestamps()
-            ->withPivot('addressPhone', 'addressIdentifier')
+            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite')
             ->orderBy('updated_at', 'desc');
     }
 

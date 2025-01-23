@@ -287,32 +287,6 @@
                     }, 3000); // 3 seconds
                 }
             });
-            // sdofmsdf
-
-            $('#country-input').select2({
-                templateResult: function(data) {
-                    if (!data.id) return data.text; // Placeholder ou sem dados
-                    const iconPath = $(data.element).data('icon'); // Caminho do SVG
-                    return $(
-                        `<span>
-                <img src="${iconPath}" alt="" style="width: 20px;  margin-right: 10px;">
-                ${data.text}
-            </span>`
-                    );
-                },
-                templateSelection: function(data) {
-                    if (!data.id) return data.text; // Placeholder ou sem dados
-                    const iconPath = $(data.element).data('icon'); // Caminho do SVG
-                    return $(
-                        `<span>
-                <img src="${iconPath}" alt="" style="width: 20px;  margin-right: 10px;">
-                ${data.text}
-            </span>`
-                    );
-                }
-            });
-
         </script>
-
     @endpush
 @endsection

@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="hs-d-flex hs-justify-content-end">
-                            <x-custom-button type="create" route="{{null}}"/>
+                            <x-custom-button id="create-billing-info-button" type="create" route="{{null}}"/>
                         </div>
                     </div>
                 </div>

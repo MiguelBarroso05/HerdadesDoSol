@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id');
             $table->string('addressPhone')->nullable();
             $table->string('addressIdentifier')->nullable();
+            $table->boolean('isFavorite')->default(false);
             $table->timestamps();
 
             $table->primary(['user_id', 'address_id']);

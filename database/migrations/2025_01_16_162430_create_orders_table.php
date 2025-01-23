@@ -20,12 +20,26 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('invoice', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('billing_id');
             $table->unsignedBigInteger('payment_id');
             $table->date('payment_date');
             $table->softDeletes();
+        });
+
+        Schema::create('billings', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('address_id')->nullable();
+            $table->string('name');
+            $table->string('nif');
+            $table->string('email');
+            $table->string('phone');
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 
@@ -35,6 +49,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
-        Schema::dropIfExists('invoice');
+        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('billings');
     }
 };

@@ -63,7 +63,7 @@
 
 
 @if($type == 'fav')
-    <a href="" class="hs-mx-2"><i class="star-button bi bi-star hs-fs-5" style="color: #FFB427;"></i></a>
+    <a href="" class="hs-mx-2"><i class="bi bi-star hs-fs-5" style="color: #FFB427;"></i></a>
 @endif
 
 

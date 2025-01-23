@@ -84,18 +84,7 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="nationality" class="hs-form-control-label">Nationality</label>
-                                            <select
-                                                class="hs-form-control custom-dropdown @error('nationality') hs-is-invalid @enderror"
-                                                name="nationality" id="country-input">
-                                                @foreach($countries as $country)
-                                                    <option
-                                                        data-icon="{{ $country['flag'] }}"
-                                                        value="{{ $country['name'] }}"
-                                                        {{ $user->nationality == $country['name'] ? 'selected' : '' }}>
-                                                        {{ $country['name'] }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            <x-countries-dropdown-input :countries="$countries" :user="auth()->user()"/>
                                             @error('nationality')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -182,13 +171,7 @@
                                     <select
                                         class="hs-form-control custom-dropdown @error('language') hs-is-invalid @enderror"
                                         name="language" id="language-input">
-                                        @foreach($languages as $language)
-                                            <option
-                                                value="{{ $language->id }}"
-                                                {{$user->language == $language->id ? 'selected' : '' }}>
-                                                {{ $language->name }}
-                                            </option>
-                                        @endforeach
+
                                     </select>
                                     @error('language')
                                     <div class="hs-invalid-feedback">{{ $message }}</div>
@@ -220,6 +203,7 @@
                                     :object="$languages"
                                     :user="$user"
                                     :paramter="$user->language"
+                                    :optionText="'name'"
                                 />
                                 @error('language')
                                 <div class="hs-invalid-feedback">{{ $message }}</div>
@@ -240,6 +224,7 @@
                                     :object="Estate::all()"
                                     :user="$user"
                                     :paramter="$user->fav_estate"
+                                    :optionText="'name'"
                                 />
                                 @error('fav_estate')
                                 <div class="hs-invalid-feedback">{{ $message }}</div>

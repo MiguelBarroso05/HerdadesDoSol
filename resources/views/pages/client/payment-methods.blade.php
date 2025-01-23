@@ -131,7 +131,7 @@
                             provided for biling
                             <x-plus-button onclick="toggleComponents()"/>
                         </div>
-                        <div class="hs-row" id="personal-info">
+                        <div class="hs-row" id="personal-info" style="display: none;">
                             <div class="hs-col-md-6">
                                 <p><strong>Name: </strong>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</p>
                                 <p><strong>Email: </strong>{{auth()->user()->email}}</p>
@@ -171,7 +171,7 @@
                     </div>
                 </div>
             </div>
-            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()"/>
+            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()" :redirectUrl="url()->current()"/>
             <livewire:new-address-billing-modal :modalIdName="'address-new'" :user="auth()->user()" />
         </div>
     </main>
@@ -217,5 +217,16 @@
                 plusButton.style.display = "block";
             }
         }
+
+        document.getElementById('create-billing-info-button').addEventListener('click', function () {
+            let billingModal = new bootstrap.Modal(document.getElementById('billing-new'));
+            billingModal.hide();
+
+            const personalInfo = document.getElementById('personal-info');
+            personalInfo.style.display = "block";
+
+            const billingInfo = document.getElementById('billing-info');
+            billingInfo.style.display = "none";
+        });
     </script>
 @endpush

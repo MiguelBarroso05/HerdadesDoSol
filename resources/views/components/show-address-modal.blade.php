@@ -2,6 +2,9 @@
      @if ($errors->any()) style="display: block;" @endif>
     <div class="modal-dialog modal-dialog-centered" style="max-width: 40%; z-index: 9999 !important;">
         <div class="modal-content">
+            <div class="hs-d-flex hs-justify-content-end div-close">
+                <x-custom-button type="close" route="{{null}}"/>
+            </div>
             <div class="hs-col-10 hs-align-self-center">
                 <div class="modal-body">
                     <div class="hs-d-flex hs-justify-content-between hs-mb-md-4">
@@ -15,7 +18,6 @@
                                     style="border: none; background-color: transparent">
                                 <i class="bi bi-trash hs-fs-5" style="color: red"></i>
                             </button>
-                            <x-custom-button type="close" route="{{null}}"/>
                         </div>
                     </div>
                     <div class="hs-row">

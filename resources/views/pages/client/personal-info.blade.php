@@ -40,45 +40,78 @@
                         <p class="text-secondary">BASIC INFORMATION</p>
                         <x-custom-button type="edit" route="{{route('personal-info.edit', ['user'=>auth()->user()])}}"/>
                     </div>
-                    <div class="hs-row" style="height: 240px">
-                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-between">
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
-                                {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Nationality:</strong>
-                                {{ auth()->user()->nationality }}</p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
-                                {{ auth()->user()->birthdate }}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Allergies:</strong>
-                                {{ auth()->user()->allergies->isNotEmpty() ? auth()->user()->allergies->pluck('name')->implode(', ') : 'none' }}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Language:</strong>
-                                {{ auth()->user()->language()->name }}
-                            </p>
-                        </div>
-                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-between">
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Phone:</strong>
-                                {{ auth()->user()->phone ?? 'none'}}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Standard Group:</strong>
-                                {{ auth()->user()->standard_group }}</p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
-                                {{ auth()->user()->email }}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Preferences:</strong>
-                                {{ auth()->user()->preferences->isNotEmpty() ? auth()->user()->preferences->pluck('name')->implode(', ') : 'none' }}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Favourite Estates:</strong>
-                                {{ auth()->user()->fav_estate ? auth()->user()->fav_estate : 'none' }}
-                            </p>
-                        </div>
-                        <div class="hs-col-md-3 hs-d-flex hs-flex-column hs-justify-content-top">
-                            <p class="hs-d-flex"><strong class="hs-pe-2">NIF:</strong>
-                                {{ auth()->user()->nif ?? 'none'}}
-                            </p>
-                            <p class="hs-d-flex"><strong class="hs-pe-2">Children nº:</strong>
-                                {{ auth()->user()->children }}</p>
+                    <div class="hs-d-flex">
+                        <div class="hs-row" style="height: 240px">
+                            <div class="hs-row">
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
+                                        {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Phone:</strong>
+                                        {{ auth()->user()->phone ?? 'none'}}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">NIF:</strong>
+                                        {{ auth()->user()->nif ?? 'none'}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="hs-row">
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Nationality:</strong>
+                                        {{ auth()->user()->nationality }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Standard Group:</strong>
+                                        {{ auth()->user()->standard_group }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Children nº:</strong>
+                                        {{ auth()->user()->children }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="hs-row">
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
+                                        {{ auth()->user()->birthdate }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-8">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
+                                        {{ auth()->user()->email }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="hs-row">
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Fav Estate:</strong>
+                                        {{ auth()->user()->fav_estate ? auth()->user()->fav_estate : 'none' }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Preferences:</strong>
+                                        {{ auth()->user()->preferences->isNotEmpty() ? auth()->user()->preferences->pluck('name')->implode(', ') : 'none' }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="hs-row">
+                                <div class="hs-col-md-4">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Language:</strong>
+                                        {{ auth()->user()->language()->name }}
+                                    </p>
+                                </div>
+                                <div class="hs-col-md-8">
+                                    <p class="hs-d-flex"><strong class="hs-pe-2">Allergies:</strong>
+                                        {{ auth()->user()->allergies->isNotEmpty() ? auth()->user()->allergies->pluck('name')->implode(', ') : 'none' }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                         <div class="hs-col-md-3 hs-text-end">
                             <img
