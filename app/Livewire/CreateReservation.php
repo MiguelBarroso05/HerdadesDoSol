@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\accommodation\AccommodationType;
 use App\Models\accommodation\Accommodation;
 use App\Models\Estate;
+use Carbon\Carbon;
 use Livewire\Component;
 
 use function PHPSTORM_META\map;
@@ -23,6 +24,11 @@ class CreateReservation extends Component
     public $selectedEstateId;
     public $selectedAccommodationTypeId;
     public $selectedAccommodation;
+
+    protected $listeners = [
+        'datesUpdated' => 'setDates',
+    ];
+
 
     public function show_accommodations_types($estateId)
     {
@@ -46,6 +52,10 @@ class CreateReservation extends Component
     public function mount()
     {
         $this->estates = Estate::all();
+        $this->groupsize = 3;
+        $this->children = 1;
+        // $this->entryDate = "09/01/2025";
+        // $this->exitDate = "09/01/2025";
     }
 
     public function render()
@@ -68,6 +78,11 @@ class CreateReservation extends Component
 
         // Dispara o evento 'show-alert' para o frontend, com os dados
         dd($data);
+    }
+   
+    public function setDates($dates){
+        $this->entryDate = $dates['entryDate'] ? Carbon::parse($dates['entryDate']) : null;
+        $this->exitDate = $dates['exitDate'] ? Carbon::parse($dates['exitDate']) : null;
     }
    
 }
