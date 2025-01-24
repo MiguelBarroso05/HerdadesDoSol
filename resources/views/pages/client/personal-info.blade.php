@@ -122,7 +122,9 @@
                 </div>
                 <livewire:show-addresses :user="auth()->user()"/>
             </div>
-            <livewire:show-address-modal :user="auth()->user()"/>
+            @foreach(auth()->user()->addresses as $address)
+                <x-show-address-modal :user="auth()->user()" :address="$address" />
+            @endforeach
             <livewire:address-form :user="auth()->user()" :modalIdName="'clientAddAddressModal'"
                                    :redirectUrl="url()->current()"/>
         </div>
