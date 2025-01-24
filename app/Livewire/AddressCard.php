@@ -14,7 +14,7 @@ class AddressCard extends Component
 
     public function mount($user, $address)
     {
-        $this->user = $user;
+        $this->user = $user->load('addresses');
         $this->address = $address;
         $this->isFavorite = $user->addresses()->wherePivot('isFavorite', true)->exists() &&
             $user->addresses()->wherePivot('isFavorite', true)->first()->id == $address->id;
@@ -29,9 +29,7 @@ class AddressCard extends Component
         $this->user->addresses()->updateExistingPivot($this->address->id, ['isFavorite' => true]);
 
         $this->isFavorite = true;
-
     }
-
     public function render()
     {
         return view('livewire.address-card');
