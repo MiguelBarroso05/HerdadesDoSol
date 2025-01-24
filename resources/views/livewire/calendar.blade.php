@@ -5,7 +5,7 @@
                 <h5 class="text-xl leading-8 font-semibold text-gray-900">{{ $monthName }}</h5>
                 <div class="flex items-center gap-2">
                     <button type="button"
-                        wire:click="navigate('prev')" 
+                        wire:click="navigate('prev')"
                         class="p-2 text-gray-500 rounded hover:bg-gray-100"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -13,7 +13,7 @@
                         </svg>
                     </button>
                     <button type="button"
-                        wire:click="navigate('next')" 
+                        wire:click="navigate('next')"
                         class="p-2 text-gray-500 rounded hover:bg-gray-100"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -36,13 +36,13 @@
                     @foreach($week as $day)
                         @php
                             $isInRange = $highlightedDates->contains(fn ($d) => $d->isSameDay($day['date']));
-                            $isSelected = $selectedEntryDate && $selectedExitDate && 
+                            $isSelected = $selectedEntryDate && $selectedExitDate &&
                                        $day['date']->between($selectedEntryDate, $selectedExitDate);
                             $isStart = $tempStartDate?->isSameDay($day['date']);
                             $isEnd = $selectedExitDate?->isSameDay($day['date']);
                         @endphp
 
-                        <div 
+                        <div id="{{ $day['date']->format('Y-m-d') }}"
                             wire:click="selectDate('{{ $day['date']->format('Y-m-d') }}')"
                             class="relative p-3 h-24 border-b border-r border-gray-200 cursor-pointer transition-colors
                                    {{ $day['isCurrentMonth'] ? 'bg-white' : 'bg-gray-50 text-gray-400' }}

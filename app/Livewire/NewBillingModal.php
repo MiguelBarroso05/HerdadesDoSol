@@ -16,8 +16,6 @@ class NewBillingModal extends Component
     public $email;
     public $phone;
 
-    public $redirectUrl;
-
     protected $rules = [
         'name' => 'required|string|max:255',
         'nif' => 'required|string|max:255',
@@ -38,8 +36,9 @@ class NewBillingModal extends Component
             'phone' => $this->phone,
             'email' => $this->email,
         ]);
+
         session()->flash('message', 'Billing information submitted successfully.');
-        return redirect()->to($this->redirectUrl);
+        $this->redirectRoute('payment-methods');
         $this->reset();
     }
 

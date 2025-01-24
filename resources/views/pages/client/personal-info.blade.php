@@ -124,7 +124,7 @@
                     <p class="text-secondary">ADDRESS INFORMATION</p>
                     <div class="hs-row hs-mx-auto hs-justify-content-between" style="min-height: 155px;">
                         @foreach(auth()->user()->addresses as $address)
-                            <x-address-card :address="$address"/>
+                            <livewire:address-card :user="auth()->user()" :address="$address" />
                         @endforeach
 
                         @if(auth()->user()->addresses->count() < 3)

@@ -69,7 +69,9 @@
                             </div>
                         </div>
                         <div class="hs-d-flex hs-justify-content-end">
-                            <x-custom-button id="create-billing-info-button" type="create" route="{{null}}"/>
+                            <button id="create-billing-info-button" type="submit" class="hs-btn hs-btn-sm hs-ms-auto hs-col-md-4" style="border: 1px solid #437546; background-color: #E0EBDC;">
+                                Create
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ class SaleFactory extends Factory
         return [
             'id_user' => User::inRandomOrder()->first()->id,
             'price' => $this->faker->randomFloat(2, 10, 1000),
-            'created_at' => $this->faker->date()
+            'created_at' => $this->faker->datetime()
         ];
     }
 }

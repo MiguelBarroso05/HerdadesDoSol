@@ -79,10 +79,10 @@ class CreateReservation extends Component
         // Dispara o evento 'show-alert' para o frontend, com os dados
         dd($data);
     }
-   
+
     public function setDates($dates){
         $this->entryDate = $dates['entryDate'] ? Carbon::parse($dates['entryDate']) : null;
         $this->exitDate = $dates['exitDate'] ? Carbon::parse($dates['exitDate']) : null;
     }
-   
+
 }

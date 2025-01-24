@@ -40,8 +40,8 @@
                             </a>
                         </li>
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
-                            <a href="" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
-                                Locations
+                            <a href="{{ route('client-create-reservations') }}" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
+                                Reservations
                             </a>
                         </li>
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center hs-ps-4">

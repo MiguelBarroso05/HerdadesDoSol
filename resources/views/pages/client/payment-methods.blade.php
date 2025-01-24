@@ -124,30 +124,44 @@
                     </div>
                 </div>
 
-                <div class="hs-p-4">
+                <div class="hs-p-4 hs-w-md-100">
                     <div class="hs-p-4">
                         <p>BILLING INFORMATION</p>
-                        <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
-                            provided for biling
-                            <x-plus-button onclick="toggleComponents()"/>
-                        </div>
-                        <div class="hs-row" id="personal-info" style="display: none;">
-                            <div class="hs-col-md-6">
-                                <p><strong>Name: </strong>{{auth()->user()->firstname}} {{auth()->user()->lastname}}</p>
-                                <p><strong>Email: </strong>{{auth()->user()->email}}</p>
+                        @if($userBillingInfo)
+                            <div id="personal-billing-info">
+                                <div class="hs-row">
+                                    <div class="hs-col-md-6">
+                                        <p><strong>Name: </strong> {{$userBillingInfo->name}}</p>
+                                    </div>
+                                    <div class="hs-col-md-6">
+                                        <p><strong>NIF: </strong> {{$userBillingInfo->nif}}</p>
+                                    </div>
+                                </div>
+                                <div class="hs-row">
+                                    <div class="hs-col-md-6">
+                                        <p><strong>Email: </strong> {{$userBillingInfo->email}}</p>
+                                    </div>
+                                    <div class="hs-col-md-6">
+                                        <p><strong>Phone: </strong> {{$userBillingInfo->phone}}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="hs-col-md-6">
-                                <p><strong>NIF: </strong>{{auth()->user()->nif}}</p>
-                                <p><strong>Phone: </strong>{{auth()->user()->phone}}</p>
+                        @else()
+                            <div>
+                                <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
+                                    provided for biling
+                                    <x-plus-button onclick="toggleComponents()"/>
+                                </div>
+                                <div class="hs-justify-content-between" style="width: 450px; display: none;"
+                                     id="payment-methods">
+                                    <x-payment-method-button id="billing-default" text="Use your personal information"
+                                                             icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
+                                    <x-payment-method-button id="billing-new-button" text="Create new billing information"
+                                                             icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
+                                </div>
                             </div>
-                        </div>
-                        <div class="hs-justify-content-between" style="width: 450px; display: none;"
-                             id="payment-methods">
-                            <x-payment-method-button id="billing-default" text="Use your personal information"
-                                                     icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
-                            <x-payment-method-button id="billing-new-button" text="Create new billing information"
-                                                     icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
-                        </div>
+                        @endif
+
                         <div class="hs-py-4">
                             <p>ADDRESS INFORMATION</p>
                             <div class="hs-text-black hs-icon-text-container" id="billing1-info">No address information
@@ -171,8 +185,8 @@
                     </div>
                 </div>
             </div>
-            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()" :redirectUrl="url()->current()"/>
-            <livewire:new-address-billing-modal :modalIdName="'address-new'" :user="auth()->user()" />
+            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()"/>
+            <livewire:new-address-billing-modal :modalIdName="'address-new'" :user="auth()->user()"/>
         </div>
     </main>
 @endsection
@@ -228,5 +242,27 @@
             const billingInfo = document.getElementById('billing-info');
             billingInfo.style.display = "none";
         });
+
+        document.addEventListener('billing-created', function (event) {
+            const data = event.detail;
+
+            const personalInfo = document.getElementById('personal-info');
+            personalInfo.innerHTML = `
+        <div class="hs-col-md-6">
+            <p><strong>Name: </strong>${data.name}</p>
+            <p><strong>Email: </strong>${data.email}</p>
+        </div>
+        <div class="hs-col-md-6">
+            <p><strong>NIF: </strong>${data.nif}</p>
+            <p><strong>Phone: </strong>${data.phone}</p>
+        </div>
+   `;
+            personalInfo.style.display = "block";
+
+            // Esconde os botões
+            const paymentMethods = document.getElementById('payment-methods');
+            paymentMethods.style.display = "none";
+        });
+
     </script>
 @endpush

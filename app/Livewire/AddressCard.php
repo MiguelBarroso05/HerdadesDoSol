@@ -2,14 +2,15 @@
 
 namespace App\Livewire;
 
+use App\Models\user\User;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
-class FavAddress extends Component
+class AddressCard extends Component
 {
     public $user;
     public $address;
     public $isFavorite;
-
 
     public function mount($user, $address)
     {
@@ -25,20 +26,14 @@ class FavAddress extends Component
             $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
         }
 
-        // Define a nova morada como favorita
         $this->user->addresses()->updateExistingPivot($this->address->id, ['isFavorite' => true]);
 
-        // Atualiza a propriedade local para garantir que o estado da estrela seja atualizado no frontend
         $this->isFavorite = true;
 
-        // Recarrega as moradas e suas relações no usuário
-        $this->user = $this->user->fresh()->load('addresses');
-
-        $this->dispatch('refreshComponent');
     }
 
     public function render()
     {
-        return view('livewire.fav-address');
+        return view('livewire.address-card');
     }
 }

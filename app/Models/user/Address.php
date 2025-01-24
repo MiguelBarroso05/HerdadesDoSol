@@ -22,6 +22,7 @@ class Address extends Model
 
     public function users(){
         return $this->belongsToMany(User::class, 'users_addresses')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite');
     }
 }
