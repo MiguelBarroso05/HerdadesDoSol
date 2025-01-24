@@ -15,6 +15,7 @@
 
     <livewire:styles/>
     <wireui:scripts />
+
 </head>
 
 <body class="{{ $class ?? '' }} hs-d-flex hs-flex-column hs-min-vh-100">
@@ -51,6 +52,7 @@
     <livewire:scripts/>
     @stack('js')
     <!-- PROVISORIOOOOOOOO JS Files -->
+
     <script src="{{asset('assets\js\preline.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

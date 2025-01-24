@@ -79,7 +79,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
-                                        {{ auth()->user()->birthdate }}
+                                        {{ auth()->user()->birthdate_formatted}}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-8">
@@ -122,17 +122,7 @@
                 </div>
                 <livewire:show-addresses :user="auth()->user()"/>
             </div>
-            @foreach(auth()->user()->addresses as $address)
-                <x-show-address-modal :address="$address" :user="auth()->user()"/>
-                @push('js')
-                    <script>
-                        document.getElementById('clickableDiv{{$address->id}}').addEventListener('click', function () {
-                            let modal = new bootstrap.Modal(document.getElementById('addressModal{{$address->id}}'));
-                            modal.show();
-                        });
-                    </script>
-                @endpush
-            @endforeach
+            <livewire:show-address-modal :user="auth()->user()"/>
             <livewire:address-form :user="auth()->user()" :modalIdName="'clientAddAddressModal'"
                                    :redirectUrl="url()->current()"/>
         </div>

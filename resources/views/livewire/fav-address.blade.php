@@ -1,5 +1,5 @@
 <div>
-    <span wire:click="toggleFavorite" id="favAddress{{$address->id}}" class="cursor-pointer">
+    <span wire:click="toggleFavorite" id="favAddress{{ $addressId }}" class="cursor-pointer">
         @if($isFavorite)
             <i class="bi bi-star-fill hs-fs-5" style="color: #FFB427;"></i>
         @else
@@ -7,3 +7,4 @@
         @endif
     </span>
 </div>
+

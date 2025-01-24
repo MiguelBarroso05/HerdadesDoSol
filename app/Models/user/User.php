@@ -58,6 +58,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthdate' => 'date',
     ];
 
     /**
@@ -68,6 +69,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function getBirthdateFormattedAttribute()
+    {
+        return $this->birthdate->format('d/m/Y');
     }
 
     public function user_roles(): BelongsToMany

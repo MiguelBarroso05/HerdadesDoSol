@@ -47,7 +47,7 @@
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
                                        .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) =>
                                            [d, mth, y].filter(Boolean).join('/'));">
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
                                        .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) =>
                                            [d, mth, y].filter(Boolean).join('/'));">
                         </div>
                     </div>
@@ -80,9 +80,20 @@
                     </div>
                 </div>
                 <div class="relative">
-                    <x-dropdown-input wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
+                    <x-dropdown-input id="{{now()}}" wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
                         :multiple="false" :placeholder="'Select a Accommodation Type'" :fixed="'bottom'" :name="'accommodation_types'" :object="$accommodationTypes"
                         :optionText="'name'" :user="auth()->user()" :paramter="null" />
+                    <x-dropdown-input
+                                    :optionText="'name'"
+                                    :multiple="false"
+                                    :placeholder="'Add your fav estate...'"
+                                    :fixed="'top'"
+                                    :name="'fav_estate'"
+                                    :object="$estates"
+                                    :user="$user"
+                                    :paramter="$user->fav_estate"
+                                    :optionText="'name'"
+                                />
                     <x-dropdown-input wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
                         :fixed="'bottom'" :name="'accommodation'" :object="$accommodations" :user="auth()->user()" :paramter="null"
                         :optionText="'size'" />

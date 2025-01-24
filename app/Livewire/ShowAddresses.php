@@ -9,6 +9,8 @@ class ShowAddresses extends Component
     public $user;
     public $addresses;
 
+    protected $listeners = ['updateFavorite' => 'updateFavorite'];
+
     public function mount($user)
     {
         $this->user = $user->load('addresses');
@@ -17,12 +19,28 @@ class ShowAddresses extends Component
 
     public function toggleFavorite($addressId)
     {
-        if ($currentFavorite = $this->user->addresses()->wherePivot('isFavorite', true)->first()) {
-            $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
+        $currentFavorite = $this->user->addresses()->wherePivot('isFavorite', true)->first();
+
+        if (!$currentFavorite) {
+            $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
+            $this->dispatch('updateFavorite');
+            return;
         }
 
+        if ($currentFavorite->id === $addressId) {
+            $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
+            $this->dispatch('updateFavorite');
+        }
+
+        $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
         $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
 
+        $this->addresses = $this->user->fresh()->addresses;
+
+        $this->dispatch('updateFavorite');
+    }
+
+    public function updateFavorite(){
         $this->addresses = $this->user->fresh()->addresses;
     }
 
@@ -33,4 +51,3 @@ class ShowAddresses extends Component
         ]);
     }
 }
-

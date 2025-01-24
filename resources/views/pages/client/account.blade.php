@@ -64,7 +64,7 @@
                                             {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
                                         </p>
                                         <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
-                                            {{ auth()->user()->birthdate }}</p>
+                                            {{ auth()->user()->birthdate_formatted }}</p>
                                         <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
                                             {{ auth()->user()->email }}
                                         </p>

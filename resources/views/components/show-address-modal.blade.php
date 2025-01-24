@@ -11,7 +11,6 @@
                         <h5 class="modal-title hs-align-self-center hs-text-uppercase" style="color: black !important;"
                             id="exampleModalLabel">{{$address->pivot->addressIdentifier}} ADDRESS</h5>
                         <div class="hs-d-flex hs-align-items-center">
-                            <x-custom-button type="fav" route="{{null}}"/>
                             <a id="openEditAddressModal{{$address->id}}" class="mx-2"><i
                                     class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer"></i></a>
                             <button id="openDeletionModal{{$address->id}}" type="button" class="mx-2"

@@ -8,6 +8,7 @@ use App\Http\Requests\user\UserRequest;
 use App\Models\Allergy;
 use App\Models\user\Address;
 use App\Models\user\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,9 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $role = Role::findById($request->role);
+
+            $validated['birthdate'] = Carbon::parse($validated['birthdate'])->format('Y-m-d');
+
             $user = User::create($validated)->assignRole($role);
 
             $this->userstoreimg($request, $user);
@@ -111,7 +115,7 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $dataToUpdate = $validated;
-
+            $validated['birthdate'] = Carbon::parse($validated['birthdate'])->format('Y-m-d');
             $user->update($dataToUpdate);
 
             $this->userstoreimg($request, $user);
