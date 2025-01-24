@@ -1,4 +1,16 @@
     <form wire:submit="submit">
+        <style>
+            .loader {
+                width: 48px;
+                height: 48px;
+                border: 5px solid #FFF;
+                border-bottom-color: #FF3D00;
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+            }
+        </style>
         <div class="hs-d-flex ">
             <style>
                 .selected {
@@ -21,7 +33,7 @@
                          focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900
                           dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500
                            dark:focus:ring-neutral-600">
-                            <option @if(true) selected @endif disabled>Select a Estate</option>
+                            <option @if (!auth()->user()->fav_estate) selected @endif disabled>Select a Estate</option>
                             @foreach ($estates as $estate)
                                 <option value="{{ $estate->id }}">{{ $estate->name }}</option>
                             @endforeach
@@ -30,28 +42,28 @@
                     <!-- End Select -->
                     <div class="hs-w-25">
                         <div class="max-w-sm space-y-3">
-                            <input type="text"
+                            <input wire:model="entryDate" type="text"
                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
-                                   .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                                   .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
-                                       [d, mth, y].filter(Boolean).join('/'));">
+                                       .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                           [d, mth, y].filter(Boolean).join('/'));">
                         </div>
-
                     </div>
 
                     <div class="hs-w-25">
                         <div class="max-w-sm space-y-3">
-                            <input type="text"
+                            <input wire:model="exitDate" type="text"
                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
-                               .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                               .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
-                                   [d, mth, y].filter(Boolean).join('/'));">
+                                       .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                           [d, mth, y].filter(Boolean).join('/'));">
                         </div>
                     </div>
+
                 </div>
                 <div class="hs-bg-card hs-w-100 hs-h-100">
                     <livewire:Calendar wire:model:selectedEntryDate="entryDate"

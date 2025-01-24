@@ -11,6 +11,7 @@ use Livewire\Component;
 
 class CreateReservation extends Component
 {
+    public $user;
     public $estates;
     public $favEstate;
     public $accommodationTypes;
@@ -56,20 +57,26 @@ class CreateReservation extends Component
     }
     public function show_accommodations()
     {
-        $this->accommodations = Estate::find($this->selectedEstateId)
+        $this->accommodations = Estate::find($this->selectedEstateId ?? $this->favEstate)
             ->accommodations()
             ->where('accommodation_type_id', $this->selectedAccommodationTypeId)
             ->get();
     }
     public function mount()
     {
-        $this->favEstate = auth()->user()->fav_estate;
-        $this->accommodationTypes = $this->show_accommodations_types($this->favEstate);
-        $this->selectedAccommodationTypeId = $this->accommodationTypes[0]->id;
-        $this->accommodations = $this->show_accommodations();
+        $this->user = auth()->user();
+        if ($this->user->fav_estate) {
+            $this->favEstate = $this->user->fav_estate;
+            $this->show_accommodations_types($this->favEstate);
+        }
+
         $this->estates = Estate::all();
-        $this->groupsize = 3;
-        $this->children = 1;
+        if ($this->user->standard_group) {
+            $this->groupsize = $this->user->standard_group;
+        }
+        if ($this->user->children) {
+            $this->children = $this->user->children;
+        }
     }
 
     public function render()
@@ -94,9 +101,43 @@ class CreateReservation extends Component
         dd($data);
     }
 
+
     public function setDates($dates)
     {
-        $this->entryDate = $dates['entryDate'] ? Carbon::parse($dates['entryDate']) : null;
-        $this->exitDate = $dates['exitDate'] ? Carbon::parse($dates['exitDate']) : null;
+        $this->entryDate = isset($dates['entryDate'])
+            ? Carbon::parse($dates['entryDate'])->format('d/m/Y')
+            : null;
+
+        $this->exitDate = isset($dates['exitDate'])
+            ? Carbon::parse($dates['exitDate'])->format('d/m/Y')
+            : null;
     }
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <form class="d-flex justify-content-center align-items-center">
+            <div class="">
+                <span style="width: 48px;
+                    height: 48px;
+                    border: 5px solid #FFF;
+                    border-bottom-color: #FF3D00;
+                    border-radius: 50%;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    animation: rotation 1s linear infinite;"></span>
+                <style>
+                    @keyframes rotation {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+                </style>
+            </div>
+        </form>
+        HTML;
+    }
+    
 }
