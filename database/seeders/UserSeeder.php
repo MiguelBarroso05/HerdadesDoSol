@@ -35,6 +35,7 @@ class UserSeeder extends Seeder
             'language' => 2,
             'standard_group' => 2,
             'children' => 0,
+            'fav_estate' => 1
         ]);
 
         User::all()->first()->addresses()->attach(Address::all()->first()->id);

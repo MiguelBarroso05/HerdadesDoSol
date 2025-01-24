@@ -69,7 +69,7 @@ class Calendar extends Component
             $start->addDay();
         }
 
-        return $calendarDays->chunk(7);
+        return  $calendarDays->chunk(7);
     }
 
 
@@ -139,7 +139,6 @@ class Calendar extends Component
         if (!$this->tempStartDate || !$this->tempEndDate) {
             return collect();
         }
-
         return $this->calendarDays->flatten(1)
             ->filter(fn($day) => $day['date']->between(
                 $this->tempStartDate->startOfDay(),
