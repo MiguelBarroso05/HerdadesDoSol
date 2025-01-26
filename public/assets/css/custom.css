@@ -3,10 +3,27 @@
     --tw-ring-color: #FFBF65 !important;
 }
 
-[type="checkbox"]:focus {
-    outline: 2px;
-    border: 2px solid #FFBF65;
-    --tw-ring-color: #FFBF65 !important;
+[type='radio']:checked {
+    border-color: transparent;
+    background-color: #FFBF65;
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+[type='radio']:checked:focus {
+    border-color: transparent;
+    background-color: #FFBF65;
+}
+
+input[type="radio"]:focus {
+    outline: 2px solid #FFBF65;
+    outline-offset: 2px;
+    border-radius: 50%;
+}
+
+label:has(input[type="radio"]:checked) {
+    border-color: #FFBF65;
 }
 
 
