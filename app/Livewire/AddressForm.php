@@ -3,8 +3,11 @@
 namespace App\Livewire;
 
 use App\Http\Requests\AddressRequest;
+use App\Models\user\Address;
 use App\Models\user\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
@@ -48,27 +51,22 @@ class AddressForm extends Component
             ];
 
             // Verifique se o endereço já existe
-            $existentAddress = DB::table('addresses')
-                ->where('country', $validated['address']['country'])
+            $existentAddress = Address::where('country', $validated['address']['country'])
                 ->where('city', $validated['address']['city'])
                 ->where('street', $validated['address']['street'])
                 ->where('zipcode', $validated['address']['zipcode'])
                 ->first();
 
-            if ($existentAddress) {
-                // Verifique se o usuário já está associado ao endereço
-                if ($this->user->addresses()->where('address_id', $existentAddress->id)->exists()) {
-                    $this->user->addresses()->updateExistingPivot($existentAddress->id, ['updated_at' => now()]);
-                } else {
-                    $this->user->addresses()->attach($existentAddress->id, [
-                        'addressPhone' => $validated['addressPhone'],
-                        'addressIdentifier' => $validated['addressIdentifier'],
-                    ]);
+            $this->user->addresses()->detach($this->addressId);
 
-                }
+            if ($existentAddress) {
+                $this->user->addresses()->attach($existentAddress->id, [
+                    'addressPhone' => $validated['addressPhone'],
+                    'addressIdentifier' => $validated['addressIdentifier'],
+                ]);
             } else {
-                // Insira um novo endereço
-                $newAddressId = DB::table('addresses')->insertGetId($validated['address']);
+                $newAddress = Address::create($validated['address']);
+                $newAddressId = $newAddress->id;
                 $this->user->addresses()->attach($newAddressId, [
                     'addressPhone' => $validated['addressPhone'],
                     'addressIdentifier' => $validated['addressIdentifier'],

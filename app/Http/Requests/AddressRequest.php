@@ -25,7 +25,7 @@ class AddressRequest extends FormRequest
             'address.country' => 'required|string',
             'address.city' => 'required|string',
             'address.street' => 'required|string',
-            'address.zipcode' => 'required|string|',
+            'address.zipcode' => 'required|string',
             'addressPhone' => 'nullable|string',
             'addressIdentifier' => 'required|string'
         ];

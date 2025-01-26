@@ -60,8 +60,6 @@ class UserController extends Controller
             $validated = $request->validated();
             $role = Role::findById($request->role);
 
-            $validated['birthdate'] = Carbon::parse($validated['birthdate'])->format('Y-m-d');
-
             $user = User::create($validated)->assignRole($role);
 
             $this->userstoreimg($request, $user);
@@ -115,7 +113,6 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $dataToUpdate = $validated;
-            $validated['birthdate'] = Carbon::parse($validated['birthdate'])->format('Y-m-d');
             $user->update($dataToUpdate);
 
             $this->userstoreimg($request, $user);
@@ -166,14 +163,10 @@ class UserController extends Controller
                 ->first();
 
             if ($existentAddress) {
-                if ($user->addresses()->where('address_id', $existentAddress->id)->exists()) {
-                    $user->addresses()->updateExistingPivot($existentAddress->id, ['updated_at' => now()]);
-                } else {
-                    $user->addresses()->attach($existentAddress->id, [
-                        'addressPhone' => $validated['addressPhone'],
-                        'addressIdentifier' => $validated['addressIdentifier'],
-                    ]);
-                }
+                $user->addresses()->attach($existentAddress->id, [
+                    'addressPhone' => $validated['addressPhone'],
+                    'addressIdentifier' => $validated['addressIdentifier'],
+                ]);
             } else {
                 $newAddressId = DB::table('addresses')->insertGetId($validated['address']);
                 $user->addresses()->attach($newAddressId, [

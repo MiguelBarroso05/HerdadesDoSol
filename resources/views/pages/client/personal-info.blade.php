@@ -79,7 +79,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
-                                        {{ auth()->user()->birthdate_formatted}}
+                                        {{ auth()->user()->birthdate->format('d-m-Y')}}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-8">
@@ -91,7 +91,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Fav Estate:</strong>
-                                        {{ auth()->user()->fav_estate ? auth()->user()->fav_estate : 'none' }}
+                                        {{ auth()->user()->fav_estate() ? auth()->user()->fav_estate() : 'none' }}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-4">
@@ -123,7 +123,15 @@
                 <livewire:show-addresses :user="auth()->user()"/>
             </div>
             @foreach(auth()->user()->addresses as $address)
-                <x-show-address-modal :user="auth()->user()" :address="$address" />
+                <x-show-address-modal :address="$address" :user="auth()->user()"/>
+                @push('js')
+                    <script>
+                        document.getElementById('clickableDiv{{$address->id}}').addEventListener('click', function () {
+                            let modal = new bootstrap.Modal(document.getElementById('addressModal{{$address->id}}'));
+                            modal.show();
+                        });
+                    </script>
+                @endpush
             @endforeach
             <livewire:address-form :user="auth()->user()" :modalIdName="'clientAddAddressModal'"
                                    :redirectUrl="url()->current()"/>

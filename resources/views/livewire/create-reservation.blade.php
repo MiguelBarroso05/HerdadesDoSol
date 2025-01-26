@@ -83,17 +83,6 @@
                     <x-dropdown-input id="{{now()}}" wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
                         :multiple="false" :placeholder="'Select a Accommodation Type'" :fixed="'bottom'" :name="'accommodation_types'" :object="$accommodationTypes"
                         :optionText="'name'" :user="auth()->user()" :paramter="null" />
-                    <x-dropdown-input
-                                    :optionText="'name'"
-                                    :multiple="false"
-                                    :placeholder="'Add your fav estate...'"
-                                    :fixed="'top'"
-                                    :name="'fav_estate'"
-                                    :object="$estates"
-                                    :user="$user"
-                                    :paramter="$user->fav_estate"
-                                    :optionText="'name'"
-                                />
                     <x-dropdown-input wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
                         :fixed="'bottom'" :name="'accommodation'" :object="$accommodations" :user="auth()->user()" :paramter="null"
                         :optionText="'size'" />

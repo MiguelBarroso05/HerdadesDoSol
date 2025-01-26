@@ -59,11 +59,8 @@
         document.getElementById('openDeletionModal{{$address->id}}').addEventListener('click', function () {
             let deletionModal = new bootstrap.Modal(document.getElementById('confirmDeletion{{$address->id}}'));
 
-            // Obter a instância do modal que está atualmente aberta
             let addressModalElement = document.getElementById('addressModal{{$address->id}}');
             let showAddressModal = bootstrap.Modal.getInstance(addressModalElement);
-
-            // Abrir o modal de exclusão e fechar o modal de endereço (se estiver aberto)
 
             if (showAddressModal) {
                 showAddressModal.hide();

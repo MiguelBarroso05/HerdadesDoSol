@@ -126,55 +126,85 @@
 
                 <div class="hs-p-4 hs-w-md-100">
                     <div class="hs-p-4">
-                        <p>BILLING INFORMATION</p>
-                        @if($userBillingInfo)
+                        <div class="hs-d-flex hs-justify-content-between">
+                            <p>BILLING INFORMATION</p>
+                            @if($userBillingInfo)
+                                <a id="openEditBillingInfoModal" class="mx-2"><i
+                                        class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer"></i></a>
+                            @endif
+                        </div>
+                        @if($userBillingInfo && $userBillingInfo->name != null)
                             <div id="personal-billing-info">
-                                <div class="hs-row">
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Name: </strong> {{$userBillingInfo->name}}</p>
+                                <div>
+                                    <div class="hs-row">
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Name: </strong> {{$userBillingInfo->name}}</p>
+                                        </div>
+                                        <div class="hs-col-md-4">
+                                            <p><strong>NIF: </strong> {{$userBillingInfo->nif ?? 'none'}}</p>
+                                        </div>
                                     </div>
-                                    <div class="hs-col-md-6">
-                                        <p><strong>NIF: </strong> {{$userBillingInfo->nif}}</p>
-                                    </div>
-                                </div>
-                                <div class="hs-row">
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Email: </strong> {{$userBillingInfo->email}}</p>
-                                    </div>
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Phone: </strong> {{$userBillingInfo->phone}}</p>
+                                    <div class="hs-row">
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Email: </strong> {{$userBillingInfo->email}}</p>
+                                        </div>
+                                        <div class="hs-col-md-4">
+                                            <p><strong>Phone: </strong> {{$userBillingInfo->phone ?? 'none'}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         @else()
-                            <div>
-                                <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
-                                    provided for biling
-                                    <x-plus-button onclick="toggleComponents()"/>
-                                </div>
-                                <div class="hs-justify-content-between" style="width: 450px; display: none;"
-                                     id="payment-methods">
-                                    <x-payment-method-button id="billing-default" text="Use your personal information"
-                                                             icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
-                                    <x-payment-method-button id="billing-new-button" text="Create new billing information"
-                                                             icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="hs-py-4">
-                            <p>ADDRESS INFORMATION</p>
-                            <div class="hs-text-black hs-icon-text-container" id="billing1-info">No address information
-                                defined
-                                <x-plus-button onclick="toggleComponents1()"/>
+                            <div class="hs-text-black hs-icon-text-container" id="billing-info">No client information
+                                provided for biling
+                                <x-plus-button onclick="toggleComponents()"/>
                             </div>
                             <div class="hs-justify-content-between" style="width: 450px; display: none;"
-                                 id="payment1-methods">
-                                <x-payment-method-button id="address-default" text="Use one of your addresses"
-                                                         icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
-                                <x-payment-method-button id="address-new-button" text="Create new address information"
+                                 id="payment-methods">
+                                <livewire:billing-personal-info id="defaultPersonalInfo"
+                                                                text="Use your personal information"
+                                                                icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"
+                                                                :user="auth()->user()"/>
+                                <x-payment-method-button modalToOpen="#newPersonalInfoForm"
+                                                         text="Create new billing information"
                                                          icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
                             </div>
+                        @endif
+                        <div class="hs-py-4">
+                            <p>ADDRESS INFORMATION</p>
+                            @if($userBillingInfo && $userBillingInfo->address_id)
+                                <div id="address-billing-info">
+                                    <div class="hs-row">
+                                        <div class="hs-col-md-4">
+                                            <p><strong>Country: </strong> {{$userBillingInfo->address->country}}</p>
+                                        </div>
+                                        <div class="hs-col-md-6">
+                                            <p><strong>City: </strong> {{$userBillingInfo->address->city}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="hs-row">
+                                        <div class="hs-col-md-4">
+                                            <p><strong>Zipcode: </strong> {{$userBillingInfo->address->zipcode}}</p>
+                                        </div>
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Street: </strong> {{$userBillingInfo->address->street}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else()
+                                <div class="hs-text-black hs-icon-text-container" id="billing1-info">No address
+                                    information
+                                    defined
+                                    <x-plus-button onclick="toggleComponents1()"/>
+                                </div>
+                                <div class="hs-justify-content-between" style="width: 450px; display: none;"
+                                     id="payment1-methods">
+
+                                    <x-payment-method-button modalToOpen="#newAddressInfoForm"
+                                                             text="Create new address information"
+                                                             icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
+                                </div>
+                            @endif
                         </div>
                         <div class="hs-py-4 hs-mt-custom-80">
                             <p>PAYMENT INFORMATION</p>
@@ -185,23 +215,14 @@
                     </div>
                 </div>
             </div>
-            <livewire:new-billing-modal :modalIdName="'billing-new'" :user="auth()->user()"/>
-            <livewire:new-address-billing-modal :modalIdName="'address-new'" :user="auth()->user()"/>
+            <livewire:billing-new-personal-info-modal :modalIdName="'newPersonalInfoForm'" :user="auth()->user()"/>
+            <livewire:billing-new-address-info-modal :modalIdName="'newAddressInfoForm'" :user="auth()->user()"/>
+            <livewire:edit-billing-info-modal />
         </div>
     </main>
 @endsection
 @push('js')
     <script>
-        document.getElementById('billing-new-button').addEventListener('click', function () {
-            let modal = new bootstrap.Modal(document.getElementById('billing-new'));
-            modal.show();
-        });
-
-        document.getElementById('address-new-button').addEventListener('click', function () {
-            let modal = new bootstrap.Modal(document.getElementById('address-new'));
-            modal.show();
-        });
-
         function toggleComponents() {
             const billingInfo = document.getElementById('billing-info') || document.getElementById('billing1-info');
             const paymentMethods = document.getElementById('payment-methods') || document.getElementById('payment1-methods');
@@ -232,36 +253,9 @@
             }
         }
 
-        document.getElementById('create-billing-info-button').addEventListener('click', function () {
-            let billingModal = new bootstrap.Modal(document.getElementById('billing-new'));
-            billingModal.hide();
-
-            const personalInfo = document.getElementById('personal-info');
-            personalInfo.style.display = "block";
-
-            const billingInfo = document.getElementById('billing-info');
-            billingInfo.style.display = "none";
-        });
-
-        document.addEventListener('billing-created', function (event) {
-            const data = event.detail;
-
-            const personalInfo = document.getElementById('personal-info');
-            personalInfo.innerHTML = `
-        <div class="hs-col-md-6">
-            <p><strong>Name: </strong>${data.name}</p>
-            <p><strong>Email: </strong>${data.email}</p>
-        </div>
-        <div class="hs-col-md-6">
-            <p><strong>NIF: </strong>${data.nif}</p>
-            <p><strong>Phone: </strong>${data.phone}</p>
-        </div>
-   `;
-            personalInfo.style.display = "block";
-
-            // Esconde os botões
-            const paymentMethods = document.getElementById('payment-methods');
-            paymentMethods.style.display = "none";
+        document.getElementById('openEditBillingInfoModal').addEventListener('click', function () {
+            let editAddressModal = new bootstrap.Modal(document.getElementById('editBillingInfoModal'));
+            editAddressModal.show();
         });
 
     </script>

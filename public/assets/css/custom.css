@@ -3,6 +3,12 @@
     --tw-ring-color: #FFBF65 !important;
 }
 
+[type="checkbox"]:focus {
+    outline: 2px;
+    border: 2px solid #FFBF65;
+    --tw-ring-color: #FFBF65 !important;
+}
+
 
 
     /* App layout */

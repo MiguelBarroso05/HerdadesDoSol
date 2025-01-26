@@ -2,11 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Http\Requests\BillingRequest;
 use App\Http\Requests\user\UserRequest;
+use App\Models\Billing;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
-class NewBillingModal extends Component
+class BillingNewPersonalInfoModal extends Component
 {
     public $modalIdName;
     public $user;
@@ -16,21 +18,17 @@ class NewBillingModal extends Component
     public $email;
     public $phone;
 
-    protected $rules = [
-        'name' => 'required|string|max:255',
-        'nif' => 'required|string|max:255',
-        'phone' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-    ];
-
     public function submit()
     {
-        $this->validate();
+        $billingRequest = new BillingRequest();
+        $rules = $billingRequest->rulesFor('personal-info');
+        $messages = $billingRequest->messages();
 
-        $user_id = auth()->id();
+        $this->validate($rules, $messages);
 
-        DB::table('billings')->insert([
-            'user_id' => $user_id,
+        $user_id = $this->user->id;
+
+        Billing::updateOrCreate(['user_id' => $user_id], [
             'name' => $this->name,
             'nif' => $this->nif,
             'phone' => $this->phone,
@@ -45,6 +43,6 @@ class NewBillingModal extends Component
 
     public function render()
     {
-        return view('livewire.new-billing-modal');
+        return view('livewire.billing-new-personal-info-modal');
     }
 }

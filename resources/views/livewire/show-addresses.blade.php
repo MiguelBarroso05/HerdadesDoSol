@@ -46,7 +46,6 @@
                 <i class="bi bi-plus-circle hs-fw-bolder"></i>
             </button>
         @endif
-
         @if(auth()->user()->addresses->count() == 0)
             <div class="hs-text-center hs-align-content-center" style="width: 350px; height: 155px;">
                 Consider adding your preferred location to simplify your purchases

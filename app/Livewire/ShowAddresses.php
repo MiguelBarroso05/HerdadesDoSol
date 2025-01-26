@@ -19,22 +19,21 @@ class ShowAddresses extends Component
 
     public function toggleFavorite($addressId)
     {
-        $currentFavorite = $this->user->addresses()->wherePivot('isFavorite', true)->first();
+        $currentFavoriteId = $this->user->addresses()->wherePivot('isFavorite', true)->first()->id ?? null;
 
-        if (!$currentFavorite) {
+        if ($currentFavoriteId == null) {
             $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
-            $this->dispatch('updateFavorite');
-            return;
         }
 
-        if ($currentFavorite->id === $addressId) {
-            $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
-            $this->dispatch('updateFavorite');
+        if ($currentFavoriteId) {
+            if ($currentFavoriteId == $addressId) {
+                $this->user->addresses()->updateExistingPivot($currentFavoriteId, ['isFavorite' => false]);
+            }
+            else{
+                $this->user->addresses()->updateExistingPivot($currentFavoriteId, ['isFavorite' => false]);
+                $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
+            }
         }
-
-        $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
-        $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
-
         $this->addresses = $this->user->fresh()->addresses;
 
         $this->dispatch('updateFavorite');

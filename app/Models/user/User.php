@@ -38,7 +38,8 @@ class User extends Authenticatable
         'children',
         'phone',
         'img',
-        'balance'
+        'balance',
+        'fav_state'
     ];
 
     /**
@@ -71,11 +72,6 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function getBirthdateFormattedAttribute()
-    {
-        return $this->birthdate->format('d/m/Y');
-    }
-
     public function user_roles(): BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
@@ -99,7 +95,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Preference::class, 'users_preferences');
     }
 
-    public function fav_estates(){
-        return $this->belongsToMany(Estate::class, 'users_fav_estates');
+    public function fav_estate(){
+        return DB::table('estates')->where('id', $this->fav_estate)->first()->name;
     }
 }

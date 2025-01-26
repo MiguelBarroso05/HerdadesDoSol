@@ -52,6 +52,7 @@ class CreateReservation extends Component
         })->unique('id');
         if (!$this->accommodationTypes->isEmpty()) {
             $this->selectedAccommodationTypeId = $this->accommodationTypes[0]->id;
+            dd($this->selectedAccommodationTypeId);
             $this->show_accommodations();
         }
     }
@@ -139,5 +140,5 @@ class CreateReservation extends Component
         </form>
         HTML;
     }
-    
+
 }
