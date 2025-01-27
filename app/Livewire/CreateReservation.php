@@ -115,7 +115,7 @@ class CreateReservation extends Component
     public function placeholder()
     {
         return <<<'HTML'
-        <form class="d-flex justify-content-center align-items-center">
+        <form class="hs-d-flex hs-justify-content-center hs-align-items-center">
             <div class="">
                 <span style="width: 48px;
                     height: 48px;
@@ -139,5 +139,5 @@ class CreateReservation extends Component
         </form>
         HTML;
     }
-    
+
 }

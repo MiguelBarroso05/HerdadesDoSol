@@ -1,14 +1,7 @@
     <form wire:submit="submit">
         <style>
             .loader {
-                width: 48px;
-                height: 48px;
-                border: 5px solid #FFF;
-                border-bottom-color: #FF3D00;
-                border-radius: 50%;
-                display: inline-block;
-                box-sizing: border-box;
-                animation: rotation 1s linear infinite;
+                
             }
         </style>
         <div class="hs-d-flex ">
@@ -79,16 +72,16 @@
                         <livewire:NumberInput wire:model="children" :name="'children'" :value="$children" />
                     </div>
                 </div>
-                <div class="relative">
-                    <x-dropdown-input wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
+                <div class="relative hs-form-group">
+                    <livewire:DropdownInputTEST wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
                         :multiple="false" :placeholder="'Select a Accommodation Type'" :fixed="'bottom'" :name="'accommodation_types'" :object="$accommodationTypes"
                         :optionText="'name'" :user="auth()->user()" :paramter="null" />
-                    <x-dropdown-input wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
+                    <livewire:DropdownInputTEST wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
                         :fixed="'bottom'" :name="'accommodation'" :object="$accommodations" :user="auth()->user()" :paramter="null"
                         :optionText="'size'" />
                 </div>
 
-                <x-dropdown-input :multiple="true" :placeholder="'Add Activities to reserve'" :fixed="'bottom'" :name="'activities'"
+                <x-dropdown-input wire:model="selectedAccommodationTypeId" :multiple="true" :placeholder="'Add Activities to reserve'" :fixed="'bottom'" :name="'activities'"
                     :object="$estates" :user="auth()->user()" :paramter="null" :optionText="'name'" />
                 <button type="submit">Reservar</button>
             </div>
