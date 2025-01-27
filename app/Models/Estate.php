@@ -28,6 +28,6 @@ class Estate extends Model
         return $this->hasMany(Activity::class);
     }
     public function accommodations(){
-        return $this->belongsToMany(Accommodation::class, 'estates_accommodations');
+        return $this->hasMany(Accommodation::class);
     }
 }

@@ -18,6 +18,7 @@ class AccommodationSeeder extends Seeder
             [
                 'size' => 2,
                 'accommodation_type_id' => 1,
+                'estate_id' => 1,
                 'description' => 'Compact tent perfect for camping.',
                 'img' => '1_Tent.jpg',
                 'created_at' => now(),
@@ -26,6 +27,7 @@ class AccommodationSeeder extends Seeder
             [
                 'size' => 4,
                 'accommodation_type_id' => 2,
+                'estate_id' => 2,
                 'description' => 'Cozy bungalow ideal for family vacations.',
                 'img' => '2_Bungalow.jpg',
                 'created_at' => now(),
@@ -34,6 +36,7 @@ class AccommodationSeeder extends Seeder
             [
                 'size' => 6,
                 'accommodation_type_id' => 3,
+                'estate_id' => 3,
                 'description' => 'Spacious cabin with forest views.',
                 'img' => 'cabin.jpg',
                 'created_at' => now(),
@@ -41,12 +44,6 @@ class AccommodationSeeder extends Seeder
             ],
         ]);
         Accommodation::factory(5)->create();
-        $accommodations = Accommodation::all();
-        $estates = Estate::all();
-        foreach ($accommodations as $accommodation) {
-            $estate = $estates->random();
-            $accommodation->estate()->attach($estate);
-            $accommodation->save();
-        }
+      
     }
 }

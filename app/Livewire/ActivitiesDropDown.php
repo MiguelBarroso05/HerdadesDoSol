@@ -8,7 +8,9 @@ use Livewire\Component;
 
 class ActivitiesDropDown extends Component
 {
+    public array $options = [];
     public $activities;
+    public array $selected = [];
     public function render()
     {
         return view('livewire.activities-drop-down');
@@ -19,25 +21,24 @@ class ActivitiesDropDown extends Component
         }        
     }
     #[On('show-activities')]
-    public function show_activities($data){
+    public function show_activities($data)
+    {
         $estate = $data['estate'];
         $entryDate = $data['entryDate'];
         $exitDate = $data['exitDate'];
         $groupsize = $data['groupSize'];
         $children = $data['children'];
 
-        // Executar a consulta com os dados passados
+        // Filtra as atividades de acordo com os critérios fornecidos
         $this->activities = Activity::where('estate_id', $estate)
             ->where('date', '>=', $entryDate)
             ->where('date', '<=', $exitDate)
             ->where(function ($query) use ($groupsize, $children) {
-                // Para atividades adultas
                 $query->where(function ($subQuery) use ($groupsize) {
                     $subQuery->where('max_participants', '>=', $groupsize)
                              ->where('adult_activity', true)
                              ->whereRaw('max_participants >= participants + ?', [$groupsize]);
                 })
-                // Para atividades com crianças
                 ->orWhere(function ($subQuery) use ($groupsize, $children) {
                     $subQuery->where('max_participants', '>=', $groupsize + $children)
                              ->where('adult_activity', false)
@@ -45,8 +46,34 @@ class ActivitiesDropDown extends Component
                 });
             })
             ->get()
-            ->groupBy('date')->toBase();
-    }
+            ->groupBy('date')
+            ->toBase();
+
+        // Processa as atividades para exibição no dropdown
+        $this->options = $this->activities->map(function ($activities, $date) {
+            return [
+                'date' => $date,
+                'activities' => $activities->map(function ($activity) {
+                    return [
+                        'id' => $activity->id,
+                        'name' => $activity->name,  // Verifique se o nome existe aqui
+                    ];
+                }),
+            ];
+        })->toArray();
     
+        // Verifique as opções para garantir que o nome está presente
+        // dd($this->options); 
+    }
+
+    public function toggleSelection($id)
+    {
+        if (in_array($id, $this->selected)) {
+            $this->selected = array_filter($this->selected, fn($item) => $item !== $id);
+        } else {
+            $this->selected[] = $id;
+            
+        }
+    }
     
 }

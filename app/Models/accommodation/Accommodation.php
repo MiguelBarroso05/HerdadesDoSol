@@ -24,6 +24,6 @@ class Accommodation extends Model
     }
     public function estate()
     {
-        return $this->belongsToMany(Estate::class ,'estates_accommodations');
+        return $this->belongsTo(Estate::class);
     }
 }

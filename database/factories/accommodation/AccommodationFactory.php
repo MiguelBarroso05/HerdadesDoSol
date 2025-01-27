@@ -19,6 +19,7 @@ class AccommodationFactory extends Factory
     {
         return [
             'accommodation_type_id' => AccommodationType::factory(),
+            'estate_id' => $this->faker->numberBetween(1, 4),
             'size' => $this->faker->numberBetween(1, 6),
             'description' => $this->faker->sentence(10),
             'img' => null,
