@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('addressPhone')->nullable();
             $table->string('addressIdentifier')->nullable();
             $table->boolean('isFavorite')->default(false);
-            $table->timestamps();
 
             $table->primary(['user_id', 'address_id']);
             $table->foreign('user_id')->references('id')->on('users');
@@ -43,20 +42,6 @@ return new class extends Migration
             $table->primary(['user_id', 'preference_id']);
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('preference_id')->references('id')->on('preferences');
-        });
-
-        //estates pivot tables
-        Schema::create('estates_accommodations', function (Blueprint $table) {
-            $table->foreignId('estate_id')->constrained()->onDelete('cascade');
-            $table->foreignId('accommodation_id')->constrained()->onDelete('cascade');
-            $table->primary(['estate_id', 'accommodation_id']);
-        });
-
-        Schema::create('estates_activities', function (Blueprint $table) {
-            $table->foreignId('estate_id')->constrained()->onDelete('cascade');
-            $table->foreignId('activity_id')->constrained()->onDelete('cascade');
-
-            $table->primary(['estate_id', 'activity_id']);
         });
 
         //Sales pivot tables

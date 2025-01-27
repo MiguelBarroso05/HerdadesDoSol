@@ -19,6 +19,7 @@
         "vite": "^6.0"
     },
     "dependencies": {
+        "@preline/file-upload": "^2.5.2",
         "@preline/input-number": "^2.5.2",
         "@preline/select": "^2.5.2",
         "preline": "^2.7.0"

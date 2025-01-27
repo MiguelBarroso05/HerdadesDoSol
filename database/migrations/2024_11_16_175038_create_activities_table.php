@@ -21,9 +21,15 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('activity_type_id')->constrained();
+            $table->foreignId('estate_id')->constrained('estates');
             $table->string('name');
             $table->string('description')->nullable();
             $table->string('img')->nullable();
+            $table->date('date');
+            $table->decimal('price', 8, 2);
+            $table->integer('max_participants');
+            $table->integer('participants');
+            $table->boolean('adult_activity');
             $table->timestamps();
             $table->softDeletes();
         });

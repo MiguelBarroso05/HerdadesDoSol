@@ -32,10 +32,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('address_id')->nullable();
-            $table->string('name');
-            $table->string('nif');
-            $table->string('email');
-            $table->string('phone');
+            $table->string('name')->nullable();
+            $table->string('nif')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

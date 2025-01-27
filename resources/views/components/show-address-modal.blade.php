@@ -11,7 +11,6 @@
                         <h5 class="modal-title hs-align-self-center hs-text-uppercase" style="color: black !important;"
                             id="exampleModalLabel">{{$address->pivot->addressIdentifier}} ADDRESS</h5>
                         <div class="hs-d-flex hs-align-items-center">
-                            <x-custom-button type="fav" route="{{null}}"/>
                             <a id="openEditAddressModal{{$address->id}}" class="mx-2"><i
                                     class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer"></i></a>
                             <button id="openDeletionModal{{$address->id}}" type="button" class="mx-2"
@@ -60,11 +59,8 @@
         document.getElementById('openDeletionModal{{$address->id}}').addEventListener('click', function () {
             let deletionModal = new bootstrap.Modal(document.getElementById('confirmDeletion{{$address->id}}'));
 
-            // Obter a instância do modal que está atualmente aberta
             let addressModalElement = document.getElementById('addressModal{{$address->id}}');
             let showAddressModal = bootstrap.Modal.getInstance(addressModalElement);
-
-            // Abrir o modal de exclusão e fechar o modal de endereço (se estiver aberto)
 
             if (showAddressModal) {
                 showAddressModal.hide();

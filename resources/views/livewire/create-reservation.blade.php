@@ -35,24 +35,24 @@
                     <!-- End Select -->
                     <div class="hs-w-25">
                         <div class="max-w-sm space-y-3">
-                            <input wire:model="entryDate" type="text"
+                            <input wire:model="entryDate" wire:change="show_activities" type="text"
                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
                                        .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) =>
                                            [d, mth, y].filter(Boolean).join('/'));">
                         </div>
                     </div>
 
                     <div class="hs-w-25">
                         <div class="max-w-sm space-y-3">
-                            <input wire:model="exitDate" type="text"
+                            <input wire:model="exitDate" wire:change="show_activities" type="text"
                                 class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                 placeholder="dd/mm/yyyy" maxlength="10"
                                 oninput="this.value = this.value
                                        .replace(/[^0-9]/g, '')  // Remove caracteres não numéricos
-                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) => 
+                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) =>
                                            [d, mth, y].filter(Boolean).join('/'));">
                         </div>
                     </div>
@@ -72,17 +72,16 @@
                         <livewire:NumberInput wire:model="children" :name="'children'" :value="$children" />
                     </div>
                 </div>
-                <div class="relative hs-form-group">
-                    <livewire:DropdownInputTEST wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
+                <div class="relative">
+                    <x-dropdown-input id="{{now()}}" wire:model="selectedAccommodationTypeId" wire:change="show_accommodations"
                         :multiple="false" :placeholder="'Select a Accommodation Type'" :fixed="'bottom'" :name="'accommodation_types'" :object="$accommodationTypes"
                         :optionText="'name'" :user="auth()->user()" :paramter="null" />
-                    <livewire:DropdownInputTEST wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
+                    <x-dropdown-input wire:model="selectedAccommodation" :multiple="false" :placeholder="'Select a Accommodation'"
                         :fixed="'bottom'" :name="'accommodation'" :object="$accommodations" :user="auth()->user()" :paramter="null"
                         :optionText="'size'" />
                 </div>
 
-                <x-dropdown-input wire:model="selectedAccommodationTypeId" :multiple="true" :placeholder="'Add Activities to reserve'" :fixed="'bottom'" :name="'activities'"
-                    :object="$estates" :user="auth()->user()" :paramter="null" :optionText="'name'" />
+                <livewire:ActivitiesDropDown :activities="$activities" />
                 <button type="submit">Reservar</button>
             </div>
     </form>

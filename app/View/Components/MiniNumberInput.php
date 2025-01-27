@@ -6,16 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class PaymentMethodButton extends Component
+class MiniNumberInput extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $icon,
-        public string $text,
-        public string $modalToOpen
-
+        public string $name,
+        public $value
     )
     {
         //
@@ -26,6 +24,6 @@ class PaymentMethodButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.payment-method-button');
+        return view('components.mini-number-input');
     }
 }

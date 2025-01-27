@@ -2,6 +2,7 @@
 
 namespace App\Models\activity;
 
+use App\Models\Estate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,10 +17,15 @@ class Activity extends Model
         'name',
         'description',
         'img',
+        'date',
     ];
 
     public function activity_types()
     {
         return $this->belongsTo(ActivityType::class, 'activity_type_id');
+    }
+    public function estate()
+    {
+        return $this->belongsTo(Estate::class, 'estate_id');
     }
 }

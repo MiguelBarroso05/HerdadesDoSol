@@ -39,8 +39,11 @@ class UserSeeder extends Seeder
         ]);
 
         User::all()->first()->addresses()->attach(Address::all()->first()->id);
-        User::find(2)->addresses()->attach(Address::first()->id);
-        User::factory(14)->create();
+        User::find(2)->addresses()->attach(Address::first()->id, [
+            'addressPhone' => '936039048',
+            'addressIdentifier' => 'Home',
+        ]);
+        User::factory(5)->create();
 
         foreach (User::all() as $user) {
             if ($user->id == 1) {

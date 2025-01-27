@@ -7,34 +7,22 @@ use Livewire\Component;
 class FavAddress extends Component
 {
     public $user;
-    public $address;
-    public $isFavorite;
-
+    public $addresses;
 
     public function mount($user, $address)
     {
-        $this->user = $user;
-        $this->address = $address;
-        $this->isFavorite = $user->addresses()->wherePivot('isFavorite', true)->exists() &&
-            $user->addresses()->wherePivot('isFavorite', true)->first()->id == $address->id;
+        $this->user = $user->load('addresses');
+        $this->addresses = $this->user->addresses;
     }
-
-    public function toggleFavorite()
+    public function toggleFavorite($addressId)
     {
         if ($currentFavorite = $this->user->addresses()->wherePivot('isFavorite', true)->first()) {
             $this->user->addresses()->updateExistingPivot($currentFavorite->id, ['isFavorite' => false]);
         }
 
-        // Define a nova morada como favorita
-        $this->user->addresses()->updateExistingPivot($this->address->id, ['isFavorite' => true]);
+        $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
 
-        // Atualiza a propriedade local para garantir que o estado da estrela seja atualizado no frontend
-        $this->isFavorite = true;
-
-        // Recarrega as moradas e suas relações no usuário
-        $this->user = $this->user->fresh()->load('addresses');
-
-        $this->dispatch('refreshComponent');
+        $this->addresses = $this->user->fresh()->addresses;
     }
 
     public function render()

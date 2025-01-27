@@ -13,7 +13,7 @@ class DropdownInput extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public bool $multiple = false,
+        public bool $multiple,
         public string $placeholder,
         public string $fixed,
         public string $name,
@@ -23,7 +23,7 @@ class DropdownInput extends Component
         public $optionText,
     )
     {
-        //
+        $this->multiple = false;
     }
 
     /**

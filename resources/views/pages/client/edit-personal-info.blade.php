@@ -1,6 +1,6 @@
 @php use App\Models\Estate;
  use App\Models\Allergy;
- @endphp
+@endphp
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
@@ -31,7 +31,8 @@
     <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
-            <div style="width: 78%;" class="hs-bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
+            <div style="width: 78%;"
+                 class="hs-bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
                 <form action="{{ route('personal-info.update', $user) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -71,7 +72,8 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="phone" class="hs-form-control-label">Phone Number</label>
-                                            <input class="hs-form-control @error('phone') hs-is-invalid @enderror" type="text"
+                                            <input class="hs-form-control @error('phone') hs-is-invalid @enderror"
+                                                   type="text"
                                                    name="phone" value="{{ old('phone', $user->phone)}}">
                                             @error('phone')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
@@ -84,7 +86,8 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="nationality" class="hs-form-control-label">Nationality</label>
-                                            <x-countries-dropdown-input :countries="$countries" :user="auth()->user()"/>
+                                            <x-country-select :user="auth()->user()" :countries="$countries"
+                                                              :name="'nationality'"/>
                                             @error('nationality')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -95,7 +98,8 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="nif" class="hs-form-control-label">Nif</label>
-                                            <input class="hs-form-control @error('nif') hs-is-invalid @enderror" type="text"
+                                            <input class="hs-form-control @error('nif') hs-is-invalid @enderror"
+                                                   type="text"
                                                    name="nif" value="{{ old('nif', $user->nif)}}">
                                             @error('nif')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
@@ -109,7 +113,7 @@
                                             <label for="birthdate" class="hs-form-control-label">Birth Date</label>
                                             <input class="hs-form-control @error('birthdate') hs-is-invalid @enderror"
                                                    name="birthdate" type="date"
-                                                   value="{{ old('birthdate', $user->birthdate) }}">
+                                                   value="{{ old('birthdate', $user->birthdate->format('Y-m-d')) }}">
                                             @error('birthdate')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -137,11 +141,8 @@
                                             <div class="hs-form-group">
                                                 <label for="standard_group" class="hs-form-control-label">Group
                                                     Size</label>
-                                                <input
-                                                    class="hs-form-control @error('standard_group') hs-is-invalid @enderror"
-                                                    type="text"
-                                                    name="standard_group"
-                                                    value="{{ old('standard_group', $user->standard_group) }}">
+                                                <x-mini-number-input name="standard_group"
+                                                                     value="{{ old('standard_group', $user->standard_group) }}"/>
                                                 @error('standard_group')
                                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -152,9 +153,8 @@
                                         <div style="width: 90px;">
                                             <div class="hs-form-group">
                                                 <label for="children" class="hs-form-control-label">Children</label>
-                                                <input class="hs-form-control @error('children') hs-is-invalid @enderror"
-                                                       type="text"
-                                                       name="children" value="{{ old('children', $user->children) }}">
+                                                <x-mini-number-input name="children"
+                                                                     value="{{ old('children', $user->children) }}"/>
                                                 @error('children')
                                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                                 @enderror

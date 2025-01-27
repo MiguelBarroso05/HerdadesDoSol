@@ -21,7 +21,7 @@
                                 <div class="hs-form-group">
                                     <label for="name" class="hs-form-control-label">Name</label>
                                     <input
-                                        class="hs-form-control @error('name') is-invalid @enderror"
+                                        class="hs-form-control @error('name') hs-is-invalid @enderror"
                                         type="text" wire:model.defer="name"
                                         placeholder="Name">
                                     @error('name')
@@ -34,11 +34,11 @@
                                 <div class="hs-form-group">
                                     <label for="nif" class="hs-form-control-label">NIF</label>
                                     <input
-                                        class="hs-form-control @error('nif') is-invalid @enderror"
+                                        class="hs-form-control @error('nif') hs-is-invalid @enderror"
                                         type="text" wire:model.defer="nif"
                                         placeholder="NIF">
                                     @error('nif')
-                                    <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
 
@@ -47,7 +47,7 @@
                                 <div class="hs-form-group">
                                     <label for="email" class="hs-form-control-label">Email</label>
                                     <input
-                                        class="hs-form-control @error('email') is-invalid @enderror"
+                                        class="hs-form-control @error('email') hs-is-invalid @enderror"
                                         type="text" wire:model.defer="email"
                                         placeholder="Email">
                                     @error('email')
@@ -60,7 +60,7 @@
                                 <div class="hs-form-group">
                                     <label for="phone" class="hs-form-control-label">Phone Number</label>
                                     <input
-                                        class="hs-form-control @error('phone') is-invalid @enderror"
+                                        class="hs-form-control @error('phone') hs-is-invalid @enderror"
                                         type="text" wire:model.defer="phone"
                                         placeholder="+000 000 000 000">
                                     @error('phone')

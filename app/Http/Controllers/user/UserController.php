@@ -8,6 +8,7 @@ use App\Http\Requests\user\UserRequest;
 use App\Models\Allergy;
 use App\Models\user\Address;
 use App\Models\user\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -58,6 +59,7 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $role = Role::findById($request->role);
+
             $user = User::create($validated)->assignRole($role);
 
             $this->userstoreimg($request, $user);
@@ -111,7 +113,6 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $dataToUpdate = $validated;
-
             $user->update($dataToUpdate);
 
             $this->userstoreimg($request, $user);
@@ -162,14 +163,10 @@ class UserController extends Controller
                 ->first();
 
             if ($existentAddress) {
-                if ($user->addresses()->where('address_id', $existentAddress->id)->exists()) {
-                    $user->addresses()->updateExistingPivot($existentAddress->id, ['updated_at' => now()]);
-                } else {
-                    $user->addresses()->attach($existentAddress->id, [
-                        'addressPhone' => $validated['addressPhone'],
-                        'addressIdentifier' => $validated['addressIdentifier'],
-                    ]);
-                }
+                $user->addresses()->attach($existentAddress->id, [
+                    'addressPhone' => $validated['addressPhone'],
+                    'addressIdentifier' => $validated['addressIdentifier'],
+                ]);
             } else {
                 $newAddressId = DB::table('addresses')->insertGetId($validated['address']);
                 $user->addresses()->attach($newAddressId, [

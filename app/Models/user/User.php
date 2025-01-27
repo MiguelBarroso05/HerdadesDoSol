@@ -38,7 +38,8 @@ class User extends Authenticatable
         'children',
         'phone',
         'img',
-        'balance'
+        'balance',
+        'fav_state'
     ];
 
     /**
@@ -58,6 +59,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'birthdate' => 'date',
     ];
 
     /**
@@ -81,7 +83,6 @@ class User extends Authenticatable
 
     public function addresses(){
         return $this->belongsToMany(Address::class, 'users_addresses')
-            ->withTimestamps()
             ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite');
     }
 
@@ -93,7 +94,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Preference::class, 'users_preferences');
     }
 
-    public function fav_estates(){
-        return $this->belongsToMany(Estate::class, 'users_fav_estates');
+    public function fav_estate(){
+        return DB::table('estates')->where('id', $this->fav_estate)->first()->name;
     }
 }

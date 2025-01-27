@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\accommodation\AccommodationType;
 use App\Models\accommodation\Accommodation;
+use App\Models\activity\Activity;
 use App\Models\Estate;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
@@ -16,6 +17,7 @@ class CreateReservation extends Component
     public $favEstate;
     public $accommodationTypes;
     public $accommodations;
+    public $activities;
     public $groupsize;
     public $children;
     public $entryDate;
@@ -38,6 +40,7 @@ class CreateReservation extends Component
         if ($event['name'] == 'children') {
             $this->children = $event['value'];
         }
+        $this->show_activities();
     }
     public function show_accommodations_types($estateId)
     {
@@ -52,11 +55,14 @@ class CreateReservation extends Component
         })->unique('id');
         if (!$this->accommodationTypes->isEmpty()) {
             $this->selectedAccommodationTypeId = $this->accommodationTypes[0]->id;
+            // dd($this->selectedAccommodationTypeId);
             $this->show_accommodations();
+            $this->show_activities();
         }
     }
     public function show_accommodations()
     {
+        // dd($this->selectedAccommodationTypeId);
         $this->accommodations = Estate::find($this->selectedEstateId ?? $this->favEstate)
             ->accommodations()
             ->where('accommodation_type_id', $this->selectedAccommodationTypeId)
@@ -71,12 +77,9 @@ class CreateReservation extends Component
         }
 
         $this->estates = Estate::all();
-        if ($this->user->standard_group) {
-            $this->groupsize = $this->user->standard_group;
-        }
-        if ($this->user->children) {
-            $this->children = $this->user->children;
-        }
+
+        $this->groupsize = $this->user->standard_group ?? 1;
+        $this->children = $this->user->children ?? 0;
     }
 
     public function render()
@@ -111,6 +114,17 @@ class CreateReservation extends Component
         $this->exitDate = isset($dates['exitDate'])
             ? Carbon::parse($dates['exitDate'])->format('d/m/Y')
             : null;
+        $this->show_activities();
+    }
+    public function show_activities()
+    {
+
+        if ($this->entryDate == null || $this->exitDate == null) {
+            return;
+        }
+        $tempEntryDate = Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d');
+        $tempExitDate = Carbon::createFromFormat('d/m/Y', $this->exitDate)->format('Y-m-d');
+        $this->dispatch('show-activities', ['entryDate' => $tempEntryDate, 'exitDate' => $tempExitDate, 'groupSize' => $this->groupsize, 'children' => $this->children, 'estate' => $this->selectedEstateId ?? $this->favEstate]);
     }
     public function placeholder()
     {
@@ -139,5 +153,4 @@ class CreateReservation extends Component
         </form>
         HTML;
     }
-
 }

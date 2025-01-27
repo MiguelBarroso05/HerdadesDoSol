@@ -4,6 +4,7 @@ use App\Http\Controllers\accommodation\AccommodationController;
 use App\Http\Controllers\accommodation\AccommodationTypeController;
 use App\Http\Controllers\activity\ActivityController;
 use App\Http\Controllers\activity\ActivityTypeController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\EstatesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\login\ChangePassword;
@@ -16,6 +17,7 @@ use App\Http\Controllers\user\UserProfileController;
 use App\Models\accommodation\Accommodation;
 use App\Models\accommodation\AccommodationType;
 use App\Models\activity\Activity;
+use App\Models\Billing;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -59,7 +61,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/personal-info/{user}', [UserController::class, 'edit'])->name('personal-info.edit');
     Route::put('/personal-info/{user}', [UserController::class, 'update'])->name('personal-info.update');
     Route::get('/payment-methods', function () {
-        $userBillingInfo = DB::table('billings')->where('user_id', auth()->id())->first();
+        $userBillingInfo = Billing::where('user_id', auth()->id())->first();
+
+        if ($userBillingInfo && $userBillingInfo->address_id) {
+            $userBillingInfo->load('address');
+        }
         return view('pages.client.payment-methods', compact('userBillingInfo'));
     })->name('payment-methods');
     Route::get('/orders', function () { return view('client.orders');})->name('orders');
