@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('addressPhone')->nullable();
             $table->string('addressIdentifier')->nullable();
             $table->boolean('isFavorite')->default(false);
-            $table->timestamps();
 
             $table->primary(['user_id', 'address_id']);
             $table->foreign('user_id')->references('id')->on('users');

@@ -3,10 +3,11 @@
 namespace App\Livewire;
 
 use App\Models\Billing;
+use App\Models\user\Address;
 use App\Models\user\User;
 use Livewire\Component;
 
-class BillingPersonalInfo extends Component
+class BillingAddressInfo extends Component
 {
     public $user;
     public $id;
@@ -18,14 +19,12 @@ class BillingPersonalInfo extends Component
         $this->user = $user;
     }
 
-    public function storePersonalInfo()
+    public function storeAddressInfo()
     {
-        $name = $this->user->firstname . ' ' . $this->user->lastname;
+        $addressId = $this->user->addresses()->first()->id;
+
         Billing::updateOrCreate(['user_id' => $this->user->id], [
-            'name' => $name,
-            'phone' => $this->user->phone,
-            'nif' => $this->user->nif,
-            'email' => $this->user->email,
+            'address_id' => $addressId,
         ]);
 
 
@@ -34,6 +33,6 @@ class BillingPersonalInfo extends Component
 
     public function render()
     {
-        return view('livewire.billing-personal-info');
+        return view('livewire.billing-address-info');
     }
 }

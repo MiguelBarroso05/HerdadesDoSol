@@ -8,47 +8,63 @@
                 </div>
                 <div class="modal-body hs-d-flex">
                     <div class="hs-col-3 hs-mx-5 hs-d-flex hs-flex-column hs-justify-content-evenly">
-                        <div class="grid space-y-2">
-                            <label for="hs-radioradio-on-right1"
-                                   class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light" style="min-height: 60px;">
-                                <span class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
-                                <input type="radio" name="hs-radio-on-right1"
-                                       class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
-                                       id="hs-radioradio-on-right1" checked="">
-                            </label>
+                        @if($userBillingInfo && $userBillingInfo->name != null)
+                            <div class="grid space-y-2">
+                                <label for="hs-radioradio-on-right1"
+                                       class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                       style="min-height: 60px;"
+                                       wire:click="UseBillingPersonalInfoButton">
+                                    <span
+                                        class="text-sm text-gray-500 dark:text-neutral-400">Update current billing information</span>
+                                    <input type="radio" name="hs-radio-on-right1"
+                                           class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                           id="hs-radioradio-on-right1" checked="">
+                                </label>
+                                <label for="hs-radioradio-on-right2"
+                                       class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                       style="min-height: 60px;"
+                                       wire:click="UsePersonalInfoButton">
+                                    <span class="text-sm text-gray-500 dark:text-neutral-400">Use your personal information</span>
+                                    <input type="radio" name="hs-radio-on-right1"
+                                           class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                           id="hs-radioradio-on-right2">
+                                </label>
 
-                            <label for="hs-radioradio-on-right2"
-                                   class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light" style="min-height: 60px;">
-                                <span class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
-                                <input type="radio" name="hs-radio-on-right1"
-                                       class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
-                                       id="hs-radioradio-on-right2" checked="">
-                            </label>
-                        </div>
-                        <div class="grid space-y-2">
-                            <label for="hs-radioradio-on-right3"
-                                   class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light" style="min-height: 60px;">
-                                <span class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
-                                <input type="radio" name="hs-radio-on-right2"
-                                       class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
-                                       id="hs-radioradio-on-right3" checked="">
-                            </label>
+                            </div>
+                        @endif
+                        @if($userBillingInfo && $userBillingInfo->address_id != null)
+                            <div class="grid space-y-2">
+                                <label for="hs-radioradio-on-right3"
+                                       class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                       style="min-height: 60px;">
+                                    <span
+                                        class="text-sm text-gray-500 dark:text-neutral-400">Update current address information</span>
+                                    <input type="radio" name="hs-radio-on-right2"
+                                           class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                           id="hs-radioradio-on-right3" checked="">
+                                </label>
 
-                            <label for="hs-radioradio-on-right4"
-                                   class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light" style="min-height: 60px;">
-                                <span class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
-                                <input type="radio" name="hs-radio-on-right2"
-                                       class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
-                                       id="hs-radioradio-on-right4" checked="">
-                            </label>
-                        </div>
+                                <label for="hs-radioradio-on-right4"
+                                       class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                       style="min-height: 60px;">
+                                    <span
+                                        class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
+                                    <input type="radio" name="hs-radio-on-right2"
+                                           class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                           id="hs-radioradio-on-right4">
+                                </label>
+                            </div>
+                        @endif
                     </div>
                     <div class="hs-col-7 hs-align-self-center">
                         <h5 class="modal-title hs-align-self-center" style="color: black !important;"
                             id="exampleModalLabel">BILLING INFORMATION</h5>
                         @if($userBillingInfo && $userBillingInfo->name != null)
-                            <div>
+                            <div class="hs-d-flex hs-justify-content-between">
                                 <p>PERSONAL INFORMATION</p>
+                                <button wire:click="deletePersonalInfo" style="border: none; background-color: transparent">
+                                    <i class="bi bi-trash fs-5" style="color: red"></i>
+                                </button>
                             </div>
                             <div class="hs-row">
                                 <!-- Name Input -->
@@ -58,7 +74,13 @@
                                         <input
                                             class="hs-form-control @error('name') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="name"
-                                            value="{{ old('name', $userBillingInfo->name) }}">
+                                            @if($usePersonalInfo)
+                                                readonly
+                                            value="{{ old('name', auth()->user()->firstname . ' ' . auth()->user()->lastname) }}"
+                                            @else
+                                                value="{{ old('name', $userBillingInfo->name) }}"
+                                            @endif
+                                        >
                                         @error('name')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -71,7 +93,13 @@
                                         <input
                                             class="hs-form-control @error('nif') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="nif"
-                                            value="{{ old('nif', $userBillingInfo->nif) }}">
+                                            @if($usePersonalInfo)
+                                                readonly
+                                            value="{{ old('nif', auth()->user()->nif) }}"
+                                            @else
+                                                value="{{ old('nif', $userBillingInfo->nif) }}"
+                                            @endif
+                                        >
                                         @error('nif')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -84,7 +112,13 @@
                                         <input
                                             class="hs-form-control @error('email') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="email"
-                                            value="{{ old('email', $userBillingInfo->email) }}">
+                                            @if($usePersonalInfo)
+                                                readonly
+                                            value="{{ old('email', auth()->user()->email) }}"
+                                            @else
+                                                value="{{ old('email', $userBillingInfo->email) }}"
+                                            @endif
+                                        >
                                         @error('email')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -97,7 +131,13 @@
                                         <input
                                             class="hs-form-control @error('phone') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="phone"
-                                            value="{{ old('phone', $userBillingInfo->phone) }}">
+                                            @if($usePersonalInfo)
+                                                readonly
+                                            value="{{ old('phone', auth()->user()->phone) }}"
+                                            @else
+                                                value="{{ old('phone', $userBillingInfo->phone) }}"
+                                            @endif
+                                        >
                                         @error('phone')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -166,7 +206,7 @@
                             <button id="create-billing-info-button" type="submit"
                                     class="hs-btn hs-btn-sm hs-ms-auto hs-col-md-4"
                                     style="border: 1px solid #437546; background-color: #E0EBDC;">
-                                Create
+                                Update
                             </button>
                         </div>
                     </div>

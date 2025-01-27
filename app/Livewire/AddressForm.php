@@ -34,13 +34,12 @@ class AddressForm extends Component
 
     public function submit()
     {
-        // Cria uma instância do AddressRequest
         $request = new AddressRequest();
 
-        // Valida os dados com as regras e mensagens do AddressRequest
+
         $this->validate(
-            $request->rules(),      // Regras de validação
-            $request->messages()    // Mensagens personalizadas
+            $request->rules(),
+            $request->messages()
         );
 
         try {
@@ -50,23 +49,28 @@ class AddressForm extends Component
                 'address' => $this->address,
             ];
 
-            // Verifique se o endereço já existe
             $existentAddress = Address::where('country', $validated['address']['country'])
                 ->where('city', $validated['address']['city'])
                 ->where('street', $validated['address']['street'])
                 ->where('zipcode', $validated['address']['zipcode'])
                 ->first();
 
-            $this->user->addresses()->detach($this->addressId);
-
             if ($existentAddress) {
-                $this->user->addresses()->attach($existentAddress->id, [
-                    'addressPhone' => $validated['addressPhone'],
-                    'addressIdentifier' => $validated['addressIdentifier'],
-                ]);
+                if ($this->user->addresses()->where('address_id', $existentAddress->id)->exists()) {
+                    $this->user->addresses()->updateExistingPivot($existentAddress->id, [
+                        'addressPhone' => $validated['addressPhone'],
+                        'addressIdentifier' => $validated['addressIdentifier']
+                    ]);
+                } else {
+                    $this->user->addresses()->attach($existentAddress->id, [
+                        'addressPhone' => $validated['addressPhone'],
+                        'addressIdentifier' => $validated['addressIdentifier'],
+                    ]);
+                }
             } else {
                 $newAddress = Address::create($validated['address']);
                 $newAddressId = $newAddress->id;
+
                 $this->user->addresses()->attach($newAddressId, [
                     'addressPhone' => $validated['addressPhone'],
                     'addressIdentifier' => $validated['addressIdentifier'],
@@ -75,24 +79,13 @@ class AddressForm extends Component
 
             session()->flash('success', 'Address successfully created!');
             return redirect()->to($this->redirectUrl);
-            $this->resetForm();
+            $this->reset();
 
         } catch (\Exception $e) {
             session()->flash('error', 'Error updating address: ' . $e->getMessage());
         }
     }
 
-    public function resetForm()
-    {
-        $this->addressIdentifier = '';
-        $this->addressPhone = '';
-        $this->address = [
-            'country' => '',
-            'city' => '',
-            'street' => '',
-            'zipcode' => '',
-        ];
-    }
 
     public function render()
     {

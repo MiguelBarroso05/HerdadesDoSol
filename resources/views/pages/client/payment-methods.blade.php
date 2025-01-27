@@ -128,7 +128,7 @@
                     <div class="hs-p-4">
                         <div class="hs-d-flex hs-justify-content-between">
                             <p>BILLING INFORMATION</p>
-                            @if($userBillingInfo)
+                            @if($userBillingInfo && ($userBillingInfo->name || $userBillingInfo->address_id))
                                 <a id="openEditBillingInfoModal" class="mx-2"><i
                                         class="bi bi-pencil-square hs-fs-5" style="color: #2B6EFF; cursor: pointer"></i></a>
                             @endif
@@ -199,7 +199,16 @@
                                 </div>
                                 <div class="hs-justify-content-between" style="width: 450px; display: none;"
                                      id="payment1-methods">
-
+                                    @if(auth()->user()->addresses->count() == 1)
+                                        <livewire:billing-address-info id="defaultAddressInfo"
+                                                                       text="Use your address information"
+                                                                       icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"
+                                                                       :user="auth()->user()"/>
+                                    @elseif(auth()->user()->addresses->count() > 1)
+                                        <x-payment-method-button modalToOpen="#chooseExistentAddress"
+                                                                 text="Choose one of your addresses"
+                                                                 icon="bi bi-arrow-right-circle hs-payment-button-icon hs-mr-custom-15"/>
+                                    @endif
                                     <x-payment-method-button modalToOpen="#newAddressInfoForm"
                                                              text="Create new address information"
                                                              icon="bi bi-plus-circle hs-payment-button-icon hs-mr-custom-15"/>
@@ -217,7 +226,8 @@
             </div>
             <livewire:billing-new-personal-info-modal :modalIdName="'newPersonalInfoForm'" :user="auth()->user()"/>
             <livewire:billing-new-address-info-modal :modalIdName="'newAddressInfoForm'" :user="auth()->user()"/>
-            <livewire:edit-billing-info-modal />
+            <livewire:choose-existent-address :user="auth()->user()" />
+            <livewire:edit-billing-info-modal/>
         </div>
     </main>
 @endsection
