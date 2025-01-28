@@ -6,12 +6,12 @@
     <main class="hs-main-content mt-0 hs-flex-grow-1">
         <!-- Hero -->
         <section class="hs-bg-cover hs-bg-center hs-align-items-center hs-justify-center hs-text-center home-image hs-min-vh-100">
-            <div class="text-white">
+            <div>
                 <h1 class="hs-display-4 hs-fw-bold hs-pt-12">Welcome to Our Estate!</h1>
-                <p class="hs-lead hs-mt-12">Discover unique accommodations, exciting activities, and much more.</p>
+                <p class="hs-lead hs-mt-12 text-white">Discover unique accommodations, exciting activities, and much more.</p>
                 <div class="hs-mt-4">
-                    <a href="#accommodations" class="hs-btn hs-btn-primary hs-btn-lg hs-me-2">Explore Accommodations</a>
-                    <a href="#activities" class="hs-btn hs-btn-outline-light hs-btn-lg">Discover Activities</a>
+                    <a href="#accommodations" class="hs-btn hs-btn-primary hs-btn-lg hs-me-2 text-white">Explore Accommodations</a>
+                    <a href="#activities" class="hs-btn hs-btn-outline-light hs-btn-lg text-white">Discover Activities</a>
                 </div>
             </div>
         </section>
@@ -28,7 +28,7 @@
                                 <div class="hs-card-body">
                                     <h5 class="hs-card-title">{{ $activity->name }}</h5>
                                     <p class="hs-card-text">{{ $activity->description }}</p>
-                                    <a href="{{ route('activities.show', $activity->id) }}" class="hs-btn hs-btn-primary">View More</a>
+                                    <x-custom-button type="viewMore" route="{{route('activities.show', $activity->id)}}"/>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                                 <div class="hs-card-body">
                                     <h5 class="hs-card-title">{{ $type->name }}</h5>
                                     <p class="hs-card-text">{{ $type->description }}</p>
-                                    <a href="{{ route('accommodation_types.show', $type->id) }}" class="hs-btn hs-btn-primary">View More</a>
+                                    <x-custom-button type="viewMore" route="{{route('accommodation_types.show', $type->id)}}"/>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 <div class="hs-card-body">
                                     <h5 class="hs-card-title">Room nº {{ $accommodation->id }}</h5>
                                     <p class="hs-card-text">Get a room fitted to accommodate a familly of {{ $accommodation->size }}</p>
-                                    <a href="{{ route('accommodations.show', $accommodation->id) }}" class="hs-btn hs-btn-primary">View More</a>
+                                    <x-custom-button type="viewMore" route="{{route('accommodations.show', $accommodation->id)}}"/>
                                 </div>
                             </div>
                         </div>

@@ -62,7 +62,7 @@
                                     </x-slot>
                                     <x-dropdown.item class="hs-justify-content-between hs-mx-2">
                                         <p class="hs-m-0">
-                                            {{ auth()->user()->firstname . " " . auth()->user()->lastname }}
+                                            {{ limit_word(auth()->user()->firstname . " " . auth()->user()->lastname, 22)}}
                                         </p>
                                         <p class="hs-m-0">
                                             {{ auth()->user()->balance . "$" }}

@@ -49,7 +49,7 @@
         <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
             <div style="width: 78%; display:flex; justify-content:space-between;">
-                <div class="hs-col-md-8" >
+                <div class="hs-col-md-8">
                     <div class="hs-row" style="width: 95% !important; min-height: 400px">
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
@@ -58,47 +58,70 @@
                             </div>
                             <div class="hs-px-6 hs-py-3">
                                 <p class="text-secondary">BASIC INFORMATION</p>
-                                <div class="hs-row hs-mb-3">
-                                    <div class="hs-col-md-5">
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
-                                            {{ auth()->user()->firstname . ' ' . auth()->user()->lastname}}
-                                        </p>
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
-                                            {{ auth()->user()->birthdate_formatted }}</p>
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
-                                            {{ auth()->user()->email }}
-                                        </p>
+                                <div class="hs-d-flex">
+                                    <div class="hs-row w-full">
+                                        <div class="hs-row">
+                                            <div class="hs-col-md-7">
+                                                <p><strong class="hs-pe-2">Name:</strong>
+                                                    {{limit_word(auth()->user()->firstname . ' ' . auth()->user()->lastname, 30)}}
+                                                </p>
+                                            </div>
+                                            <div class="hs-col-md-5">
+                                                <p><strong
+                                                        class="hs-pe-2">NIF:</strong>{{ auth()->user()->nif ?? 'none' }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="hs-row">
+                                            <div class="hs-col-md-7">
+                                                <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
+                                                    {{ auth()->user()->birthdate->format('d-m-Y') }}</p>
+                                            </div>
+                                            <div class="hs-col-md-5">
+                                                <p class="hs-d-flex"><strong
+                                                        class="hs-pe-2">Phone:</strong>{{ auth()->user()->phone ?? 'none' }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="hs-row">
+                                            <div class="hs-col-md-12">
+                                                <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
+                                                    {{ auth()->user()->email }}
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="hs-col-md-4">
-                                        <p class="hs-d-flex"><strong
-                                                class="hs-pe-2">NIF:</strong>{{ auth()->user()->nif ?? 'none' }}</p>
-                                        <p class="hs-d-flex"><strong
-                                                class="hs-pe-2">Phone:</strong>{{ auth()->user()->phone ?? 'none' }}</p>
-                                    </div>
-                                    <div class="hs-col-md-3 hs-text-end">
+                                    <div class="hs-col-md-3">
                                         <img
                                             src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('/imgs/users/no-image.png') }}"
-                                            alt="" class="hs-img-fluid hs-rounded-3" style="width: 100px">
+                                            alt="" class="hs-img-fluid hs-rounded-3 justify-self-end" style="width: 120px;">
                                     </div>
                                 </div>
                                 <div class="hs-row">
                                     <p class="text-secondary">MAIN ADDRESS INFORMATION</p>
                                     @if(auth()->user()->addresses()->first())
-                                        <div class="hs-col-md-5">
-                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                >Country:</strong>{{auth()->user()->addresses()->first()->country}}
-                                            </p>
-                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                >Postal-code:</strong>{{auth()->user()->addresses()->first()->zipcode}}
-                                            </p>
+                                        <div class="hs-row">
+                                            <div class="hs-col-md-5">
+                                                <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
+                                                    >Country:</strong>{{auth()->user()->addresses()->first()->country}}
+                                                </p>
+                                            </div>
+                                            <div class="hs-col-md-7">
+                                                <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
+                                                    >City:</strong>{{auth()->user()->addresses()->first()->city}}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="hs-col-md-7">
-                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                >City:</strong>{{auth()->user()->addresses()->first()->city}}
-                                            </p>
-                                            <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                >Address:</strong>{{auth()->user()->addresses()->first()->street}}
-                                            </p>
+                                        <div class="hs-row">
+                                            <div class="hs-col-md-5">
+                                                <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
+                                                    >Postal-code:</strong>{{auth()->user()->addresses()->first()->zipcode}}
+                                                </p>
+                                            </div>
+                                            <div class="hs-col-md-7">
+                                                <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
+                                                    >Address:</strong>{{auth()->user()->addresses()->first()->street}}
+                                                </p>
+                                            </div>
                                         </div>
                                     @else
                                         <div class="hs-col-md-6">

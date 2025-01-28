@@ -66,4 +66,8 @@
     <a href="" class="hs-mx-2"><i class="bi bi-star hs-fs-5" style="color: #FFB427;"></i></a>
 @endif
 
+@if($type == "viewMore" )
+    <a href="{{ $route }}" class="hs-btn hs-btn-primary text-white">View More</a>
+@endif
+
 
