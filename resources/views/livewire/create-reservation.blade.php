@@ -1,7 +1,7 @@
     <form wire:submit="submit">
         <style>
             .loader {
-                
+
             }
         </style>
         <div class="hs-d-flex ">
@@ -84,4 +84,5 @@
                 <livewire:ActivitiesDropDown :activities="$activities" />
                 <button type="submit">Reservar</button>
             </div>
+        </div>
     </form>

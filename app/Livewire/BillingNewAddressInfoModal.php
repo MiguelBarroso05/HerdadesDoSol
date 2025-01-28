@@ -24,9 +24,7 @@ class BillingNewAddressInfoModal extends Component
         $messages = $billingRequest->messages();
 
         $this->validate($rules, $messages);
-
         $user_id = $this->user->id;
-        $billingAddressId = $this->billingAddressId;
 
         $address = Address::where('country', $this->country)
             ->where('city', $this->city)
@@ -38,7 +36,6 @@ class BillingNewAddressInfoModal extends Component
             Billing::updateOrCreate(['user_id' => $user_id], [
                 'address_id' => $address->id,
             ]);
-            $billingAddressId = $address->id;
         }
         else{
             $newAddress = Address::create([
@@ -51,20 +48,11 @@ class BillingNewAddressInfoModal extends Component
             Billing::updateOrCreate(['user_id' => $user_id], [
                 'address_id' => $newAddress->id,
             ]);
-
-            $billingAddressId = $newAddress->id;
         }
 
         session()->flash('message', 'Billing information submitted successfully.');
         $this->redirectRoute('payment-methods');
         $this->reset();
-
-        /*if ($this->user->addresses->count() < 3 && !$this->user->addresses->contains('id', $billingAddressId)) {
-
-        }
-        else{
-
-        }*/
     }
 
     public function render()

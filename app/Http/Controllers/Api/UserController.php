@@ -43,4 +43,24 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function edit(Request $request)
+    {
+        // Validate the incoming data
+        $validated = $request->validate([
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'nif' => 'nullable|digits:9',
+            'birthdate' => 'nullable|date',
+            'phone' => 'nullable|string|max:15',
+        ]);
+
+        $user = $request->user();
+        $user->update($validated);
+
+        return response()->json([
+            'message' => 'User updated successfully.',
+            'user' => $user,
+        ]);
+    }
 }

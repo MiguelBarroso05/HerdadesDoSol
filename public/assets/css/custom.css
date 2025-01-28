@@ -239,8 +239,8 @@ a {
 .custom-select ul {
     padding: 0;
 }
+
 .selected {
     border: 1px solid #ffbf65 !important;
-    box-shadow: 0 0 5px rgba(255, 191, 101, 0.5);
     background-color: #fff9f1 !important;
 }

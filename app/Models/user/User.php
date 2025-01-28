@@ -5,6 +5,7 @@ namespace App\Models\user;
 use App\Models\Allergy;
 use App\Models\Estate;
 use App\Models\Preference;
+use Dotenv\Util\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -39,7 +40,7 @@ class User extends Authenticatable
         'phone',
         'img',
         'balance',
-        'fav_state'
+        'fav_estate'
     ];
 
     /**
@@ -95,6 +96,10 @@ class User extends Authenticatable
     }
 
     public function fav_estate(){
-        return DB::table('estates')->where('id', $this->fav_estate)->first()->name;
+        return DB::table('estates')->where('id', $this->fav_estate)->first()->name ?? null;
+    }
+
+    public function limitParamter($paramter, $limit){
+        return \Illuminate\Support\Str::of($paramter)->limit($limit, preserveWords: true);
     }
 }

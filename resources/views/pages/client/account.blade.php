@@ -61,7 +61,7 @@
                                 <div class="hs-row hs-mb-3">
                                     <div class="hs-col-md-5">
                                         <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
-                                            {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
+                                            {{ auth()->user()->firstname . ' ' . auth()->user()->lastname}}
                                         </p>
                                         <p class="hs-d-flex"><strong class="hs-pe-2">Birth Date:</strong>
                                             {{ auth()->user()->birthdate_formatted }}</p>

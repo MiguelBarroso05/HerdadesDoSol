@@ -69,8 +69,8 @@
                             </div>
                         </div>
                         <div class="hs-d-flex hs-justify-content-end">
-                            <button id="create-billing-info-button" type="submit" data-bs-toggle="modal"
-                                    data-bs-target="#teste" class="hs-btn hs-btn-sm hs-ms-auto hs-col-md-4"
+                            <button id="create-billing-info-button" type="submit"
+                                    class="hs-btn hs-btn-sm hs-ms-auto hs-col-md-4"
                                     style="border: 1px solid #437546; background-color: #E0EBDC;">
                                 Create
                             </button>

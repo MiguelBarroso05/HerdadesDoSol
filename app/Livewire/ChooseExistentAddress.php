@@ -27,7 +27,6 @@ class ChooseExistentAddress extends Component
         Billing::updateOrCreate(['user_id' => $this->user->id], [
             'address_id' => $this->addressId,
         ]);
-
         $this->redirectRoute('payment-methods');
         $this->reset();
     }

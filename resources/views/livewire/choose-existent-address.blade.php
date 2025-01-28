@@ -5,7 +5,7 @@
          @else style="max-width: 980px;"@endif>
         <form wire:submit="submit">
             <div class="modal-content">
-                <div class="hs-d-flex hs-justify-content-end div-close">
+                <div class="hs-d-flex hs-justify-content-end div-close hs-z-index-1" id="closeButton">
                     <x-custom-button type="close" route="{{null}}"/>
                 </div>
                 <div class="modal-body hs-px-6">
@@ -36,8 +36,13 @@
                                    id="radio{{$address->id}}" style="display: none;">
                         @endforeach
                     </div>
-                    <div class="hs-d-flex hs-justify-content-end">
-                        <x-custom-button type="create" route="{{null}}"/>
+                    <div class="hs-d-flex hs-justify-content-end" disabled>
+                        <button type="submit" class="hs-btn hs-btn-sm hs-ms-auto hs-col-md-4"
+                                style="border: 1px solid #437546; background-color: #E0EBDC;"
+                                @if($addressId == null) disabled @endif
+                        >
+                            Create
+                        </button>
                     </div>
                 </div>
             </div>

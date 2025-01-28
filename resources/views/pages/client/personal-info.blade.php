@@ -91,7 +91,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Fav Estate:</strong>
-                                        {{ auth()->user()->fav_estate() ? auth()->user()->fav_estate() : 'none' }}
+                                        {{ auth()->user()->fav_estate() ??  'none' }}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-4">

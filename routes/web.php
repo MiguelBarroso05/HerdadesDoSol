@@ -68,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         }
         return view('pages.client.payment-methods', compact('userBillingInfo'));
     })->name('payment-methods');
-    Route::get('/orders', function () { return view('client.orders');})->name('orders');
+    Route::get('/orders', function () { return view('pages.client.orders');})->name('orders');
     Route::get('/wishlist', function () { return view('client.wishlist');})->name('wishlist');
     Route::get('/history', function () { return view('client.history');})->name('history');
     Route::get('/reviews', function () { return view('client.reviews');})->name('reviews');

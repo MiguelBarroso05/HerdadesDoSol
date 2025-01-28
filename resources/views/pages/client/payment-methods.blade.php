@@ -226,7 +226,7 @@
             </div>
             <livewire:billing-new-personal-info-modal :modalIdName="'newPersonalInfoForm'" :user="auth()->user()"/>
             <livewire:billing-new-address-info-modal :modalIdName="'newAddressInfoForm'" :user="auth()->user()"/>
-            <livewire:choose-existent-address :user="auth()->user()" />
+            <livewire:choose-existent-address :user="auth()->user()"/>
             <livewire:edit-billing-info-modal/>
         </div>
     </main>
@@ -264,8 +264,36 @@
         }
 
         document.getElementById('openEditBillingInfoModal').addEventListener('click', function () {
-            let editAddressModal = new bootstrap.Modal(document.getElementById('editBillingInfoModal'));
-            editAddressModal.show();
+            let editBillingModal = new bootstrap.Modal(document.getElementById('editBillingInfoModal'));
+            editBillingModal.show();
+        });
+
+
+        document.getElementById('openChooseAddressModal').addEventListener('click', function () {
+            let chooseAddressModal = new bootstrap.Modal(document.getElementById('chooseExistentAddress'));
+
+            let editBillingElement = document.getElementById('editBillingInfoModal');
+            let editBillingModal = bootstrap.Modal.getInstance(editBillingElement);
+
+            if (editBillingModal) {
+                editBillingModal.hide();
+            }
+            chooseAddressModal.show();
+        });
+
+        document.getElementById('closeButton').addEventListener('click', function () {
+
+            let prevModalElement = document.getElementById('editBillingInfoModal');
+            let prevModal = bootstrap.Modal.getInstance(prevModalElement) || new bootstrap.Modal(prevModalElement);
+
+            let actualElement = document.getElementById('chooseExistentAddress');
+            let actualModal = bootstrap.Modal.getInstance(actualElement);
+
+            if (actualModal) {
+                actualModal.hide();
+            }
+
+            prevModal.show();
         });
 
     </script>

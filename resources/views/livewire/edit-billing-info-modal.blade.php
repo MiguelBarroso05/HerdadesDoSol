@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 980px;">
         <form wire:submit.prevent="submit">
             <div class="modal-content">
-                <div class="hs-d-flex hs-justify-content-end div-close">
+                <div class="hs-d-flex hs-justify-content-end div-close hs-z-index-1">
                     <x-custom-button type="close" route="{{null}}"/>
                 </div>
                 <div class="modal-body hs-d-flex">
@@ -29,30 +29,49 @@
                                            class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
                                            id="hs-radioradio-on-right2">
                                 </label>
-
                             </div>
                         @endif
                         @if($userBillingInfo && $userBillingInfo->address_id != null)
                             <div class="grid space-y-2">
                                 <label for="hs-radioradio-on-right3"
                                        class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
-                                       style="min-height: 60px;">
+                                       style="min-height: 60px;"
+                                        wire:click="UseBillingAddressInfoButton">
                                     <span
                                         class="text-sm text-gray-500 dark:text-neutral-400">Update current address information</span>
                                     <input type="radio" name="hs-radio-on-right2"
                                            class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
                                            id="hs-radioradio-on-right3" checked="">
                                 </label>
-
-                                <label for="hs-radioradio-on-right4"
-                                       class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
-                                       style="min-height: 60px;">
+                                @if(auth()->user()->addresses->count() == 1)
+                                    <label for="hs-radioradio-on-right4"
+                                           class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                           style="min-height: 60px;
+                                           @if(auth()->user()->addresses->count() == 0) background-color: #e9ecef; cursor: default @endif"
+                                           wire:click="UseAddressInfoButton">
+                                        <span
+                                            class="text-sm text-gray-500 dark:text-neutral-400"
+                                            @if(auth()->user()->addresses->count() == 0) style="color: #495057 !important;" @endif
+                                        >Use your addresses information</span>
+                                        <input type="radio" name="hs-radio-on-right2"
+                                               class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                               id="hs-radioradio-on-right4"
+                                            @if(auth()->user()->addresses->count() == 0) disabled @endif
+                                        >
+                                    </label>
+                                @endif
+                                @if(auth()->user()->addresses->count() > 1)
+                                    <label for="hs-radioradio-on-right5"
+                                           class="cursor-pointer flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 hs-align-items-center hs-fw-light"
+                                           style="min-height: 60px;"
+                                           id="openChooseAddressModal">
                                     <span
-                                        class="text-sm text-gray-500 dark:text-neutral-400">Use one of your addresses</span>
-                                    <input type="radio" name="hs-radio-on-right2"
-                                           class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
-                                           id="hs-radioradio-on-right4">
-                                </label>
+                                        class="text-sm text-gray-500 dark:text-neutral-400">Choose one of your address</span>
+                                        <input type="radio" name="hs-radio-on-right2"
+                                               class="shrink-0 ms-auto mt-0.5 border-gray-200 rounded-full primary-color focus:border-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-primary dark:checked:border-primary dark:focus:ring-offset-primary"
+                                               id="hs-radioradio-on-right5">
+                                    </label>
+                                @endif
                             </div>
                         @endif
                     </div>
@@ -62,7 +81,8 @@
                         @if($userBillingInfo && $userBillingInfo->name != null)
                             <div class="hs-d-flex hs-justify-content-between">
                                 <p>PERSONAL INFORMATION</p>
-                                <button wire:click="deletePersonalInfo" style="border: none; background-color: transparent">
+                                <button wire:click="deletePersonalInfo"
+                                        style="border: none; background-color: transparent">
                                     <i class="bi bi-trash fs-5" style="color: red"></i>
                                 </button>
                             </div>
@@ -76,7 +96,7 @@
                                             type="text" wire:model.defer="name"
                                             @if($usePersonalInfo)
                                                 readonly
-                                            value="{{ old('name', auth()->user()->firstname . ' ' . auth()->user()->lastname) }}"
+                                            value="{{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}"
                                             @else
                                                 value="{{ old('name', $userBillingInfo->name) }}"
                                             @endif
@@ -95,7 +115,7 @@
                                             type="text" wire:model.defer="nif"
                                             @if($usePersonalInfo)
                                                 readonly
-                                            value="{{ old('nif', auth()->user()->nif) }}"
+                                            value="{{ auth()->user()->nif }}"
                                             @else
                                                 value="{{ old('nif', $userBillingInfo->nif) }}"
                                             @endif
@@ -114,7 +134,7 @@
                                             type="text" wire:model.defer="email"
                                             @if($usePersonalInfo)
                                                 readonly
-                                            value="{{ old('email', auth()->user()->email) }}"
+                                            value="{{ auth()->user()->email }}"
                                             @else
                                                 value="{{ old('email', $userBillingInfo->email) }}"
                                             @endif
@@ -133,7 +153,7 @@
                                             type="text" wire:model.defer="phone"
                                             @if($usePersonalInfo)
                                                 readonly
-                                            value="{{ old('phone', auth()->user()->phone) }}"
+                                            value="{{ auth()->user()->phone }}"
                                             @else
                                                 value="{{ old('phone', $userBillingInfo->phone) }}"
                                             @endif
@@ -145,8 +165,12 @@
                             </div>
                         @endif
                         @if($userBillingInfo && $userBillingInfo->address_id != null)
-                            <div>
+                            <div class="hs-d-flex hs-justify-content-between">
                                 <p>ADDRESS INFORMATION</p>
+                                <button wire:click="deleteAddressInfo"
+                                        style="border: none; background-color: transparent">
+                                    <i class="bi bi-trash fs-5" style="color: red"></i>
+                                </button>
                             </div>
                             <div class="hs-row">
                                 <!-- Country Input -->
@@ -156,7 +180,13 @@
                                         <input
                                             class="hs-form-control @error('country') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="country"
-                                            value="{{ old('country', $userBillingInfo->address->country) }}">
+                                            @if($useAddressInfo)
+                                                readonly
+                                            value="{{ $userAddress->country ?? 'null'}}"
+                                            @else
+                                                value="{{ old('country', $userBillingInfo->address->country) }}"
+                                            @endif
+                                            >
                                         @error('country')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -169,7 +199,13 @@
                                         <input
                                             class="hs-form-control @error('city') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="city"
-                                            value="{{ old('city', $userBillingInfo->address->city) }}">
+                                            @if($useAddressInfo)
+                                                readonly
+                                            value="{{ $userAddress->city }}"
+                                            @else
+                                                value="{{ old('city', $userBillingInfo->address->city) }}"
+                                            @endif
+                                            >
                                         @error('city')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -182,7 +218,13 @@
                                         <input
                                             class="hs-form-control @error('zipcode') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="zipcode"
-                                            value="{{ old('zipcode', $userBillingInfo->address->zipcode) }}">
+                                            @if($useAddressInfo)
+                                                readonly
+                                            value="{{ $userAddress->zipcode }}"
+                                            @else
+                                                value="{{ old('zipcode', $userBillingInfo->address->zipcode) }}"
+                                            @endif
+                                            >
                                         @error('zipcode')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
@@ -195,7 +237,13 @@
                                         <input
                                             class="hs-form-control @error('street') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="street"
-                                            value="{{ old('street', $userBillingInfo->address->street) }}">
+                                            @if($useAddressInfo)
+                                                readonly
+                                            value="{{ $userAddress->street }}"
+                                            @else
+                                                value="{{ old('street', $userBillingInfo->address->street) }}"
+                                            @endif
+                                            >
                                         @error('street')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
