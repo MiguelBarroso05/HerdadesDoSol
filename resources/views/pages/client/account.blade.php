@@ -2,13 +2,7 @@
 @section('content')
     @include('layouts.navbars.guest.navbar')
     <style>
-        body {
-            background: linear-gradient(rgba(228, 229, 218, 0.8), rgba(228, 229, 218, 0.8)),
-            url('../../imgs/pages/home_banner.png');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-        }
+        
 
 
         .hs-sidebar {

@@ -3,6 +3,7 @@
 namespace App\Models\accommodation;
 
 use App\Models\Estate;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -25,5 +26,9 @@ class Accommodation extends Model
     public function estate()
     {
         return $this->belongsTo(Estate::class);
+    }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

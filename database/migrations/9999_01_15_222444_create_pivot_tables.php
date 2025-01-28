@@ -11,6 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('reservation_activities', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('reservation_id')->constrained();
+            $table->foreignId('activity_id')->constrained();
+            $table->timestamps();
+        });
         //Users pivot tables
         Schema::create('users_addresses', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');

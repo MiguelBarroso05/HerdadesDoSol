@@ -48,12 +48,12 @@
                             wire:click="selectDate('{{ $day['date']->format('Y-m-d') }}')"
                             class="relative p-3 h-24 border-b border-r border-gray-200 cursor-pointer transition-colors
                                     {{ $day['isCurrentMonth'] ? 'bg-white' : 'bg-gray-50 text-gray-400' }}
-                                    {{ $isStart || $isEnd ? '!bg-blue-600 !text-white' : '' }}
-                                   {{ $isInRange && !$isStart && !$isEnd ? '!bg-blue-50' : '' }}
-                                   {{ $isSelected && !$isStart && !$isEnd ? '!bg-blue-100' : '' }}
+                                    {{ $isStart || $isEnd ? '!bg-orange-300 !text-white' : '' }}
+                                   {{ $isInRange && !$isStart && !$isEnd ? '!bg-orange-200' : '' }}
+                                   {{ $isSelected && !$isStart && !$isEnd ? '!bg-orange-200' : '' }}
                                    hover:bg-blue-200">
                             <div class="flex items-center justify-center">
-                                <span class="text-sm {{ $day['isToday'] ? 'font-bold !text-blue-600' : '' }}">
+                                <span class="text-sm {{ $day['isToday'] ? 'font-bold !text-orange-400' : '' }}">
                                     {{ $day['date']->day }}
                                 </span>
                             </div>

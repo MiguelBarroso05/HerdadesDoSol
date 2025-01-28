@@ -12,6 +12,7 @@ use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\login\RegisterController;
 use App\Http\Controllers\login\ResetPassword;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\UserProfileController;
 use App\Models\accommodation\Accommodation;
@@ -74,6 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/reviews', function () { return view('client.reviews');})->name('reviews');
     Route::get('/support', function () { return view('client.support');})->name('support');
     Route::get('/reservations', function () { return view('pages.reservations.create');})->name('client-create-reservations');
+
+    Route::post('/create-reservation', [ReservationController::class, 'create'])->name('reservation.create');
 
     #Routes Address
     Route::put('/users/{user}/storeAddress', [UserController::class, 'storeAddress'])->name('users.storeAddress');

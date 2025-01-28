@@ -3,6 +3,7 @@
 namespace App\Models\activity;
 
 use App\Models\Estate;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,5 +28,9 @@ class Activity extends Model
     public function estate()
     {
         return $this->belongsTo(Estate::class, 'estate_id');
+    }
+    public function reservations()
+    {
+        return $this->belongsToMany(Reservation::class, 'reservation_activities', 'activity_id', 'reservation_id');
     }
 }
