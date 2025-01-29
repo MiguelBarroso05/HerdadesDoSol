@@ -15,6 +15,9 @@ class NumberInput extends Component
     }
     public function increase()
     {
+        if ($this->value == 8) {
+            return;
+        }
         $this->value++;
         $event = [
             'name' => $this->name,	
@@ -25,13 +28,16 @@ class NumberInput extends Component
 
     public function decrease()
     {
-        if ($this->value > 0) {
+        if ($this->value == 0) {
+            return;
+        }
+       
             $this->value--;
             $event = [
                 'name' => $this->name,	
                 'value' => $this->value,
             ];
             $this->dispatch('valueUpdated', $event); 
-        }
+        
     }
 }

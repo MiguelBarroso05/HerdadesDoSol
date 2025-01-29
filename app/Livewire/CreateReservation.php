@@ -40,7 +40,7 @@ class CreateReservation extends Component
         if ($event['name'] == 'children') {
             $this->children = $event['value'];
         }
-        $this->show_activities();
+        $this->loadData();
     }
 
     public function show_accommodations_types()
@@ -107,7 +107,7 @@ class CreateReservation extends Component
             $data = [
                 'estate' => $this->selectedEstateId ?? $this->favEstate,
                 'accommodation_type' => $this->selectedAccommodationTypeId,
-                'accommodation' => $this->aselectedAccommodation ?? $this->accommodations->first()->id, // Se estiver selecionado
+                'accommodation' => $this->selectedAccommodation ?? $this->accommodations ? $this->accommodations->first()->id : null, 
                 'group_size' => $this->groupsize,
                 'children' => $this->children,
                 'entry_date' => Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d'),
@@ -164,7 +164,7 @@ class CreateReservation extends Component
 
     public function loadData()
     {
-        if ($this->entryDate == null || $this->exitDate == null) {
+        if ($this->entryDate == null || $this->exitDate == null || $this->selectedEstateId == null) {
             return;
         }
         $this->show_accommodations_types();
@@ -184,7 +184,6 @@ class CreateReservation extends Component
     }
     public function show_activities()
     {
-
         $tempEntryDate = Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d');
         $tempExitDate = Carbon::createFromFormat('d/m/Y', $this->exitDate)->format('Y-m-d');
         $this->dispatch('show-activities', ['entryDate' => $tempEntryDate, 'exitDate' => $tempExitDate, 'groupSize' => $this->groupsize, 'children' => $this->children, 'estate' => $this->selectedEstateId ?? $this->favEstate]);

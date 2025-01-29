@@ -1,4 +1,4 @@
- <div id="" name="{{$name}}" class="py-2 px-3 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
+ <div id="" name="{{$name}}" class="hs-d-flex hs-form-control py-2 px-3 bg-white border border-gray-200 rounded-lg dark:bg-neutral-900 dark:border-neutral-700"
      data-hs-input-number="">
      <div class="w-full flex justify-between items-center gap-x-5">
          <div class="flex justify-start items-center gap-x-1.5">

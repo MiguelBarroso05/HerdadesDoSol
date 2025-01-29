@@ -1,5 +1,5 @@
-<section class="relative py-8 sm:p-8">
-    <div class="w-full max-w-7xl mx-auto px-4 lg:px-8 xl:px-14">
+<section class="relative pb-8 ">
+    <div class="w-full max-w-7xl mx-auto px-7">
         <div class="flex items-center justify-between gap-3 mb-5">
             <div class="flex items-center gap-4">
                 <h5 class="text-xl leading-8 font-semibold text-gray-900">{{ $monthName }}</h5>
@@ -42,18 +42,21 @@
                                 $day['date']->between($selectedEntryDate, $selectedExitDate);
                             $isStart = $tempStartDate?->isSameDay($day['date']);
                             $isEnd = $selectedExitDate?->isSameDay($day['date']);
+                            $itPassed = $day['date']->isPast() ;
                         @endphp
 
                         <div id="{{ $day['date']->format('Y-m-d') }}"
+                            @if ( !$itPassed || $day['isToday'])
                             wire:click="selectDate('{{ $day['date']->format('Y-m-d') }}')"
+                            @endif
                             class="relative p-3 h-24 border-b border-r border-gray-200 cursor-pointer transition-colors
                                     {{ $day['isCurrentMonth'] ? 'bg-white' : 'bg-gray-50 text-gray-400' }}
                                     {{ $isStart || $isEnd ? '!bg-primary !text-white' : '' }}
                                    {{ $isInRange && !$isStart && !$isEnd ? '!bg-sec' : '' }}
                                    {{ $isSelected && !$isStart && !$isEnd ? '!bg-sec' : '' }}
-                                   hover:bg-sec">
+                                   {{ $itPassed && !$day['isToday']  ? '!bg-gray-100 !text-gray-400' : 'hover:bg-sec ' }}">
                             <div class="flex items-center justify-center">
-                                <span class="text-sm {{ $day['isToday'] ? 'font-bold !text-orange-400' : '' }}">
+                                <span class="text-sm {{ $day['isToday'] ? 'font-bold !text-orange-400' : '' }}  {{ $itPassed && !$day['isToday']  ? ' !text-gray-400' : '' }}">
                                     {{ $day['date']->day }}
                                 </span>
                             </div>

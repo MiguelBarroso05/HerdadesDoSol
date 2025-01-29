@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('img')->nullable();
             $table->date('date');
+            $table->time('time');
+            $table->integer('duration');
             $table->decimal('price', 8, 2);
             $table->integer('max_participants');
             $table->integer('participants');
