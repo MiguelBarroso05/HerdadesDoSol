@@ -2,7 +2,7 @@
 @section('content')
     @include('layouts.navbars.guest.navbar')
     <style>
-        
+
 
 
         .hs-sidebar {
@@ -57,7 +57,7 @@
                                         <div class="hs-row">
                                             <div class="hs-col-md-7">
                                                 <p><strong class="hs-pe-2">Name:</strong>
-                                                    {{limit_word(auth()->user()->firstname . ' ' . auth()->user()->lastname, 30)}}
+                                                    {{limit_word(auth()->user()->firstname . ' ' . auth()->user()->lastname, 40, true)}}
                                                 </p>
                                             </div>
                                             <div class="hs-col-md-5">
@@ -79,14 +79,14 @@
                                         <div class="hs-row">
                                             <div class="hs-col-md-12">
                                                 <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
-                                                    {{ auth()->user()->email }}
+                                                    {{  limit_word(auth()->user()->email, 50, false)  }}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="hs-col-md-3">
                                         <img
-                                            src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('/imgs/users/no-image.png') }}"
+                                            src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
                                             alt="" class="hs-img-fluid hs-rounded-3 justify-self-end" style="width: 120px;">
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                             </div>
                                             <div class="hs-col-md-7">
                                                 <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                    >Address:</strong>{{auth()->user()->addresses()->first()->street}}
+                                                    >Address:</strong>{{ limit_word(auth()->user()->addresses()->first()->street, 35, false) }}
                                                 </p>
                                             </div>
                                         </div>

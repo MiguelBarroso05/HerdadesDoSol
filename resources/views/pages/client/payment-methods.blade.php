@@ -138,10 +138,10 @@
                                 <div>
                                     <div class="hs-row">
                                         <div class="hs-col-md-6">
-                                            <p><strong>Name: </strong> {{$userBillingInfo->name}}</p>
+                                            <p><strong>Name: </strong> {{ limit_word($userBillingInfo->name, 30, true) }}</p>
                                         </div>
                                         <div class="hs-col-md-4">
-                                            <p><strong>NIF: </strong> {{$userBillingInfo->nif ?? 'none'}}</p>
+                                            <p><strong>NIF: </strong> {){$userBillingInfo->nif ?? 'none'}}</p>
                                         </div>
                                     </div>
                                     <div class="hs-row">

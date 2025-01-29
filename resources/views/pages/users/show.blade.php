@@ -11,7 +11,7 @@
                     <!-- User profile image -->
                     <div class="hs-col-auto">
                         <div class="hs-avatar hs-avatar-xl hs-position-relative">
-                            <img src="{{ $user->img ? asset('storage/'.$user->img) : asset('/imgs/users/no-image.png') }}"
+                            <img src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
                                  alt="profile_image" class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
                         </div>
                     </div>

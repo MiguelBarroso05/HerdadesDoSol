@@ -53,14 +53,36 @@ class UserController extends Controller
             'nif' => 'nullable|digits:9',
             'birthdate' => 'nullable|date',
             'phone' => 'nullable|string|max:15',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
         ]);
 
         $user = $request->user();
         $user->update($validated);
 
+        if ($request->hasFile('img')) {
+            $img = $request->file('img');
+            $filename = $user->id . '_' . $user->firstname . '_' . $user->lastname . '.' . $img->getClientOriginalExtension();
+            $path = $img->storeAs('users', $filename, 'public');
+
+            $user->img = $path;
+            $user->save();
+        }
+
+
         return response()->json([
             'message' => 'User updated successfully.',
             'user' => $user,
         ]);
+    }
+
+    public function getUserData(Request $request)
+    {
+        $user = $request->user();
+
+        if ($user->img && !str_contains($user->img, 'http')) {
+            $user->img = asset("storage/{$user->img}") . '?t=' . $user->updated_at->timestamp;
+        }
+
+        return response()->json(['user' => $user]);
     }
 }

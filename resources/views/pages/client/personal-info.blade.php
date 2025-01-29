@@ -45,7 +45,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
-                                        {{ auth()->user()->firstname . ' ' . auth()->user()->lastname }}
+                                        {{ limit_word(auth()->user()->firstname . ' ' . auth()->user()->lastname, 30, true) }}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-4">
@@ -62,7 +62,7 @@
                             <div class="hs-row">
                                 <div class="hs-col-md-4">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Nationality:</strong>
-                                        {{ auth()->user()->nationality }}
+                                        {{ limit_word(auth()->user()->nationality, 16, true) }}
                                     </p>
                                 </div>
                                 <div class="hs-col-md-4">
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="hs-col-md-8">
                                     <p class="hs-d-flex"><strong class="hs-pe-2">Email:</strong>
-                                        {{ auth()->user()->email }}
+                                        {{ limit_word(auth()->user()->email, 50, false) }}
                                     </p>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="hs-col-md-3 hs-text-end">
                             <img
-                                src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
                                 alt="" class="hs-img-fluid hs-rounded-3" style="width: 200px">
                         </div>
                     </div>

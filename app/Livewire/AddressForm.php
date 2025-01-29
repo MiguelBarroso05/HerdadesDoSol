@@ -15,6 +15,7 @@ class AddressForm extends Component
 {
     public $addressIdentifier;
     public $addressPhone;
+
     public $address = [
         'country' => '',
         'city' => '',
@@ -25,11 +26,13 @@ class AddressForm extends Component
     public $user;
     public $modalIdName;
     public $redirectUrl;
+    public $lastOrder;
 
     public function mount(User $user, $modalIdName)
     {
         $this->user = $user;
         $this->modalIdName = $modalIdName;
+        $this->lastOrder = $this->user->addresses()->orderByPivot('order', 'desc')->first()->pivot->order ?? 0;
     }
 
     public function submit()
@@ -49,6 +52,8 @@ class AddressForm extends Component
                 'address' => $this->address,
             ];
 
+
+
             $existentAddress = Address::where('country', $validated['address']['country'])
                 ->where('city', $validated['address']['city'])
                 ->where('street', $validated['address']['street'])
@@ -59,12 +64,14 @@ class AddressForm extends Component
                 if ($this->user->addresses()->where('address_id', $existentAddress->id)->exists()) {
                     $this->user->addresses()->updateExistingPivot($existentAddress->id, [
                         'addressPhone' => $validated['addressPhone'],
-                        'addressIdentifier' => $validated['addressIdentifier']
+                        'addressIdentifier' => $validated['addressIdentifier'],
+                        'order' => $this->lastOrder + 1,
                     ]);
                 } else {
                     $this->user->addresses()->attach($existentAddress->id, [
                         'addressPhone' => $validated['addressPhone'],
                         'addressIdentifier' => $validated['addressIdentifier'],
+                        'order' => $this->lastOrder + 1,
                     ]);
                 }
             } else {
@@ -74,6 +81,7 @@ class AddressForm extends Component
                 $this->user->addresses()->attach($newAddressId, [
                     'addressPhone' => $validated['addressPhone'],
                     'addressIdentifier' => $validated['addressIdentifier'],
+                    'order' => $this->lastOrder + 1,
                 ]);
             }
 

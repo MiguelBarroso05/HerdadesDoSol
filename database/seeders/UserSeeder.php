@@ -42,6 +42,7 @@ class UserSeeder extends Seeder
         User::find(2)->addresses()->attach(Address::first()->id, [
             'addressPhone' => '936039048',
             'addressIdentifier' => 'Home',
+            'order' => 1
         ]);
         User::factory(5)->create();
 

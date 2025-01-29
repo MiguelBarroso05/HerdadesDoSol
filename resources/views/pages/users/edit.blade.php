@@ -16,7 +16,7 @@
                                 <div class="hs-avatar hs-avatar-xl hs-position-relative">
                                     <!-- Display user image or a default image if not available -->
                                     <img
-                                        src="{{ $user->img ? asset('storage/'.$user->img) : asset('/imgs/users/no-image.png') }}"
+                                        src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
                                         alt="profile_image" class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
                                 </div>
                             </div>

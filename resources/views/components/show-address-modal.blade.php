@@ -36,7 +36,7 @@
                             <p><strong>Zipcode:</strong> {{ $address->zipcode }}</p>
                         </div>
                         <div class="hs-col-md-6">
-                            <p><strong>Street:</strong> {{ $address->street }}</p>
+                            <p><strong>Street:</strong> {{ limit_word($address->street, 35, false) }}</p>
                         </div>
                     </div>
                 </div>
@@ -52,8 +52,7 @@
 
 <livewire:edit-address-form
     :user="auth()->user()"
-    :address="$address"
-    :redirectUrl="url()->current()"/>
+    :address="$address"/>
 @push('js')
     <script>
         document.getElementById('openDeletionModal{{$address->id}}').addEventListener('click', function () {

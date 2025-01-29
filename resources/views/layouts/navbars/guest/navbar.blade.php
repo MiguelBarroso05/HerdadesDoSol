@@ -57,12 +57,12 @@
                                     <x-slot name="trigger">
                                         <img class="hs-rounded-circle"
                                              style="width: 30px; height: 30px; object-fit: fill"
-                                             src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                             src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
                                              alt="Avatar">
                                     </x-slot>
                                     <x-dropdown.item class="hs-justify-content-between hs-mx-2">
                                         <p class="hs-m-0">
-                                            {{ limit_word(auth()->user()->firstname . " " . auth()->user()->lastname, 22)}}
+                                            {{ limit_word(auth()->user()->firstname . " " . auth()->user()->lastname, 22, true)}}
                                         </p>
                                         <p class="hs-m-0">
                                             {{ auth()->user()->balance . "$" }}

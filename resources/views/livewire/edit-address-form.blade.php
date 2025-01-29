@@ -19,7 +19,7 @@
                                 <div class="hs-form-group">
                                     <label for="addressIdentifier" class="hs-form-control-label">Identifier</label>
                                     <input
-                                        class="hs-form-control @error('address.addressIdentifier') hs-is-invalid @enderror"
+                                        class="hs-form-control @error('addressIdentifier') hs-is-invalid @enderror"
                                         type="text" wire:model.defer="addressIdentifier">
                                     @error('addressIdentifier')
                                     <div class="hs-invalid-feedback">{{ $message }}</div> @enderror

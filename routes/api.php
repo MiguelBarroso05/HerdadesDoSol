@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     #Routes User
+    Route::get('/user', [UserController::class, 'getUserData'])->name('api.user');
     Route::post('/edit', [UserController::class, 'edit'])->name('api.edit')->middleware('auth:sanctum');
     Route::post('/logout', [UserController::class, 'logout'])->name('api.logout')->middleware('auth:sanctum');
 });

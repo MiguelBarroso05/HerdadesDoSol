@@ -12,7 +12,7 @@
                     <div class="hs-col-auto">
                         <div class="hs-avatar hs-avatar-xl hs-position-relative">
                             <img
-                                src="{{ auth()->user()->img ? asset('storage/'.auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
                                 class="hs-w-100 hs-border-radius-lg hs-shadow-sm" alt="User image">
                         </div>
                     </div>

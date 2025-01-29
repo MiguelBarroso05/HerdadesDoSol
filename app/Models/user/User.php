@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function addresses(){
         return $this->belongsToMany(Address::class, 'users_addresses')
-            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite');
+            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite', 'order');
     }
 
     public function allergies(){
@@ -99,7 +99,8 @@ class User extends Authenticatable
         return DB::table('estates')->where('id', $this->fav_estate)->first()->name ?? null;
     }
 
-    public function limitParamter($paramter, $limit){
-        return \Illuminate\Support\Str::of($paramter)->limit($limit, preserveWords: true);
+    public function getImgAttribute($value)
+    {
+        return $value ? asset('storage/' . $value) : null;
     }
 }

@@ -14,7 +14,7 @@ class ShowAddresses extends Component
     public function mount($user)
     {
         $this->user = $user->load('addresses');
-        $this->addresses = $this->user->addresses;
+        $this->addresses = $this->user->addresses()->orderByPivot('order')->get();
     }
 
     public function toggleFavorite($addressId)

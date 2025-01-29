@@ -15,7 +15,7 @@
         <option value="{{ $country['name'] }}" data-hs-select-option='{
             "icon": "<img class=\"inline-block size-4 rounded-full\" src=\"{{ $country['flag'] }}\" />"}'
             {{ $user->nationality == $country['name'] ? 'selected' : '' }}>
-            {{ $country['name'] }}
+            {{ limit_word($country['name'], 16, true) }}
         </option>
     @endforeach
 </select>

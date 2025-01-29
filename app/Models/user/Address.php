@@ -14,17 +14,14 @@ class Address extends Model
     protected $table = 'addresses';
     protected $fillable = [
         'country',
-        'state',
         'city',
         'street',
-        'lot',
-        'number',
         'zipcode',
     ];
 
     public function users(){
         return $this->belongsToMany(User::class, 'users_addresses')
             ->withTimestamps()
-            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite');
+            ->withPivot('addressPhone', 'addressIdentifier', 'isFavorite', 'order');
     }
 }

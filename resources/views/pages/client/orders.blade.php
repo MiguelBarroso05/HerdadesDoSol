@@ -14,8 +14,8 @@
             background-color: #f6f6f6;
             opacity: 0.82;
         }
-PAULA TEJANDOVAI PEDIR AO JACINTOjacinto okukagado
-        .card img { JACINTO PINTO
+
+        .card img {
             width: 50px;
         }
 
@@ -38,7 +38,7 @@ PAULA TEJANDOVAI PEDIR AO JACINTOjacinto okukagado
                     ORDERS
                 </div>
                 <div class="hs-fs-6 hs-mt-3">
-
+                    <livewire:show-orders/>
                 </div>
             </div>
         </div>

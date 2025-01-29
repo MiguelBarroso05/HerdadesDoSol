@@ -11,30 +11,27 @@ use Livewire\Component;
 class EditAddressForm extends Component
 {
     public $user;
-    public $address = [
-        'country' => '',
-        'city' => '',
-        'street' => '',
-        'zipcode' => '',
-    ];
+    public $address;
     public $addressIdentifier;
     public $addressPhone;
     public $addressId;
-    public $redirectUrl;
+    public $addressOrder;
 
-    public function mount($user, $address, $redirectUrl)
+
+    public function mount(User $user, Address $address)
     {
         $this->user = $user;
+        $this->addressId = $this->address->id;
+        $this->addressIdentifier = $this->address->pivot->addressIdentifier;
+        $this->addressPhone = $this->address->pivot->addressPhone;
+        $this->addressOrder = $this->address->pivot->order ?? 1;
+
         $this->address = [
-            'country' => $address->country,
-            'city' => $address->city,
-            'street' => $address->street,
-            'zipcode' => $address->zipcode,
+            'country' => $this->address->country ?? '',
+            'city' => $this->address->city ?? '',
+            'street' => $this->address->street ?? '',
+            'zipcode' => $this->address->zipcode ?? '',
         ];
-        $this->addressId = $address->id;
-        $this->addressIdentifier = $address->pivot->addressIdentifier;
-        $this->addressPhone = $address->pivot->addressPhone;
-        $this->redirectUrl = $redirectUrl;
     }
 
     public function submit()
@@ -42,8 +39,8 @@ class EditAddressForm extends Component
         $request = new AddressRequest();
 
         $this->validate(
-            $request->rules(),      // Regras de validação
-            $request->messages()    // Mensagens personalizadas
+            $request->rules(),
+            $request->messages()
         );
 
         try {
@@ -52,6 +49,9 @@ class EditAddressForm extends Component
                 'addressPhone' => $this->addressPhone,
                 'address' => $this->address,
             ];
+
+            $currentPivot = $this->user->addresses()->where('address_id', $this->addressId)->first();
+            $currentOrder = $currentPivot->pivot->order ?? 1;
 
             // Verifique se o endereço já existe
             $existentAddress = DB::table('addresses')
@@ -67,17 +67,19 @@ class EditAddressForm extends Component
                 $this->user->addresses()->attach($existentAddress->id, [
                     'addressPhone' => $validated['addressPhone'],
                     'addressIdentifier' => $validated['addressIdentifier'],
+                    'order' => $currentOrder,
                 ]);
             } else {
                 $newAddressId = DB::table('addresses')->insertGetId($validated['address']);
                 $this->user->addresses()->attach($newAddressId, [
                     'addressPhone' => $validated['addressPhone'],
                     'addressIdentifier' => $validated['addressIdentifier'],
+                    'order' => $currentOrder,
                 ]);
             }
 
             session()->flash('success', 'Address successfully updated!');
-            return redirect()->to($this->redirectUrl);
+            return redirect()->to(route('personal-info'));
             $this->resetForm();
 
         } catch (\Exception $e) {

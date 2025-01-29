@@ -182,7 +182,7 @@
                         <div style="width: 390px; height: 395px;"
                              class="hs-d-flex hs-flex-column hs-justify-content-between hs-align-items-end">
                             <img
-                                src="{{ auth()->user()->img ? asset('storage/' . auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
                                 alt="" class="hs-img-fluid hs-rounded-3" style="width: 240px">
 
                             <!-- Profile Image Upload -->

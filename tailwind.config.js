@@ -24,6 +24,7 @@ export default {
             },
             colors: {
                 primary: '#FFBF65',
+                sec: '#fbebd6',
             },
         },
     },

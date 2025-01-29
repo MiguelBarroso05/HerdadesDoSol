@@ -62,7 +62,7 @@
                                                     <!-- User profile image -->
                                                     <div>
                                                         <img
-                                                            src="{{ $user->img ? asset('storage/'.$user->img) : asset('/imgs/users/no-image.png') }}"
+                                                            src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
                                                             class="hs-avatar hs-avatar-sm hs-me-3" alt="User image">
                                                     </div>
                                                     <!-- Username and email -->

@@ -23,9 +23,9 @@ class BillingRequest extends FormRequest
     {
         return [
             'personal-info' => [
-                'name' => ['required', 'string', 'max:255'],
-                'nif' => ['required'],
-                'email' => ['required', 'email:rfc,dns'],
+                'name' => ['required', 'string', 'max:40'],
+                'nif' => ['required', 'size:9'],
+                'email' => ['required', 'email:rfc,dns', 'max:255'],
                 'phone' => ['required', 'min:9'],
             ],
             'address-info' => [
@@ -43,12 +43,14 @@ class BillingRequest extends FormRequest
             // Messages for personal-info
             'personal-info.name.required' => 'The name is required.',
             'personal-info.name.string' => 'The name must be a valid name.',
-            'personal-info.name.max' => 'The name cannot exceed 255 characters.',
+            'personal-info.name.max' => 'The name cannot exceed 40 characters.',
 
             'personal-info.nif.required' => 'The NIF is required.',
+            'personal-info.nif.size' => 'The NIF must be 9 digits.',
 
             'personal-info.email.required' => 'The email is required.',
             'personal-info.email.email' => 'Please provide a valid email address.',
+            'personal-info.email.max' => 'The email cannot exceed 255 characters.',
 
             'personal-info.phone.required' => 'The phone number is required.',
             'personal-info.phone.min' => 'The phone number must be at least 9 characters long.',

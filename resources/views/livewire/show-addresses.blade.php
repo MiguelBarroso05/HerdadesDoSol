@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <span class="hs-d-flex"> {{ $address->zipcode }} </span>
-                    <span class="hs-d-flex"> {{ $address->street }} </span>
+                    <span class="hs-d-flex"> {{ limit_word($address->street, 35, false) }} </span>
                 </div>
             </div>
             @push('js')
