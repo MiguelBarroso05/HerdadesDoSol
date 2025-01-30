@@ -28,7 +28,6 @@ class BillingPersonalInfo extends Component
             'email' => $this->user->email,
         ]);
 
-
         return redirect()->route('payment-methods');
     }
 

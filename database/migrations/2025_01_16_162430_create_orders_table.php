@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users');
             $table->integer('status')->default(0);
             $table->decimal('price', 8, 2);
+            $table->unsignedBigInteger('estate_id')->constrained('estates');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -23,7 +24,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('billing_id');
-            $table->unsignedBigInteger('payment_id');
+            $table->unsignedBigInteger('payment_method_id');
             $table->date('payment_date');
             $table->softDeletes();
         });
@@ -41,6 +42,19 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('address_id')->references('id')->on('addresses');
         });
+
+        Schema::create('payment_methods', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('identifier')->nullable();
+            $table->string('name');
+            $table->string('number');
+            $table->string('cvv');
+            $table->string('validity');
+            $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -51,5 +65,6 @@ return new class extends Migration
         Schema::dropIfExists('orders');
         Schema::dropIfExists('invoices');
         Schema::dropIfExists('billings');
+        Schema::dropIfExists('payment_methods');
     }
 };

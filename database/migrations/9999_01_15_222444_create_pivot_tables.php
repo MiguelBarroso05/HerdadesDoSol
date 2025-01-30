@@ -66,9 +66,9 @@ return new class extends Migration
             $table->timestamps();
         });
         #Orders pivot
-        Schema::create('order_products', function (Blueprint $table) {
+        Schema::create('orders_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->constrained('orders');
+            $table->string('order_id')->constrained('orders');
             $table->unsignedBigInteger('product_id')->constrained('products');
             $table->integer('quantity');
             $table->timestamps();
@@ -76,10 +76,18 @@ return new class extends Migration
         });
         Schema::create('orders_accommodations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->constrained('orders');
+            $table->string('order_id')->constrained('orders');
             $table->unsignedBigInteger('accommodation_id')->constrained('accommodations');
             $table->date('date_in');
             $table->date('date_out');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+        Schema::create('orders_activities', function (Blueprint $table) {
+            $table->id();
+            $table->string('order_id')->constrained('orders');
+            $table->unsignedBigInteger('activity_id')->constrained('activities');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -105,5 +113,7 @@ return new class extends Migration
 
         //Orders pivot
         Schema::dropIfExists('order_products');
+        Schema::dropIfExists('order_accommodations');
+        Schema::dropIfExists('order_activities');
     }
 };

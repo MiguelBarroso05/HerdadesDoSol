@@ -29,6 +29,17 @@
             width: 100%;
             border-radius: 8px;
         }
+
+        .hs-text-black {
+            color: black;
+        }
+
+        .hs-box-icon {
+            color: #437546;
+            font-size: 23px;
+            -webkit-text-stroke: 2px;
+        }
+
     </style>
     <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <div class="hs-d-flex hs-justify-content-between">
@@ -37,9 +48,7 @@
                 <div class="hs-text-black hs-fs-5 hs-pb-1">
                     ORDERS
                 </div>
-                <div class="hs-fs-6 hs-mt-3">
-                    <livewire:show-orders/>
-                </div>
+                <livewire:show-orders/>
             </div>
         </div>
     </main>

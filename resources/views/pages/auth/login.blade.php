@@ -3,7 +3,6 @@
 @section('content')
     @include('layouts.navbars.guest.navbar')
     <div class="hs-d-flex">
-
         <main class="hs-main-content hs-flex-grow-1">
             <!-- Form container -->
             <section>

@@ -119,9 +119,12 @@
                         </div>
                     </div>
                     <div class="hs-border-custom-black hs-w-100"></div>
-                    <div class="hs-dashed-box hs-m-4 hs-rounded-3">
+                    <div class="hs-dashed-box hs-m-4 hs-rounded-3 hs-cursor-pointer"
+                         data-bs-toggle="modal"
+                         data-bs-target="#createPaymentMethodModal">
                         <i class="bi bi-plus-circle hs-box-icon"></i>
                     </div>
+
                 </div>
 
                 <div class="hs-p-4 hs-w-md-100">
@@ -141,7 +144,7 @@
                                             <p><strong>Name: </strong> {{ limit_word($userBillingInfo->name, 30, true) }}</p>
                                         </div>
                                         <div class="hs-col-md-4">
-                                            <p><strong>NIF: </strong> {){$userBillingInfo->nif ?? 'none'}}</p>
+                                            <p><strong>NIF: </strong> {{$userBillingInfo->nif ?? 'none'}}</p>
                                         </div>
                                     </div>
                                     <div class="hs-row">
@@ -224,6 +227,7 @@
                     </div>
                 </div>
             </div>
+            <livewire:create-payment-method-modal :modalIdName="'createPaymentMethodModal'" />
             <livewire:billing-new-personal-info-modal :modalIdName="'newPersonalInfoForm'" :user="auth()->user()"/>
             <livewire:billing-new-address-info-modal :modalIdName="'newAddressInfoForm'" :user="auth()->user()"/>
             <livewire:choose-existent-address :user="auth()->user()"/>

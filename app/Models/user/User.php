@@ -4,7 +4,9 @@ namespace App\Models\user;
 
 use App\Models\Allergy;
 use App\Models\Estate;
+use App\Models\Order;
 use App\Models\Preference;
+use App\Models\Billing;
 use Dotenv\Util\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -102,5 +104,23 @@ class User extends Authenticatable
     public function getImgAttribute($value)
     {
         return $value ? asset('storage/' . $value) : null;
+    }
+
+    public function billing()
+    {
+        return $this->hasOne(Billing::class);
+    }
+
+    public function bookingOrders()
+    {
+        return $this->hasMany(Order::class)
+            ->whereHas('accommodations')
+            ->orWhereHas('activities');
+    }
+
+    public function productOrders()
+    {
+        return $this->hasMany(Order::class)
+            ->whereHas('products');
     }
 }

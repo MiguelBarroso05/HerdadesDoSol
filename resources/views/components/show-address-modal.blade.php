@@ -30,7 +30,7 @@
                             <p><strong>Country:</strong> {{ $address->country }}</p>
                         </div>
                         <div class="hs-col-md-6">
-                            <p><strong>City:</strong> {{ $address->city }}</p>
+                            <p><strong>City:</strong> {{ limit_word($address->city, 35, false) }}</p>
                         </div>
                         <div class="hs-col-md-6">
                             <p><strong>Zipcode:</strong> {{ $address->zipcode }}</p>

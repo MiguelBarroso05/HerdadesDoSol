@@ -27,18 +27,27 @@ class AddressForm extends Component
     public $modalIdName;
     public $redirectUrl;
     public $lastOrder;
+    public $countries;
 
     public function mount(User $user, $modalIdName)
     {
         $this->user = $user;
         $this->modalIdName = $modalIdName;
         $this->lastOrder = $this->user->addresses()->orderByPivot('order', 'desc')->first()->pivot->order ?? 0;
+
+        try {
+            $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
+            $this->countries = $response->json();
+            $this->countries = Arr::sort($this->countries);
+
+        } catch (\Exception $e) {
+            $countries = ['Failed to retrieve countries'];
+        }
     }
 
     public function submit()
     {
         $request = new AddressRequest();
-
 
         $this->validate(
             $request->rules(),
@@ -51,8 +60,6 @@ class AddressForm extends Component
                 'addressPhone' => $this->addressPhone,
                 'address' => $this->address,
             ];
-
-
 
             $existentAddress = Address::where('country', $validated['address']['country'])
                 ->where('city', $validated['address']['city'])

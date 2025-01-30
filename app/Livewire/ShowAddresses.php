@@ -34,14 +34,9 @@ class ShowAddresses extends Component
                 $this->user->addresses()->updateExistingPivot($addressId, ['isFavorite' => true]);
             }
         }
-        $this->addresses = $this->user->fresh()->addresses;
-
-        $this->dispatch('updateFavorite');
+        $this->addresses = $this->user->fresh()->addresses()->orderByPivot('order')->get();
     }
 
-    public function updateFavorite(){
-        $this->addresses = $this->user->fresh()->addresses;
-    }
 
     public function render()
     {

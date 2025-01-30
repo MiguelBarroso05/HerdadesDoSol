@@ -22,7 +22,7 @@
                             </span>
                         </div>
                     </div>
-                    <span class="hs-d-flex"> {{ $address->city }} </span>
+                    <span class="hs-d-flex"> {{ limit_word($address->city, 35, false) }} </span>
                 </div>
                 <div>
                     <span class="hs-d-flex"> {{ $address->zipcode }} </span>

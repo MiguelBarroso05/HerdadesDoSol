@@ -3,8 +3,6 @@
     @include('layouts.navbars.guest.navbar')
     <style>
 
-
-
         .hs-sidebar {
             display: flex;
             flex-direction: column;

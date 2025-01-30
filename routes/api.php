@@ -12,10 +12,14 @@ Route::post('/register', [UserController::class, 'register'])->name('api.registe
 
 #Routes Auth
 Route::middleware('auth:sanctum')->group(function () {
-
-
     #Routes User
     Route::get('/user', [UserController::class, 'getUserData'])->name('api.user');
     Route::post('/edit', [UserController::class, 'edit'])->name('api.edit')->middleware('auth:sanctum');
     Route::post('/logout', [UserController::class, 'logout'])->name('api.logout')->middleware('auth:sanctum');
+
+    #Routes User billing information
+    Route::get('/billing', [UserController::class, 'getBillingInfo'])->name('api.billing.get');
+    Route::post('/billing/update', [UserController::class, 'updateBillingInfo'])->name('api.billing.update');
+    Route::post('/billing/address/update', [UserController::class, 'updateBillingAddress'])->name('api.billing.address.update');
+
 });

@@ -5,7 +5,9 @@ namespace App\Livewire;
 use App\Http\Requests\AddressRequest;
 use App\Models\user\Address;
 use App\Models\user\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class EditAddressForm extends Component
@@ -16,9 +18,10 @@ class EditAddressForm extends Component
     public $addressPhone;
     public $addressId;
     public $addressOrder;
+    public $countries;
 
 
-    public function mount(User $user, Address $address)
+    public function mount(User $user)
     {
         $this->user = $user;
         $this->addressId = $this->address->id;
@@ -32,6 +35,15 @@ class EditAddressForm extends Component
             'street' => $this->address->street ?? '',
             'zipcode' => $this->address->zipcode ?? '',
         ];
+
+        try {
+            $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
+            $this->countries = $response->json();
+            $this->countries = Arr::sort($this->countries);
+
+        } catch (\Exception $e) {
+            $countries = ['Failed to retrieve countries'];
+        }
     }
 
     public function submit()

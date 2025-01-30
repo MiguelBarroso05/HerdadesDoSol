@@ -79,10 +79,89 @@ class UserController extends Controller
     {
         $user = $request->user();
 
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         if ($user->img && !str_contains($user->img, 'http')) {
             $user->img = asset("storage/{$user->img}") . '?t=' . $user->updated_at->timestamp;
         }
 
         return response()->json(['user' => $user]);
+    }
+
+    public function getBillingInfo(Request $request)
+    {
+        $user = $request->user();
+        $billing = $user->billing()->with('address')->first();
+
+        if ($billing) {
+            $isBillingEmpty = is_null($billing->name) && is_null($billing->phone) && is_null($billing->nif) && is_null($billing->email);
+
+            return response()->json([
+                'billing' => $isBillingEmpty ? null : $billing,
+                'address' => $billing->address ?? null,
+            ]);
+        }
+
+        return response()->json([
+            'billing' => null,
+            'address' => null,
+        ]);
+    }
+
+    public function updateBillingInfo(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'nif' => 'nullable|string|size:9',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:15',
+        ]);
+
+        $user = $request->user();
+        $billing = $user->billing()->firstOrCreate([]);
+
+        $billing->update([
+            'name' => $validated['name'],
+            'nif' => $validated['nif'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+        ]);
+
+        return response()->json([
+            'message' => 'Billing information updated successfully!',
+            'billing' => $billing->load('address'),
+        ]);
+    }
+
+    public function updateBillingAddress(Request $request)
+    {
+        $validated = $request->validate([
+            'country' => 'required|string|max:100',
+            'city' => 'required|string|max:100',
+            'street' => 'required|string|max:255',
+            'zipcode' => 'required|string|max:20',
+        ]);
+
+        $user = $request->user();
+        $billing = $user->billing()->firstOrCreate([]);
+
+        $address = $billing->address()->updateOrCreate(
+            ['id' => $billing->address_id],
+            [
+                'country' => $validated['country'],
+                'city' => $validated['city'],
+                'street' => $validated['street'],
+                'zipcode' => $validated['zipcode'],
+            ]
+        );
+
+        $billing->update(['address_id' => $address->id]);
+
+        return response()->json([
+            'message' => 'Billing address updated successfully!',
+            'address' => $address,
+        ]);
     }
 }
