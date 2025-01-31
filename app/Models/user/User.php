@@ -114,8 +114,7 @@ class User extends Authenticatable
     public function bookingOrders()
     {
         return $this->hasMany(Order::class)
-            ->whereHas('accommodations')
-            ->orWhereHas('activities');
+            ->whereHas('accommodation');
     }
 
     public function productOrders()

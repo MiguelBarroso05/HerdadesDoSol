@@ -42,7 +42,7 @@ class EditAddressForm extends Component
             $this->countries = Arr::sort($this->countries);
 
         } catch (\Exception $e) {
-            $countries = ['Failed to retrieve countries'];
+            $this->countries = ['Failed to retrieve countries'];
         }
     }
 

@@ -9,6 +9,7 @@ class ShowOrders extends Component
 {
     public $bookingOrders;
     public $orders;
+    public $expandedOrderId = null;
 
     public function mount(){
         $this->bookingOrders = true;
@@ -23,6 +24,11 @@ class ShowOrders extends Component
     public function showProductOrders(){
         $this->bookingOrders = false;
         $this->orders = auth()->user()->productOrders ?? null;
+    }
+
+    public function toggleOrderDetails($orderId)
+    {
+        $this->expandedOrderId = $this->expandedOrderId === $orderId ? null : $orderId;
     }
 
     public function render()

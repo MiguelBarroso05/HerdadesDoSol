@@ -84,12 +84,12 @@ class UserController extends Controller
     public function edit(User $user)
     {
         try {
-            $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
+            $response = Http::get('https://restcountries.c=name');
             $countries = $response->json();
             $countries = Arr::sort($countries);
 
         } catch (\Exception $e) {
-            $countries = ['Failed to retrieve countries'];
+            $countries = ['No countries loaded'];
         }
 
         $languages = DB::table('languages')->get();

@@ -11,17 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->constrained();
-            $table->unsignedBigInteger('estate_id')->constrained();
-            $table->unsignedBigInteger('accommodation_id')->constrained();
-            $table->date('entry_date');
-            $table->date('exit_date');
-            $table->integer('groupsize');
-            $table->integer('children');
-            $table->timestamps();
-        });
+
     }
 
     /**

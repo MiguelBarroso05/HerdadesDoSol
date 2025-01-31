@@ -22,6 +22,8 @@ class Reservation extends Model
         'children',
         'entry_date',
         'exit_date',
+        'price',
+        'status',
     ];
     public function create($request)
     {

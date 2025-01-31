@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservation_activities', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('reservation_id')->constrained();
             $table->foreignId('activity_id')->constrained();
             $table->timestamps();
+
+            $table->primary(['reservation_id', 'activity_id']);
         });
         //Users pivot tables
         Schema::create('users_addresses', function (Blueprint $table) {
@@ -53,43 +54,45 @@ return new class extends Migration
 
         //Sales pivot tables
         Schema::create('activity_sales', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('activity_id')->constrained('activities')->cascadeOnDelete();
             $table->foreignId('sales_id')->constrained('sales')->cascadeOnDelete();
             $table->timestamps();
+
+            $table->primary(['activity_id', 'sales_id']);
         });
 
         Schema::create('accommodation_sales', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('accommodations_id')->constrained('accommodations')->cascadeOnDelete();
             $table->foreignId('sales_id')->constrained('sales')->cascadeOnDelete();
             $table->timestamps();
+
+            $table->primary(['accommodations_id', 'sales_id']);
         });
         #Orders pivot
         Schema::create('orders_products', function (Blueprint $table) {
-            $table->id();
             $table->string('order_id')->constrained('orders');
             $table->unsignedBigInteger('product_id')->constrained('products');
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->primary(['order_id', 'product_id']);
         });
         Schema::create('orders_accommodations', function (Blueprint $table) {
-            $table->id();
             $table->string('order_id')->constrained('orders');
             $table->unsignedBigInteger('accommodation_id')->constrained('accommodations');
             $table->date('date_in');
             $table->date('date_out');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->primary(['order_id', 'accommodation_id']);
         });
-        Schema::create('orders_activities', function (Blueprint $table) {
-            $table->id();
-            $table->string('order_id')->constrained('orders');
+        Schema::create('orders_accommodations_activities', function (Blueprint $table) {
+            $table->unsignedBigInteger('orders_accommodations_id')->constrained('orders_accommodations');
             $table->unsignedBigInteger('activity_id')->constrained('activities');
-            $table->date('date');
-            $table->timestamps();
-            $table->softDeletes();
+
+            $table->primary(['orders_accommodations_id', 'activity_id']);
         });
     }
 

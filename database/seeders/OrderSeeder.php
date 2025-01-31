@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Billing;
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\OrderActivity;
 use App\Models\OrderProduct;
+use App\Models\PaymentMethod;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +19,30 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
+        PaymentMethod::create([
+            'user_id' => 2,
+            'identifier' => 'cartao1',
+            'type' => 'VISA',
+            'name' => 'Marco Candido',
+            'number' => '123412341234',
+            'last4' => '1234',
+            'validity' => '12/24'
+        ]);
+
+        Billing::create([
+            'user_id' => 2,
+            'address_id' => 1,
+            'name' => 'Marco Candido',
+            'nif' => '123412341',
+            'email' => 'marcocandido@gmail.com',
+            'phone' => '123123123'
+        ]);
+
+        Invoice::create([
+            'billing_id' => 1,
+            'payment_method_id' => 1,
+            'payment_date' => now()
+        ]);
 
         Order::create([
             'id' => "LSDMMSL11",
@@ -23,6 +50,7 @@ class OrderSeeder extends Seeder
             'status' => 0,
             'price' => 5,
             'estate_id' => 2,
+            'invoice_id' => 1,
         ]);
 
         Order::create([
@@ -31,6 +59,7 @@ class OrderSeeder extends Seeder
             'status' => 1,
             'price' => 5,
             'estate_id' => 2,
+            'invoice_id' => 1,
         ]);
 
         Order::create([
@@ -39,6 +68,7 @@ class OrderSeeder extends Seeder
             'status' => 2,
             'price' => 5,
             'estate_id' => 2,
+            'invoice_id' => 1,
         ]);
 
         Order::create([
@@ -47,6 +77,7 @@ class OrderSeeder extends Seeder
             'status' => 3,
             'price' => 5,
             'estate_id' => 2,
+            'invoice_id' => 1,
         ]);
 
         OrderProduct::create([

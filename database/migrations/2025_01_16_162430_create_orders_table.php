@@ -17,14 +17,30 @@ return new class extends Migration
             $table->integer('status')->default(0);
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('estate_id')->constrained('estates');
+            $table->unsignedBigInteger('invoice_id')->constrained('invoices');
             $table->timestamps();
             $table->softDeletes();
         });
 
+        Schema::create('reservations', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id')->constrained();
+            $table->unsignedBigInteger('estate_id')->constrained();
+            $table->unsignedBigInteger('accommodation_id')->constrained();
+            $table->date('entry_date');
+            $table->date('exit_date');
+            $table->integer('groupsize');
+            $table->integer('children');
+            $table->decimal('price', 8, 2);
+            $table->integer('status')->default(1);
+            $table->unsignedBigInteger('invoice_id')->constrained('invoices');
+            $table->timestamps();
+        });
+
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('billing_id');
-            $table->unsignedBigInteger('payment_method_id');
+            $table->unsignedBigInteger('billing_id')->constrained('billings');
+            $table->unsignedBigInteger('payment_method_id')->constrained('payment_methods');
             $table->date('payment_date');
             $table->softDeletes();
         });
@@ -47,9 +63,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('identifier')->nullable();
+            $table->string('type');
             $table->string('name');
             $table->string('number');
-            $table->string('cvv');
+            $table->string('last4');
             $table->string('validity');
             $table->softDeletes();
 

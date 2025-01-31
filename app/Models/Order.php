@@ -15,12 +15,14 @@ class Order extends Model
     use HasFactory, SoftDeletes;
 
     public $incrementing = false;
-    
+
     protected $keyType = 'string';
 
     protected $fillable = [
         'order_id',
         'user_id',
+        'estate_id',
+        'invoice_id',
         'status',
         'price'
     ];
@@ -30,11 +32,14 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function accommodations()
+    public function accommodation()
     {
-        return $this->belongsToMany(Accommodation::class, 'orders_accommodations');
+        return $this->belongsToMany(Accommodation::class, 'orders_accommodations', 'order_id', 'accommodation_id')
+            ->withPivot(['date_in', 'date_out', 'created_at', 'updated_at', 'deleted_at'])
+            ->withTimestamps();
     }
 
+    //Para eliminar depois
     public function activities()
     {
         return $this->belongsToMany(Activity::class, 'orders_activities');
@@ -48,5 +53,9 @@ class Order extends Model
     public function estate()
     {
         return $this->belongsTo(Estate::class, 'estate_id');
+    }
+
+    public function invoice(){
+        return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 }

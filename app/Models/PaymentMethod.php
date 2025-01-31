@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PaymentMethod extends Model
 {
     use SoftDeletes;
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',
