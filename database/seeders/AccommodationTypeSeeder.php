@@ -14,7 +14,7 @@ class AccommodationTypeSeeder extends Seeder
     public function run(): void
     {
         DB::table('accommodation_types')->insert([
-            ['name' => 'Tent', 'img' => 'accommodation_type/1_Tent.png', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Tent', 'img' => 'accommodation_type/1_Tent.jpg', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Bungalow', 'img' => 'accommodation_type/2_Bungalow.jpg', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Cabin', 'img' => 'accommodation_type/3_Cabin.png', 'created_at' => now(), 'updated_at' => now()],
         ]);

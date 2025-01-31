@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('products.index', compact('products'));
+        return view('pages.products.index', compact('products'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $estates = Estate::all();
-        return view('products.create', compact('categories', 'estates'));
+        return view('pages.products.create', compact('categories', 'estates'));
     }
 
     /**
@@ -64,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('pages.products.show', compact('product'));
     }
 
     /**
@@ -73,7 +73,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::all();
-        return view('products.edit', compact('product', 'categories'));
+        return view('pages.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -90,7 +90,7 @@ class ProductController extends Controller
         $product->fill($request->all());
         $this->storeimage($request, $product);
         $product->save();
-        return redirect()->route('products.index');
+        return redirect()->route('pages.products.index');
     }
 
     /**
@@ -99,6 +99,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index');
+        return redirect()->route('pages.products.index');
     }
 }

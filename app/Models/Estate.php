@@ -30,4 +30,7 @@ class Estate extends Model
     public function accommodations(){
         return $this->hasMany(Accommodation::class);
     }
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }
