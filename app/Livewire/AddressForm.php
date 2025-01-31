@@ -41,7 +41,7 @@ class AddressForm extends Component
             $this->countries = Arr::sort($this->countries);
 
         } catch (\Exception $e) {
-            $this->countries = ['No countries loaded'];
+            $this->countries = ['Failed to retrieve countries'];
         }
     }
 

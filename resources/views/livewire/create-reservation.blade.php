@@ -77,7 +77,7 @@
                </div>
            </div>
            <div class="bg-[#143633] hs-rounded-3 hs-w-30 hs-p-3" style="opacity: 0.82; min-width: 470px;">
-               <div class="relative @if (!$selectedEstateId || (!$user->fav_estate && !$entryDate && !$exitDate)) hs-d-none @endif">
+            <div class="relative {{ (($selectedEstateId || $user->fav_estate) && $entryDate && $exitDate) ? '' : 'hs-d-none' }}">
                    <div class="hs-form-group">
                        <label for="accommodation_types" class="hs-form-control-label text-white"> Accommodation
                            Type</label>

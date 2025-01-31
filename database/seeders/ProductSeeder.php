@@ -2,46 +2,46 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        DB::table('products')->insert([
-            [
-                'name' => 'Product 1',
-                'description' => 'Description for product 1',
-                'category_id' => 1,
-                'estate_id' => 2,
-                'price' => 100,
-                'stock' => 10
-            ]
-        ]);
-        DB::table('products')->insert([
-            [
-                'name' => 'Product 2',
-                'description' => 'Description for product 2',
-                'category_id' => 2,
-                'estate_id' => 1,
-                'price' => 200,
-                'stock' => 20
-            ]
-        ]);
-        DB::table('products')->insert([
-            [
-                'name' => 'Product 3',
-                'description' => 'Description for product 3',
-                'category_id' => 3,
-                'estate_id' => 3,
-                'price' => 300,
-                'stock' => 30
-            ]
-        ]);
+        // Criar categorias
+        $categories = [
+            'Wines & Beverages',
+            'Olive Oils & Preserves',
+            'Honey & Derivatives',
+            'Cork & Crafts',
+            'Natural Cosmetics',
+            'Decor & Lifestyle'
+        ];
+
+        foreach ($categories as $category) {
+            Category::firstOrCreate(['name' => $category]);
+        }
+
+        // Criar produtos com distribuição controlada
+        Product::factory()
+            ->count(100)
+            ->sequence(fn ($sequence) => [
+                'category_id' => $this->getCategoryId($sequence->index)
+            ])
+            ->create();
+    }
+
+    private function getCategoryId($index)
+    {
+        return match(true) {
+            $index < 25 => Category::where('name', 'Wines & Beverages')->first()->id,
+            $index < 45 => Category::where('name', 'Olive Oils & Preserves')->first()->id,
+            $index < 60 => Category::where('name', 'Honey & Derivatives')->first()->id,
+            $index < 75 => Category::where('name', 'Cork & Crafts')->first()->id,
+            $index < 90 => Category::where('name', 'Natural Cosmetics')->first()->id,
+            default => Category::where('name', 'Decor & Lifestyle')->first()->id,
+        };
     }
 }

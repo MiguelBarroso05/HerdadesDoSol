@@ -1,17 +1,8 @@
-<div>
-    @foreach($products as $product)
-        <div>
-            <h2>{{ $product->name }}</h2>
-            <p>{{ $product->description }}</p>
-            <p>{{ $product->category->name }}</p>
-            <p>{{ $product->price }}</p>
+@extends('layouts.app')
+@section('content')
+    @include('layouts.navbars.guest.navbar')
+    <main class="hs-d-flex hs-flex-grow-1 hs-mt-8 hs-px-9 hs-justify-content-center hs-mb-2">
 
-            <a href="{{ route('products.edit', $product) }}">Edit</a>
-            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit">Delete</button>
-            </form>
-        </div>
-    @endforeach
-</div>
+        <livewire:ProductList />
+    </main>
+@endsection

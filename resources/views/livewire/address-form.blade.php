@@ -43,7 +43,7 @@
                             <div class="hs-col-md-4">
                                 <div class="hs-form-group">
                                     <label for="country" class="hs-form-control-label">Country</label>
-                                    <x-address-country-select :user="auth()->user()" :countries="$countries" />
+                                    <x-address-country-select :user="auth()->user()" :countries='$countries'/>
                                 </div>
                             </div>
 
