@@ -23,7 +23,7 @@ return new class extends Migration
         });
 
         Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id')->constrained();
             $table->unsignedBigInteger('estate_id')->constrained();
             $table->unsignedBigInteger('accommodation_id')->constrained();
@@ -62,13 +62,14 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('identifier')->nullable();
+            $table->string('identifier')->default('card');
             $table->string('type');
             $table->string('name');
             $table->string('number');
             $table->string('last4');
             $table->string('validity');
-            $table->softDeletes();
+            $table->boolean('predefined')->default(false);
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -80,6 +81,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
+        Schema::dropIfExists('reservations');
         Schema::dropIfExists('invoices');
         Schema::dropIfExists('billings');
         Schema::dropIfExists('payment_methods');

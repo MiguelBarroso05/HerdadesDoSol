@@ -26,11 +26,6 @@
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-
-                                <!-- Image Template -->
-                                <div class="hs-col-md-4 hs-d-flex hs-justify-content-end hs-align-items-end">
-                                    <img src="{{asset('/imgs/pages/cvvIndicatorTemplate.png')}}" alt="">
-                                </div>
                             </div>
 
                             <div class="hs-row hs-d-flex hs-justify-content-between hs-mb-3">
@@ -47,19 +42,15 @@
                                     </div>
                                 </div>
 
-                                <!-- CVV Input -->
+                                <!-- Validity Input -->
                                 <div class="hs-col-md-4">
                                     <div class="form-group">
-                                        <label for="cvv" class="hs-form-control-label">CVV*</label>
+                                        <label for="validity" class="hs-form-control-label">Validity*</label>
                                         <input
-                                            class="hs-form-control @error('cvv') hs-is-invalid @enderror"
-                                            type="text" wire:model.defer="cvv"
-                                            placeholder="xxx"
-                                            oninput="this.value = this.value
-                                       .replace(/[^0-9]/g, '')
-                                       .replace(/(\d{2})(\d{1,2})?(\d{1,4})?/, (m, d, mth, y) =>
-                                           [d, mth, y].filter(Boolean).join('/'));">
-                                        @error('cvv')
+                                            class="hs-form-control @error('validity') hs-is-invalid @enderror"
+                                            type="text" wire:model.defer="validity"
+                                            placeholder="mm/YY">
+                                        @error('validity')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
@@ -73,21 +64,21 @@
                                         <input
                                             class="hs-form-control @error('number') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="number"
-                                            placeholder="xxxx-xxxx-xxxx-xxxx">
+                                            placeholder="xxxx xxxx xxxx">
                                         @error('number')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
 
-                                <!-- Identifier Input -->
+                                <!-- Last4 Input -->
                                 <div class="hs-col-md-4">
                                     <div class="form-group">
-                                        <label for="validationDate" class="hs-form-control-label">Validity*</label>
+                                        <label for="last4" class="hs-form-control-label">Last 4 digits*</label>
                                         <input
-                                            class="hs-form-control @error('validationDate') hs-is-invalid @enderror"
-                                            type="text" wire:model.defer="validationDate"
-                                            placeholder="mm/YY">
-                                        @error('validationDate')
+                                            class="hs-form-control @error('last4') hs-is-invalid @enderror"
+                                            type="text" wire:model.defer="last4"
+                                            placeholder="xxxx">
+                                        @error('last4')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>

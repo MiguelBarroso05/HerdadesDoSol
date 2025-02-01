@@ -5,6 +5,8 @@ namespace App\Livewire;
 use App\Http\Requests\BillingRequest;
 use App\Models\Billing;
 use App\Models\user\Address;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class BillingNewAddressInfoModal extends Component
@@ -15,7 +17,20 @@ class BillingNewAddressInfoModal extends Component
     public $city;
     public $zipcode;
     public $street;
+
+    public $countries;
     public $billingAddressId;
+
+    public function mount(){
+        try {
+            $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
+            $this->countries = $response->json();
+            $this->countries = Arr::sort($this->countries);
+
+        } catch (\Exception $e) {
+            $this->countries = ['Failed to retrieve countries'];
+        }
+    }
 
     public function submit()
     {

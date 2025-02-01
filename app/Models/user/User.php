@@ -5,8 +5,10 @@ namespace App\Models\user;
 use App\Models\Allergy;
 use App\Models\Estate;
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\Preference;
 use App\Models\Billing;
+use App\Models\Reservation;
 use Dotenv\Util\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -111,9 +113,13 @@ class User extends Authenticatable
         return $this->hasOne(Billing::class);
     }
 
+    public function paymentMethods(){
+        return $this->hasMany(PaymentMethod::class);
+    }
+
     public function bookingOrders()
     {
-        return $this->hasMany(Order::class)
+        return $this->hasMany(Reservation::class)
             ->whereHas('accommodation');
     }
 

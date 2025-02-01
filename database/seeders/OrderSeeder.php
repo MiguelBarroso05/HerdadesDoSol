@@ -62,24 +62,6 @@ class OrderSeeder extends Seeder
             'invoice_id' => 1,
         ]);
 
-        Order::create([
-            'id' => "BBBTRS45",
-            'user_id' => 2,
-            'status' => 2,
-            'price' => 5,
-            'estate_id' => 2,
-            'invoice_id' => 1,
-        ]);
-
-        Order::create([
-            'id' => "LLL45TSJA",
-            'user_id' => 2,
-            'status' => 3,
-            'price' => 5,
-            'estate_id' => 2,
-            'invoice_id' => 1,
-        ]);
-
         OrderProduct::create([
             'order_id' => "LSDMMSL11",
             'product_id' => 1,
@@ -92,16 +74,5 @@ class OrderSeeder extends Seeder
             'quantity' => 3,
         ]);
 
-        OrderActivity::create([
-            'order_id' => "BBBTRS45",
-            'activity_id' => 1,
-            'date' => now(),
-        ]);
-
-        OrderActivity::create([
-            'order_id' => "LLL45TSJA",
-            'activity_id' => 2,
-            'date' => now(),
-        ]);
     }
 }

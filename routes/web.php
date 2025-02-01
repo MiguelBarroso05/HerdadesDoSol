@@ -69,14 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('personal-info');
     Route::get('/personal-info/{user}', [UserController::class, 'edit'])->name('personal-info.edit');
     Route::put('/personal-info/{user}', [UserController::class, 'update'])->name('personal-info.update');
-    Route::get('/payment-methods', function () {
-        $userBillingInfo = Billing::where('user_id', auth()->id())->first();
-
-        if ($userBillingInfo && $userBillingInfo->address_id) {
-            $userBillingInfo->load('address');
-        }
-        return view('pages.client.payment-methods', compact('userBillingInfo'));
-    })->name('payment-methods');
+    Route::get('/payment-methods', function () { return view('pages.client.payment-methods');})->name('payment-methods');
     Route::get('/orders', function () { return view('pages.client.orders');})->name('orders');
     Route::get('/wishlist', function () { return view('pages.client.wishlist');})->name('wishlist');
     Route::get('/history', function () { return view('client.history');})->name('history');
