@@ -52,4 +52,10 @@ class Reservation extends Model
     {
         return $this->belongsTo(Accommodation::class);
     }
+
+    public function invoice(){
+        return $this->belongsTo(Invoice::class, 'invoice_id');
+    }
+
+
 }

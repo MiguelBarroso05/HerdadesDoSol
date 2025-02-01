@@ -20,10 +20,7 @@
                             <div class="hs-col-md-4">
                                 <div class="hs-form-group">
                                     <label for="country" class="hs-form-control-label">Country</label>
-                                    <input
-                                        class="hs-form-control @error('country') hs-is-invalid @enderror"
-                                        type="text" wire:model.defer="country"
-                                        placeholder="Name">
+                                    <x-address-country-select :user="auth()->user()" :countries='$countries'/>
                                     @error('country')
                                     <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                 </div>

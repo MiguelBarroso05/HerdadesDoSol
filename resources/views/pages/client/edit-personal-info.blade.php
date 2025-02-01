@@ -86,7 +86,7 @@
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="nationality" class="hs-form-control-label">Nationality</label>
-                                            <x-country-select :user="auth()->user()" :countries="$countries"
+                                            <x-country-select :user="auth()->user()" :countries='$countries'
                                                               :name="'nationality'"/>
                                             @error('nationality')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>

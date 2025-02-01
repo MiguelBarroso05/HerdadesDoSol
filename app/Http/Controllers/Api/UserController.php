@@ -12,43 +12,35 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
-        $validated = $request->validate([
-            'firstname'   => 'required|string|max:50',
-            'lastname'    => 'required|string|max:50',
-            'email'       => 'required|email|unique:users,email',
-            'password'    => [
-                'required',
-                'string',
-                'min:8',
-                'regex:/[A-Z]/',
-                'regex:/[a-z]/',
-                'regex:/[0-9]/',
-                'regex:/[\W]/',
-                'confirmed',
-            ],
-            'phone'       => 'nullable|string|regex:/^\+\d{8,14}$/',
-            'nif'         => 'nullable|digits:9|unique:users,nif',
-            'birthdate'   => 'required|date|before_or_equal:' . now()->subYears(18)->format('Y-m-d'),
-        ]);
+        try {
+            $validated = $request->validate([
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:8|confirmed',
+                'nif' => 'nullable|digits:9|unique:users,nif',
+                'birthdate' => 'required|date',
+                'phone' => 'nullable|string|max:15',
+            ]);
 
-        $user = User::create([
-            'firstname'   => $validated['firstname'],
-            'lastname'    => $validated['lastname'],
-            'email'       => $validated['email'],
-            'password'    => Hash::make($validated['password']),
-            'phone'       => $validated['phone'] ?? null,
-            'nif'         => $validated['nif'] ?? null,
-            'birthdate'   => $validated['birthdate'],
-        ]);
+            $user = User::create($validated);
 
-        $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'User registered successfully',
+                'user' => $user
+            ], 201);
 
-        return response()->json([
-            'message'      => 'User registered successfully!',
-            'access_token' => $token,
-            'token_type'   => 'Bearer',
-            'user'         => $user,
-        ], 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors()
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error creating user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

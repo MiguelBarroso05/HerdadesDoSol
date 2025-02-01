@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reservation_activities', function (Blueprint $table) {
-            $table->foreignId('reservation_id')->constrained();
-            $table->foreignId('activity_id')->constrained();
+            $table->uuid('reservation_id')->constrained('reservations');
+            $table->foreignId('activity_id')->constrained('activities');
             $table->timestamps();
 
             $table->primary(['reservation_id', 'activity_id']);
@@ -70,29 +70,13 @@ return new class extends Migration
         });
         #Orders pivot
         Schema::create('orders_products', function (Blueprint $table) {
-            $table->string('order_id')->constrained('orders');
+            $table->uuid('order_id')->constrained('orders');
             $table->unsignedBigInteger('product_id')->constrained('products');
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
 
             $table->primary(['order_id', 'product_id']);
-        });
-        Schema::create('orders_accommodations', function (Blueprint $table) {
-            $table->string('order_id')->constrained('orders');
-            $table->unsignedBigInteger('accommodation_id')->constrained('accommodations');
-            $table->date('date_in');
-            $table->date('date_out');
-            $table->timestamps();
-            $table->softDeletes();
-
-            $table->primary(['order_id', 'accommodation_id']);
-        });
-        Schema::create('orders_accommodations_activities', function (Blueprint $table) {
-            $table->unsignedBigInteger('orders_accommodations_id')->constrained('orders_accommodations');
-            $table->unsignedBigInteger('activity_id')->constrained('activities');
-
-            $table->primary(['orders_accommodations_id', 'activity_id']);
         });
     }
 

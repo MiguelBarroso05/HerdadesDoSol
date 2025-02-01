@@ -24,9 +24,24 @@ class PaymentMethodRequest extends FormRequest
         return [
             'identifier' => 'nullable|string|max:18',
             'name' => 'required|string|max:40',
-            'number' => 'required|numeric|regex:/^\d{4}-\d{4}-\d{4}-\d{4}$/',
-            'cvv' => 'required|numeric|size:3',
-            'validity' => 'required|date',
+            'number' => 'required|numeric',
+            'last4' => 'required|numeric|digits:4',
+            'validity' => 'required|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'identifier.max' => 'The identifier is too long.',
+            'identifier.required' => 'The identifier is required.',
+            'name.required' => 'The name is required.',
+            'name.max' => 'The name is too long.',
+            'number.required' => 'The number is required.',
+            'number.numeric' => 'The number must be a number.',
+            'validity.required' => 'The validity is required.',
+            'last4.required' => 'The last4 is required.',
+            'last4.size' => 'The last4 have to be 4.',
         ];
     }
 }

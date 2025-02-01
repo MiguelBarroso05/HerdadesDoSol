@@ -32,19 +32,6 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function accommodation()
-    {
-        return $this->belongsToMany(Accommodation::class, 'orders_accommodations', 'order_id', 'accommodation_id')
-            ->withPivot(['date_in', 'date_out', 'created_at', 'updated_at', 'deleted_at'])
-            ->withTimestamps();
-    }
-
-    //Para eliminar depois
-    public function activities()
-    {
-        return $this->belongsToMany(Activity::class, 'orders_activities');
-    }
-
     public function products()
     {
         return $this->belongsToMany(Product::class, 'orders_products');

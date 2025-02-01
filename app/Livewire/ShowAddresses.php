@@ -37,7 +37,6 @@ class ShowAddresses extends Component
         $this->addresses = $this->user->fresh()->addresses()->orderByPivot('order')->get();
     }
 
-
     public function render()
     {
         return view('livewire.show-addresses', [
