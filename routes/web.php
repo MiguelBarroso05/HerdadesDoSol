@@ -5,6 +5,7 @@ use App\Http\Controllers\accommodation\AccommodationTypeController;
 use App\Http\Controllers\activity\ActivityController;
 use App\Http\Controllers\activity\ActivityTypeController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\EstatesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\login\ChangePassword;
@@ -49,6 +50,13 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/cart/add/{id}/{quantity}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+    
+
     #Route Clients
     Route::resource('products', ProductController::class);
     Route::get('/client/accommodations', [AccommodationController::class, 'index'])->name('client.accommodations.index');

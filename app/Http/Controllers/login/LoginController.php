@@ -4,6 +4,7 @@ namespace App\Http\Controllers\login;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Renderable;
+use App\Models\Cart;
 use App\Models\user\User;
 use App\Notifications\WrongLoginAttempt;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -40,6 +41,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+            app(Cart::class)->merge();
 
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->intended('dashboard');
@@ -57,6 +59,23 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+        $userId = Auth::id();
+        $cart = session()->get('cart', []);
+
+        foreach ($cart as $productId => $item) {
+            Cart::create([
+                'user_id' => $userId,
+                'product_id' => $productId,
+                'quantity' => $item['quantity'],
+            ]);
+        }
+
+        // Limpar a variável de sessão do carrinho
+        session()->forget('cart');
+
         Auth::logout();
 
         $request->session()->invalidate();
@@ -114,5 +133,4 @@ class LoginController extends Controller
             ],
         ])->status(429);
     }
-
 }

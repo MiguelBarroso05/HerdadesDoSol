@@ -1,4 +1,5 @@
 <div class="hs-bg-card hs-p-4 hs-px-9 hs-rounded-3">
+    <h3>Products</h3>
     <div class="grid grid-cols-4 gap-8 ">
         @foreach ($products as $product)
             <a href="{{ route('products.show', $product->id) }}">

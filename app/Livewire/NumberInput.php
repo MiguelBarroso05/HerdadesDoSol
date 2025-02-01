@@ -8,6 +8,7 @@ class NumberInput extends Component
 {
     public $value = 1;
     public $name;
+    public $max;
     public function render()
     {
         return view('livewire.number-input', [
@@ -15,7 +16,7 @@ class NumberInput extends Component
     }
     public function increase()
     {
-        if ($this->value == 8) {
+        if ($this->value >= $this->max) {
             return;
         }
         $this->value++;

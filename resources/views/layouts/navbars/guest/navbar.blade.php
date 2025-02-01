@@ -45,10 +45,16 @@
                             </a>
                         </li>
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center hs-ps-4">
-                            <a href="" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0"
-                               style="font-size: 18px !important;">
-                                <i class="bi bi-cart3"></i>
-                            </a>
+                            
+                               <x-dropdown class="dropdown-auth" height="h-[300px]">
+                                <x-slot name="trigger">
+                                    <i class="bi bi-cart3"></i>
+                                </x-slot>
+                               
+                                    <livewire:CartComponent />
+                            
+                              
+                            </x-dropdown>
                         </li>
                         @auth()
                             <!-- User img with dropdown -->

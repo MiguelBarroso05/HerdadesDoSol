@@ -64,12 +64,12 @@
                    <div class="hs-w-15 hs-form-group">
                        <label class="hs-form-control-label" for="groupsize">Group Size</label>
                        <livewire:NumberInput class="hs-form-control" wire:model="groupsize" wire:change="loadData"
-                           :name="'groupsize'" :value="$groupsize" />
+                           :name="'groupsize'" :value="$groupsize" :max="8" />
                    </div>
                    <div class="hs-w-15 hs-form-group">
                        <label class="hs-form-control-label" for="children">Children</label>
                        <livewire:NumberInput class="hs-form-control" wire:model="children" wire:change="loadData"
-                           :name="'children'" :value="$children" />
+                           :name="'children'" :value="$children" :max="8" />
                    </div>
                </div>
                <div class=" hs-w-100">
