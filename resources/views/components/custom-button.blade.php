@@ -12,11 +12,7 @@
 
 <!-- Show Button -->
 @if($type == "show")
-    <a href="{{ $route }}"
-       class="hs-btn hs-btn-secondary hs-btn-sm hs-mr-2 hs-bg-gradient-info"
-       data-toggle="tooltip">
-        Show
-    </a>
+    <a href="{{ $route }}" class="hs-mx-2"><i class="bi bi-eye hs-fs-5" style="color: #2B6EFF"></i></a>
 @endif
 
 <!-- Edit Button -->
@@ -50,9 +46,13 @@
 <!-- Cancel Button -->
 @if($type == "cancel")
     <a href="{{ $route }}"
-       class="hs-btn hs-btn-sm hs-col-md-4" style="border: 1px solid #754343; background-color: #EAD2D2; width: 100px">
+       class="hs-btn hs-btn-sm hs-col-md-4" style="border: 1px solid #754343; background-color: #EAD2D2;">
         Cancel
     </a>
+@endif
+
+@if($type == "cancelIcon")
+    <a href="{{ $route }}" class="hs-mx-2"><i class="bi bi-x-lg hs-fs-5" style="color: black"></i></a>
 @endif
 
 @if($type == "close")
@@ -68,6 +68,31 @@
 
 @if($type == "viewMore" )
     <a href="{{ $route }}" class="hs-btn hs-btn-primary text-white">View More</a>
+@endif
+
+@if($type == "disable")
+    <form action="{{ $route }}"
+          method="POST">
+        @method('DELETE')
+        @csrf
+        <button type="submit"
+                class="bg-transparent"
+                data-toggle="tooltip" data-original-title="Disable user">
+            <i class="bi bi-person-x hs-fs-5" style="color: #df0505"></i>
+        </button>
+    </form>
+@endif
+
+@if($type == "enable")
+    <form action="{{ $route }}"
+          method="POST">
+        @csrf
+        <button type="submit"
+                class="bg-transparent"
+                data-toggle="tooltip" data-original-title="Activate user">
+            <i class="bi bi-person-up hs-fs-5" style="color: #22df05"></i>
+        </button>
+    </form>
 @endif
 
 

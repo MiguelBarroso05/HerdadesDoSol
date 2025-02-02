@@ -224,8 +224,7 @@ input.hs-form-control::placeholder {
 
 /*PaymentMethod Page*/
 .hs-card-selected {
-    border: 2px solid #2B6EFF;
-    background-color: #f0f4ff !important;
+    border: 2px solid #ffbf65;
 }
 .hs-card img {
     width: 50px;

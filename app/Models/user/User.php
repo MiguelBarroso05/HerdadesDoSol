@@ -2,23 +2,20 @@
 
 namespace App\Models\user;
 
-use App\Models\Allergy;
-use App\Models\Estate;
+use App\Models\Address;
+use App\Models\Billing;
 use App\Models\Order;
 use App\Models\PaymentMethod;
-use App\Models\Preference;
-use App\Models\Billing;
 use App\Models\Reservation;
-use Dotenv\Util\Str;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {

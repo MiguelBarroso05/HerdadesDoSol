@@ -3,13 +3,11 @@
 namespace App\Livewire;
 
 use App\Http\Requests\AddressRequest;
-use App\Models\user\Address;
+use App\Models\Address;
 use App\Models\user\User;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
-use Spatie\Permission\Models\Role;
 
 class AddressForm extends Component
 {

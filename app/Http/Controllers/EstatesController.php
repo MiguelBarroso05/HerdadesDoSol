@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\Estate;
-
-use App\Models\user\Address;
 use Illuminate\Http\Request;
 
 class EstatesController extends Controller

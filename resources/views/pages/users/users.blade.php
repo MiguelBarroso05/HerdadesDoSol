@@ -100,7 +100,7 @@
                                             </td>
 
                                             <!-- Action buttons -->
-                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
+                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly items-center min-h-[61px]">
                                                 <!-- Show User button -->
                                                 <x-custom-button type="show" route="{{ route('users.show', $user) }}"/>
 
@@ -110,27 +110,10 @@
                                                 <!-- Conditional: Disable or Activate User -->
                                                 @if(is_null($user->deleted_at))
                                                     <!-- Disable user -->
-                                                    <form action="{{ route('users.destroy', ['user' => $user]) }}"
-                                                          method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button type="submit"
-                                                                class="hs-btn hs-btn-secondary hs-btn-sm hs-bg-gradient-danger"
-                                                                data-toggle="tooltip" data-original-title="Disable user">
-                                                            Disable
-                                                        </button>
-                                                    </form>
+                                                    <x-custom-button type="disable" route="{{ route('users.destroy', ['user' => $user]) }}" />
                                                 @else
                                                     <!-- Activate user -->
-                                                    <form action="{{ route('users.recover', ['user' => $user]) }}"
-                                                          method="POST">
-                                                        @csrf
-                                                        <button type="submit"
-                                                                class="hs-btn hs-btn-secondary hs-btn-sm hs-bg-gradient-success"
-                                                                data-toggle="tooltip" data-original-title="Activate user">
-                                                            Activate
-                                                        </button>
-                                                    </form>
+                                                    <x-custom-button type="enable" route="{{ route('users.recover', ['user' => $user]) }}" />
                                                 @endif
                                             </td>
                                         </tr>

@@ -15,7 +15,7 @@
                         <div class="hs-row hs-justify-content-center">
                             <div class="hs-row hs-d-flex hs-justify-content-between hs-mb-3">
                                 <!-- Identifier Input -->
-                                <div class="hs-col-md-8">
+                                <div class="hs-col-md-7">
                                     <div class="form-group">
                                         <label for="identifier" class="hs-form-control-label">Identifier</label>
                                         <input
@@ -23,6 +23,16 @@
                                             type="text" wire:model.defer="identifier"
                                             placeholder="Name">
                                         @error('identifier')
+                                        <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <!-- Type Input -->
+                                <div class="hs-col-md-5">
+                                    <div class="form-group">
+                                        <label for="payment_method_type_id" class="hs-form-control-label">Type</label>
+                                        <x-payment-method-type-dropdown/>
+                                        @error('payment_method_type_id')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
@@ -48,8 +58,18 @@
                                         <label for="validity" class="hs-form-control-label">Validity*</label>
                                         <input
                                             class="hs-form-control @error('validity') hs-is-invalid @enderror"
-                                            type="text" wire:model.defer="validity"
-                                            placeholder="mm/YY">
+                                            type="text"
+                                            wire:model.defer="validity"
+                                            oninput="this.value = this.value
+                                            .replace(/[^0-9]/g, '')
+                                            .replace(/(\d{2})(\d{0,2})/, (match, mm, yy) => {
+                                                yy = yy.substring(0, 2);
+                                                return yy ? `${mm}/${yy}` : mm;
+                                            })
+                                            .substring(0, 5)"
+                                        placeholder="mm/YY"
+                                        maxlength="5"
+                                        >
                                         @error('validity')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>

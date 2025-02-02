@@ -48,7 +48,7 @@
                                         <!-- Update button -->
                                         <x-custom-button type="update" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('users.index') }}"/>
+                                        <x-custom-button type="cancelIcon" route="{{ route('users.index') }}"/>
                                     </div>
                                 </div>
                             </div>

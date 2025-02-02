@@ -21,37 +21,41 @@
                     </div>
                 @endif
                 @foreach($paymentMethods as $card)
-                    <div class="w-[240px] h-[94px] hs-rounded-3 hs-m-3 flex items-center bg-[#EEEEEE] hs-cursor-pointer
-             {{ $selectedCard && $selectedCard->id === $card->id ? 'hs-card-selected' : '' }}"
-                         wire:click="selectCard({{ $card->id }})">
-                        <div class="hs-col-md-5 px-2">
-                            <div
-                                class="w-[90px] h-[55px] bg-gradient-to-r from-orange-500 to-orange-700 text-white p-2 rounded shadow-lg flex flex-col justify-between">
-                                <span class="text-[5px] uppercase">{{$card->name}}</span>
-                                <img class="w-[15px] h-auto"
-                                     src="{{asset('/imgs/pages/creditCardChip.png')}}"
-                                     alt="creditCardChip"/>
-                                <div class="text-[5px]">
-                                    <span>**** **** **** {{$card->last4}}</span>
-                                </div>
-                                <div class="flex justify-between text-[5px]">
-                                    <span class="content-center">**/**</span>
-                                    @if($card->type == 'visa')
-                                        <img class="w-[20px] h-auto" src="{{asset('/imgs/pages/Visa.png')}}"
-                                             alt="visaLogo">
-                                    @else
-                                        <img class="w-[10px] h-auto"
-                                             src="{{asset('/imgs/pages/Mastercard.png')}}"
-                                             alt="mastercardLogo">
-                                    @endif
+                    <div
+                        class="w-[240px] h-[94px] hs-rounded-3 hs-m-3 flex flex-col justify-around place-self-center bg-[#EEEEEE] hs-cursor-pointer {{ $selectedCard && $selectedCard->id === $card->id ? 'hs-card-selected' : '' }}"
+                        wire:click="selectCard({{ $card->id }})">
+
+                        <div class="flex flex-row items-center w-full">
+                            <div class="hs-col-md-5 px-2">
+                                <div
+                                    class="w-[90px] h-[55px] bg-gradient-to-r from-orange-500 to-orange-700 text-white p-2 rounded shadow-lg flex flex-col justify-between">
+                                    <span class="text-[5px] uppercase">{{$card->name}}</span>
+                                    <img class="w-[15px] h-auto"
+                                         src="{{asset('/imgs/pages/creditCardChip.png')}}"
+                                         alt="creditCardChip"/>
+                                    <div class="text-[5px]">
+                                        <span>**** **** **** {{$card->last4}}</span>
+                                    </div>
+                                    <div class="flex justify-between text-[5px]">
+                                        <span class="content-center">**/**</span>
+                                        <img class="w-[15px] h-auto"
+                                             src="{{asset($card->type->img) ?? null}}"
+                                             alt="{{$card->type->name}}Logo">
+                                    </div>
                                 </div>
                             </div>
 
+                            <div class="hs-col-md-7 px-2">
+                                <p class="m-0 text-sm">{{ $card->identifier ?? 'Card' }}</p>
+                                <p class="m-0 text-xs">Card ending in {{ $card->last4 }}</p>
+                            </div>
                         </div>
-                        <div class="hs-col-md-7 px-2">
-                            <p class="m-0 text-sm">{{ $card->identifier }}</p>
-                            <p class="m-0 text-xs">Card ending in {{ $card->last4 }}</p>
-                        </div>
+
+                        @if($card->predefined == 1)
+                            <div class="hs-row w-full px-2 pb-1">
+                                <span class="text-xs font-bold">Predefined Payment Method <i class="bi bi-check"></i></span>
+                            </div>
+                        @endif
                     </div>
                 @endforeach
             </div>
@@ -155,7 +159,8 @@
                         <div class="flex justify-between">
                             <p>PAYMENT INFORMATION</p>
                             @if($selectedCard)
-                                <button class="cursor-pointer"  wire:click="deleteCard({{ $selectedCard->id }})" style="border: none; background-color: transparent">
+                                <button class="cursor-pointer" wire:click="deleteCard({{ $selectedCard->id }})"
+                                        style="border: none; background-color: transparent">
                                     <i class="bi bi-trash fs-5" style="color: red"></i>
                                 </button>
                             @endif
@@ -182,14 +187,9 @@
                                         </div>
                                         <div class="hs-col-md-6">
                                             <p class="flex"><strong>Method </strong>
-                                                @if($selectedCard->type == 'visa')
-                                                    <img class="w-[50px] h-auto" src="{{asset('/imgs/pages/Visa.png')}}"
-                                                         alt="visaLogo">
-                                                @else
-                                                    <img class="w-[45px] h-auto"
-                                                         src="{{asset('/imgs/pages/Mastercard.png')}}"
-                                                         alt="mastercardLogo">
-                                                @endif
+                                                <img class="w-[50px] h-auto"
+                                                     src="{{asset($selectedCard->type->img) ?? null}}"
+                                                     alt="{{$selectedCard->type->name}}Logo">
                                             </p>
                                         </div>
                                     </div>
@@ -223,14 +223,9 @@
                                             </div>
                                             <div class="flex justify-between text-sm">
                                                 <span class="content-center">**/**</span>
-                                                @if($selectedCard->type == 'visa')
-                                                    <img class="w-[70px] h-auto" src="{{asset('/imgs/pages/Visa.png')}}"
-                                                         alt="visaLogo">
-                                                @else
-                                                    <img class="w-[60px] h-auto"
-                                                         src="{{asset('/imgs/pages/Mastercard.png')}}"
-                                                         alt="mastercardLogo">
-                                                @endif
+                                                <img class="w-[70px] h-auto"
+                                                     src="{{asset($selectedCard->type->img) ?? null}}"
+                                                     alt="{{$selectedCard->type->name}}Logo">
                                             </div>
                                         </div>
                                     </div>
