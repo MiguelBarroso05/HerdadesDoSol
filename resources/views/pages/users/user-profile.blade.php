@@ -39,11 +39,11 @@
                             @csrf <!-- CSRF token for security -->
 
                             <!-- Form Header -->
-                            <div class="hs-card-header hs-pb-0">
-                                <div class="hs-d-flex hs-align-items-center">
+                            <div class="hs-card-header hs-pb-0 rounded-2xl">
+                                <div class="hs-d-flex hs-align-items-center justify-between">
                                     <p class="hs-mb-0">Edit Profile</p>
                                     <!-- Submit button -->
-                                    <button type="submit" class="hs-btn hs-btn-primary hs-btn-sm hs-ms-auto">Save</button>
+                                    <x-custom-button type="update" route="{{null}}" />
                                 </div>
                             </div>
 
@@ -94,7 +94,7 @@
                 <!-- Side Image Section -->
                 <div class="hs-col-md-4">
                     <div class="hs-card">
-                        <img src="{{ asset('imgs/pages/sign_in.jpg') }}" style="border-radius: 1rem; height: 400px">
+                        <img src="{{ asset('imgs/pages/sign_in.jpg') }}" style="border-radius: 1rem; height: 389.56px; width: auto; object-fit: cover">
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
             </div>
 
             <!-- Logout Button -->
-            <form method="post" action="{{ route('logout') }}" id="logout-form" class="hs-py-3 hs-px-3 top-nav-form">
+            <form method="post" action="{{ route('logout') }}" id="logout-form" class="hs-p-2 top-nav-form">
                 @csrf
                 <a href="{{ route('logout') }} " class="top-nav-form-color text-white"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

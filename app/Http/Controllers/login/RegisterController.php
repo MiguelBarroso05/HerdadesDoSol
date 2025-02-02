@@ -17,7 +17,13 @@ class RegisterController extends Controller
     {
         $attributes = request()->validate([
             'email' => 'required|email:rfc,dns|max:255|unique:users,email',
-            'password' => 'required|min:5|max:255|confirmed',
+            'password'  => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W]).{8,}$/',
+                'confirmed'
+            ],
             'firstname' => 'required|max:255|min:2',
             'lastname' => 'required|max:255|min:2',
             'birthdate' => 'required|date|before:18 years ago',

@@ -71,16 +71,19 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(int $id)
     {
+        $user = User::withTrashed()->findOrFail($id);
         return view('pages.users.show', ['user' => $user]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(int $id)
     {
+        $user = User::withTrashed()->findOrFail($id);
+
         try {
             $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
             $countries = $response->json();

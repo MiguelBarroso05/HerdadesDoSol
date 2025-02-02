@@ -69,7 +69,6 @@ return new class extends Migration
             $table->string('last4');
             $table->string('validity');
             $table->boolean('predefined')->default(false);
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
         });

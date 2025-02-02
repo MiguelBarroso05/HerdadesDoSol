@@ -95,4 +95,29 @@
     </form>
 @endif
 
+@if($type == "disableEstate")
+    <form action="{{ $route }}"
+          method="POST">
+        @method('DELETE')
+        @csrf
+        <button type="submit"
+                class="bg-transparent"
+                data-toggle="tooltip" data-original-title="Put Estate to maintenance">
+            <i class="bi bi-house-gear hs-fs-5" style="color: #df0505"></i>
+        </button>
+    </form>
+@endif
+
+@if($type == "enableEstate")
+    <form action="{{ $route }}"
+          method="POST">
+        @csrf
+        <button type="submit"
+                class="bg-transparent"
+                data-toggle="tooltip" data-original-title="Put Estate to work">
+            <i class="bi bi-house-check hs-fs-5" style="color: #2dce89"></i>
+        </button>
+    </form>
+@endif
+
 

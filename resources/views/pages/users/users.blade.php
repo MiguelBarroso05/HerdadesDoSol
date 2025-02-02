@@ -102,7 +102,7 @@
                                             <!-- Action buttons -->
                                             <td class="hs-align-middle hs-d-flex hs-justify-content-evenly items-center min-h-[61px]">
                                                 <!-- Show User button -->
-                                                <x-custom-button type="show" route="{{ route('users.show', $user) }}"/>
+                                                <x-custom-button type="show" route="{{ route('users.show', $user->id) }}"/>
 
                                                 <!-- Edit User button -->
                                                 <x-custom-button type="edit" route="{{ route('users.edit', $user) }}"/>

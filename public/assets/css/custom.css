@@ -172,6 +172,10 @@ input::placeholder {
 }
 
 /* Styles */
+.hs-badge{
+    color: white !important;
+}
+
 .custom-dropdown {
     appearance: none;
     background: url("https://cdn-icons-png.flaticon.com/512/60/60995.png")

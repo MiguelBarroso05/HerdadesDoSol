@@ -29,7 +29,6 @@ class PaymentMethodPage extends Component
 
     public function PredefinedCard($selectedCard)
     {
-
         $currentPredefinedCardId = auth()->user()->paymentMethods()->where('predefined', true)->first()?->id;
 
         if ($currentPredefinedCardId == $selectedCard) {

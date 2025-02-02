@@ -5,7 +5,7 @@ use App\Http\Controllers\accommodation\AccommodationTypeController;
 use App\Http\Controllers\activity\ActivityController;
 use App\Http\Controllers\activity\ActivityTypeController;
 use App\Http\Controllers\BillingController;
-use App\Http\Controllers\EstatesController;
+use App\Http\Controllers\EstateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\login\ChangePassword;
 use App\Http\Controllers\login\LoginController;
@@ -85,8 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/dashboard/sales_overview', [HomeController::class, 'salesOverview'])->name('sales.overview');
 
-        #Routes estates
-        Route::resource('estates', EstatesController::class);
+        #Routes Estates
+        Route::resource('estates', EstateController::class);
+        Route::post('/estates/{estate}/recover', [EstateController::class, 'recover'])->name('estates.recover');
 
         #Routes Users
         Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
@@ -101,5 +102,6 @@ Route::group(['middleware' => 'auth'], function () {
         #Routes Activities
         Route::resource('activities', ActivityController::class);
         Route::resource('activity_types', ActivityTypeController::class);
+
     });
 });
