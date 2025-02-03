@@ -2,24 +2,12 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'All estates'])
-
+    <x-custom-alert type="warning" :session="session('warning_estates')" />
+    <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
         <div class="hs-container-fluid hs-py-4">
             <div class="hs-row">
                 <div class="hs-col-12">
-                    <!-- Success Message -->
-                    @if(session('success'))
-                        <div id="success-alert" class="hs-alert hs-alert-success hs-alert-dismissible hs-fade hs-show " role="alert">
-                            <strong>Success!</strong> {{ session('success') }}
-                        </div>
-                    @endif
-
-                    @if(session('warning_estates'))
-                        <div id="warning-alert" class="hs-alert hs-alert-warning hs-alert-dismissible hs-fade hs-show " role="alert">
-                            <strong>Warning!</strong> {{ session('warning_estates') }}
-                        </div>
-                    @endif
-
                     <!-- Card container for the Users table -->
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
@@ -139,23 +127,4 @@
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script>
-            <!-- Script to auto-hide the message -->
-            document.addEventListener('DOMContentLoaded', function () {
-                const alert = document.getElementById('success-alert') || document.getElementById('warning-alert');
-
-                if (alert) {
-                    setTimeout(() => {
-                        alert.classList.remove('hs-show');
-                        alert.classList.add('hs-fade');
-                        setTimeout(() => {
-                            alert.remove();
-                        }, 300); // Fade-out animation
-                    }, 3000); // 3 seconds
-                }
-            });
-        </script>
-    @endpush
 @endsection

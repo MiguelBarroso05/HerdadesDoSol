@@ -2,17 +2,12 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'All Users'])
-
+    <x-custom-alert type="warning" :session="session('warning-users')" />
+    <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
         <div class="hs-container-fluid hs-py-4">
             <div class="hs-row">
                 <div class="hs-col-12">
-                    <!-- Success Message -->
-                    <x-success-message />
-
-                    <!-- Warning Message -->
-                    <x-warning-message session="warning-users"/>
-
                     <!-- Card container for the Users table -->
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">

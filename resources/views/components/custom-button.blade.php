@@ -12,7 +12,7 @@
 
 <!-- Show Button -->
 @if($type == "show")
-    <a href="{{ $route }}" class="hs-mx-2"><i class="bi bi-eye hs-fs-5" style="color: #2B6EFF"></i></a>
+    <a href="{{ $route }}" class="hs-mx-2"><i class="bi bi-eye hs-fs-5" style="color: #E17747"></i></a>
 @endif
 
 <!-- Edit Button -->

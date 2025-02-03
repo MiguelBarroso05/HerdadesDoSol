@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EstateRequest;
 use App\Models\Address;
 use App\Models\Estate;
 use Illuminate\Http\Request;
@@ -99,9 +100,14 @@ class EstateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Estate $estates)
+    public function update(EstateRequest $request, Estate $estates)
     {
-        //
+        try {
+            $validated = $request->validated();
+            $dataToUpdate = $validated;
+        } catch (\Exception $e) {
+
+        }
     }
 
     /**

@@ -34,7 +34,7 @@
                                     <p class="hs-mb-0">Edit Estate</p>
                                     <div class="hs-col-6 text-end">
                                         <!-- Submit button -->
-                                        <x-custom-button type="update" route="{{route('estates.edit', $estate->id)}}"/>
+                                        <x-custom-button type="update" route="{{null}}"/>
 
                                         <x-custom-button type="cancel" route="{{ route('estates.index') }}"/>
                                     </div>
@@ -68,13 +68,13 @@
                                     <!-- Country input -->
                                     <div class="hs-col-md-4">
                                         <div class="hs-form-group">
-                                            <label for="address[country]" class="hs-form-control-label">Country</label>
+                                            <label for="country" class="hs-form-control-label">Country</label>
                                             <input
-                                                class="hs-form-control @error('address.country') hs-is-invalid @enderror"
-                                                name="address[country]" type="text"
+                                                class="hs-form-control @error('country') hs-is-invalid @enderror"
+                                                name="country" type="text"
                                                 placeholder="Name"
-                                                value="{{ old('address[country]', $estate->address->country) }}">
-                                            @error('address.country')
+                                                value="{{ old('country', $estate->address->country) }}">
+                                            @error('country')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -83,13 +83,13 @@
                                     <!-- City input -->
                                     <div class="hs-col-md-4">
                                         <div class="hs-form-group">
-                                            <label for="address[city]" class="hs-form-control-label">City</label>
+                                            <label for="city" class="hs-form-control-label">City</label>
                                             <input
-                                                class="hs-form-control @error('address.city') hs-is-invalid @enderror"
-                                                name="address[city]" type="text"
+                                                class="hs-form-control @error('city') hs-is-invalid @enderror"
+                                                name="city" type="text"
                                                 placeholder="Name"
-                                                value="{{ old('address[city]', $estate->address->city) }}">
-                                            @error('address.city')
+                                                value="{{ old('city', $estate->address->city) }}">
+                                            @error('city')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -99,13 +99,13 @@
                                     <!-- Street input -->
                                     <div class="hs-col-md-4">
                                         <div class="hs-form-group">
-                                            <label for="address[street]" class="hs-form-control-label">Street</label>
+                                            <label for="street" class="hs-form-control-label">Street</label>
                                             <input
-                                                class="hs-form-control @error('address.street') hs-is-invalid @enderror"
-                                                name="address[street]" type="text"
+                                                class="hs-form-control @error('street') hs-is-invalid @enderror"
+                                                name="street" type="text"
                                                 placeholder="Name"
-                                                value="{{ old('address[street]', $estate->address->street) }}">
-                                            @error('address.street')
+                                                value="{{ old('street', $estate->address->street) }}">
+                                            @error('street')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -114,9 +114,9 @@
                                     <!-- Zipcode input -->
                                     <div class="hs-col-md-4">
                                         <div class="hs-form-group">
-                                            <label for="address[zipcode]" class="hs-form-control-label">Zipcode</label>
+                                            <label for="zipcode" class="hs-form-control-label">Zipcode</label>
                                             <input
-                                                class="hs-form-control @error('address.zipcode') hs-is-invalid @enderror"
+                                                class="hs-form-control @error('zipcode') hs-is-invalid @enderror"
                                                 name="address[zipcode]" type="text"
                                                 placeholder="Name"
                                                 value="{{ old('address[zipcode]', $estate->address->zipcode) }}">
