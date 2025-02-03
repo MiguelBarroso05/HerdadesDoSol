@@ -49,7 +49,7 @@
                         </div>
                         <div class="hs-align-self-end">
                             <button wire:click="addToCart" type="button" class="hs-btn hs-btn-primary hs-mb-0 hs-h-50">
-                                    <i class="bi bi-cart-plus"></i> Adicionar ao Carrinho
+                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart 
                             </button>
                         </div>
                     </div>

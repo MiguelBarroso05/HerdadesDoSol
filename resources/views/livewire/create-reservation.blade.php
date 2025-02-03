@@ -62,7 +62,7 @@
                        </div>
                    </div>
                    <div class="hs-w-15 hs-form-group">
-                       <label class="hs-form-control-label" for="groupsize">Group Size</label>
+                       <label class="hs-form-control-label" for="groupsize">Adults</label>
                        <livewire:NumberInput class="hs-form-control" wire:model="groupsize" wire:change="loadData"
                            :name="'groupsize'" :value="$groupsize" :max="8" />
                    </div>

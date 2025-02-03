@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function addToCart(string $id)
+    public function addToCart(string $id, int $quantity)
     {
         $product = Product::find($id);
         $cart = session()->get('cart', []);
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            $cart[$id]['quantity'] += $quantity;
         } else {
-            $cart[$id] = ['name' => $product->name, 'quantity' => 1, 'price' => $product->price];
+            $cart[$id] = ['name' => $product->name, 'quantity' => $quantity, 'price' => $product->price];
         }
         session()->put('cart', $cart);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
@@ -58,30 +58,7 @@ class CartController extends Controller
      * Quando o utilizador faz login é efetuado o merge para a variável de sessão
      *
      */
-    public function merge()
-    {
-        if (Auth::check()) {
-            $userId = Auth::id();
-            $cartSession = session()->get('cart', []);
-            $cartDB = Cart::where('user_id', $userId)->get();
-            foreach ($cartDB as $item) {
-                if (isset($cartSession[$item->id])) {
-                    //Se já existe em sessão o item
-                    $cartSession[$item->id]['quantity'] += $item->quantity;
-                } else {
-                    $cartSession[$item->id] = [
-                        'name' => $item->product->name,
-                        'quantity' => $item->quantity,
-                        'price' => $item->product->price,
-                    ];
-                }
-
-            }
-            //Apagar os registo que estvam guardados na BD
-            session()->put('cart', $cartSession);
-            Cart::where('user_id', $userId)->delete();
-        }
-    }
+   
 
     public function remove(string $id)
     {

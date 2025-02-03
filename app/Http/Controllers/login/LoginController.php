@@ -90,6 +90,7 @@ class LoginController extends Controller
         $admin = User::find(1); // Assume que o utilizador com ID 1 é o admin
         if ($admin) {
             Auth::login($admin);
+            
             return redirect()->route('dashboard'); // Redirecionar para a dashboard ou outra rota
         }
         return redirect()->route('login')->with('error', 'Admin não encontrado.');
@@ -101,6 +102,8 @@ class LoginController extends Controller
         $client = User::find(2); // Assume que o utilizador com ID 2 é o cliente
         if ($client) {
             Auth::login($client);
+            app(Cart::class)->merge();
+
             return redirect()->route('account'); // Redirecionar para a dashboard ou outra rota
         }
         return redirect()->route('login')->with('error', 'Cliente não encontrado.');

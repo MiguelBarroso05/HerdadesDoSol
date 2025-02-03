@@ -10,19 +10,30 @@ class CartComponent extends Component
 {
     public $cartItems = [];
     public $products = [];
+    public $showCart = false;
+
+    public function toggleCart()
+    {
+        $this->showCart = !$this->showCart;
+    }
 
     public function mount()
     {
-        $this->cartItems = session()->get('cart', []);
-        $this->loadProducts();
+        // Retrieve your cart items and products from session, database, etc.
+        // For example, if you're storing the cart in session:
+        $this->cartItems = session('cart', []);
+        // Assume $this->products is an associative array where keys are product IDs.
+        $this->products = $this->getProducts(array_keys($this->cartItems));
     }
 
-    private function loadProducts()
+    protected function getProducts(array $productIds)
     {
-        $productIds = array_keys($this->cartItems);
-        $this->products = Product::whereIn('id', $productIds)
-            ->get()
-            ->keyBy('id');
+        // Replace this with your actual query logic.
+        // For instance, assuming you have a Product model:
+        return \App\Models\Product::whereIn('id', $productIds)
+                    ->get()
+                    ->keyBy('id')
+                    ->toArray();
     }
 
 
