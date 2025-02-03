@@ -23,11 +23,12 @@ class Cart extends Model
             $cartSession = session()->get('cart', []);
             $cartDB = Cart::where('user_id', $userId)->get();
             foreach ($cartDB as $item) {
-                if (isset($cartSession[$item->id])) {
+
+                if (isset($cartSession[$item->product->id])) {
                     //Se já existe em sessão o item
-                    $cartSession[$item->id]['quantity'] += $item->quantity;
+                    $cartSession[$item->product->id]['quantity'] += $item->quantity;
                 } else {
-                    $cartSession[$item->id] = [
+                    $cartSession[$item->product->id] = [
                         'name' => $item->product->name,
                         'quantity' => $item->quantity,
                         'price' => $item->product->price,
@@ -37,7 +38,7 @@ class Cart extends Model
             }
             //Apagar os registo que estvam guardados na BD
             session()->put('cart', $cartSession);
-            //dd(session()->get('cart'));
+            // dd($cartDB, session()->get('cart'));
             Cart::where('user_id', $userId)->delete();
         }
     }

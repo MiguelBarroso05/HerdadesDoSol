@@ -2,15 +2,14 @@
 
 @section('content')
     @include('layouts.navbars.guest.navbar')
-    <div class="hs-d-flex">
-        <main class="hs-main-content hs-flex-grow-1">
+        <main class="hs-main-content hs-d-flex hs-flex-grow-1 hs-flex-column hs-mt-7">
             <!-- Form container -->
             <section>
-                <div class="hs-page-header hs-min-vh-90">
+                <div class="hs-page-header hs-min-vh-80 ">
                     <div class="hs-container">
                         <div class="hs-row">
                             <div class="hs-col-xl-4 hs-col-lg-5 hs-col-md-7 hs-d-flex hs-flex-column hs-mx-lg-0 hs-mx-auto">
-                                <div class="hs-card hs-card-plain">
+                                <div class="hs-card">
                                     <div class="hs-card-header hs-pb-0 hs-text-start">
                                         <h4 class="hs-font-weight-bolder">Sign In</h4>
                                         <p class="hs-mb-0">Enter your email and password to sign in</p>
@@ -18,7 +17,7 @@
 
                                     <!-- Form container -->
                                     <div class="hs-card-body">
-                                        <form role="form" method="POST" action="{{ route('login.perform') }}">
+                                        <form role="form" method="POST" action="{{ route('login.perform') }}" style="margin-bottom: 7%;">
                                             @csrf
                                             @method('post')
                                             <div class="hs-flex hs-flex-col hs-mb-3">
@@ -84,7 +83,7 @@
 
                             <!-- Vertical banner -->
                             <div
-                                class="hs-col-6 hs-d-lg-flex hs-d-none hs-h-100 hs-my-auto hs-pe-0 hs-position-absolute hs-top-0 hs-end-0 hs-text-center hs-justify-content-center hs-flex-column">
+                                class=" hs-d-lg-flex hs-d-none hs-h-100 hs-my-auto hs-pe-0 hs-position-absolute hs-top-0 hs-end-0 hs-text-center hs-justify-content-center hs-flex-column" style="width: 35%; margin-right: 7%;">
                                 <div
                                     class="hs-position-relative hs-bg-gradient-primary hs-h-100 hs-m-3 hs-px-7 hs-border-radius-lg hs-d-flex hs-flex-column hs-justify-content-center hs-overflow-hidden signin-image">
                                     <span class="hs-mask hs-bg-gradient-primary hs-opacity-1"></span>
@@ -99,5 +98,4 @@
                 </div>
             </section>
         </main>
-    </div>
 @endsection

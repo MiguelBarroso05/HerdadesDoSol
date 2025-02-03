@@ -31,6 +31,16 @@ Route::get('/', function () {
         'accommodation_types' => AccommodationType::take(3)->get(),
     ]);
 })->name('home');
+Route::get('/cart/add/{id}/{quantity}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
+Route::get('/accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+
+
 
 
 Route::group(['middleware' => 'guest'], function () {
@@ -49,21 +59,20 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/login/client', [LoginController::class, 'loginClient'])->name('login.client');
 });
 
+
+
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::get('/checkout', function () {
-        
-    });
-
-    Route::get('/cart/add/{id}/{quantity}', [CartController::class, 'addToCart'])->name('cart.add');
-    Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
-    Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     
-
     #Route Clients
-    Route::resource('products', ProductController::class);
-    Route::get('/client/accommodations', [AccommodationController::class, 'index'])->name('client.accommodations.index');
+    
+    
+    
+    Route::resource('products', ProductController::class)->except(['index']);;
+    Route::get('/checkout', function () {
+        $isReservation = request('isReservation', false); 
+        return view('pages.checkout.index', compact('isReservation'));
+    })->name('checkout');
+    
     Route::get('/account', function () {
         return view('pages.client.account');
     })->name('account');
@@ -73,15 +82,25 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('personal-info');
     Route::get('/personal-info/{user}', [UserController::class, 'edit'])->name('personal-info.edit');
     Route::put('/personal-info/{user}', [UserController::class, 'update'])->name('personal-info.update');
-    Route::get('/payment-methods', function () { return view('pages.client.payment-methods');})->name('payment-methods');
-    Route::get('/orders', function () { return view('pages.client.orders');})->name('orders');
-    Route::get('/wishlist', function () { return view('pages.client.wishlist');})->name('wishlist');
-    Route::get('/history', function () { return view('client.history');})->name('history');
-    Route::get('/reviews', function () { return view('client.reviews');})->name('reviews');
-    Route::get('/support', function () { return view('client.support');})->name('support');
-    Route::get('/reservations', function () { return view('pages.reservations.create');})->name('client-create-reservations');
+    Route::get('/payment-methods', function () {
+        return view('pages.client.payment-methods');
+    })->name('payment-methods');
+    Route::get('/orders', function () {
+        return view('pages.client.orders');
+    })->name('orders');
+    Route::get('/wishlist', function () {
+        return view('pages.client.wishlist');
+    })->name('wishlist');
+    Route::get('/history', function () {
+        return view('client.history');
+    })->name('history');
+    Route::get('/reviews', function () {
+        return view('client.reviews');
+    })->name('reviews');
+    Route::get('/support', function () {
+        return view('client.support');
+    })->name('support');
 
-    Route::post('/create-reservation', [ReservationController::class, 'create'])->name('reservation.create');
 
     #Routes Address
     Route::put('/users/{user}/storeAddress', [UserController::class, 'storeAddress'])->name('users.storeAddress');
@@ -108,12 +127,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('users', UserController::class);
 
         #Routes Accommodations
-        Route::resource('accommodations', AccommodationController::class);
+        Route::resource('accommodations', AccommodationController::class)->except(['index']);
         Route::resource('accommodation_types', AccommodationTypeController::class);
 
         #Routes Activities
         Route::resource('activities', ActivityController::class);
         Route::resource('activity_types', ActivityTypeController::class);
-
     });
 });

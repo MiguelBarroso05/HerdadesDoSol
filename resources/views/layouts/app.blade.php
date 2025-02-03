@@ -50,10 +50,10 @@
     @endauth
 
     <livewire:scripts/>
-    @stack('js')
-    <script src="https://www.paypal.com/sdk/js?client-id=AYK9nDavtGJIdiPRWSb6xHFJUKSOxB6vsIWOhsckO3op_zPO0tWBWNVUcTD-HabVcOH9jXKEyrf4yUTH&currency=EUR"></script>
+    <script src="https://sandbox.paypal.com/sdk/js?client-id=AYK9nDavtGJIdiPRWSb6xHFJUKSOxB6vsIWOhsckO3op_zPO0tWBWNVUcTD-HabVcOH9jXKEyrf4yUTH&currency=EUR&disable-funding=credit,card"></script>
     <script src="{{asset('assets\js\preline.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('js')
 
 </body>
 

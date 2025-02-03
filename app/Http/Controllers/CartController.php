@@ -27,7 +27,7 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
-            $cart[$id]['quantity'] = max(0, (int)$request->input('quantity')); // Evita valores negativos
+            $cart[$id]['quantity'] = max(0, (int)$request->input('quantity'));
             if($cart[$id]['quantity'] < 1) {
                 unset($cart[$id]);
             }
@@ -39,26 +39,8 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('error', 'Produto não encontrado no carrinho.');
     }
 
-    public function index()
-    {
-
-        $totalPrice = 0;
-
-        $cart = session()->get('cart');
-        foreach ($cart as $item) {
-            $totalPrice += $item['quantity'] * $item['price'];
-        }
-        return view('cart.index', compact('cart', 'totalPrice'));
-    }
-
-
-    /**
-     * A estratégia implementada é usar sempre as variáveis de sessão.
-     * O utilizador quando faz logout é guardado em BD o carrinho
-     * Quando o utilizador faz login é efetuado o merge para a variável de sessão
-     *
-     */
    
+
 
     public function remove(string $id)
     {

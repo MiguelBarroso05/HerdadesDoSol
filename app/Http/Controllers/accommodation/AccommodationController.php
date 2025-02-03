@@ -14,7 +14,7 @@ class AccommodationController extends Controller
      */
     public function index()
     {
-        if  (auth()->user()->hasRole('admin')) {
+        if  (auth()->user() && auth()->user()->hasRole('admin')) {
         $accommodations = Accommodation::with('accommodation_types')->paginate(8);
         return view('pages.accommodations.accommodations', compact('accommodations'));
 

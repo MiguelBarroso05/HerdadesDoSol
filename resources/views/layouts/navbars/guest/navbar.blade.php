@@ -25,7 +25,7 @@
                     <!-- Navbar Menu -->
                     <ul class="hs-navbar-nav hs-justify-content-end hs-col-4">
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
-                            <a href="{{route('client.accommodations.index')}}" class="hs-nav-link hs-text-black hs-p-0 hs-fw-bold">
+                            <a href="{{route('accommodations.index')}}" class="hs-nav-link hs-text-black hs-p-0 hs-fw-bold">
                                 Accommodations
                             </a>
                         </li>
@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center">
-                            <a href="{{ route('client-create-reservations') }}" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
+                            <a href="{{ route('reservation.create') }}" class="hs-nav-link hs-text-black hs-fw-bold hs-p-0">
                                 Reservations
                             </a>
                         </li>

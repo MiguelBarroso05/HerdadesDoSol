@@ -230,9 +230,9 @@ input.hs-form-control::placeholder {
 .hs-card-selected {
     border: 2px solid #ffbf65;
 }
-.hs-card img {
+/* .hs-card img {
     width: 50px;
-}
+} */
 
 .hs-cursor-pointer {
     cursor: pointer;

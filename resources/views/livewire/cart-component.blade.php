@@ -59,7 +59,7 @@
                                 {{ number_format($total, 2, ',', '.') }}€
                             </span>
                         </div>
-                        <a href="{{ route('checkout') }}" class="hs-btn hs-btn-primary hs-w-100 text-white">
+                        <a href="{{ route('checkout',['isReservation' => false])}}" class="hs-btn hs-btn-primary hs-w-100 text-white">
                             Checkout
                         </a>
                     </div>
