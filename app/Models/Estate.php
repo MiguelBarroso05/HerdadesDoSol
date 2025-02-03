@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\accommodation\Accommodation;
 use App\Models\activity\Activity;
-use App\Models\user\Address;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

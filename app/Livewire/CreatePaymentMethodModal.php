@@ -14,27 +14,26 @@ class CreatePaymentMethodModal extends Component
     public $number;
     public $last4;
     public $validity;
-    public $type = "visa";
+    public $payment_method_type_id = 1;
 
     public function submit(){
-
         $request = new PaymentMethodRequest();
 
-        // Validação
         $this->validate(
             $request->rules(),
             $request->messages()
         );
+
 
         try {
             PaymentMethod::create([
                 'user_id' => auth()->id(),
                 'identifier' => $this->identifier,
                 'name' => $this->name,
-                'type' => $this->type,
-                'number' => preg_replace('/[^0-9]/', '', $this->number),
+                'payment_method_type_id' => $this->payment_method_type_id,
+                'number' => encrypt($this->number),
                 'last4' => $this->last4,
-                'validity' => $this->validity
+                'validity' => encrypt($this->validity),
             ]);
 
             $this->reset();
@@ -42,7 +41,7 @@ class CreatePaymentMethodModal extends Component
             return redirect()->route('payment-methods');
 
         } catch (\Exception $e) {
-            session()->flash('error', 'ERRO: ' . $e->getMessage());
+            session()->flash('error', 'Error: ' . $e->getMessage());
         }
     }
 

@@ -62,16 +62,21 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('identifier')->default('card');
-            $table->string('type');
+            $table->string('identifier')->default('Card')->nullable();
+            $table->unsignedBigInteger('payment_method_type_id')->constrained('payment_method_types');
             $table->string('name');
             $table->string('number');
             $table->string('last4');
             $table->string('validity');
             $table->boolean('predefined')->default(false);
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+        });
+
+        Schema::create('payment_method_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('img')->nullable();
         });
     }
 
@@ -85,5 +90,6 @@ return new class extends Migration
         Schema::dropIfExists('invoices');
         Schema::dropIfExists('billings');
         Schema::dropIfExists('payment_methods');
+        Schema::dropIfExists('payment_method_types');
     }
 };

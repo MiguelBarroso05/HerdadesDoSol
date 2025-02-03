@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\user;
+namespace App\Models;
 
+use App\Models\user\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

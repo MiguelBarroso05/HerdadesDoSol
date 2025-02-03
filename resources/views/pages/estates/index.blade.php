@@ -2,24 +2,12 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'All estates'])
-
+    <x-custom-alert type="warning" :session="session('warning_estates')" />
+    <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
         <div class="hs-container-fluid hs-py-4">
             <div class="hs-row">
                 <div class="hs-col-12">
-                    <!-- Success Message -->
-                    @if(session('success'))
-                        <div id="success-alert" class="hs-alert hs-alert-success hs-alert-dismissible hs-fade hs-show " role="alert">
-                            <strong>Success!</strong> {{ session('success') }}
-                        </div>
-                    @endif
-
-                    @if(session('warning_users'))
-                        <div id="warning-alert" class="hs-alert hs-alert-warning hs-alert-dismissible hs-fade hs-show " role="alert">
-                            <strong>Warning!</strong> {{ session('warning_users') }}
-                        </div>
-                    @endif
-
                     <!-- Card container for the Users table -->
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
@@ -51,20 +39,22 @@
                                             Location
                                         </th>
                                         <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                            Status
+                                        </th>
+                                        <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                             Activated/Disabled at
                                         </th>
-                                        <th class="hs-text-secondary hs-opacity-7"></th>
                                         <th class="hs-text-secondary hs-opacity-7"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- Loop through the $estates collection to display each user -->
+                                    <!-- Loop through the $estates collection to display each estate -->
                                     @foreach($estates as $estate)
                                         <tr>
-                                            <!-- User info column -->
+                                            <!-- Estate column -->
                                             <td>
                                                 <div class="hs-d-flex hs-px-2 hs-py-1">
-                                                    <!-- User profile image -->
+                                                    <!-- Estate image -->
                                                     <div>
                                                         <img
                                                             src="{{ $estate->img ? asset('storage/'.$estate->img) : asset('/imgs/users/no-image.png') }}"
@@ -77,23 +67,23 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="hs-d-flex hs-px-2 hs-py-1">
+                                                <div class="hs-d-flex hs-px-2 hs-py-1 place-self-center">
                                                     <div class="hs-d-flex hs-flex-column hs-justify-content-center">
                                                         <h6 class="hs-mb-0 hs-text-sm">{{ $estate->address->city }}</h6>
                                                         <p class="hs-mb-0 hs-text-sm">{{ $estate->address->street }}</p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <!-- User status column -->
+                                            <!-- Estate status column -->
                                             <td class="hs-align-middle hs-text-center hs-text-sm">
                                                 <!-- Status badge: Active or Inactive -->
                                                 <span
                                                     class="hs-badge hs-badge-sm {{ is_null($estate->deleted_at) ? 'hs-bg-gradient-success' : 'hs-bg-gradient-danger' }}">
-                                                    {{ is_null($estate->deleted_at) ? 'Active' : 'Inactive' }}
+                                                    {{ is_null($estate->deleted_at) ? 'Active' : 'In Maintenance' }}
                                                 </span>
                                             </td>
 
-                                            <!-- User activation/disable date -->
+                                            <!-- Estate activation/disable date -->
                                             <td class="hs-align-middle hs-text-center">
                                                 <span class="hs-text-secondary hs-text-xs hs-font-weight-bold">
                                                     @if (is_null($estate->deleted_at))
@@ -105,37 +95,20 @@
                                             </td>
 
                                             <!-- Action buttons -->
-                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
+                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly items-center min-h-[67px]">
                                                 <!-- Show User button -->
-                                                <x-custom-button type="show" route="{{ route('estates.show', $estate) }}"/>
+                                                <x-custom-button type="show" route="{{ route('estates.show', $estate->id) }}"/>
 
                                                 <!-- Edit User button -->
-                                                <x-custom-button type="edit" route="{{ route('users.edit', $estate) }}"/>
+                                                <x-custom-button type="edit" route="{{ route('estates.edit', $estate) }}"/>
 
                                                 <!-- Conditional: Disable or Activate User -->
                                                 @if(is_null($estate->deleted_at))
                                                     <!-- Disable user -->
-                                                    <form action="{{ route('users.destroy', ['user' => $estate]) }}"
-                                                          method="POST">
-                                                        @method('DELETE')
-                                                        @csrf
-                                                        <button type="submit"
-                                                                class="hs-btn hs-btn-secondary hs-btn-sm hs-bg-gradient-danger"
-                                                                data-toggle="tooltip" data-original-title="Disable user">
-                                                            Disable
-                                                        </button>
-                                                    </form>
+                                                    <x-custom-button type="disableEstate" route="{{route('estates.destroy', ['estate' => $estate])}}"/>
                                                 @else
                                                     <!-- Activate user -->
-                                                    <form action="{{ route('users.recover', ['user' => $estate]) }}"
-                                                          method="POST">
-                                                        @csrf
-                                                        <button type="submit"
-                                                                class="hs-btn hs-btn-secondary hs-btn-sm hs-bg-gradient-success"
-                                                                data-toggle="tooltip" data-original-title="Activate user">
-                                                            Activate
-                                                        </button>
-                                                    </form>
+                                                    <x-custom-button type="enableEstate" route="{{ route('estates.recover', ['estate' => $estate]) }}"/>
                                                 @endif
                                             </td>
                                         </tr>
@@ -145,6 +118,7 @@
 
                                 <!-- Pagination -->
                                 <div class="hs-d-flex hs-justify-content-center hs-mt-4">
+                                    {{ $estates->links('vendor.pagination.custom') }}
                                 </div>
                             </div>
                         </div>
@@ -153,23 +127,4 @@
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script>
-            <!-- Script to auto-hide the message -->
-            document.addEventListener('DOMContentLoaded', function () {
-                const alert = document.getElementById('success-alert') || document.getElementById('warning-alert');
-
-                if (alert) {
-                    setTimeout(() => {
-                        alert.classList.remove('hs-show');
-                        alert.classList.add('hs-fade');
-                        setTimeout(() => {
-                            alert.remove();
-                        }, 300); // Fade-out animation
-                    }, 3000); // 3 seconds
-                }
-            });
-        </script>
-    @endpush
 @endsection

@@ -48,7 +48,7 @@
                                         <!-- Update button -->
                                         <x-custom-button type="update" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('users.index') }}"/>
+                                        <x-custom-button type="cancelIcon" route="{{ route('users.index') }}"/>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +244,7 @@
                                             <div class="hs-card-body hs-p-3 hs-d-flex hs-align-items-center hs-justify-content-center">
                                                 <button type="button" class="hs-btn hs-btn-primary hs-mb-0" data-bs-toggle="modal"
                                                         data-bs-target="#addAddressModal">
-                                                    <i class="fa-solid fa-circle-plus fs-5"></i>
+                                                    <i class="bi bi-plus-circle hs-fs-5"></i>
                                                 </button>
                                             </div>
                                         </div>

@@ -19,60 +19,6 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        PaymentMethod::create([
-            'user_id' => 2,
-            'identifier' => 'cartao1',
-            'type' => 'VISA',
-            'name' => 'Marco Candido',
-            'number' => '123412341234',
-            'last4' => '1234',
-            'validity' => '12/24'
-        ]);
-
-        Billing::create([
-            'user_id' => 2,
-            'address_id' => 1,
-            'name' => 'Marco Candido',
-            'nif' => '123412341',
-            'email' => 'marcocandido@gmail.com',
-            'phone' => '123123123'
-        ]);
-
-        Invoice::create([
-            'billing_id' => 1,
-            'payment_method_id' => 1,
-            'payment_date' => now()
-        ]);
-
-        Order::create([
-            'id' => "LSDMMSL11",
-            'user_id' => 2,
-            'status' => 0,
-            'price' => 5,
-            'estate_id' => 2,
-            'invoice_id' => 1,
-        ]);
-
-        Order::create([
-            'id' => "AAAWESA23",
-            'user_id' => 2,
-            'status' => 1,
-            'price' => 5,
-            'estate_id' => 2,
-            'invoice_id' => 1,
-        ]);
-
-        OrderProduct::create([
-            'order_id' => "LSDMMSL11",
-            'product_id' => 1,
-            'quantity' => 2,
-        ]);
-
-        OrderProduct::create([
-            'order_id' => "AAAWESA23",
-            'product_id' => 2,
-            'quantity' => 3,
-        ]);
 
     }
 }

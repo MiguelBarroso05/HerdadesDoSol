@@ -1,5 +1,4 @@
 @php use App\Models\Estate;
- use App\Models\Allergy;
 @endphp
 @extends('layouts.app')
 @section('content')

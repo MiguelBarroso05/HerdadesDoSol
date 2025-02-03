@@ -63,7 +63,7 @@
                                                     class="hs-text-secondary hs-text-xs hs-font-weight-bold">{{$accommodation_type->updated_at}}</span>
                                             </td>
                                             <!-- Action Buttons -->
-                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
+                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly items-center min-h-[61px]">
                                                 <!-- Edit button -->
                                                 <x-custom-button type="edit" route="{{ route('accommodation_types.edit', $accommodation_type) }}"/>
 

@@ -74,7 +74,7 @@
                                             </td>
 
                                             <!-- Action buttons -->
-                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly">
+                                            <td class="hs-align-middle hs-d-flex hs-justify-content-evenly items-center min-h-[61px]">
                                                 <!-- Show button -->
                                                 <x-custom-button type="show" route="{{ route('activities.show', $activity) }}"/>
 

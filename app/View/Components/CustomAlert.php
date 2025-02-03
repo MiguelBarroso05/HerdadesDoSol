@@ -6,17 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ConfirmDeletion extends Component
+class CustomAlert extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $modalId,
-        public string $title,
-        public string $message,
-        public string $route,
-        public string $prevModalId
+        public string $type,
+        public $session,
     )
     {
         //
@@ -27,6 +24,6 @@ class ConfirmDeletion extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.confirm-deletion');
+        return view('components.custom-alert');
     }
 }

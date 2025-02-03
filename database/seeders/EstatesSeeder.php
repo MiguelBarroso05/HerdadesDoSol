@@ -2,16 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\accommodation\Accommodation;
-use App\Models\Estate;
-use App\Models\user\Address;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class EstatesSeeder extends Seeder
 {
-   
+
     /**
      * Run the database seeds.
      */

@@ -15,10 +15,10 @@
                     <form action="{{ route('users.store',) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="hs-card-header hs-pb-0">
-                            <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
-                                <p class="hs-mb-0">Create User</p>
+                            <div class="hs-row hs-d-flex hs-align-items-center hs-justify-content-between">
+                                <p class="hs-mb-0 hs-col-md-6">Create User</p>
                                 <!-- Action Buttons -->
-                                <div>
+                                <div class="hs-col-md-4 flex justify-around">
                                     <!-- Create button -->
                                     <x-custom-button type="create" route={{null}}/>
                                     <!-- Cancel button-->

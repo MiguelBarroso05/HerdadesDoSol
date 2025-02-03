@@ -28,7 +28,7 @@
         <a class="hs-py-3 hs-px-3 {{ Route::is('personal-info') || Route::is('personal-info.edit') ? 'active' : '' }}" href="{{ route('personal-info') }}">
             <i class="bi bi-person hs-me-3 hs-fs-5"></i>Personal Information
         </a>
-        <a class="hs-py-3 hs-px-3 {{ Route::is('payment-methods') ? 'active' : '' }}" href="{{ route('payment-methods') }}">
+        <a class="hs-py-3 hs-px-3 {{ Route::is('payment-methods') || Route::is('livewire.update') ? 'active' : '' }}" href="{{ route('payment-methods') }}">
             <i class="bi bi-wallet2 hs-me-3 hs-fs-5"></i>Payment Methods
         </a>
         <a class="hs-py-3 hs-px-3 {{ Route::is('orders') ? 'active' : '' }}" href="{{ route('orders') }}">

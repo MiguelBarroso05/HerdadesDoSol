@@ -17,7 +17,13 @@ class UserController extends Controller
                 'firstname' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:8|confirmed',
+                'password'  => [
+                    'required',
+                    'string',
+                    'min:8',
+                    'regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W]).{8,}$/',
+                    'confirmed'
+                ],
                 'nif' => 'nullable|digits:9|unique:users,nif',
                 'birthdate' => 'required|date',
                 'phone' => 'nullable|string|max:15',

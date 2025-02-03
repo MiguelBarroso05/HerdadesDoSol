@@ -24,9 +24,9 @@ class PaymentMethodRequest extends FormRequest
         return [
             'identifier' => 'nullable|string|max:18',
             'name' => 'required|string|max:40',
-            'number' => 'required|numeric',
+            'number' => 'required|numeric|digits:12',
             'last4' => 'required|numeric|digits:4',
-            'validity' => 'required|string',
+            'validity' => 'required|string|size:5',
         ];
     }
 
@@ -34,7 +34,6 @@ class PaymentMethodRequest extends FormRequest
     {
         return [
             'identifier.max' => 'The identifier is too long.',
-            'identifier.required' => 'The identifier is required.',
             'name.required' => 'The name is required.',
             'name.max' => 'The name is too long.',
             'number.required' => 'The number is required.',

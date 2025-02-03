@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Models\user\Address;
+use App\Models\Address;
 use App\Models\user\User;
 use Closure;
 use Illuminate\Contracts\View\View;

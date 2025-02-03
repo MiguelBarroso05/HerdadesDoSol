@@ -7,31 +7,34 @@
         <!-- Profile Card Section -->
         <div class="hs-card hs-shadow-lg hs-mx-4 hs-card-profile-bottom">
             <div class="hs-card-body hs-p-3">
-                <div class="hs-row hs-gx-4">
-                    <!-- User profile image -->
-                    <div class="hs-col-auto">
-                        <div class="hs-avatar hs-avatar-xl hs-position-relative">
-                            <img src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
-                                 alt="profile_image" class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
+                <div class="hs-row hs-gx-4 flex justify-between">
+                    <div class="hs-col-md-6 flex">
+                        <!-- User profile image -->
+                        <div class="hs-col-2">
+                            <div class="hs-avatar hs-avatar-xl hs-position-relative">
+                                <img src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
+                                     alt="profile_image" class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
+                            </div>
+                        </div>
+                        <!-- User name and role -->
+                        <div class="hs-col-10 hs-my-auto">
+                            <div class="hs-h-100">
+                                <h5 class="hs-mb-1">
+                                    {{ $user->firstname }} {{ $user->lastname }}
+                                </h5>
+                                <p class="hs-mb-0 hs-font-weight-bold hs-text-sm">
+                                    {{$user->user_roles->first()->name}}
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <!-- User name and role -->
-                    <div class="hs-col-auto hs-my-auto">
-                        <div class="hs-h-100">
-                            <h5 class="hs-mb-1">
-                                {{ $user->firstname }} {{ $user->lastname }}
-                            </h5>
-                            <p class="hs-mb-0 hs-font-weight-bold hs-text-sm">
-                                {{$user->user_roles->first()->name}}
-                            </p>
-                        </div>
-                    </div>
+
                     <!-- Buttons aligned to the right and vertically centered -->
-                    <div class="hs-col hs-d-flex hs-align-items-center hs-justify-content-end">
+                    <div class="hs-col-3 hs-d-flex hs-align-items-center hs-justify-content-end">
                         <!-- Edit button -->
                         <x-custom-button type="edit" route="{{ route('users.edit', $user) }}"/>
                         <!-- Cancel button -->
-                        <x-custom-button type="cancel" route="{{ route('users.index') }}"/>
+                        <x-custom-button type="cancelIcon" route="{{ route('users.index') }}"/>
                     </div>
                 </div>
             </div>
