@@ -16,6 +16,8 @@ class CreatePaymentMethodModal extends Component
     public $payment_method_type_id = 1;
 
     public function submit(){
+
+        $this->number = str_replace(' ', '', $this->number);
         $request = new PaymentMethodRequest();
 
         $this->validate(
@@ -36,9 +38,12 @@ class CreatePaymentMethodModal extends Component
                 'last4' => $last4,
                 'validity' => encrypt($this->validity),
             ]);
-
+            
             $this->reset();
             session()->flash('success', 'Método de pagamento criado!');
+            if(PaymentMethod::where('user_id', auth()->id())->count() == 1){
+                PaymentMethod::where('user_id', auth()->id())->update(['predefined' => 1]);
+            }
             return redirect()->route('payment-methods');
 
         } catch (\Exception $e) {
