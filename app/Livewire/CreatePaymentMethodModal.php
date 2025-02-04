@@ -12,7 +12,6 @@ class CreatePaymentMethodModal extends Component
     public $identifier;
     public $name;
     public $number;
-    public $last4;
     public $validity;
     public $payment_method_type_id = 1;
 
@@ -24,6 +23,8 @@ class CreatePaymentMethodModal extends Component
             $request->messages()
         );
 
+        $encriptNumber = substr($this->number, 0, 12);
+        $last4 = substr($this->number, 12, 4);
 
         try {
             PaymentMethod::create([
@@ -31,8 +32,8 @@ class CreatePaymentMethodModal extends Component
                 'identifier' => $this->identifier,
                 'name' => $this->name,
                 'payment_method_type_id' => $this->payment_method_type_id,
-                'number' => encrypt($this->number),
-                'last4' => $this->last4,
+                'number' => encrypt($encriptNumber),
+                'last4' => $last4,
                 'validity' => encrypt($this->validity),
             ]);
 

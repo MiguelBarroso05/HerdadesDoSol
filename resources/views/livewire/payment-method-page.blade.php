@@ -13,13 +13,6 @@
                     </div>
                 </div>
                 <div class="hs-border-custom-black hs-w-100"></div>
-                @if($paymentMethods->count() < 5)
-                    <div class="hs-dashed-box hs-m-4 hs-rounded-3 hs-cursor-pointer"
-                         data-bs-toggle="modal"
-                         data-bs-target="#createPaymentMethodModal">
-                        <i class="bi bi-plus-circle hs-box-icon"></i>
-                    </div>
-                @endif
                 @foreach($paymentMethods as $card)
                     <div
                         class="w-[240px] h-[94px] hs-rounded-3 hs-m-3 flex flex-col justify-around place-self-center bg-[#EEEEEE] hs-cursor-pointer {{ $selectedCard && $selectedCard->id === $card->id ? 'hs-card-selected' : '' }}"
@@ -58,6 +51,13 @@
                         @endif
                     </div>
                 @endforeach
+                @if($paymentMethods->count() < 5)
+                    <div class="hs-dashed-box hs-m-4 hs-rounded-3 hs-cursor-pointer"
+                         data-bs-toggle="modal"
+                         data-bs-target="#createPaymentMethodModal">
+                        <i class="bi bi-plus-circle hs-box-icon"></i>
+                    </div>
+                @endif
             </div>
 
             <div class="hs-p-4 hs-w-md-100">

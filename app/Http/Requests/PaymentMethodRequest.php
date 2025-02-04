@@ -24,8 +24,7 @@ class PaymentMethodRequest extends FormRequest
         return [
             'identifier' => 'nullable|string|max:18',
             'name' => 'required|string|max:40',
-            'number' => 'required|numeric|digits:12',
-            'last4' => 'required|numeric|digits:4',
+            'number' => 'required|numeric|digits:16',
             'validity' => 'required|string|size:5',
         ];
     }
@@ -38,9 +37,8 @@ class PaymentMethodRequest extends FormRequest
             'name.max' => 'The name is too long.',
             'number.required' => 'The number is required.',
             'number.numeric' => 'The number must be a number.',
+            'number.digits' => 'The number have to be 16 digits.',
             'validity.required' => 'The validity is required.',
-            'last4.required' => 'The last4 is required.',
-            'last4.size' => 'The last4 have to be 4.',
         ];
     }
 }

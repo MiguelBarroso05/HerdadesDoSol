@@ -45,13 +45,13 @@
                             </a>
                         </li>
                         <li class="hs-nav-item hs-dropdown hs-pe-3 hs-d-flex hs-align-items-center hs-ps-4">
-                    
+
                                     <livewire:CartComponent />
                         </li>
                         @auth()
                             <!-- User img with dropdown -->
-                            <li class="hs-nav-item hs-dropdown hs-d-flex">
-                                <x-dropdown class="dropdown-auth" height="h-[300px]">
+                            <li class="hs-nav-item hs-dropdown hs-d-flex left-5">
+                                <x-dropdown class="dropdown-auth" height="h-[325px]">
                                     <x-slot name="trigger">
                                         <img class="hs-rounded-circle"
                                              style="width: 30px; height: 30px; object-fit: fill"
@@ -59,7 +59,7 @@
                                              alt="Avatar">
                                     </x-slot>
                                     <x-dropdown.item class="hs-justify-content-between hs-mx-2">
-                                        <p class="hs-m-0">
+                                        <p class="hs-m-0 pe-2">
                                             {{ limit_word(auth()->user()->firstname . " " . auth()->user()->lastname, 22, true)}}
                                         </p>
                                         <p class="hs-m-0">

@@ -180,14 +180,13 @@
                         </div>
                         <div style="width: 390px; height: 395px;"
                              class="hs-d-flex hs-flex-column hs-justify-content-between hs-align-items-end">
-                            <img
-                                src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
-                                alt="" class="hs-img-fluid hs-rounded-3" style="width: 240px">
+                            <img id="profileImage"
+                                 src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                 class="hs-img-fluid hs-rounded-3" style="width: 240px">
 
                             <!-- Profile Image Upload -->
                             <div style="width: 240px;">
-                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
-                                       accept="image/*">
+                                <input type="file" class="hs-form-control" id="inputGroupFile02" accept="image/*">
                             </div>
 
                             <!-- Language Input -->
@@ -241,11 +240,29 @@
                         </div>
                     </div>
                     <div class="hs-d-flex hs-justify-content-between">
-                        <x-custom-button type="update" route="{{null}}"/>
-                        <x-custom-button type="cancel" route="{{route('personal-info')}}"/>
+                        <div class="hs-col-4">
+                            <x-custom-button type="cancel" route="{{route('personal-info')}}"/>
+                        </div>
+                        <div>
+                            <x-custom-button type="update" route="{{null}}"/>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </main>
 @endsection
+@push('js')
+    <script>
+        document.getElementById('inputGroupFile02').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

@@ -84,21 +84,10 @@
                                         <input
                                             class="hs-form-control @error('number') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="number"
-                                            placeholder="xxxx xxxx xxxx">
+                                            placeholder="xxxx xxxx xxxx"
+                                            pattern="\d{16}"
+                                            maxlength="16">
                                         @error('number')
-                                        <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
-                                    </div>
-                                </div>
-
-                                <!-- Last4 Input -->
-                                <div class="hs-col-md-4">
-                                    <div class="form-group">
-                                        <label for="last4" class="hs-form-control-label">Last 4 digits*</label>
-                                        <input
-                                            class="hs-form-control @error('last4') hs-is-invalid @enderror"
-                                            type="text" wire:model.defer="last4"
-                                            placeholder="xxxx">
-                                        @error('last4')
                                         <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>

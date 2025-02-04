@@ -28,11 +28,7 @@
                                                 @enderror
                                             </div>
                                             <div class="hs-flex hs-flex-col hs-mb-3">
-                                                <input type="password" name="password" class="hs-form-control hs-form-control-lg"
-                                                       placeholder="Password" aria-label="Password" value="">
-                                                @error('password')
-                                                <p class="hs-text-danger hs-text-xs hs-pt-1"> {{$message}} </p>
-                                                @enderror
+                                                <x-hidden-password-input />
                                             </div>
                                             <div class="hs-form-check hs-form-switch">
                                                 <input class="hs-form-check-input" name="remember" type="checkbox"

@@ -36,11 +36,10 @@
                                     <!-- Password and Confirm Password -->
                                     <div class="hs-row">
                                         <div class="hs-col-12 hs-col-md-6 hs-mb-3">
-                                            <input type="password" name="password" class="hs-form-control" placeholder="Password" aria-label="Password">
-                                            @error('password') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
+                                            <x-hidden-password-input />
                                         </div>
                                         <div class="hs-col-12 hs-col-md-6 hs-mb-3">
-                                            <input type="password" name="password_confirmation" class="hs-form-control" placeholder="Confirm Password" aria-label="Password">
+                                            <x-hidden-confirm-password-input />
                                         </div>
                                     </div>
 
