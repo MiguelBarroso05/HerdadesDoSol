@@ -186,9 +186,8 @@
 
                             <!-- Profile Image Upload -->
                             <div style="width: 240px;">
-                                <input type="file" class="hs-form-control" id="inputGroupFile02" accept="image/*">
+                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02" accept="image/*">
                             </div>
-
                             <!-- Language Input -->
                             <div style="width: 240px;">
                                 <label for="language" class="hs-form-control-label">Prefered Language</label>

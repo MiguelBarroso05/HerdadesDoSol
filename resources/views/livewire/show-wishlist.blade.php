@@ -59,7 +59,7 @@
             return
         </div>
     </div>
-    <div class="hs-d-flex hs-justify-content-between">
+    <div class="hs-d-flex">
         <div class="hs-row">
             <div class="hs-col-6 hs-fs-4 hs-text-black hs-mt-2">
                 Your Wishlist
@@ -91,6 +91,7 @@
                     <option value="accommodations">Accommodations</option>
                 </select>
             </div>
+
         </div>
     </div>
 </div>

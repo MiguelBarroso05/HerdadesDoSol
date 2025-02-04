@@ -1,20 +1,13 @@
 @extends('layouts.app')
-
 @section('content')
-    <div class="hs-container hs-position-sticky hs-z-index-sticky hs-top-0">
-        <div class="hs-row">
-            <div class="hs-col-12">
-                @include('layouts.navbars.guest.navbar')
-            </div>
-        </div>
-    </div>
+    @include('layouts.navbars.guest.navbar')
     <main class="hs-main-content hs-mt-0">
         <section>
             <div class="hs-page-header hs-min-vh-100">
                 <div class="hs-container">
                     <div class="hs-row">
                         <div class="hs-col-xl-4 hs-col-lg-5 hs-col-md-7 hs-d-flex hs-flex-column hs-mx-lg-0 hs-mx-auto">
-                            <div class="hs-card hs-card-plain">
+                            <div class="hs-card">
                                 <div class="hs-card-header hs-pb-0 hs-text-start">
                                     <h4 class="hs-font-weight-bolder">Reset your password</h4>
                                     <p class="hs-mb-0">Enter your email and please wait a few seconds</p>
