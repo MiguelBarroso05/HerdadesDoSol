@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'All estates'])
-    <x-custom-alert type="warning" :session="session('warning_estates')" />
+    <x-custom-alert type="warning" :session="session('warning')" />
     <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
         <div class="hs-container-fluid">

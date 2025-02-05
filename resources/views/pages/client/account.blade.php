@@ -1,41 +1,6 @@
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
-    <style>
-
-        .hs-sidebar {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: black;
-            width: 15%
-        }
-
-        .hs-sidebar .active {
-            background-color: rgb(255, 172, 57);
-            border-radius: 0.75rem;
-        }
-
-        .hs-sidebar a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .hs-card img {
-            width: 50px;
-        }
-
-        .hs-main-content {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 10px;
-        }
-
-        .wishlist-card img {
-            width: 100%;
-            border-radius: 8px;
-        }
-    </style>
     <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <x-success-message/>
         <div class="hs-d-flex hs-justify-content-between">
@@ -191,32 +156,36 @@
                 </div>
 
                 <div class="hs-col-md-4">
-                    <div class="hs-row hs-m-0">
+                    <div class="hs-row hs-m-0 min-h-[400px]">
                         <div class="hs-px-0 hs-rounded-3 hs-bg-card">
                             <div class="hs-py-3 hs-px-3 hs-w-100 hs-rounded-3 hs-text-white"
                                  style="background-color: #437546 !important">
                                 <i class="bi bi-credit-card-2-back hs-pe-3"></i>Payment Method
                             </div>
-                            <div class="hs-px-6 hs-py-3">
+                            <div class="hs-px-6 hs-py-2">
                                 <div class="hs-row hs-mt-1" style="margin-bottom: 60px">
-                                    <div class="hs-py-3">
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Method:</strong></p>
-                                    </div>
-                                    <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
-                                    </p>
-                                    <p class="hs-d-flex"><strong class="hs-pe-2">Number:</strong>
-                                    </p>
-                                    <div class="hs-d-flex hs-justify-content-between">
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Expiration Date: 24/07</strong>
+                                    @if(auth()->user()->paymentMethods->firstWhere('predefined', 1))
+                                        <div class="hs-py-3">
+                                            <p class="hs-d-flex"><strong class="hs-pe-2">Method:</strong> <img class="w-[50px] h-auto"
+                                                                                                               src="{{asset(auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->img)}}"
+                                                                                                               alt="{{auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->name}} Logo"></p>
+                                        </div>
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong> {{auth()->user()->paymentMethods->firstWhere('predefined', 1)->name}}
                                         </p>
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">CVV: ***</strong>
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Number: </strong> {{'**** **** ****'.auth()->user()->paymentMethods->firstWhere('predefined', 1)->last4}}
                                         </p>
-                                    </div>
+                                        <div class="hs-d-flex hs-justify-content-between">
+                                            <p class="hs-d-flex"><strong class="hs-pe-2">Validity: </strong> **/**</p>
+                                        </div>
+                                    @else
+                                        <p class="pt-12 text-center">Payment method not defined</p>
+                                    @endif
+
                                 </div>
                                 <div class="hs-d-flex hs-justify-content-center">
-                                    <button type="button" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
+                                    <a href="{{route('payment-methods')}}" type="button" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
                                             style="height: 31px">Payment Methods
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

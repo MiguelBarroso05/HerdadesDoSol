@@ -2,6 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Your Profile'])
+    <x-custom-alert type="success" :session="session('success')" />
 
     <div class="col-admin">
         <!-- Profile Card Section -->
@@ -13,6 +14,7 @@
                         <div class="hs-avatar hs-avatar-xl hs-position-relative">
                             <img
                                 src="{{ auth()->user()->img ? asset(auth()->user()->img) : asset('/imgs/users/no-image.png') }}"
+                                id="adminImage"
                                 class="hs-w-100 hs-border-radius-lg hs-shadow-sm" alt="User image">
                         </div>
                     </div>
@@ -54,8 +56,11 @@
                                     <!-- Profile Image Upload -->
                                     <div class="hs-col-md-6">
                                         <label for="img" class="hs-form-control-label">Image</label>
-                                        <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
+                                        <input type="file" class="hs-form-control @error('img') hs-is-invalid @enderror" name="img" id="adminImageInput"
                                                accept="image/*">
+                                        @error('img')
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="hs-row">
@@ -63,8 +68,11 @@
                                     <div class="hs-col-md-6">
                                         <div class="hs-form-group">
                                             <label for="example-text-input" class="hs-form-control-label">Email address</label>
-                                            <input class="hs-form-control" type="email" name="email"
+                                            <input class="hs-form-control @error('email') hs-is-invalid @enderror" type="email" name="email"
                                                    value="{{ old('email', auth()->user()->email) }}">
+                                            @error('email')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -73,16 +81,22 @@
                                     <div class="hs-col-md-6">
                                         <div class="hs-form-group">
                                             <label for="example-text-input" class="hs-form-control-label">First name</label>
-                                            <input class="hs-form-control" type="text" name="firstname"
+                                            <input class="hs-form-control @error('firstname') hs-is-invalid @enderror" type="text" name="firstname"
                                                    value="{{ old('firstname', auth()->user()->firstname) }}">
+                                            @error('firstname')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <!-- Last name input -->
                                     <div class="hs-col-md-6">
                                         <div class="hs-form-group">
                                             <label for="example-text-input" class="hs-form-control-label">Last name</label>
-                                            <input class="hs-form-control" type="text" name="lastname"
+                                            <input class="hs-form-control @error('lastname') hs-is-invalid @enderror" type="text" name="lastname"
                                                    value="{{ old('lastname', auth()->user()->lastname) }}">
+                                            @error('lastname')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -101,3 +115,17 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        document.getElementById('adminImageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('adminImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

@@ -30,8 +30,8 @@ class UserController extends Controller
                 ->paginate(8);
 
             if ($users->isEmpty()) {
-
-                session()->flash('warning_users', 'Nothing to show with "' . $search_param . '".');
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('users.index');
             }
             return view('pages.users.users', compact('users', 'search_param'));
 
@@ -142,7 +142,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('warning', 'User disabled successfully');
     }
 
     public function recover(string $id)

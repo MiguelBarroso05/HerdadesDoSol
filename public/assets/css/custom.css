@@ -228,23 +228,6 @@ input.hs-form-control::placeholder {
     border-radius: 20px !important;
 }
 
-/*PaymentMethod Page*/
-.hs-card-selected {
-    border: 2px solid #ffbf65;
-}
-/* .hs-card img {
-    width: 50px;
-} */
-
-.hs-cursor-pointer {
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.hs-cursor-pointer:hover {
-    transform: translateY(-2px);
-}
-
-
 /* Mobile */
 @media only screen and (max-width: 768px) {
     .mobile-hidden {
@@ -279,3 +262,5 @@ a {
     border: 1px solid #ffbf65 !important;
     background-color: #fff9f1 !important;
 }
+
+

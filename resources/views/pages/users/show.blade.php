@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Profile'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'User'])
 
     <div class="col-admin">
         <!-- Profile Card Section -->

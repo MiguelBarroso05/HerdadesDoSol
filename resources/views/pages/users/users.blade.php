@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'All Users'])
-    <x-custom-alert type="warning" :session="session('warning-users')" />
+    <x-custom-alert type="warning" :session="session('warning')" />
     <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
         <div class="hs-container-fluid">
@@ -20,7 +20,11 @@
                             </div>
                             <div>
                                 <!-- Button Create New -->
-                                <x-custom-button type="createNew" route="{{ route('users.create') }}"/>
+                                <a href="{{ route('estates.create') }}"
+                                   class="hs-mx-2"
+                                   data-toggle="tooltip">
+                                    <i class="bi bi-person-add hs-fs-3"></i>
+                                </a>
                             </div>
                         </div>
 

@@ -24,8 +24,8 @@ class EstateController extends Controller
                 ->paginate(6);
 
             if ($estates->isEmpty()) {
-                $estates = Estate::withTrashed()->paginate(6);
-                session()->flash('warning_estates', 'Nothing to show with "' . $search_param . '".');
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('estates.index');
             }
             return view('pages.estates.index', compact('estates', 'search_param'));
         } else {
@@ -81,7 +81,7 @@ class EstateController extends Controller
                 $estate->save();
             }
 
-            return redirect()->route('estates.index');
+            return redirect()->route('estates.index')->with('success', 'Estate created successfully.');
         }catch(\Exception $e){
             return redirect()->back()->with('error', 'Error creating estate: ' . $e->getMessage());
         }
@@ -142,7 +142,7 @@ class EstateController extends Controller
                 $estate->save();
             }
 
-            return redirect()->route('estates.show', $estate);
+            return redirect()->route('estates.show', $estate)->with('success', 'Estate updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error creating estate: ' . $e->getMessage());
         }
@@ -154,7 +154,7 @@ class EstateController extends Controller
     public function destroy(Estate $estate)
     {
         $estate->delete();
-        return redirect()->route('estates.index');
+        return redirect()->route('estates.index')->with('warning', $estate->name .' in maintenance');
     }
 
     public function recover(string $id)

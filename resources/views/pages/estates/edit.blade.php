@@ -17,7 +17,7 @@
                             <div class="hs-card-header hs-pb-0 rounded-2xl">
                                 <div class="hs-d-flex hs-align-items-center justify-between">
                                     <p class="hs-mb-0">Edit Estate</p>
-                                    <x-custom-button type="cancelIcon" route="{{url()->previous()}}"/>
+                                    <x-custom-button type="cancelIcon" route="{{route('estates.index')}}"/>
                                 </div>
                             </div>
 

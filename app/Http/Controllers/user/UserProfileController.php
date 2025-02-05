@@ -20,11 +20,6 @@ class UserProfileController extends Controller
             'lastname' => ['max:100'],
             'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore(auth()->user()->id),],
             'img' => 'nullable|image|max:2048',
-            'address' => ['max:100'],
-            'city' => ['max:100'],
-            'country' => ['max:100'],
-            'postal' => ['max:100'],
-            'about' => ['max:255']
         ]);
 
         $user = auth()->user();
@@ -33,11 +28,6 @@ class UserProfileController extends Controller
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
             'email' => $request->get('email'),
-            'address' => $request->get('address'),
-            'city' => $request->get('city'),
-            'country' => $request->get('country'),
-            'postal' => $request->get('postal'),
-            'about' => $request->get('about')
         ]);
 
         if ($request->hasFile('img')) {
@@ -48,6 +38,6 @@ class UserProfileController extends Controller
         }
 
         $user->update($dataToUpdate);
-        return back()->with('succes', 'Profile succesfully updated');
+        return redirect()->back()->with('success', 'Profile succesfully updated');
     }
 }
