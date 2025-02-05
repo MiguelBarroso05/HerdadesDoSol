@@ -47,6 +47,32 @@
             <div style="width: 78%;" class="bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column">
                 <div class="hs-text-black hs-fs-5 hs-pb-1"></div>
                 <livewire:show-wishlist/>
+                <div class="row flex flex-wrap hs-col-12 hs-mt-4 ">
+                    <div class="hs-col-3 hs-mb-4">
+                    <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                    <div class="hs-col-3">
+                        <x-card-wishlist/>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

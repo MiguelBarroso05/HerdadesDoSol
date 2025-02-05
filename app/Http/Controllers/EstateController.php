@@ -6,6 +6,7 @@ use App\Http\Requests\EstateRequest;
 use App\Models\Address;
 use App\Models\Estate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EstateController extends Controller
 {
@@ -14,20 +15,21 @@ class EstateController extends Controller
      */
     public function index(Request $request)
     {
-        // Fetch paginated users, including soft-deleted ones
+        // Fetch paginated estates, including soft-deleted ones
         $search_param = $request->query('search_estates');
 
         if ($search_param) {
             $estates = Estate::withTrashed()
                 ->where('name', 'like', '%' . $search_param . '%')
-                ->paginate(8);
+                ->paginate(6);
 
             if ($estates->isEmpty()) {
+                $estates = Estate::withTrashed()->paginate(6);
                 session()->flash('warning_estates', 'Nothing to show with "' . $search_param . '".');
             }
             return view('pages.estates.index', compact('estates', 'search_param'));
         } else {
-            $estates = Estate::withTrashed()->paginate(8);
+            $estates = Estate::withTrashed()->paginate(6);
             return view('pages.estates.index', compact('estates'));
         }
     }
@@ -43,39 +45,45 @@ class EstateController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EstateRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'country' => 'required',
-            'city' => 'required',
-            'street' => 'required',
-            'zipcode' => 'required',
-        ]);
-        $alreadyExistsaddrees = Address::where('country',
-            $validated['country'])->where('city',
-            $validated['city'])->where('street',
-            $validated['street'])->where('zipcode',
-            $validated['zipcode'])->first();
-        if ($alreadyExistsaddrees) {
+        try {
+            $validated = $request->validated();
+
+            $alreadyExistsAddrees = Address::where('country', $validated['country'])
+                ->where('city', $validated['city'])
+                ->where('street', $validated['street'])
+                ->where('zipcode', $validated['zipcode'])
+                ->first();
+
+            if ($alreadyExistsAddrees) {
+                $addressId = $alreadyExistsAddrees->id;
+            } else {
+                $address = new Address();
+                $address->country = $validated['country'];
+                $address->city = $validated['city'];
+                $address->street = $validated['street'];
+                $address->zipcode = $validated['zipcode'];
+                $address->save();
+                $addressId = $address->id;
+            }
+
             $estate = new Estate();
             $estate->name = $validated['name'];
-            $estate->address_id = $alreadyExistsaddrees->id;
+            $estate->address_id = $addressId;
             $estate->save();
-            return redirect()->route('pages.estates.index');
-        }
-        else {
-            $address = new Address();
-            $address->country = $validated['country'];
-            $address->city = $validated['city'];
-            $address->street = $validated['street'];
-            $address->zipcode = $validated['zipcode'];
-            $address->save();
-            $estate = new Estate();
-            $estate->name = $validated['name'];
-            $estate->address_id = $address->id;
-            $estate->save();
-            return redirect()->route('pages.estates.index');
+
+            if ($request->hasFile('img')) {
+                $img = $request->file('img');
+                $filename = $estate->id . '_' . Str::slug($estate->name) . '.' . $img->getClientOriginalExtension();
+                $url = $img->storeAs('estates', $filename, 'public');
+                $estate->img = $url;
+                $estate->save();
+            }
+
+            return redirect()->route('estates.index');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', 'Error creating estate: ' . $e->getMessage());
         }
     }
 
@@ -100,13 +108,43 @@ class EstateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EstateRequest $request, Estate $estates)
+    public function update(EstateRequest $request, Estate $estate)
     {
         try {
             $validated = $request->validated();
-            $dataToUpdate = $validated;
-        } catch (\Exception $e) {
 
+            $alreadyExistsAddrees = Address::where('country', $validated['country'])
+                ->where('city', $validated['city'])
+                ->where('street', $validated['street'])
+                ->where('zipcode', $validated['zipcode'])
+                ->first();
+
+            if ($alreadyExistsAddrees) {
+                $addressId = $alreadyExistsAddrees->id;
+            } else {
+                $address = new Address();
+                $address->country = $validated['country'];
+                $address->city = $validated['city'];
+                $address->street = $validated['street'];
+                $address->zipcode = $validated['zipcode'];
+                $address->save();
+                $addressId = $address->id;
+            }
+            $estate->name = $validated['name'];
+            $estate->address_id = $addressId;
+            $estate->save();
+
+            if ($request->hasFile('img')) {
+                $img = $request->file('img');
+                $filename = $estate->id . '_' . Str::slug($estate->name) . '.' . $img->getClientOriginalExtension();
+                $url = $img->storeAs('estates', $filename, 'public');
+                $estate->img = $url;
+                $estate->save();
+            }
+
+            return redirect()->route('estates.show', $estate);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error creating estate: ' . $e->getMessage());
         }
     }
 

@@ -41,8 +41,9 @@ label:has(input[type="radio"]:checked) {
 
 /* App layout */
 .app-image {
-    background-image: url("../../imgs/pages/app_banner.jpg") !important;
-    background-position-y: 65%;
+    background: linear-gradient(rgba(186, 227, 233, 0.6), rgba(186, 227, 233, 0.6)),
+    url("../../imgs/pages/home_banner.png");
+    background-position-y: 47%;
     background-position-x: 50%;
 }
 
@@ -50,6 +51,7 @@ label:has(input[type="radio"]:checked) {
     padding: 0 !important;
     margin-left: 282px !important;
     width: 84% !important;
+    margin-top: 10rem;
 }
 
 .div-close {

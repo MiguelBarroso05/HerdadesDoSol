@@ -21,9 +21,11 @@ class EstateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->route('estate')->id;
+
         return [
-            'name' => 'required',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|unique:estates,name'. ($id ? ',' . $id : ''),
+            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'country' => 'required|string',
             'city' => 'required|string',
             'street' => 'required|string',
@@ -35,7 +37,9 @@ class EstateRequest extends FormRequest
     {
         return [
             'name.required' => 'The name is required.',
+            'name.unique' => 'The name has already been taken.',
             'img.image' => 'The image must be an image.',
+            'img.mimes' => 'The image must be of type: jpeg, jpg, png.',
             'country.required' => 'The country is required.',
             'city.required' => 'The city is required.',
             'street.required' => 'The street is required.',

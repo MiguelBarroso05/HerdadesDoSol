@@ -5,7 +5,7 @@
     <x-custom-alert type="warning" :session="session('warning_estates')" />
     <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
-        <div class="hs-container-fluid hs-py-4">
+        <div class="hs-container-fluid">
             <div class="hs-row">
                 <div class="hs-col-12">
                     <!-- Card container for the Users table -->
@@ -20,7 +20,11 @@
                             </div>
                             <div>
                                 <!-- Button Create New -->
-                                <x-custom-button type="createNew" route="{{ route('estates.create') }}"/>
+                                <a href="{{ route('estates.create') }}"
+                                   class="hs-mx-2"
+                                   data-toggle="tooltip">
+                                    <i class="bi bi-house-add hs-fs-3"></i>
+                                </a>
                             </div>
                         </div>
 
@@ -35,7 +39,7 @@
                                         <th class="hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                             Name
                                         </th>
-                                        <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                        <th class="hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                             Location
                                         </th>
                                         <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
@@ -67,7 +71,7 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="hs-d-flex hs-px-2 hs-py-1 place-self-center">
+                                                <div class="hs-d-flex hs-px-2 hs-py-1">
                                                     <div class="hs-d-flex hs-flex-column hs-justify-content-center">
                                                         <h6 class="hs-mb-0 hs-text-sm">{{ $estate->address->city }}</h6>
                                                         <p class="hs-mb-0 hs-text-sm">{{ $estate->address->street }}</p>

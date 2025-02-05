@@ -2,163 +2,148 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Create Estate'])
-
     <div class="col-admin">
-        <!-- Edit Form -->
-        <div class="hs-container-fluid hs-py-4 hs-mt-8">
-            <div class="hs-row hs-justify-content-center">
-                <div class="hs-col-md-8">
-                    <!-- Error Messages -->
-                    <x-general-errors/>
-
-                    <!-- User Information Card -->
+        <div class="hs-container-fluid ">
+            <div class="hs-row place-content-center">
+                <div class="hs-col-md-5">
+                    <!-- Estate Edit Form -->
                     <div class="hs-card">
-                        <form action="{{ route('estates.store',) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('estates.store') }}" method="POST"
+                              enctype="multipart/form-data">
                             @csrf
-                            <div class="hs-card-header hs-pb-0">
-                                <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
+                            <!-- Form Header -->
+                            <div class="hs-card-header hs-pb-0 rounded-2xl">
+                                <div class="hs-d-flex hs-align-items-center justify-between">
                                     <p class="hs-mb-0">Create Estate</p>
-                                    <!-- Action Buttons -->
-                                    <div>
-                                        <!-- Create button -->
-                                        <x-custom-button type="create" route={{null}}/>
-                                        <!-- Cancel button-->
-                                        <x-custom-button type="cancel" route="{{ route('estates.index') }}"/>
-                                    </div>
+                                    <x-custom-button type="cancelIcon" route="{{url()->previous()}}"/>
                                 </div>
                             </div>
 
                             <div class="hs-card-body">
-                                <!-- Mandatory Information Section -->
-                                <p class="hs-text-uppercase hs-text-sm">Estate Information</p>
+                                <!-- Estate Information Section -->
                                 <div class="hs-row">
-                                    <!-- Name Input -->
-                                    <div class="hs-col-md-12">
+                                    <!-- Name input -->
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
-                                            <label for="name" class="hs-form-control-label">Estate Name</label>
-                                            <input class="hs-form-control @error('email') hs-is-invalid @enderror" type="text"
-                                                   name="name" value="{{ old('name') }}" required>
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Estate
+                                                Name</label>
+                                            <input class="hs-form-control @error('name') hs-is-invalid @enderror" type="text" name="name" placeholder="Name"
+                                                   value="{{ old('name') }}">
                                             @error('name')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
-                                    <!--  Information Section -->
-                                    <hr>
-                                    <p class="hs-text-uppercase hs-text-sm">Address Information</p>
-
-                                    <div class="hs-col-md-4">
-                                        <div class="hs-form-group">
-                                            <label for="addressIdentifier" class="hs-form-control-label">Identifier</label>
-                                            <input
-                                                class="hs-form-control @error('addressIdentifier') hs-is-invalid @enderror"
-                                                type="text" name="addressIdentifier"
-                                                placeholder="Home"
-                                                value="{{ old('addressIdentifier') }}">
-                                            @error('addressIdentifier')
-                                            <div class="hs-invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                    <!-- Profile Image Upload -->
+                                    <div class="hs-col-md-5">
+                                        <label for="img" class="hs-form-control-label">Image</label>
+                                        <input type="file" class="hs-form-control @error('img') hs-is-invalid @enderror" name="img"
+                                               id="estateImageInput"
+                                               accept="image/*">
+                                        @error('img')
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
+                                </div>
+                                <hr class="hs-horizontal hs-dark">
 
-                                    <!-- Phone Number Input -->
-                                    <div class="hs-col-md-4">
+                                <p class="hs-text-uppercase hs-text-sm">Address Information</p>
+                                <div class="hs-row">
+                                    <!-- Country input -->
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
-                                            <label for="addressPhone" class="hs-form-control-label">Phone Number</label>
+                                            <label for="country"
+                                                   class="hs-form-control-label">Country</label>
                                             <input
-                                                class="hs-form-control @error('addressPhone') hs-is-invalid @enderror"
-                                                type="text" name="addressPhone"
-                                                placeholder="+000 000 000 000"
-                                                value="{{ old('addressPhone') }}">
-                                            @error('addressPhone')
-                                            <div class="hs-invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <!-- Country Input -->
-                                    <div class="hs-col-md-4">
-                                        <div class="hs-form-group">
-                                            <label for="address[country]" class="hs-form-control-label">Country</label>
-                                            <input
-                                                class="hs-form-control @error('address.country') hs-is-invalid @enderror"
-                                                name="address[country]" type="text"
+                                                class="hs-form-control @error('country') hs-is-invalid @enderror"
+                                                name="country" type="text"
                                                 placeholder="Name"
-                                                value="{{ old('address[country]') }}">
-                                            @error('address.country')
+                                                value="{{ old('country') }}">
+                                            @error('country')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
 
-                                    <!-- City Input -->
-                                    <div class="hs-col-md-8">
+                                    <!-- City input -->
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
-                                            <label for="address[city]" class="hs-form-control-label">City</label>
+                                            <label for="city" class="hs-form-control-label">City</label>
                                             <input
-                                                class="hs-form-control @error('address.city') hs-is-invalid @enderror"
+                                                class="hs-form-control @error('city') hs-is-invalid @enderror"
+                                                name="city" type="text"
                                                 placeholder="Name"
-                                                type="text" name="address[city]"
-                                                value="{{ old('address[city]') }}">
-                                            @error('address.city')
-                                            <div class="hs-invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <!-- Zipcode Input -->
-                                    <div class="hs-col-md-4">
-                                        <div class="hs-form-group">
-                                            <label for="address[zipcode]" class="hs-form-control-label">Zipcode</label>
-                                            <input
-                                                class="hs-form-control @error('address.zipcode') hs-is-invalid @enderror"
-                                                type="text" name="address[zipcode]"
-                                                placeholder="0000-000"
-                                                value="{{ old('address[zipcode]') }}">
-                                            @error('address.zipcode')
-                                            <div class="hs-invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                    <!-- Street Input -->
-                                    <div class="hs-col-md-12">
-                                        <div class="hs-form-group">
-                                            <label for="address[street]" class="hs-form-control-label">Street</label>
-                                            <input
-                                                class="hs-form-control @error('address.street') hs-is-invalid @enderror"
-                                                type="text" name="address[street]"
-                                                placeholder="Name, number, floor"
-                                                value="{{ old('address[street]') }}">
-                                            @error('address.street')
+                                                value="{{ old('city') }}">
+                                            @error('city')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
+                                <div class="hs-row">
+                                    <!-- Street input -->
+                                    <div class="hs-col-md-5">
+                                        <div class="hs-form-group">
+                                            <label for="street"
+                                                   class="hs-form-control-label">Street</label>
+                                            <input
+                                                class="hs-form-control @error('street') hs-is-invalid @enderror"
+                                                name="street" type="text"
+                                                placeholder="Name"
+                                                value="{{ old('street') }}">
+                                            @error('street')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <!-- Zipcode input -->
+                                    <div class="hs-col-md-5">
+                                        <div class="hs-form-group">
+                                            <label for="zipcode"
+                                                   class="hs-form-control-label">Zipcode</label>
+                                            <input
+                                                class="hs-form-control @error('zipcode') hs-is-invalid @enderror"
+                                                name="zipcode" type="text"
+                                                placeholder="Name"
+                                                value="{{ old('zipcode') }}">
+                                            @error('zipcode')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <x-custom-button type="create" route="{{null}}"/>
                             </div>
                         </form>
                     </div>
                 </div>
+
+                <!-- Side Image Section -->
+                <div class="hs-col-md-4">
+                    <img src="{{ asset('/imgs/users/no-image.png') }}"
+                         id="estateImage" class="w-auto h-[472px]"
+                         style="object-fit: cover; border-radius: 24px;">
+                </div>
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script>
-            document.getElementById('inputGroupFile02').addEventListener('change', function (event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        document.getElementById('profilePreview').src = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        </script>
-    @endpush
 @endsection
+@push('js')
+    <script>
+        document.getElementById('estateImageInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('estateImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush
 
 

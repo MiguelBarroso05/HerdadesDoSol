@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('estates', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image')->nullable();
+            $table->string('img')->nullable();
             $table->unsignedBigInteger('address_id');
             $table->timestamps();
             $table->softDeletes();

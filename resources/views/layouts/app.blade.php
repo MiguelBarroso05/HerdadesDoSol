@@ -34,12 +34,18 @@
 
             @include('layouts.footers.footer')
         @else
-            @if (in_array(request()->route()->getName(), ['home']))
+            @if (in_array(request()->route()->getName(), ['home', 'products.index', 'products.show', 'checkout', 'reservation.create']))
                 <div></div>
-            @elseif (!in_array(request()->route()->getName(), ['home']))
+            @else
                 <div class="hs-position-absolute hs-w-100 hs-min-height-200 hs-top-0 app-image">
-                    <span class="hs-mask hs-bg-primary hs-opacity-6"></span>
+                    <span class="hs-mask hs-opacity-6"></span>
                 </div>
+                <style>
+                    body{
+                        background-image: none;
+                        background-color: #00000017;
+                    }
+                </style>
             @endif
             @include('layouts.navbars.auth.sidenav')
             <main class="hs-main-content hs-border-radius-lg hs-mt-0 hs-flex-grow-1">

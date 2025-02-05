@@ -30,6 +30,7 @@ class UserController extends Controller
                 ->paginate(8);
 
             if ($users->isEmpty()) {
+
                 session()->flash('warning_users', 'Nothing to show with "' . $search_param . '".');
             }
             return view('pages.users.users', compact('users', 'search_param'));

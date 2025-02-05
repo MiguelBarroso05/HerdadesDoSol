@@ -62,17 +62,17 @@ Route::group(['middleware' => 'guest'], function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    
+
     #Route Clients
-    
-    
-    
+
+
+
     Route::resource('products', ProductController::class)->except(['index']);;
     Route::get('/checkout', function () {
-        $isReservation = request('isReservation', false); 
+        $isReservation = request('isReservation', false);
         return view('pages.checkout.index', compact('isReservation'));
     })->name('checkout');
-    
+
     Route::get('/account', function () {
         return view('pages.client.account');
     })->name('account');
@@ -92,10 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('pages.client.wishlist');
     })->name('wishlist');
     Route::get('/history', function () {
-        return view('client.history');
+        return view('pages.client.history');
     })->name('history');
     Route::get('/reviews', function () {
-        return view('client.reviews');
+        return view('pages.client.reviews');
     })->name('reviews');
     Route::get('/support', function () {
         return view('client.support');

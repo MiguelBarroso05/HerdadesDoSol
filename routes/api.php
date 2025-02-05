@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AccommodationController;
 use App\Http\Controllers\Api\ActivityController;
+use App\Http\Controllers\Api\PaymentMethodController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;

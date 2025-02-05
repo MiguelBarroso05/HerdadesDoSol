@@ -4,7 +4,7 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Activity Types'])
 
     <div class="col-admin">
-        <div class="hs-container-fluid hs-py-4">
+        <div class="hs-container-fluid">
             <div class="hs-row">
                 <div class="hs-col-12">
                     <!-- Success Message -->

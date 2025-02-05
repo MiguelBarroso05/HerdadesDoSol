@@ -5,7 +5,7 @@
     <x-custom-alert type="warning" :session="session('warning-users')" />
     <x-custom-alert type="success" :session="session('success')" />
     <div class="col-admin">
-        <div class="hs-container-fluid hs-py-4">
+        <div class="hs-container-fluid">
             <div class="hs-row">
                 <div class="hs-col-12">
                     <!-- Card container for the Users table -->

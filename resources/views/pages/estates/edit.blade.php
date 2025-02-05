@@ -4,40 +4,20 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Estate'])
 
     <div class="col-admin">
-        <!-- Estate Card Section -->
-        <div class="hs-card hs-shadow-lg hs-mx-4 hs-card-profile-bottom">
-            <div class="hs-card-body hs-p-3">
-                <div class="hs-row hs-gx-4">
-                    <!-- Estate name -->
-                    <div class="hs-col-auto hs-my-auto">
-                        <div class="hs-h-100">
-                            <h5 class="hs-mb-1">
-                                {{ $estate->name}}
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hs-container-fluid hs-py-4">
+        <div class="hs-container-fluid ">
             <div class="hs-row place-content-center">
-                <div class="hs-col-md-6">
+                <div class="hs-col-md-5">
                     <!-- Estate Edit Form -->
                     <div class="hs-card">
                         <form role="form" method="POST"
-                              action={{ route('estates.update', $estate->id) }} enctype="multipart/form-data">
+                              action={{ route('estates.update', $estate) }} enctype="multipart/form-data">
                             @csrf <!-- CSRF token for security -->
-
+                            @method('PUT')
                             <!-- Form Header -->
                             <div class="hs-card-header hs-pb-0 rounded-2xl">
                                 <div class="hs-d-flex hs-align-items-center justify-between">
                                     <p class="hs-mb-0">Edit Estate</p>
-                                    <div class="hs-col-6 text-end">
-                                        <!-- Submit button -->
-                                        <x-custom-button type="update" route="{{null}}"/>
-
-                                        <x-custom-button type="cancel" route="{{ route('estates.index') }}"/>
-                                    </div>
+                                    <x-custom-button type="cancelIcon" route="{{url()->previous()}}"/>
                                 </div>
                             </div>
 
@@ -45,20 +25,26 @@
                                 <!-- Estate Information Section -->
                                 <div class="hs-row">
                                     <!-- Name input -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
                                             <label for="example-text-input" class="hs-form-control-label">Estate
                                                 Name</label>
-                                            <input class="hs-form-control" type="text" name="name"
+                                            <input class="hs-form-control @error('name') hs-is-invalid @enderror" type="text" name="name"
                                                    value="{{ old('name', $estate->name) }}">
+                                            @error('name')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
                                     <!-- Profile Image Upload -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <label for="img" class="hs-form-control-label">Image</label>
-                                        <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
+                                        <input type="file" class="hs-form-control @error('img') hs-is-invalid @enderror" name="img" id="estateImageInput"
                                                accept="image/*">
+                                        @error('img')
+                                        <div class="hs-invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <hr class="hs-horizontal hs-dark">
@@ -66,7 +52,7 @@
                                 <p class="hs-text-uppercase hs-text-sm">Address Information</p>
                                 <div class="hs-row">
                                     <!-- Country input -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
                                             <label for="country" class="hs-form-control-label">Country</label>
                                             <input
@@ -81,7 +67,7 @@
                                     </div>
 
                                     <!-- City input -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
                                             <label for="city" class="hs-form-control-label">City</label>
                                             <input
@@ -97,7 +83,7 @@
                                 </div>
                                 <div class="hs-row">
                                     <!-- Street input -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
                                             <label for="street" class="hs-form-control-label">Street</label>
                                             <input
@@ -112,20 +98,21 @@
                                     </div>
 
                                     <!-- Zipcode input -->
-                                    <div class="hs-col-md-4">
+                                    <div class="hs-col-md-5">
                                         <div class="hs-form-group">
                                             <label for="zipcode" class="hs-form-control-label">Zipcode</label>
                                             <input
                                                 class="hs-form-control @error('zipcode') hs-is-invalid @enderror"
-                                                name="address[zipcode]" type="text"
+                                                name="zipcode" type="text"
                                                 placeholder="Name"
-                                                value="{{ old('address[zipcode]', $estate->address->zipcode) }}">
-                                            @error('address.zipcode')
+                                                value="{{ old('zipcode', $estate->address->zipcode) }}">
+                                            @error('zipcode')
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
+                                    <x-custom-button type="update" route="{{null}}"/>
                             </div>
                         </form>
                     </div>
@@ -133,10 +120,25 @@
 
                 <!-- Side Image Section -->
                 <div class="hs-col-md-4">
-                        <img src="{{ $estate->img ? asset('storage/'.$estate->img) : asset('/imgs/users/no-image.png') }}" class="w-auto h-[440px]"
-                             style="object-fit: cover; border-radius: 24px;">
+                    <img src="{{ $estate->img ? asset('storage/'.$estate->img) : asset('/imgs/users/no-image.png') }}"
+                         id="estateImage" class="w-auto h-[472px]"
+                         style="object-fit: cover; border-radius: 24px;">
                 </div>
             </div>
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        document.getElementById('estateImageInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('estateImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+@endpush

@@ -53,7 +53,7 @@
 <div>
     <div class="hs-d-flex hs-justify-content-between">
         <div>
-            Wishlist
+            Reviews
         </div>
         <div class="hs-fs-8">
             return
@@ -62,7 +62,7 @@
     <div>
         <div class="hs-row hs-mt-3">
             <div class="hs-col-6 hs-fs-4 hs-text-black hs-mt-2">
-                Your Wishlist
+                Your Reviews
             </div>
             <div class="hs-col-6 flex hs-justify-content-between">
                 <div>

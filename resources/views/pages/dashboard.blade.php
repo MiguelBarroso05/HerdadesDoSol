@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
 
-    <div class="hs-container-fluid hs-py-4 hs-flex-grow-1 col-admin">
+    <div class="hs-container-fluid hs-flex-grow-1 col-admin">
         <div class="hs-row">
             <!-- Total Users -->
             <div class="hs-col-xl-3 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
