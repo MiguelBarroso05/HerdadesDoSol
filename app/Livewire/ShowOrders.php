@@ -9,7 +9,7 @@ class ShowOrders extends Component
 {
     public $seeBookings;
     public $orders;
-    public $bookings; //Ainda nao implementado
+    public $bookings;
     public $expandedOrderId = null;
 
     public function mount(){

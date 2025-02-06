@@ -27,7 +27,7 @@
                             </div>
 
                             <!-- Phone Number Input -->
-                            <div class="hs-col-md-4">
+                            <div class="hs-col-md-4">-
                                 <div class="hs-form-group">
                                     <label for="addressPhone" class="hs-form-control-label">Phone Number</label>
                                     <input
@@ -38,7 +38,6 @@
                                     <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                 </div>
                             </div>
-
                             <!-- Country Input -->
                             <div class="hs-col-md-4">
                                 <div class="hs-form-group" wire:ignore>

@@ -22,6 +22,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $id = $this->route('user');
+        $nationalityRule = $this->input('api_failed') ? 'nullable' : 'required';
 
         return [
             /*Campos comuns entre clientes e admins*/
@@ -31,7 +32,7 @@ class UserRequest extends FormRequest
             'nif' => 'nullable|size:9|unique:users,nif' . ($id ? ',' . $id : ''),
             'password' => $id ? 'nullable|min:8' : 'required|min:8|confirmed',
             'birthdate' => 'nullable|date|before:18 years ago',
-            'nationality' => 'required',
+            'nationality' => $nationalityRule,
             'language' => 'required',
             'standard_group' => 'nullable|integer|max:8',
             'children' => 'nullable|integer|max:8',
@@ -83,9 +84,9 @@ class UserRequest extends FormRequest
             // Nif validation messages
             'nif.unique' => 'The nif already exists.',
             'nif.size' => 'The nif must be 9 characters.',
-
+            
             // Nationality validation messages
-            'nationality.required' => 'The nationality field is required.',
+            'nationality.' => 'The nationality field is required.',
 
             // Language validation messages
             'language.required' => 'The language field is required.',

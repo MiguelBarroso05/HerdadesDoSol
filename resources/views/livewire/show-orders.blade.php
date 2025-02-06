@@ -2,8 +2,7 @@
     <div class="hs-d-flex hs-justify-content-between hs-py-2" style="border-bottom: solid #B3B3B3 2px">
         <div class="hs-d-flex hs-justify-content-between hs-col-md-2">
             <a class="@if($seeBookings) hs-fw-bold @endif cursor-pointer" wire:click="showBookings">Bookings</a>
-            <a class="@if(!$seeBookings) hs-fw-bold @endif cursor-pointer" wire:click="showOrders">My
-                Products</a>
+            <a class="@if(!$seeBookings) hs-fw-bold @endif cursor-pointer" wire:click="showOrders">My Products</a>
         </div>
         <div wire:ignore>
             <div style="width: 222px;">
@@ -112,13 +111,15 @@
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Estate Address</p>
                                     <p class="text-xs mb-1">{{$order->estate->name}}</p>
-                                    <p class="text-xs mb-1">{{$order->estate->address->zipcode}}, {{$order->estate->address->city}}</p>
+                                    <p class="text-xs mb-1">{{$order->estate->address->zipcode}}
+                                        , {{$order->estate->address->city}}</p>
                                     <p class="text-xs mb-1">{{$order->estate->address->country}}</p>
                                 </div>
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Billing Address</p>
                                     <p class="text-xs mb-1">{{$order->invoice->billing->address->street}}</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->zipcode}}, {{$order->invoice->billing->address->city}}</p>
+                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->zipcode}}
+                                        , {{$order->invoice->billing->address->city}}</p>
                                     <p class="text-xs mb-1">{{$order->invoice->billing->address->country}}</p>
                                 </div>
                             </div>
@@ -126,7 +127,8 @@
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Order Amount</p>
                                     <p class="text-xs mb-1">{{$order->price}} €</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->payment_method->type}} ending in {{$order->invoice->payment_method->last4}}</p>
+                                    <p class="text-xs mb-1">{{$order->invoice->payment_method->type}} ending
+                                        in {{$order->invoice->payment_method->last4}}</p>
                                     <p class="text-xs mb-1 uppercase">{{$order->invoice->payment_method->name}}</p>
                                 </div>
                                 <div class="hs-col-6 content-center">
@@ -158,7 +160,11 @@
                             <p>{{$order->created_at->format('d-m-Y')}}</p>
                         </div>
                     </div>
-                    <span class="text-secondary">{{$totalQuantity}} @if($totalQuantity == 1) Product @else Products @endif ordered</span>
+                    <span class="text-secondary">{{$totalQuantity}} @if($totalQuantity == 1)
+                            Product
+                        @else
+                            Products
+                        @endif ordered</span>
                     <div>
                         @if($order->status == 0)
                             <x-custom-badge text="Canceled" backgroundColor="#FFCACA" color="#D70000"/>
@@ -183,7 +189,8 @@
                                         1
                                     </div>
                                     <div class="ml-4 flex align-items-center">
-                                        <span class="font-semibold">Validated at {{$order->created_at->format('d-m-Y')}}</span>
+                                        <span
+                                            class="font-semibold">Validated at {{$order->created_at->format('d-m-Y')}}</span>
                                     </div>
                                 </div>
 
@@ -203,7 +210,8 @@
                                         3
                                     </div>
                                     <div class="ml-4">
-                                        <span class="font-semibold">{{$order->delivered_at ? 'Issued at '. $order->delivered_at->format('d-m-Y') : 'For issuing'}}</span>
+                                        <span
+                                            class="font-semibold">{{$order->delivered_at ? 'Issued at '. $order->delivered_at->format('d-m-Y') : 'For issuing'}}</span>
                                     </div>
                                 </div>
 
@@ -239,7 +247,8 @@
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Billing Address</p>
                                     <p class="text-xs mb-1">{{$order->invoice->billing->address->street}}</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->zipcode}}, {{$order->invoice->billing->address->city}}</p>
+                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->zipcode}}
+                                        , {{$order->invoice->billing->address->city}}</p>
                                     <p class="text-xs mb-1">{{$order->invoice->billing->address->country}}</p>
                                 </div>
                             </div>
@@ -247,16 +256,19 @@
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Order Amount</p>
                                     <p class="text-xs mb-1">{{$order->price}} €</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->payment_method->type->name}} ending in {{$order->invoice->payment_method->last4}}</p>
+                                    <p class="text-xs mb-1">{{$order->invoice->payment_method->type->name}} ending
+                                        in {{$order->invoice->payment_method->last4}}</p>
                                     <p class="text-xs mb-1 uppercase">{{$order->invoice->payment_method->name}}</p>
                                 </div>
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Actions & Modifications</p>
                                     <div class="w-full">
-                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white" style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
+                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white"
+                                                style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
                                             Print Invoice
                                         </button>
-                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white" style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
+                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white"
+                                                style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
                                             Show Details
                                         </button>
                                     </div>
@@ -268,10 +280,9 @@
             </div>
         @endforeach
     @endif
-    @if($seeBookings && empty($bookings))
+    @if($seeBookings && !$bookings)
         <p class="mt-10">No Bookings to show</p>
-    @endif
-    @if(!$seeBookings && $orders->count() == 0)
+    @elseif(!$seeBookings && $orders->isEmpty())
         <p class="mt-10">No Orders to show</p>
     @endif
 </div>

@@ -3,7 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Your Profile'])
     <x-custom-alert type="success" :session="session('success')" />
-
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <div class="col-admin">
         <!-- Profile Card Section -->
         <div class="hs-card hs-shadow-lg hs-mx-4 hs-card-profile-bottom">

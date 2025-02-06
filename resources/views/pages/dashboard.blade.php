@@ -2,7 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
-
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <div class="hs-container-fluid hs-flex-grow-1 col-admin">
         <div class="hs-row">
             <!-- Total Users -->
@@ -14,7 +16,7 @@
                                 <div class="hs-numbers">
                                     <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">Total Users</p>
                                     <h5 class="hs-font-weight-bolder">
-                                        {{ $totalUsers }}
+                                        {{ $totalUsers }} olha lá, que andas fazende
                                     </h5>
                                 </div>
                             </div>

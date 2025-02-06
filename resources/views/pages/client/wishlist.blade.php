@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <style>
         body {
             background: linear-gradient(rgba(228, 229, 218, 0.8), rgba(228, 229, 218, 0.8)),

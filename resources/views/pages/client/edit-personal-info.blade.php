@@ -3,6 +3,9 @@
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <style>
         body {
             background: linear-gradient(rgba(228, 229, 218, 0.8), rgba(228, 229, 218, 0.8)),
@@ -92,6 +95,7 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <input type="hidden" name="api_failed" value="{{ $apiFailed ? 1 : 0 }}">
 
                                     <!-- Nif Input -->
                                     <div style="width: 195px;">
@@ -186,7 +190,8 @@
 
                             <!-- Profile Image Upload -->
                             <div style="width: 240px;">
-                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02" accept="image/*">
+                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
+                                       accept="image/*">
                             </div>
                             <!-- Language Input -->
                             <div style="width: 240px;">
@@ -253,11 +258,11 @@
 @endsection
 @push('js')
     <script>
-        document.getElementById('inputGroupFile02').addEventListener('change', function(event) {
+        document.getElementById('inputGroupFile02').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     document.getElementById('profileImage').src = e.target.result;
                 };
                 reader.readAsDataURL(file);

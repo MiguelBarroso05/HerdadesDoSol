@@ -2,7 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Create User'])
-
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <!-- Edit Form -->
     <div class="hs-container-fluid hs-py-4 hs-mt-8">
         <div class="hs-row hs-justify-content-center">

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -89,19 +90,21 @@ class UserController extends Controller
             $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
             $countries = $response->json();
             $countries = Arr::sort($countries);
+            $apiFailed = false;
 
         } catch (\Exception $e) {
             $countries = ['No countries loaded'];
+            $apiFailed = true;
         }
 
         $languages = DB::table('languages')->get();
 
         if (auth()->user()->HasRole('admin')) {
             $roles = Role::all()->pluck('name', 'id');
-            return view('pages.users.edit', compact('user', 'roles', 'languages', 'countries'));
+            return view('pages.users.edit', compact('user', 'roles', 'languages', 'countries', 'apiFailed'));
         }
         if (auth()->user()->HasRole('client')) {
-            return view('pages.client.edit-personal-info', compact('user', 'languages', 'countries'));
+            return view('pages.client.edit-personal-info', compact('user', 'languages', 'countries', 'apiFailed'));
         }
     }
 

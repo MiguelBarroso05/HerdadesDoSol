@@ -5,6 +5,9 @@
         <div class="hs-row">
             <div class="hs-col-12">
                 @include('layouts.navbars.guest.navbar')
+                <x-custom-alert type="warning" :session="session('warning')" />
+                <x-custom-alert type="success" :session="session('success')" />
+                <x-custom-alert type="error" :session="session('error')" />
             </div>
         </div>
     </div>

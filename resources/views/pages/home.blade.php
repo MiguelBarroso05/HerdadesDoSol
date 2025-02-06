@@ -2,7 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.guest.navbar')
-
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <main class="hs-main-content mt-0 hs-flex-grow-1">
         <!-- Hero -->
         <section class="hs-bg-cover hs-bg-center hs-align-items-center hs-justify-center hs-text-center home-image hs-min-vh-100">
