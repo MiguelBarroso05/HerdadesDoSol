@@ -20,6 +20,7 @@ class ProductShow extends Component
     {
         $this->quantity = 1;
         $this->product = $product;
+        $this->product->stock = 20;
     }
 
     #[On('valueUpdated')]
@@ -35,13 +36,6 @@ class ProductShow extends Component
         $this->validate([
             'quantity' => 'required|integer|min:1|max:8'
         ]);
-
-        // Chama diretamente o controller
-
-
-
-
-
         return redirect()->route('cart.add', ['id' => $this->product->id, 'quantity' => $this->quantity] );
     }
 }

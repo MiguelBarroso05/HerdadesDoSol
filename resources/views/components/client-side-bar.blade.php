@@ -31,7 +31,7 @@
         <a class="hs-py-3 hs-px-3 {{ Route::is('payment-methods') || Route::is('livewire.update') ? 'active' : '' }}" href="{{ route('payment-methods') }}">
             <i class="bi bi-wallet2 hs-me-3 hs-fs-5"></i>Payment Methods
         </a>
-        <a class="hs-py-3 hs-px-3 {{ Route::is('orders') ? 'active' : '' }}" href="{{ route('orders') }}">
+        <a class="hs-py-3 hs-px-3 {{ Route::is('orders.index') ? 'active' : '' }}" href="{{ route('orders.index') }}">
             <i class="bi bi-book hs-me-3 hs-fs-5"></i>Orders
         </a>
         <a class="hs-py-3 hs-px-3 {{ Route::is('wishlist') ? 'active' : '' }}" href="{{ route('wishlist') }}">

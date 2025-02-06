@@ -12,6 +12,7 @@ use App\Http\Controllers\login\ChangePassword;
 use App\Http\Controllers\login\LoginController;
 use App\Http\Controllers\login\RegisterController;
 use App\Http\Controllers\login\ResetPassword;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\user\UserController;
@@ -66,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     #Route Clients
 
 
-
+    Route::resource('orders', OrderController::class)->except(['index']);
     Route::resource('products', ProductController::class)->except(['index']);;
     Route::get('/checkout', function () {
         $isReservation = request('isReservation', false);
@@ -87,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('payment-methods');
     Route::get('/orders', function () {
         return view('pages.client.orders');
-    })->name('orders');
+    })->name('orders.index');
     Route::get('/wishlist', function () {
         return view('pages.client.wishlist');
     })->name('wishlist');

@@ -9,6 +9,7 @@ class NumberInput extends Component
     public $value = 1;
     public $name;
     public $max;
+    private $processing = false;
     public function render()
     {
         return view('livewire.number-input', [
@@ -32,7 +33,6 @@ class NumberInput extends Component
         if ($this->value == 0) {
             return;
         }
-       
             $this->value--;
             $event = [
                 'name' => $this->name,	

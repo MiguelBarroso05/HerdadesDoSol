@@ -43,7 +43,7 @@ label:has(input[type="radio"]:checked) {
 .app-image {
     background: linear-gradient(rgba(186, 227, 233, 0.6), rgba(186, 227, 233, 0.6)),
     url("../../imgs/pages/home_banner.png");
-    background-position-y: 47%;
+    background-position-y: 60%;
     background-position-x: 50%;
 }
 
@@ -264,3 +264,21 @@ a {
 }
 
 
+/* Scroll Bar Checkout */
+.scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

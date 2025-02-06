@@ -41,12 +41,5 @@ class PaymentMethodRequest extends FormRequest
             'validity.required' => 'The validity is required.',
         ];
     }
-    protected function prepareForValidation()
-    {
-        if ($this->has('number')) {
-            $this->merge([
-                'number' => str_replace(' ', '', $this->input('number')),
-            ]);
-        }
-    }
+   
 }

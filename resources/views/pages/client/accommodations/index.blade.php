@@ -18,7 +18,8 @@
                                     </div>
                                     <div class="hs-d-flex hs-flex-column hs-flex-grow-1 hs-justify-content-between">
                                         <h5 class="hs-card-title">{{ $accommodation->accommodation_types->name }}</h5>
-                                        <p class="hs-card-text" style="max-height: 90px; overflow: ellipsis">{{ $accommodation->description }}</p>
+                                        <p class="hs-card-text" style="max-height: 90px; overflow: ellipsis">
+                                            {{ $accommodation->description }}</p>
                                         <div class="hs-w-100 hs-d-flex hs-justify-content-center mt-3">
                                             <a href="{{ route('reservation.create') }}"
                                                 class="hs-btn hs-btn-primary hs-w-50">Reservar</a>

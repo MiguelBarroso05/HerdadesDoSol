@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('address_id')->constrained('addresses');
             $table->integer('status')->default(0);
             $table->decimal('price', 8, 2);
-            $table->unsignedBigInteger('estate_id')->constrained('estates');
             $table->unsignedBigInteger('invoice_id')->constrained('invoices');
             $table->timestamps();
             $table->softDeletes();

@@ -15,9 +15,11 @@
             style="max-height: 480px;">
             <div>
                 <div class="hs-d-flex hs-align-items-center hs-flex-row mb-3">
-                    <h3 class="me-3">{{ $product->name }}</h3>
+                    <h3 class="me-3 mb-0">{{ $product->name }}</h3>
                     @if ($product->stock == 0)
                     <span class="!text-red-400">Out of stock</span>
+                    @elseif ($product->stock <= 20)
+                    <span class="!text-orange-400">Last units</span>
                     @else
                     <span class="!text-green-400">In stock</span>
                     @endif

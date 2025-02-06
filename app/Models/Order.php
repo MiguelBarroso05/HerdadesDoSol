@@ -8,7 +8,7 @@ use App\Models\user\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Str;
 class Order extends Model
 {
     /** @use HasFactory<\Database\Factories\OrderFactory> */
@@ -18,10 +18,22 @@ class Order extends Model
 
     protected $keyType = 'string';
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($order) {
+            // Gerar UUID quando um novo registo for criado
+            if (!$order->id) {
+                $order->id = Str::uuid()->toString();
+            }
+        });
+    }
+
     protected $fillable = [
         'order_id',
         'user_id',
-        'estate_id',
+        'address_id',
         'invoice_id',
         'status',
         'price'
@@ -34,13 +46,11 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'orders_products');
+        return $this->belongsToMany(Product::class, 'orders_products')
+        ->withPivot('quantity')
+        ->withTimestamps();
     }
 
-    public function estate()
-    {
-        return $this->belongsTo(Estate::class, 'estate_id');
-    }
 
     public function invoice(){
         return $this->belongsTo(Invoice::class, 'invoice_id');
