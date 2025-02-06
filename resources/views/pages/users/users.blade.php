@@ -20,7 +20,7 @@
                             </div>
                             <div>
                                 <!-- Button Create New -->
-                                <a href="{{ route('estates.create') }}"
+                                <a href="{{ route('users.create') }}"
                                    class="hs-mx-2"
                                    data-toggle="tooltip">
                                     <i class="bi bi-person-add hs-fs-3"></i>

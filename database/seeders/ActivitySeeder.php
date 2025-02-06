@@ -24,7 +24,7 @@ class ActivitySeeder extends Seeder
                 'max_participants' => 10,
                 'participants' => 0,
                 'adult_activity' => true,
-                'date' => '2025-01-30',
+                'date' => '2025-02-07',
                 'time' => '10:00',
                 'duration' => 30,
                 'created_at' => now(),

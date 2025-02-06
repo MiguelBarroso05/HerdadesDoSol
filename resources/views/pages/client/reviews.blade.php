@@ -48,8 +48,23 @@
                 <div class="hs-text-black hs-fs-5 hs-pb-1">
                     Latest Reviews
                 </div>
-                <div class="hs-text-black hs-fs-5 hs-pb-1">
-
+                <div class="flex justify-between">
+                    <div class="hs-mt-4">
+                        <x-card-reviews/>
+                    </div>
+                    <div class="hs-mt-4">
+                        <x-card-reviews/>
+                    </div>
+                    <div class="hs-mt-4">
+                        <x-card-reviews/>
+                    </div>
+                    <div class="hs-align-content-center">View All</div>
+                </div>
+                <div class="hs-text-black hs-fs-5 hs-pb-1 hs-mt-4">
+                    Reviews your products
+                </div>
+                <div class="hs-mt-4">
+                    You have not purchased any products or visited any of our estates, please consider trying one of our products or an experience at one of our estates.
                 </div>
             </div>
         </div>

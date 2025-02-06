@@ -27,6 +27,11 @@ class PaymentMethod extends Model
         'number'
     ];
 
+    public function getValidityAttribute($value)
+    {
+        return date('m/y', strtotime($value));
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

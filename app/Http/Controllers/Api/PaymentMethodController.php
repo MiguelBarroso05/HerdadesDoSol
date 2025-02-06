@@ -34,9 +34,14 @@ class PaymentMethodController extends Controller
             'name' => 'required|string|max:255',
             'number' => 'required|string|max:16|unique:payment_methods,number',
             'validity' => 'required|string|max:5|regex:/^\d{2}\/\d{2}$/',
+            'predefined' => 'boolean',
         ]);
 
         $user = Auth::user();
+
+        if ($validated['predefined']) {
+            $user->paymentMethods()->update(['predefined' => false]);
+        }
 
         $paymentMethod = $user->paymentMethods()->create([
             'identifier' => $validated['identifier'] ?? 'Card',
@@ -45,7 +50,7 @@ class PaymentMethodController extends Controller
             'number' => $validated['number'],
             'last4' => substr($validated['number'], -4),
             'validity' => $validated['validity'],
-            'predefined' => false,
+            'predefined' => $request->has('predefined') ? $request->predefined : false,
         ]);
 
         return response()->json([
@@ -54,31 +59,6 @@ class PaymentMethodController extends Controller
         ], 201);
     }
 
-    /**
-     * Update an existing payment method.
-     */
-    public function update(Request $request, $id)
-    {
-        $user = Auth::user();
-        $paymentMethod = $user->paymentMethods()->findOrFail($id);
-
-        $validated = $request->validate([
-            'identifier' => 'nullable|string|max:255',
-            'name' => 'required|string|max:255',
-            'validity' => 'required|string|max:5|regex:/^\d{2}\/\d{2}$/',
-        ]);
-
-        $paymentMethod->update([
-            'identifier' => $validated['identifier'] ?? $paymentMethod->identifier,
-            'name' => $validated['name'],
-            'validity' => $validated['validity'],
-        ]);
-
-        return response()->json([
-            'message' => 'Payment method updated successfully',
-            'payment_method' => $paymentMethod
-        ]);
-    }
 
     /**
      * Delete a payment method.

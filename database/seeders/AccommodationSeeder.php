@@ -43,7 +43,7 @@ class AccommodationSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
-        Accommodation::factory(5)->create();
-      
+        Accommodation::factory(20)->create();
+
     }
 }

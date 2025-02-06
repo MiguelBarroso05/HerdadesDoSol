@@ -56,6 +56,11 @@
                                     <div class="hs-col-md-6">
                                         <p><strong>Email:</strong> {{ $user->email }}</p>
                                     </div>
+                                    <!-- Nif -->
+                                    <div class="hs-col-md-6">
+                                        <p><strong>Nif:</strong> {{ $user->nif ?? 'none' }}</p>
+                                    </div>
+
                                     <!-- First name -->
                                     <div class="hs-col-md-6">
                                         <p><strong>First name:</strong> {{ $user->firstname }}</p>
@@ -66,44 +71,50 @@
                                     </div>
                                     <!-- Birth Date -->
                                     <div class="hs-col-md-6">
-                                        <p><strong>Birth Date:</strong> {{ $user->birthdate }}</p>
-                                    </div>
-                                    <!-- Nif -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Nif:</strong> {{ $user->nif ?? 'none' }}</p>
+                                        <p><strong>Birth Date:</strong> {{ $user->birthdate->format('d-m-Y') }}</p>
                                     </div>
                                     <!-- Phone -->
                                     <div class="hs-col-md-6">
                                         <p><strong>Phone:</strong> {{ $user->phone ?? 'none' }}</p>
                                     </div>
-                                    <!-- Balance -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Balance:</strong> {{ $user->balance }}</p>
-                                    </div>
+                                    @if($user->user_roles->first()->name != 'admin')
+                                        <!-- Balance -->
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Balance:</strong> {{ $user->balance }}</p>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Divider -->
                                 <hr class="hs-horizontal hs-dark">
 
                                 <p class="hs-text-uppercase hs-text-sm">Address Information</p>
-                                <div class="hs-row">
-                                    <!-- Country -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Country:</strong> {{ $user->country ?? 'none' }}</p>
+                                @if($user->addresses->count() >= 1)
+                                    <div class="hs-row">
+                                        <!-- Country -->
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Country:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->country ?? auth()->user()->addresses()->first()->country }}</p>
+                                        </div>
+                                        <!-- City -->
+                                        <div class="hs-col-md-6">
+                                            <p><strong>City:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->city ?? auth()->user()->addresses()->first()->city}}</p>
+                                        </div>
+                                        <!-- Address -->
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Street:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first() ?
+                                                    limit_word(auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->street, 35, false) :
+                                                    limit_word(auth()->user()->addresses()->first()->street, 35, false) }}</p>
+                                        </div>
+                                        <!-- Postal code -->
+                                        <div class="hs-col-md-6">
+                                            <p><strong>Postal code:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->zipcode ?? auth()->user()->addresses()->first()->zipcode}}
+                                        </div>
                                     </div>
-                                    <!-- City -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>City:</strong> {{ $user->city ?? 'none' }}</p>
+                                @else
+                                    <div class="hs-row">
+                                        <p>Address not defined</p>
                                     </div>
-                                    <!-- Address -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Address:</strong> {{ $user->address ?? 'none' }}</p>
-                                    </div>
-                                    <!-- Postal code -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Postal code:</strong> {{ $user->postal ?? 'none' }}</p>
-                                    </div>
-                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -113,7 +124,7 @@
                 <div class="hs-col-md-4">
                     <div class="hs-card hs-h-100">
                         <img src="{{ asset('imgs/pages/placeholder.jpg') }}" class="hs-w-100 hs-h-100"
-                             style="object-fit: cover; border-radius: 24px;">
+                             style="object-fit: cover; border-radius: 1rem;">
                     </div>
                 </div>
             </div>

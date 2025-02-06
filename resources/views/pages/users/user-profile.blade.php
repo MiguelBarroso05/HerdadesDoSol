@@ -62,9 +62,7 @@
                                         <div class="hs-invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="hs-row">
-                                    <!-- Email input -->
+
                                     <div class="hs-col-md-6">
                                         <div class="hs-form-group">
                                             <label for="example-text-input" class="hs-form-control-label">Email address</label>

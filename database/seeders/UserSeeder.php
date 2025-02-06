@@ -24,7 +24,6 @@ class UserSeeder extends Seeder
             'language' => 2,
         ]);
 
-
         DB::table('users')->insert([
             'firstname' => 'Client',
             'lastname' => 'Client',

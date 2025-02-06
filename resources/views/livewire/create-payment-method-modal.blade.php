@@ -27,7 +27,7 @@
 
                                 <!-- Type Input -->
                                 <div class="hs-col-md-5">
-                                    <div class="form-group">
+                                    <div class="form-group" wire:ignore>
                                         <label for="payment_method_type_id" class="hs-form-control-label">Type</label>
                                         <x-payment-method-type-dropdown />
                                         @error('payment_method_type_id')
@@ -79,8 +79,8 @@
                                         <input class="hs-form-control @error('number') hs-is-invalid @enderror"
                                             type="text" wire:model.defer="number"
                                             oninput="this.value = this.value
-                                                .replace(/[^0-9]/g, '')            
-                                                .replace(/(\d{4})(?=\d)/g, '$1 ')  
+                                                .replace(/[^0-9]/g, '')
+                                                .replace(/(\d{4})(?=\d)/g, '$1 ')
                                                 .substring(0, 19)"
                                             placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
 

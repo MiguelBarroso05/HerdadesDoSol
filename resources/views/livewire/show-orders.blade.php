@@ -5,7 +5,7 @@
             <a class="@if(!$bookingOrders) hs-fw-bold @endif cursor-pointer" wire:click="showProductOrders">My
                 Products</a>
         </div>
-        <div>
+        <div wire:ignore>
             <div style="width: 222px;">
                 <select style="width: 200px;" data-hs-select='{
   "placeholder": "Select Orders Year",
@@ -36,7 +36,6 @@
                 $order->save();
                 $checkedOut = true;
             }
-
         @endphp
         <div class="hs-d-flex hs-justify-content-between hs-px-4 hs-py-3 hs-mt-4 hs-rounded-3 hs-bg-white"
              style="border: solid #D9D9D9 1px; @if($isExpanded) height: 325px; @else height: 160px; @endif">

@@ -36,7 +36,6 @@ Route::get('/cart/add/{id}/{quantity}', [CartController::class, 'addToCart'])->n
 Route::get('/cart/index', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::get('/accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 
@@ -66,7 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     #Route Clients
 
-
+    Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::resource('products', ProductController::class)->except(['index']);;
     Route::get('/checkout', function () {

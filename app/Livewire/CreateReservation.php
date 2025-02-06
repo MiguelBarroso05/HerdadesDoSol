@@ -24,7 +24,7 @@ class CreateReservation extends Component
 
     public $selectedEstateId;
     public $selectedAccommodationTypeId;
-    public $selectedAccommodation;
+    public string $selectedAccommodation = '';
     public $selectedActivities;
 
     protected $listeners = [
@@ -62,7 +62,7 @@ class CreateReservation extends Component
     }
     public function show_accommodations()
     {
-        
+
         $query = Estate::find($this->selectedEstateId ?? $this->favEstate)
             ->accommodations()
             ->where('accommodation_type_id', $this->selectedAccommodationTypeId);
@@ -71,7 +71,7 @@ class CreateReservation extends Component
         if ($this->entryDate && $this->exitDate) {
             $entry = Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d');
             $exit = Carbon::createFromFormat('d/m/Y', $this->exitDate)->format('Y-m-d');
-            
+
             $query->whereDoesntHave('reservations', function ($q) use ($entry, $exit) {
                 $q->where(function ($innerQuery) use ($entry, $exit) {
                     $innerQuery->where('exit_date', '>', $entry)
@@ -81,7 +81,7 @@ class CreateReservation extends Component
         }
 
         $this->accommodations = $query->get();
-        $this->selectedAccommodation = $this->accommodations->isNotEmpty() ? $this->accommodations->first() : null;
+        //$this->selectedAccommodation = $this->accommodations->isNotEmpty() ? $this->accommodations->first() : null;
     }
     public function mount()
     {
@@ -107,7 +107,7 @@ class CreateReservation extends Component
             $data = [
                 'estate' => $this->selectedEstateId ?? $this->favEstate,
                 'accommodation_type' => $this->selectedAccommodationTypeId,
-                'accommodation' => $this->selectedAccommodation ?? $this->accommodations ? $this->accommodations->first()->id : null, 
+                'accommodation' => $this->selectedAccommodation ?? $this->accommodations ? $this->accommodations->first()->id : null,
                 'group_size' => $this->groupsize,
                 'children' => $this->children,
                 'entry_date' => Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d'),

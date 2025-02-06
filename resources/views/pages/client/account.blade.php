@@ -55,28 +55,30 @@
                                 </div>
                                 <div class="hs-row">
                                     <p class="text-secondary">MAIN ADDRESS INFORMATION</p>
-                                    @if(auth()->user()->addresses()->first())
+                                    @if(auth()->user()->addresses()->count() >= 1)
                                         <div class="hs-row">
                                             <div class="hs-col-md-5">
                                                 <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                    >Country:</strong>{{auth()->user()->addresses()->first()->country}}
+                                                    >Country:</strong>{{auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->country ?? auth()->user()->addresses()->first()->country }}
                                                 </p>
                                             </div>
                                             <div class="hs-col-md-7">
                                                 <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                    >City:</strong>{{auth()->user()->addresses()->first()->city}}
+                                                    >City:</strong>{{auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->city ?? auth()->user()->addresses()->first()->city}}
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="hs-row">
                                             <div class="hs-col-md-5">
                                                 <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                    >Postal-code:</strong>{{auth()->user()->addresses()->first()->zipcode}}
+                                                    >Postal-code:</strong>{{auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->zipcode ?? auth()->user()->addresses()->first()->zipcode}}
                                                 </p>
                                             </div>
                                             <div class="hs-col-md-7">
                                                 <p class="hs-d-flex hs-pe-2"><strong class="hs-pe-2"
-                                                    >Address:</strong>{{ limit_word(auth()->user()->addresses()->first()->street, 35, false) }}
+                                                    >Street:</strong>{{auth()->user()->addresses()->wherePivot('isFavorite', true)->first() ?
+                                                    limit_word(auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->street, 35, false) :
+                                                    limit_word(auth()->user()->addresses()->first()->street, 35, false) }}
                                                 </p>
                                             </div>
                                         </div>

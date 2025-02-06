@@ -32,7 +32,6 @@ class CheckoutComponent extends Component
         $this->billingAddress = $this->billingInformation->address ?? null;
         if (auth()->user()->addresses->first()) {
             $this->address = auth()->user()->addresses->where('isFavorite', 1)->first() ??  auth()->user()->addresses->first();
-            
         }
     }
     public function render()
@@ -72,7 +71,7 @@ class CheckoutComponent extends Component
                 $order->products()->attach($product['product'], ['quantity' => $product['quantity']]);
             }
         }
-        redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.'); 
-    
+        redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.');
+
     }
 }

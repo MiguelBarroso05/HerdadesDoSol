@@ -3,6 +3,7 @@
 namespace Database\Factories\accommodation;
 
 use App\Models\accommodation\AccommodationType;
+use App\Models\Estate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,9 @@ class AccommodationFactory extends Factory
      */
     public function definition(): array
     {
+        $accommodationTypes = AccommodationType::all();
         return [
-            'accommodation_type_id' => AccommodationType::factory(),
+            'accommodation_type_id' => $accommodationTypes->random()->id,
             'estate_id' => $this->faker->numberBetween(1, 4),
             'size' => $this->faker->numberBetween(1, 6),
             'description' => $this->faker->sentence(10),

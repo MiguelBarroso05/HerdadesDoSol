@@ -26,7 +26,6 @@ Route::middleware('auth:sanctum')->group(function () {
     #Routes Payment Methods
     Route::get('/payment-methods', [PaymentMethodController::class, 'index']);
     Route::post('/payment-methods', [PaymentMethodController::class, 'store']);
-    Route::put('/payment-methods/{id}', [PaymentMethodController::class, 'update']);
     Route::delete('/payment-methods/{id}', [PaymentMethodController::class, 'destroy']);
     Route::post('/payment-methods/{id}/set-default', [PaymentMethodController::class, 'setDefault']);
 

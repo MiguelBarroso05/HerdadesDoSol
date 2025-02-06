@@ -51,7 +51,6 @@ class Order extends Model
         ->withTimestamps();
     }
 
-
     public function invoice(){
         return $this->belongsTo(Invoice::class, 'invoice_id');
     }

@@ -5,7 +5,7 @@
 
     <div class="col-admin">
         <!-- Edit Form -->
-        <div class="hs-container-fluid hs-py-4 hs-mt-8">
+        <div class="hs-container-fluid">
             <div class="hs-row hs-justify-content-center">
                 <div class="hs-col-md-8">
                     <!-- User Profile Card -->
