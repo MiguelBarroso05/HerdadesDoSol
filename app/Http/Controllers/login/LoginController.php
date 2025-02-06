@@ -5,8 +5,10 @@ namespace App\Http\Controllers\login;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Renderable;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\user\User;
 use App\Notifications\WrongLoginAttempt;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
@@ -42,7 +44,19 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             app(Cart::class)->merge();
-
+            $cart = session()->get('cart', []);
+            for ($i = 0; $i < count($cart); $i++) {
+                $productId = array_keys($cart)[$i];
+                try {
+                    $product = Product::findorFail($productId);
+                    if ($product && $product->stock == 0) {
+                        unset($cart[$productId]);
+                    }
+                } catch (Exception $e) {
+                    unset($cart[$productId]);
+                }
+            }
+            session()->put('cart', $cart);
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->intended('dashboard');
             }

@@ -168,7 +168,7 @@
                                 <div class="hs-row hs-mt-1" style="margin-bottom: 60px">
                                     @if(auth()->user()->paymentMethods->firstWhere('predefined', 1))
                                         <div class="hs-py-3">
-                                            <p class="hs-d-flex"><strong class="hs-pe-2">Method:</strong> <img class="w-[50px] h-auto"
+                                            <p class="hs-d-flex  hs-align-items-center"><strong class="hs-pe-2">Method:</strong> <img class="w-[50px] h-auto"
                                                                                                                src="{{asset(auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->img)}}"
                                                                                                                alt="{{auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->name}} Logo"></p>
                                         </div>
