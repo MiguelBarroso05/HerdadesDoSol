@@ -7,6 +7,8 @@ use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
@@ -43,6 +45,9 @@ class CheckoutComponent extends Component
         if ($this->isReservation) {
             return;
         }
+        if (empty($this->selectedCard) || empty($this->billingInformation) || empty($this->address)) {
+            return;
+        }
         $data = [
             'user' => auth()->user()->id,
             'paymentMethod' => $this->selectedCard->id,
@@ -51,10 +56,20 @@ class CheckoutComponent extends Component
             'products' => [],
             'total' => $this->total
         ];
-        foreach (session('cart') as $id => $product) {
+        for ($i = 0; $i < count(session('cart')); $i++) {
+            $id = array_keys(session('cart'))[$i];
+            $product = session('cart')[$id];
+            if ($product['quantity'] > Product::find($id)->stock) {
+                session()->forget('cart.' . $id);
+                $this->total -= $product['price'] * $product['quantity'];
+                return session()->flash('error', 'Product out of stock');
+            }
             $quantity = $product['quantity'];
             $data['products'][] = ['product' => $id, 'quantity' => $quantity];
         }
+
+        $this->validation($data);
+        
         $order = new Order();
         $invoice = new Invoice();
         $invoice->billing_id = $data['billingInformation'];
@@ -69,9 +84,25 @@ class CheckoutComponent extends Component
         if (!empty($data['products'])) {
             foreach ($data['products'] as $product) {
                 $order->products()->attach($product['product'], ['quantity' => $product['quantity']]);
+                $productObject = Product::find($product['product']);
+                $productObject->stock -= $product['quantity'];
+                $productObject->save();
             }
         }
+        session()->forget('cart');
         redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.');
 
+    }
+    public function validation($data){
+        Validator::validate($data, [
+            'user' => 'required|integer|exists:users,id',
+            'paymentMethod' => 'required|integer|exists:payment_methods,id',
+            'billingInformation' => 'required|integer|exists:billings,id',
+            'address' => 'required|integer|exists:addresses,id',
+            'products' => 'required|array',
+            'products.*.product' => 'required|integer|exists:products,id',
+            'products.*.quantity' => 'required|integer|min:1',
+            'total' => 'required|numeric|min:0'
+        ]);
     }
 }

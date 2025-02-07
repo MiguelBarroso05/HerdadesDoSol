@@ -114,7 +114,6 @@ class UserController extends Controller
     public function update(UserRequest $request, $id)
     {
         $user = User::findOrFail($id);
-
         try {
             $validated = $request->validated();
             $dataToUpdate = $validated;
