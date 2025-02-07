@@ -14,7 +14,7 @@
         <ul class="p-0">
             <!-- Dashboard Link -->
             <li>
-                <a href="{{ route('dashboard') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'dashboard' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('dashboard') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'dashboard' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-graph-up text-dark text-lg"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>
@@ -27,7 +27,7 @@
 
             <!-- Estates Link -->
             <li>
-                <a href="{{ route('estates.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'estates.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('estates.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'estates.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-house-door text-dark text-lg"></i>
                     <span class="ml-3">Estates</span>
                 </a>
@@ -40,7 +40,7 @@
 
             <!-- Profile Link -->
             <li>
-                <a href="{{ route('profile') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'profile' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('profile') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'profile' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-person-fill text-dark text-lg"></i>
                     <span class="ml-3">Profile</span>
                 </a>
@@ -48,7 +48,7 @@
 
             <!-- Users Link -->
             <li>
-                <a href="{{ route('users.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'users.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('users.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'users.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-people-fill text-dark text-lg"></i>
                     <span class="ml-3">Users</span>
                 </a>
@@ -61,7 +61,7 @@
 
             <!-- Activities Link -->
             <li>
-                <a href="{{ route('activities.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'activities.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('activities.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'activities.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-compass text-info text-lg"></i>
                     <span class="ml-3">Activities</span>
                 </a>
@@ -69,7 +69,7 @@
 
             <!-- Activity Types Link -->
             <li>
-                <a href="{{ route('activity_types.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'activity_types.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('activity_types.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'activity_types.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-compass text-secondary text-lg"></i>
                     <span class="ml-3">Activity Types</span>
                 </a>
@@ -77,7 +77,7 @@
 
             <!-- Accommodations Link -->
             <li>
-                <a href="{{ route('accommodations.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'accommodations.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('accommodations.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'accommodations.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-houses-fill text-danger text-lg"></i>
                     <span class="ml-3">Accommodations</span>
                 </a>
@@ -85,7 +85,7 @@
 
             <!-- Accommodation Types Link -->
             <li>
-                <a href="{{ route('accommodation_types.index') }}" class="flex items-center hs-p-3 hs-rounded-lg  transition-colors {{ Route::currentRouteName() == 'accommodation_types.index' ? 'bg-primary text-gray-900' : 'hover:hs-bg-gray-100 text-gray-600' }} hover:bg-gray-200 rounded-lg">
+                <a href="{{ route('accommodation_types.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::currentRouteName() == 'accommodation_types.index' ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-houses-fill text-secondary text-lg"></i>
                     <span class="ml-3">Accommodation Types</span>
                 </a>

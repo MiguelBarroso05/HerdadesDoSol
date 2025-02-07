@@ -1,3 +1,6 @@
+<x-custom-alert type="warning" :session="session('warning')" />
+<x-custom-alert type="success" :session="session('success')" />
+<x-custom-alert type="error" :session="session('error')" />
 <div class="hs-mt-10 hs-flex-grow-1">
     <a href="{{route('products.index')}}" class="hs-bg-card hs-rounded-3 hs-py-1 hs-px-3" style="position: fixed;top: 145px;left: 350px;"><i class="bi bi-arrow-left"></i></a>
     <div class="hs-d-flex hs-flex-row justify-center">
@@ -51,7 +54,7 @@
                         </div>
                         <div class="hs-align-self-end">
                             <button {{ $product->stock == 0 ? 'disabled' : ''}} wire:click="addToCart" type="button" class="hs-btn hs-btn-primary hs-mb-0 hs-h-50">
-                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart 
+                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
                             </button>
                         </div>
                     </div>

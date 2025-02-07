@@ -173,6 +173,19 @@ input::placeholder {
     background-size: cover;
 }
 
+/*PaymentMethod Page*/
+.hs-card-selected {
+    border: 2px solid #ffbf65;
+}
+
+.hs-cursor-pointer {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.hs-cursor-pointer:hover {
+    transform: translateY(-2px);
+}
+
 /* Styles */
 .hs-badge{
     color: white !important;

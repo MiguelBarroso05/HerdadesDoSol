@@ -6,15 +6,27 @@ use App\Models\accommodation\Accommodation;
 use App\Models\activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Guid\Guid;
 
 class Reservation extends Model
 {
     /** @use HasFactory<\Database\Factories\ReservationFactory> */
     use HasFactory;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($order) {
+            $uuid = (string) Guid::uuid4();
+            $order->id = strtoupper(substr($uuid, -12));
+        });
+    }
+
     protected $fillable = [
-        'start_date',
-        'end_date',
         'user_id',
         'estate_id',
         'accommodation_id',
@@ -28,8 +40,8 @@ class Reservation extends Model
     public function create($request)
     {
         $request->validate([
-            'start_date' => 'required',
-            'end_date' => 'required',
+            'entry_date' => 'required | date',
+            'exit_date' => 'required | date',
             'user_id' => 'required',
             'estate_id' => 'required',
             'accommodation_id' => 'required',

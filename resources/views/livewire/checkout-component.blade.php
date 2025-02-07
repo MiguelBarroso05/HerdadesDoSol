@@ -90,8 +90,8 @@
                             @endif
                         </div>
                         @if (auth()->user()->paymentMethods->count() > 1)
-                            
-                        
+
+
                         <div x-data="{ open: false }">
                             <!-- Botão para abrir o modal -->
                             <a class="hs-btn hs-btn-primary h-10 mt-1" @click="open = true">
@@ -165,34 +165,35 @@
                     <p>Phone: {{ $billingInformation->phone ?? 'none' }}</p>
                 </div>
                 @if ($billingInformation->address)
-<h6>Address</h6>
+                <h6>Address</h6>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Country: {{ $billingInformation->address->country }}</p>
+                    <p class="hs-col-6">Country: {{ $billingInformation->address->country }}</p>
                     <p>Street: {{ $billingInformation->address->street }}</p>
                 </div>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">City: {{ $billingInformation->address->city }}</p>
+                    <p class="hs-col-6">City: {{ $billingInformation->address->city }}</p>
                     <p>Zipcode: {{ $billingInformation->address->zipcode }}</p>
                 </div>
-@endif
+               @endif
             </div>
             <hr>
-@endif
-<div class="hs-d-flex hs-flex-column">
-                <h6>Address</h6>
+            @endif
+            <div class="hs-d-flex hs-flex-column">
+                <h6>
+                    Delivery address</h6>
                 @if ($address)
-<div class="hs-d-flex hs-flex-row">
+                <div class="hs-d-flex hs-flex-row">
                     <p class="hs-col-6">Country: {{ $address->country }} </p>
-                    <p>City: {{ $address->city }}</p>
+                    <p> Street: {{ $address->street }}</p>
                 </div>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-6">Street: {{ $address->street }}</p>
+                    <p class="hs-col-6">City: {{ $address->city }}</p>
                     <p>Zipcode: {{ $address->zipcode }}</p>
                 </div>
-@else
-<p class="hs-col-4">Please add a address</p>
-<a href="{{ route('personal-info') }}" class="hs-btn hs-btn-primary hs-col-4">Please add a address</a>
-@endif
+                @else
+                <p class="hs-col-4">Please add a address</p>
+                <a href="{{ route('personal-info') }}" class="hs-btn hs-btn-primary hs-col-4">Please add a address</a>
+                @endif
             </div>
         </div>
         <div class=" hs-w-20">

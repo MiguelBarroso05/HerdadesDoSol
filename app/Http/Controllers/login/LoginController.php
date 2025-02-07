@@ -88,27 +88,27 @@ class LoginController extends Controller
         }
         // dd(session()->get('cart'), Cart::where('user_id', $userId)->get());
         session()->forget('cart');
-        
+
         Auth::logout();
-        
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect('/');
     }
-    
+
     public function loginAdmin()
     {
         // Exemplo: login do admin com ID 1
         $admin = User::find(1); // Assume que o utilizador com ID 1 é o admin
         if ($admin) {
             Auth::login($admin);
-            
+
             return redirect()->route('dashboard'); // Redirecionar para a dashboard ou outra rota
         }
         return redirect()->route('login')->with('error', 'Admin não encontrado.');
     }
-    
+
     public function loginClient()
     {
         // Exemplo: login do cliente com ID 2
@@ -116,8 +116,8 @@ class LoginController extends Controller
         if ($client) {
             Auth::login($client);
             app(Cart::class)->merge();
-            
-            return redirect()->route('account'); // Redirecionar para a dashboard ou outra rota
+
+            return redirect()->route('account'); // Redirecionar para a account ou outra rota
         }
         return redirect()->route('login')->with('error', 'Cliente não encontrado.');
     }

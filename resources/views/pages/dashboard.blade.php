@@ -16,7 +16,7 @@
                                 <div class="hs-numbers">
                                     <p class="hs-text-sm hs-mb-0 hs-text-uppercase hs-font-weight-bold">Total Users</p>
                                     <h5 class="hs-font-weight-bolder">
-                                        {{ $totalUsers }} olha lá, que andas fazende
+                                        {{ $totalUsers }}
                                     </h5>
                                 </div>
                             </div>

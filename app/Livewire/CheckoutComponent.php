@@ -69,7 +69,7 @@ class CheckoutComponent extends Component
         }
 
         $this->validation($data);
-        
+
         $order = new Order();
         $invoice = new Invoice();
         $invoice->billing_id = $data['billingInformation'];
@@ -90,8 +90,7 @@ class CheckoutComponent extends Component
             }
         }
         session()->forget('cart');
-        redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.');
-
+        redirect()->route('orders.index')->with('success', 'Order made successfully. We will contact you soon.');
     }
     public function validation($data){
         Validator::validate($data, [

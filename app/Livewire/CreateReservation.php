@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\activity\Activity;
 use App\Models\Estate;
 use App\Models\Reservation;
 use Carbon\Carbon;
@@ -55,14 +56,12 @@ class CreateReservation extends Component
         $this->accommodationTypes = $estate->accommodations->map(function ($accommodation) {
             return $accommodation->accommodation_types;
         })->unique('id');
-
         if (!$this->accommodationTypes->isEmpty()) {
             $this->selectedAccommodationTypeId = $this->accommodationTypes[0]->id;
         }
     }
     public function show_accommodations()
     {
-
         $query = Estate::find($this->selectedEstateId ?? $this->favEstate)
             ->accommodations()
             ->where('accommodation_type_id', $this->selectedAccommodationTypeId);
@@ -89,7 +88,6 @@ class CreateReservation extends Component
         if ($this->user->fav_estate) {
             $this->favEstate = $this->user->fav_estate;
         }
-
         $this->estates = Estate::all();
 
         $this->groupsize = $this->user->standard_group ?? 1;
@@ -107,7 +105,7 @@ class CreateReservation extends Component
             $data = [
                 'estate' => $this->selectedEstateId ?? $this->favEstate,
                 'accommodation_type' => $this->selectedAccommodationTypeId,
-                'accommodation' => $this->selectedAccommodation ?? $this->accommodations ? $this->accommodations->first()->id : null,
+                'accommodation' => ($this->selectedAccommodation) ?? ($this->accommodations ? $this->accommodations->first()->id : null),
                 'group_size' => $this->groupsize,
                 'children' => $this->children,
                 'entry_date' => Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d'),
@@ -115,27 +113,27 @@ class CreateReservation extends Component
                 'activities' => $this->selectedActivities,
             ];
         } catch (\Exception $e) {
+            $this->dispatch('error');
            return redirect()->back()->with('error', $e->getMessage());
+
         }
-         dd($data);
-        // Validar os dados
+
         $validator = Validator::make($data, [
             'entry_date' => 'required|date',
             'exit_date' => 'required|date|after:entry_date',
-            'estate' => 'required|exists:estates,id', // Verifica se o estate existe na tabela estates
-            'accommodation' => 'required|exists:accommodations,id', // Verifica se o accommodation existe
+            'estate' => 'required|exists:estates,id',
+            'accommodation' => 'required|exists:accommodations,id',
             'group_size' => 'required|numeric|min:1|max:8',
             'children' => 'required|numeric|min:0|max:8',
-            'activities' => 'nullable|array', // Atividades são opcionais
-            'activities.*' => 'exists:activities,id' // Verifica se cada atividade existe
+            'activities' => 'nullable|array',
+            'activities.*' => 'exists:activities,id'
         ]);
 
-        // Se a validação falhar, retornar erros
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            $this->dispatch('error');
+            return redirect()->back()->withInput()->with('error', $validator->errors()->first());
         }
 
-        // Criar a reserva
         try {
             $reservation = new Reservation();
             $reservation->fill([
@@ -147,9 +145,17 @@ class CreateReservation extends Component
                 'exit_date' => $data['exit_date'],
                 'user_id' => auth()->id(),
             ]);
+            $total = 0;
+            foreach ($data['activities'] as $activity) {
+                 $activity = Activity::find($activity);
+                 $total += $activity->price;
+            }
+            $reservation->price = $total;
             $reservation->save();
         } catch (\Exception $e) {
-            dd($e->getMessage()); // Captura e exibe qualquer exceção
+            $this->dispatch('error');
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
+
         }
         // Adicionar atividades à reserva
         if (!empty($data['activities'])) {
@@ -159,7 +165,8 @@ class CreateReservation extends Component
         }
 
         $this->reset();
-        return redirect()->route('client-create-reservations')->with('success', 'Reservation created successfully');
+        $this->dispatch('error');
+        return redirect()->back()->with('success', 'Reservation created successfully');
     }
 
     public function loadData()
