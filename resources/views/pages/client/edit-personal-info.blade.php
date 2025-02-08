@@ -85,6 +85,7 @@
                                 </div>
 
                                 <div class="hs-d-flex hs-justify-content-between">
+                                    <!-- Nationality Input -->
                                     <div style="width: 195px;">
                                         <div class="hs-form-group">
                                             <label for="nationality" class="hs-form-control-label">Nationality</label>
@@ -190,7 +191,7 @@
 
                             <!-- Profile Image Upload -->
                             <div style="width: 240px;">
-                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
+                                <input type="file" class="hs-form-control" name="img" id="profileImageInput"
                                        accept="image/*">
                             </div>
                             <!-- Language Input -->
@@ -258,7 +259,7 @@
 @endsection
 @push('js')
     <script>
-        document.getElementById('inputGroupFile02').addEventListener('change', function (event) {
+        document.getElementById('profileImageInput').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();

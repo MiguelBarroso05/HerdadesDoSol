@@ -19,7 +19,8 @@
                                     <!-- Display user image or a default image if not available -->
                                     <img
                                         src="{{ $user->img ? asset($user->img) : asset('/imgs/users/no-image.png') }}"
-                                        alt="profile_image" class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
+                                        alt="profile_image" id="userImagePreview"
+                                        class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
                                 </div>
                             </div>
                             <!-- User Name Section -->
@@ -42,13 +43,11 @@
                             <div class="hs-card-header hs-py-0">
                                 <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
                                     <p class="hs-mb-0">Edit User</p>
-                                    <!-- Action Buttons -->
-                                    <!-- Cancel button -->
                                     <x-custom-button type="cancelIcon" route="{{ route('users.index') }}"/>
                                 </div>
                             </div>
 
-                            <div class="hs-card-body hs-py-0">
+                            <div class="hs-card-body hs-py-5">
                                 <!-- User Information Section -->
                                 <p class="hs-text-uppercase hs-text-sm">User Information</p>
                                 <div class="hs-row">
@@ -57,8 +56,8 @@
                                         <div class="hs-col-md-3">
                                             <label for="username" class="hs-form-control-label">Image</label>
                                             <!-- Image Upload -->
-                                                <input type="file" class="hs-form-control" name="img" id="inputGroupFile02"
-                                                       accept="image/*">
+                                            <input type="file" class="hs-form-control" name="img" id="userImageInput"
+                                                   accept="image/*">
                                         </div>
                                     </div>
 
@@ -117,6 +116,7 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <input type="hidden" name="api_failed" value="{{ $apiFailed ? 1 : 0 }}">
 
                                         <!-- Nif -->
                                         <div class="hs-col-md-3">
@@ -138,7 +138,7 @@
                                                 <input
                                                     class="hs-form-control @error('birthdate') hs-is-invalid @enderror"
                                                     name="birthdate" type="date"
-                                                    value="{{ old('birthdate', $user->birthdate) }}">
+                                                    value="{{ old('birthdate', $user->birthdate->format('Y-m-d')) }}">
                                                 @error('birthdate')
                                                 <div class="hs-invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -160,7 +160,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row hs-col-md-6 flex justify-around">
+                                        <div class="row hs-col-md-6 flex justify-evenly">
                                             <div class="hs-col-md-3">
                                                 <div class="hs-form-group">
                                                     <label for="standard_group" class="hs-form-control-label">Group
@@ -188,40 +188,27 @@
                                     <div class="row flex justify-between">
                                         <!-- Role Input -->
                                         <div class="hs-col-md-3">
-                                            <div class="hs-form-group">
-                                                <label for="role-input" class="hs-form-control-label">Role</label>
-                                                <select
-                                                    class="hs-form-control hs-custom-dropdown @error('role') hs-is-invalid @enderror"
-                                                    name="role" id="role-input">
-                                                    @foreach($roles as $role_id => $role_name)
-                                                        <option
-                                                            value="{{ $role_id }}"
-                                                            {{$user->user_roles->first()->name == $role_name ? 'selected' : '' }}>
-                                                            {{ $role_name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            <label for="role" class="hs-form-control-label">User Role</label>
+                                            <x-role-select :user="$user" :roles="$roles" />
                                         </div>
 
                                         <div class="hs-col-md-3">
-                                            <div class="hs-form-group">
-                                                <label for="language" class="hs-form-control-label">Language</label>
-                                                <select
-                                                    class="hs-form-control hs-custom-dropdown @error('language') hs-is-invalid @enderror"
-                                                    name="language" id="language-input">
-                                                    @foreach($languages as $language)
-                                                        <option
-                                                            value="{{ $language->id }}"
-                                                            {{$user->language == $language->id ? 'selected' : '' }}>
-                                                            {{ $language->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('language')
-                                                <div class="hs-invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
+                                            <label for="language" class="hs-form-control-label">Prefered
+                                                Language</label>
+                                            <x-dropdown-input
+                                                :optionText="'name'"
+                                                :multiple="false"
+                                                :placeholder="'Select user prefered language...'"
+                                                :fixed="'top'"
+                                                :name="'language'"
+                                                :object="$languages"
+                                                :user="$user"
+                                                :paramter="$user->language"
+                                                :optionText="'name'"
+                                            />
+                                            @error('language')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <!-- Balance -->
@@ -237,54 +224,64 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row flex justify-between">
+                                        <!-- Allergies -->
+                                        <div class="hs-col-md-3">
+                                            <div class="hs-form-group">
+                                                <label for="allergies" class="hs-form-control-label">Allergies</label>
+                                                <x-allergies-dropdown-input :user="$user"/>
+                                                @error('allergies')
+                                                <div class="hs-invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <!-- Fav Estate -->
+                                        <div class="hs-col-md-3">
+                                            <div class="hs-form-group">
+                                                <label for="fav_estate" class="hs-form-control-label">Favourite Estate</label>
+                                                <x-dropdown-input
+                                                    :optionText="'name'"
+                                                    :multiple="false"
+                                                    :placeholder="'Add your fav estate...'"
+                                                    :fixed="'top'"
+                                                    :name="'fav_estate'"
+                                                    :object="\App\Models\Estate::all()"
+                                                    :user="$user"
+                                                    :paramter="$user->fav_estate"
+                                                    :optionText="'name'"
+                                                />
+                                                @error('fav_estate')
+                                                <div class="hs-invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <!-- Empty div -->
+                                        <div class="hs-col-md-3">
+                                        </div>
+                                    </div>
                                 </div>
-                                <x-custom-button type="update" route={{null}}/>
+                                <div class="row mt-5">
+                                    <x-custom-button type="update" route={{null}}/>
+                                </div>
                             </div>
                         </form>
-                        <div class="hs-card-body"><!-- Contact Information Section -->
-                            <hr class="hs-horizontal hs-dark">
-                            <p class="hs-text-uppercase hs-text-sm">Address Information</p>
-                            <livewire:address-form :user="$user" :modalIdName="'addAddressModal'"
-                                                   :redirectUrl="url()->current()"/>
-
-                            <div class="hs-row">
-                                @foreach($user->addresses->reverse() as $address)
-                                    <div class="hs-col-xl-4 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
-                                        <div class="hs-card hs-min-vh-25">
-                                            <div class="hs-card-body hs-p-3">
-                                                <p class="hs-d-flex hs-justify-content-center hs-fw-bold">{{$address->pivot->addressIdentifier ?? 'No identifier'}}</p>
-                                                <p class="hs-d-flex hs-justify-content-center">{{$address->city}}</p>
-                                                <p class="hs-d-flex hs-justify-content-center">{{$address->street}}</p>
-                                                <div class="hs-d-flex hs-justify-content-center">
-                                                    <button type="button"
-                                                            class="hs-btn hs-btn-secondary hs-btn-sm hs-mb-0 hs-bg-gradient-info"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#addressModal{{$address->id}}">
-                                                        Show
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <x-address-modal :address="$address" :user="$user"/>
-                                @endforeach
-                                @if($user->addresses->count() < 3)
-                                    <div class="hs-col-xl-4 hs-col-sm-6 hs-mb-xl-0 hs-mb-4">
-                                        <div class="hs-card hs-min-vh-25 hs-border hs-border-primary">
-                                            <div
-                                                class="hs-card-body hs-p-3 hs-d-flex hs-align-items-center hs-justify-content-center">
-                                                <button type="button" class="hs-btn hs-btn-primary hs-mb-0"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#addAddressModal">
-                                                    <i class="bi bi-plus-circle hs-fs-5"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
                     </div>
+                    <livewire:show-addresses :user="$user"/>
+                    @foreach($user->addresses as $address)
+                        <x-show-address-modal :address="$address" :user="$user"/>
+                        @push('js')
+                            <script>
+                                document.getElementById('clickableDiv{{$address->id}}').addEventListener('click', function () {
+                                    let modal = new bootstrap.Modal(document.getElementById('addressModal{{$address->id}}'));
+                                    modal.show();
+                                });
+                            </script>
+                        @endpush
+                    @endforeach
+                    <livewire:address-form :user="$user" :modalIdName="'clientAddAddressModal'"
+                                           :redirectUrl="url()->current()"/>
                 </div>
             </div>
         </div>
@@ -292,12 +289,12 @@
 
     @push('js')
         <script>
-            document.getElementById('inputGroupFile02').addEventListener('change', function (event) {
+            document.getElementById('userImageInput').addEventListener('change', function (event) {
                 const file = event.target.files[0];
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function (e) {
-                        document.getElementById('profilePreview').src = e.target.result;
+                        document.getElementById('userImagePreview').src = e.target.result;
                     };
                     reader.readAsDataURL(file);
                 }

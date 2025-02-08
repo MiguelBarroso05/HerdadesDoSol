@@ -2,20 +2,18 @@
 
 namespace App\View\Components;
 
-use App\Models\user\User;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CountrySelect extends Component
+class RoleSelect extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public $user,
-        public $countries,
-        public string $name
+        public $roles,
+        public $user
     )
     {
         //
@@ -26,6 +24,6 @@ class CountrySelect extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.country-select');
+        return view('components.role-select');
     }
 }

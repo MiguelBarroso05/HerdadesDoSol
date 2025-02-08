@@ -21,7 +21,11 @@ class EstateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('estate')->id;
+        $id = null;
+        if ($this->routeIs('estates.update')) {
+
+            $id = $this->route('estate')->id;
+        }
 
         return [
             'name' => 'required|unique:estates,name'. ($id ? ',' . $id : ''),

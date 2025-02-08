@@ -47,8 +47,21 @@ class UserController extends Controller
      */
     public function create()
     {
+        try {
+            $response = Http::get('https://restcountries.com/v2/all?fields=flag&fields=name');
+            $countries = $response->json();
+            $countries = Arr::sort($countries);
+            $apiFailed = false;
+
+        } catch (\Exception $e) {
+            $countries = ['No countries loaded'];
+            $apiFailed = true;
+        }
+
+        $languages = DB::table('languages')->get();
+
         $roles = Role::all()->pluck('name', 'id');
-        return view('pages.users.create', compact('roles'));
+        return view('pages.users.create', compact('roles', 'countries', 'apiFailed', 'languages'));
     }
 
     /**
@@ -66,6 +79,7 @@ class UserController extends Controller
 
             return redirect()->route('users.index')->with('success', 'User created successfully');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
         }
     }
@@ -119,21 +133,23 @@ class UserController extends Controller
             $dataToUpdate = $validated;
             $user->update($dataToUpdate);
 
+
+
             $this->userstoreimg($request, $user);
 
             $allergies = $request->input('allergies');
 
             $user->allergies()->sync($allergies);
 
-            if (auth()->user()->HasRole('admin')) {
+            if (auth()->user()->hasRole('admin')) {
                 $user->roles()->sync([$request->role]);
                 return redirect()->route('users.index')->with('success', 'User updated successfully');
             }
-            if (auth()->user()->HasRole('client')) {
-                return redirect()->route('personal-info');
+            if (auth()->user()->hasRole('client')) {
+                return redirect()->route('personal-info')->with('success', 'User updated successfully');
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error updating user: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error updating user');
         }
     }
 

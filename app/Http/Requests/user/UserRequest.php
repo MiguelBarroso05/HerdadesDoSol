@@ -21,7 +21,10 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = $this->route('user');
+        $id = null;
+        if ($this->routeIs('users.update')) {
+            $id = $this->route('user');
+        }
         $nationalityRule = $this->input('api_failed') ? 'nullable' : 'required';
 
         return [
@@ -84,7 +87,7 @@ class UserRequest extends FormRequest
             // Nif validation messages
             'nif.unique' => 'The nif already exists.',
             'nif.size' => 'The nif must be 9 characters.',
-            
+
             // Nationality validation messages
             'nationality.' => 'The nationality field is required.',
 

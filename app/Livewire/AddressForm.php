@@ -95,7 +95,7 @@ class AddressForm extends Component
             $this->reset();
 
         } catch (\Exception $e) {
-            session()->flash('error', 'Error updating address: ' . $e->getMessage());
+            session()->flash('error', 'Error creating address');
         }
     }
 

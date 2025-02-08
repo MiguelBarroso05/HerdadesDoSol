@@ -4,7 +4,7 @@
         @foreach($addresses as $address)
             <div
                 class="hs-bg-white hs-p-3 hs-rounded-3 hs-d-flex hs-justify-content-between hs-flex-column z-index-0"
-                style="border: 1px solid #D9D9D9; width: 350px; height: 155px; cursor: pointer;"
+                style="border: 1px solid #D9D9D9; @if(auth()->user()->hasRole('admin')) width: 300px; @else width: 350px; @endif height: 155px; cursor: pointer;"
                 id="clickableDiv{{$address->id}}">
                 <div>
                     <div class="hs-d-flex hs-justify-content-between">
@@ -37,24 +37,24 @@
                 </script>
             @endpush
         @endforeach
-        @if(auth()->user()->addresses->count() < 3)
+        @if($user->addresses->count() < 3)
             <button type="button"
                     class="hs-bg-white hs-p-3 hs-rounded-3 hs-d-flex hs-justify-content-center hs-align-items-center hs-fs-2"
-                    style="border: 1px dashed  #437546; width: 350px; height: 155px; color: #437546;"
+                    style="border: 1px dashed  #437546; @if(auth()->user()->hasRole('admin')) width: 300px; @else width: 350px; @endif  height: 155px; color: #437546;"
                     data-bs-toggle="modal"
                     data-bs-target="#clientAddAddressModal">
                 <i class="bi bi-plus-circle hs-fw-bolder"></i>
             </button>
         @endif
         @if(auth()->user()->addresses->count() == 0)
-            <div class="hs-text-center hs-align-content-center" style="width: 350px; height: 155px;">
+            <div class="hs-text-center hs-align-content-center" style="@if(auth()->user()->hasRole('admin')) width: 300px; @else width: 350px; @endif; height: 155px;">
                 Consider adding your preferred location to simplify your purchases
             </div>
-            <div class="hs-ms-2" style="width: 350px; height: 155px;"></div>
+            <div class="hs-ms-2" style="@if(auth()->user()->hasRole('admin')) width: 300px; @else width: 350px; @endif height: 155px;"></div>
 
         @elseif(auth()->user()->addresses->count() != 0)
             @for ($i = auth()->user()->addresses->count(); $i < 2; $i++)
-                <div class="hs-ms-2" style="width: 350px; height: 155px;"></div>
+                <div class="hs-ms-2" style="@if(auth()->user()->hasRole('admin')) width: 300px; @else width: 350px; @endif height: 155px;"></div>
             @endfor
         @endif
     </div>
