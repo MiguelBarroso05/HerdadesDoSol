@@ -26,40 +26,42 @@ class AccommodationController extends Controller
         $checkOut = $request->query('check_out');
         $groupSize = $request->query('group_size');
 
+        Log::info("DEBUG: Estate ID: $estateId, Check-In: $checkIn, Check-Out: $checkOut, Group Size: $groupSize");
+
         $types = Accommodation::where('estate_id', $estateId)
             ->where('size', '>=', $groupSize)
-            ->whereNotExists(function ($query) use ($checkIn, $checkOut) {
-                $query->select(DB::raw(1))
+            ->whereNotIn('id', function ($query) use ($checkIn, $checkOut) {
+                $query->select('accommodation_id')
                     ->from('reservations')
-                    ->whereColumn('reservations.accommodation_id', 'accommodations.id')
-                    ->where(function ($query) use ($checkIn, $checkOut) {
-                        $query->whereBetween('entry_date', [$checkIn, $checkOut])
-                            ->orWhereBetween('exit_date', [$checkIn, $checkOut])
-                            ->orWhere(function ($query) use ($checkIn, $checkOut) {
-                                $query->where('entry_date', '<=', $checkIn)
-                                    ->where('exit_date', '>=', $checkOut);
-                            });
-                    });
+                    ->whereBetween('entry_date', [$checkIn, $checkOut])
+                    ->orWhereBetween('exit_date', [$checkIn, $checkOut]);
             })
-            ->join('accommodation_types', 'accommodations.accommodation_type_id', '=', 'accommodation_types.id')
-            ->select('accommodation_types.id as id', 'accommodation_types.name as name')
-            ->distinct()
+            ->with('accommodationType')
+            ->groupBy('accommodation_type_id')
+            ->select('accommodation_type_id', DB::raw('COUNT(*) as count'))
             ->get();
+
+        $types = $types->map(function ($type) {
+            return [
+                'accommodation_type_id' => $type->accommodation_type_id,
+                'name' => $type->accommodationType->name ?? 'Unknown',
+                'count' => $type->count
+            ];
+        });
 
         return response()->json(['accommodation_types' => $types]);
     }
 
     public function getAvailableAccommodations(Request $request)
     {
-        $estateId = $request->estate_id;
-        $checkIn = $request->check_in;
-        $checkOut = $request->check_out;
-        $groupSize = $request->group_size;
-
-        // DEBUG: Mostrar o que está a ser recebido
-        Log::info("DEBUG: Estate ID: $estateId, Check-In: $checkIn, Check-Out: $checkOut, Group Size: $groupSize");
+        $estateId = $request->query('estate_id');
+        $checkIn = $request->query('check_in');
+        $checkOut = $request->query('check_out');
+        $groupSize = $request->query('group_size');
+        $accommodationTypeId = $request->query('accommodation_type_id');
 
         $availableAccommodations = Accommodation::where('estate_id', $estateId)
+            ->where('accommodation_type_id', $accommodationTypeId)
             ->where('size', '>=', $groupSize)
             ->whereNotIn('id', function ($query) use ($checkIn, $checkOut) {
                 $query->select('accommodation_id')
@@ -67,9 +69,6 @@ class AccommodationController extends Controller
                     ->whereBetween('entry_date', [$checkIn, $checkOut])
                     ->orWhereBetween('exit_date', [$checkIn, $checkOut]);
             })->get();
-
-        // DEBUG: Mostrar quantas acomodações foram encontradas
-        Log::info("DEBUG: Found " . count($availableAccommodations) . " accommodations");
 
         return response()->json(['accommodations' => $availableAccommodations]);
     }

@@ -15,5 +15,4 @@ class AccommodationType extends Model
         'description',
         'img',
     ];
-
 }
