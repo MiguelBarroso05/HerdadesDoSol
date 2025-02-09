@@ -268,20 +268,6 @@
                             </div>
                         </form>
                     </div>
-                    <livewire:show-addresses :user="$user"/>
-                    @foreach($user->addresses as $address)
-                        <x-show-address-modal :address="$address" :user="$user"/>
-                        @push('js')
-                            <script>
-                                document.getElementById('clickableDiv{{$address->id}}').addEventListener('click', function () {
-                                    let modal = new bootstrap.Modal(document.getElementById('addressModal{{$address->id}}'));
-                                    modal.show();
-                                });
-                            </script>
-                        @endpush
-                    @endforeach
-                    <livewire:address-form :user="$user" :modalIdName="'clientAddAddressModal'"
-                                           :redirectUrl="url()->current()"/>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@ class UserController extends Controller
             $users = User::withTrashed()
                 ->where('firstname', 'like', '%' . $search_param . '%')
                 ->orWhere('lastname', 'like', '%' . $search_param . '%')
-                ->paginate(8);
+                ->paginate(6);
 
             if ($users->isEmpty()) {
                 session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
@@ -37,7 +37,7 @@ class UserController extends Controller
             return view('pages.users.users', compact('users', 'search_param'));
 
         } else {
-            $users = User::withTrashed()->paginate(8);
+            $users = User::withTrashed()->paginate(6);
             return view('pages.users.users', compact('users'));
         }
     }
@@ -79,8 +79,7 @@ class UserController extends Controller
 
             return redirect()->route('users.index')->with('success', 'User created successfully');
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            return redirect()->back()->with('error', 'Error creating user: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error creating user');
         }
     }
 

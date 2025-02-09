@@ -6,6 +6,7 @@ use App\Http\Controllers\activity\ActivityController;
 use App\Http\Controllers\activity\ActivityTypeController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EstateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\login\ChangePassword;
@@ -132,5 +133,11 @@ Route::group(['middleware' => 'auth'], function () {
         #Routes Activities
         Route::resource('activities', ActivityController::class);
         Route::resource('activity_types', ActivityTypeController::class);
+
+        #Routes Categories
+        Route::resource('categories', CategoryController::class)->except(['show']);
+
+        #Routes Products
+        Route::resource('admin/products', ProductController::class);
     });
 });

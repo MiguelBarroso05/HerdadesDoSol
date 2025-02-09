@@ -15,7 +15,7 @@ class ShowAddressModal extends Component
      */
     public function __construct(
         public Address $address,
-        public User $user
+        public User $user,
     )
     {
         //

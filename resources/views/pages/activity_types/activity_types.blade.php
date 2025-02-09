@@ -9,16 +9,14 @@
         <div class="hs-container-fluid">
             <div class="hs-row">
                 <div class="hs-col-12">
-                    <!-- Success Message -->
-                    @if(session('success'))
-                        <div id="success-alert" class="hs-alert hs-alert-success hs-alert-dismissible hs-fade hs-show" role="alert">
-                            <strong>Success!</strong> {{ session('success') }}
-                        </div>
-                    @endif
                     <!-- Create Button -->
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
                             <h6>Activity Types Table</h6>
+
+                            <!-- Search Bar -->
+                            <x-search-bar :searchbarName="'search_activity_types'" />
+
                             <!-- Button Create New -->
                             <x-custom-button type="createNew" route="{{ route('activity_types.create') }}"/>
                         </div>
