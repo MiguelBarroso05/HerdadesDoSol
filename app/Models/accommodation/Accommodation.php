@@ -15,11 +15,13 @@ class Accommodation extends Model
 
     protected $fillable = [
         'accommodation_type_id',
+        'estate_id',
         'size',
-        'description',
+        'name',
+        'price',
     ];
 
-    public function accommodation_types()
+    public function accommodationType()
     {
         return $this->belongsTo(AccommodationType::class, 'accommodation_type_id');
     }

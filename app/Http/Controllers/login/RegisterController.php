@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\login;
 
-// use App\Http\Requests\RegisterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\user\User;
 
