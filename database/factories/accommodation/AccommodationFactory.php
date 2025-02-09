@@ -23,8 +23,7 @@ class AccommodationFactory extends Factory
             'accommodation_type_id' => $accommodationTypes->random()->id,
             'estate_id' => $this->faker->numberBetween(1, 4),
             'size' => $this->faker->numberBetween(1, 6),
-            'description' => $this->faker->sentence(10),
-            'img' => null,
+            'price' => $this->faker->numberBetween(50, 200),
         ];
     }
 }

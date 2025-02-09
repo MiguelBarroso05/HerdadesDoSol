@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('img')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,8 +25,7 @@ return new class extends Migration
             $table->foreignId('accommodation_type_id')->constrained();
             $table->foreignId('estate_id')->constrained();
             $table->integer('size');
-            $table->string('description')->nullable();
-            $table->string('img')->nullable();
+            $table->decimal('price', 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });

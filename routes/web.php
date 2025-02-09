@@ -64,7 +64,6 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
 
     #Route Clients
-
     Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::resource('products', ProductController::class)->except(['index']);;

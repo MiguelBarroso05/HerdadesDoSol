@@ -70,7 +70,7 @@ return new class extends Migration
         });
         #Orders pivot
         Schema::create('orders_products', function (Blueprint $table) {
-            $table->uuid('order_id')->constrained('orders');
+            $table->string('order_id')->constrained('orders');
             $table->unsignedBigInteger('product_id')->constrained('products');
             $table->integer('quantity');
             $table->timestamps();

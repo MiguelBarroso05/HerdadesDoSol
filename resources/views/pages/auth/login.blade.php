@@ -2,6 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.guest.navbar')
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
         <main class="hs-main-content hs-d-flex hs-flex-grow-1 hs-flex-column hs-mt-7">
             <!-- Form container -->
             <section>

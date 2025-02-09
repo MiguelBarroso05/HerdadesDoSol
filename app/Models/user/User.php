@@ -114,13 +114,7 @@ class User extends Authenticatable
         return $this->hasMany(PaymentMethod::class);
     }
 
-    public function bookingOrders()
-    {
-        return $this->hasMany(Reservation::class)
-            ->whereHas('accommodation');
-    }
-
-    public function productOrders()
+    public function orders()
     {
         return $this->hasMany(Order::class)
             ->whereHas('products');

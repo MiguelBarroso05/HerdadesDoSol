@@ -2,6 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.guest.navbar')
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <main class="hs-d-flex hs-flex-grow-1 mb-3">
         <div class="hs-container hs-mt-8">
             <h1 class="hs-text-center">Accommodations</h1>

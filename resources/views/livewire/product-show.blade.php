@@ -1,3 +1,6 @@
+<x-custom-alert type="warning" :session="session('warning')" />
+<x-custom-alert type="success" :session="session('success')" />
+<x-custom-alert type="error" :session="session('error')" />
 <div class="hs-mt-10 hs-flex-grow-1">
     <a href="{{route('products.index')}}" class="hs-bg-card hs-rounded-3 hs-py-1 hs-px-3" style="position: fixed;top: 145px;left: 350px;"><i class="bi bi-arrow-left"></i></a>
     <div class="hs-d-flex hs-flex-row justify-center">
@@ -45,13 +48,13 @@
                     <h3 class="text-primary m-0 me-3">{{ $product->price }}€</h3>
                     <div class="hs-d-flex hs-flex-row justify-end ">
 
-                        <div class="hs-form-group hs-me-3 hs-m-0 hs-w-30">
+                        <div class=" {{ $product->stock == 0 ? '!hidden' : ''}} hs-form-group hs-me-3 hs-m-0 hs-w-30">
                             <label for="quantity" class="form-label">Quantity:</label>
                             <livewire:NumberInput wire:model="quantity" class="form-control " :max="8" :name="'quantity'">
                         </div>
                         <div class="hs-align-self-end">
-                            <button wire:click="addToCart" type="button" class="hs-btn hs-btn-primary hs-mb-0 hs-h-50">
-                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart 
+                            <button {{ $product->stock == 0 ? 'disabled' : ''}} wire:click="addToCart" type="button" class="hs-btn hs-btn-primary hs-mb-0 hs-h-50">
+                                    <i class="bi bi-cart-plus me-2"></i> Add to Cart
                             </button>
                         </div>
                     </div>

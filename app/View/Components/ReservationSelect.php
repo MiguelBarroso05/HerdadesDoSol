@@ -21,7 +21,7 @@ class ReservationSelect extends Component
         public $paramter,
         public $optionText,
         public $set,
-        public $call
+        public $call,
     )
     {
     }

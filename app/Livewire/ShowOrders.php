@@ -7,23 +7,25 @@ use Livewire\Component;
 
 class ShowOrders extends Component
 {
-    public $bookingOrders;
+    public $seeBookings;
     public $orders;
+    public $bookings;
     public $expandedOrderId = null;
 
     public function mount(){
-        $this->bookingOrders = true;
+        $this->seeBookings = true;
         $this->orders = auth()->user()->bookingOrders ?? null;
+        $this->bookings = null;
     }
 
-    public function showBookingOrders(){
-        $this->bookingOrders = true;
-        $this->orders = auth()->user()->bookingOrders ?? null;
+    public function showBookings(){
+        $this->seeBookings = true;
+        //$this->orders = auth()->user()->bookingOrders ?? null;
     }
 
-    public function showProductOrders(){
-        $this->bookingOrders = false;
-        $this->orders = auth()->user()->productOrders ?? null;
+    public function showOrders(){
+        $this->seeBookings = false;
+        $this->orders = auth()->user()->orders ?? null;
     }
 
     public function toggleOrderDetails($orderId)

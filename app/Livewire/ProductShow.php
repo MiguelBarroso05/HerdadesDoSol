@@ -20,7 +20,9 @@ class ProductShow extends Component
     {
         $this->quantity = 1;
         $this->product = $product;
-        $this->product->stock = 20;
+        if ($this->product->stock - session()->get('cart.' . $this->product->id . '.quantity', 0) <= 0) {
+            $this->product->stock = 0;            
+        }
     }
 
     #[On('valueUpdated')]
@@ -31,7 +33,11 @@ class ProductShow extends Component
 
 
     public function addToCart()
-    {
+    {   
+        if ($this->quantity > $this->product->stock) {
+            return session()->flash('error', 'Not enough stock');
+        }
+
 
         $this->validate([
             'quantity' => 'required|integer|min:1|max:8'

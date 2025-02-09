@@ -1,5 +1,6 @@
 <main class="hs-d-flex hs-flex-grow-1">
-    <form wire:submit="submit" method="POST" class="hs-d-flex hs-flex-grow-1 hs-mt-8 hs-px-9 hs-justify-content-center hs-mb-3">
+    <form wire:submit="submit" method="POST"
+        class="hs-d-flex hs-flex-grow-1 hs-mt-8 hs-px-9 hs-justify-content-center hs-mb-3">
         @csrf
         <div class="hs-w-80 hs-bg-card hs-p-5 hs-rounded-3 hs-d-flex hs-flex-row hs-justify-content-between">
             <div class="scroll-container hs-w-70 hs-pe-2" style="max-height: 580px; overflow-y: scroll;">
@@ -14,7 +15,8 @@
                                 <p>{{ $product['price'] }}€</p>
                             </div>
                             <div>
-                                <a href="{{ route('cart.remove', $id) }}"><i class="bi bi-x text-red-600 hs-fs-5"></i></a>
+                                <a href="{{ route('cart.remove', $id) }}"><i
+                                        class="bi bi-x text-red-600 hs-fs-5"></i></a>
                             </div>
                         </div>
                         <hr>
@@ -42,10 +44,11 @@
                     <h5>You have your Basket empty!</h5>
                 @endif
                 <h6>Total: {{ $this->total }}€</h6>
+                <hr>
                 <h6>Chose a payment method</h6>
                 <div class="hs-d-flex hs-flex-row hs-align-items-center">
                     @if (auth()->user()->paymentMethods->count() == 0)
-                        <div>
+                        <div class="hs-col-4">
                             <p>Please add a Payment Method</p>
                             <a href="{{ route('payment-methods') }}" class="hs-btn hs-btn-primary">Add Payment
                                 Method</a>
@@ -86,6 +89,9 @@
                                 </div>
                             @endif
                         </div>
+                        @if (auth()->user()->paymentMethods->count() > 1)
+
+
                         <div x-data="{ open: false }">
                             <!-- Botão para abrir o modal -->
                             <a class="hs-btn hs-btn-primary h-10 mt-1" @click="open = true">
@@ -104,45 +110,46 @@
                                     <!-- Lista de cartões não predefined -->
 
                                     @foreach ($selectedCard->predefined == 1 ? auth()->user()->paymentMethods->where('predefined', 0) : auth()->user()->paymentMethods->where('id', '!=', $selectedCard->id) as $card)
-<div class="w-[240px] h-[94px] hs-rounded-3 hs-m-3 flex flex-col justify-around place-self-center bg-[#EEEEEE] hs-cursor-pointer hs-card-selected"
-                                wire:click="selectCard({{ $card->id }})">
+                                        <div class="w-[240px] h-[94px] hs-rounded-3 hs-m-3 flex flex-col justify-around place-self-center bg-[#EEEEEE] hs-cursor-pointer hs-card-selected"
+                                                                    wire:click="selectCard({{ $card->id }})">
 
-                                <div wire class="flex flex-row items-center w-full">
-                                    <div class="hs-col-md-5 px-2">
-                                        <div
-                                            class="w-[90px] h-[55px] bg-gradient-to-r from-orange-500 to-orange-700 text-white p-2 rounded shadow-lg flex flex-col justify-between">
-                                            <span class="text-[5px] uppercase">{{ $card->name }}</span>
-                                            <img class="w-[15px] h-auto"
-                                                src="{{ asset('/imgs/pages/creditCardChip.png') }}"
-                                                alt="creditCardChip" />
-                                            <div class="text-[5px]">
-                                                <span>**** **** **** {{ $card->last4 }}</span>
-                                            </div>
-                                            <div class="flex justify-between text-[5px]">
-                                                <span class="content-center">**/**</span>
-                                                <img class="w-[15px] h-auto"
-                                                    src="{{ asset($card->type->img) ?? null }}"
-                                                    alt="{{ $card->type->name }}Logo">
-                                            </div>
-                                        </div>
-                                    </div>
+                                                                    <div wire class="flex flex-row items-center w-full">
+                                                                        <div class="hs-col-md-5 px-2">
+                                                                            <div
+                                                                                class="w-[90px] h-[55px] bg-gradient-to-r from-orange-500 to-orange-700 text-white p-2 rounded shadow-lg flex flex-col justify-between">
+                                                                                <span class="text-[5px] uppercase">{{ $card->name }}</span>
+                                                                                <img class="w-[15px] h-auto"
+                                                                                    src="{{ asset('/imgs/pages/creditCardChip.png') }}"
+                                                                                    alt="creditCardChip" />
+                                                                                <div class="text-[5px]">
+                                                                                    <span>**** **** **** {{ $card->last4 }}</span>
+                                                                                </div>
+                                                                                <div class="flex justify-between text-[5px]">
+                                                                                    <span class="content-center">**/**</span>
+                                                                                    <img class="w-[15px] h-auto"
+                                                                                        src="{{ asset($card->type->img) ?? null }}"
+                                                                                        alt="{{ $card->type->name }}Logo">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
 
-                                    <div class="hs-col-md-7 px-2">
-                                        <p class="m-0 text-sm">{{ $card->identifier ?? 'Card' }}</p>
-                                        <p class="m-0 text-xs">Card ending in {{ $card->last4 }}</p>
-                                    </div>
-                                </div>
-                            </div>
-@endforeach
+                                                                        <div class="hs-col-md-7 px-2">
+                                                                            <p class="m-0 text-sm">{{ $card->identifier ?? 'Card' }}</p>
+                                                                            <p class="m-0 text-xs">Card ending in {{ $card->last4 }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                    @endforeach
 
 
-                            <!-- Botão para fechar o modal -->
-                            <button class="mt-4 hs-btn hs-btn-secondary" @click="open = false">
-                                Close
-                            </button>
+                                    <!-- Botão para fechar o modal -->
+                                    <a class="mt-4 hs-btn hs-btn-secondary" @click="open = false">
+                                        Close
+                                    </a>
                         </div>
                     </div>
                 </div>
+                @endif
                 @endif
             </div>
             <hr>
@@ -150,37 +157,43 @@
 <div class="hs-d-flex hs-flex-column">
                 <h6>Billing Information</h6>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Name: {{ $billingInformation->name }}</p>
+                    <p class="hs-col-6">Name: {{ $billingInformation->name }}</p>
                     <p>Nif: {{ $billingInformation->nif ?? 'none' }}</p>
                 </div>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Email: {{ $billingInformation->email }}</p>
+                    <p class="hs-col-6">Email: {{ $billingInformation->email }}</p>
                     <p>Phone: {{ $billingInformation->phone ?? 'none' }}</p>
                 </div>
                 @if ($billingInformation->address)
-<h6>Address</h6>
+                <h6>Address</h6>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Country: {{ $billingInformation->address->country }}</p>
+                    <p class="hs-col-6">Country: {{ $billingInformation->address->country }}</p>
                     <p>Street: {{ $billingInformation->address->street }}</p>
                 </div>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">City: {{ $billingInformation->address->city }}</p>
+                    <p class="hs-col-6">City: {{ $billingInformation->address->city }}</p>
                     <p>Zipcode: {{ $billingInformation->address->zipcode }}</p>
                 </div>
-@endif
+               @endif
             </div>
             <hr>
-@endif
+            @endif
             <div class="hs-d-flex hs-flex-column">
-                <h6>Address</h6>
+                <h6>
+                    Delivery address</h6>
+                @if ($address)
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Country: {{ $address->country }} </p>
-                    <p>City: {{ $address->city }}</p>
+                    <p class="hs-col-6">Country: {{ $address->country }} </p>
+                    <p> Street: {{ $address->street }}</p>
                 </div>
                 <div class="hs-d-flex hs-flex-row">
-                    <p class="hs-col-4">Street: {{ $address->street }}</p>
+                    <p class="hs-col-6">City: {{ $address->city }}</p>
                     <p>Zipcode: {{ $address->zipcode }}</p>
                 </div>
+                @else
+                <p class="hs-col-4">Please add a address</p>
+                <a href="{{ route('personal-info') }}" class="hs-btn hs-btn-primary hs-col-4">Please add a address</a>
+                @endif
             </div>
         </div>
         <div class=" hs-w-20">

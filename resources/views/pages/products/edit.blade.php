@@ -7,7 +7,6 @@
 
     <label for="description">Description</label>
     <input type="text" name="description" value="{{ $product->description }}">
-
     <label for="price">Price</label>
     <input type="text" name="price" value="{{ $product->price }}">
     <select name="category_id">

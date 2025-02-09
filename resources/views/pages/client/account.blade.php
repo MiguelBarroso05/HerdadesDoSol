@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
     @include('layouts.navbars.guest.navbar')
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <main class="hs-col-md-11 hs-w-85 hs-align-self-center hs-mt-8 hs-p-2 hs-flex-grow-1">
         <x-success-message/>
         <div class="hs-d-flex hs-justify-content-between">
@@ -168,13 +171,17 @@
                                 <div class="hs-row hs-mt-1" style="margin-bottom: 60px">
                                     @if(auth()->user()->paymentMethods->firstWhere('predefined', 1))
                                         <div class="hs-py-3">
-                                            <p class="hs-d-flex"><strong class="hs-pe-2">Method:</strong> <img class="w-[50px] h-auto"
-                                                                                                               src="{{asset(auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->img)}}"
-                                                                                                               alt="{{auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->name}} Logo"></p>
+                                            <p class="hs-d-flex  hs-align-items-center"><strong class="hs-pe-2">Method:</strong>
+                                                <img class="w-[50px] h-auto"
+                                                src="{{asset(auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->img)}}"
+                                                alt="{{auth()->user()->paymentMethods->firstWhere('predefined', 1)->type->name}} Logo">
+                                            </p>
                                         </div>
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong> {{auth()->user()->paymentMethods->firstWhere('predefined', 1)->name}}
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Name:</strong>
+                                            {{auth()->user()->paymentMethods->firstWhere('predefined', 1)->name}}
                                         </p>
-                                        <p class="hs-d-flex"><strong class="hs-pe-2">Number: </strong> {{'**** **** ****'.auth()->user()->paymentMethods->firstWhere('predefined', 1)->last4}}
+                                        <p class="hs-d-flex"><strong class="hs-pe-2">Number: </strong>
+                                            {{'**** **** ****'.auth()->user()->paymentMethods->firstWhere('predefined', 1)->last4}}
                                         </p>
                                         <div class="hs-d-flex hs-justify-content-between">
                                             <p class="hs-d-flex"><strong class="hs-pe-2">Validity: </strong> **/**</p>
@@ -185,7 +192,7 @@
 
                                 </div>
                                 <div class="hs-d-flex hs-justify-content-center">
-                                    <a href="{{route('payment-methods')}}" type="button" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
+                                    <a href="{{route('payment-methods')}}" class="hs-btn hs-btn-light hs-d-flex hs-align-items-center"
                                             style="height: 31px">Payment Methods
                                     </a>
                                 </div>

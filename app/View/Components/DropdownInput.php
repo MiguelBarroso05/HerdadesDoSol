@@ -18,7 +18,7 @@ class DropdownInput extends Component
         public string $fixed,
         public string $name,
         public $object,
-        public User $user,
+        public $user,
         public $paramter,
         public $optionText,
     )

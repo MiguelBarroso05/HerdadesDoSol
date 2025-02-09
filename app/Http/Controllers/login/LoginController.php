@@ -5,8 +5,10 @@ namespace App\Http\Controllers\login;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Renderable;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\user\User;
 use App\Notifications\WrongLoginAttempt;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
@@ -42,7 +44,19 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
             app(Cart::class)->merge();
-
+            $cart = session()->get('cart', []);
+            for ($i = 0; $i < count($cart); $i++) {
+                $productId = array_keys($cart)[$i];
+                try {
+                    $product = Product::findorFail($productId);
+                    if ($product && $product->stock == 0) {
+                        unset($cart[$productId]);
+                    }
+                } catch (Exception $e) {
+                    unset($cart[$productId]);
+                }
+            }
+            session()->put('cart', $cart);
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->intended('dashboard');
             }
@@ -74,27 +88,27 @@ class LoginController extends Controller
         }
         // dd(session()->get('cart'), Cart::where('user_id', $userId)->get());
         session()->forget('cart');
-        
+
         Auth::logout();
-        
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        
+
         return redirect('/');
     }
-    
+
     public function loginAdmin()
     {
         // Exemplo: login do admin com ID 1
         $admin = User::find(1); // Assume que o utilizador com ID 1 é o admin
         if ($admin) {
             Auth::login($admin);
-            
+
             return redirect()->route('dashboard'); // Redirecionar para a dashboard ou outra rota
         }
         return redirect()->route('login')->with('error', 'Admin não encontrado.');
     }
-    
+
     public function loginClient()
     {
         // Exemplo: login do cliente com ID 2
@@ -102,8 +116,8 @@ class LoginController extends Controller
         if ($client) {
             Auth::login($client);
             app(Cart::class)->merge();
-            
-            return redirect()->route('account'); // Redirecionar para a dashboard ou outra rota
+
+            return redirect()->route('account'); // Redirecionar para a account ou outra rota
         }
         return redirect()->route('login')->with('error', 'Cliente não encontrado.');
     }
