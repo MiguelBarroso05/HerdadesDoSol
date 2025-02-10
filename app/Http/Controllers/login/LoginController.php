@@ -7,6 +7,7 @@ use App\Http\Controllers\Renderable;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\user\User;
+use App\Notifications\ProductCartNotInStock;
 use App\Notifications\WrongLoginAttempt;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,9 +51,11 @@ class LoginController extends Controller
                 try {
                     $product = Product::findorFail($productId);
                     if ($product && $product->stock == 0) {
+                        auth()->user()->notify(new ProductCartNotInStock());
                         unset($cart[$productId]);
                     }
                 } catch (Exception $e) {
+                    auth()->user()->notify(new ProductCartNotInStock($product));
                     unset($cart[$productId]);
                 }
             }
@@ -116,7 +119,21 @@ class LoginController extends Controller
         if ($client) {
             Auth::login($client);
             app(Cart::class)->merge();
-
+            $cart = session()->get('cart', []);
+            for ($i = 0; $i < count($cart); $i++) {
+                $productId = array_keys($cart)[$i];
+                try {
+                    $product = Product::findorFail($productId);
+                    if ($product && $product->stock == 0) {
+                        auth()->user()->notify(new ProductCartNotInStock());
+                        unset($cart[$productId]);
+                    }
+                } catch (Exception $e) {
+                    auth()->user()->notify(new ProductCartNotInStock());
+                    unset($cart[$productId]);
+                }
+            }
+            session()->put('cart', $cart);
             return redirect()->route('account'); // Redirecionar para a account ou outra rota
         }
         return redirect()->route('login')->with('error', 'Cliente não encontrado.');

@@ -9,7 +9,6 @@ class NumberInput extends Component
     public $value = 1;
     public $name;
     public $max;
-    private $processing = false;
     public function render()
     {
         return view('livewire.number-input', [

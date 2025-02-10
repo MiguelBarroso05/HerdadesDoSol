@@ -10,11 +10,6 @@
         <div class="hs-container-fluid">
             <div class="hs-row">
                 <div class="hs-col-12">
-                    <!-- Success Message -->
-                    <x-success-message />
-
-                    <x-warning-message :session="'warning_activities'"/>
-
                     <!-- Card container for the Activities table -->
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">

@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             AllergySeeder::class,
-            OrderSeeder::class,
             PaymentMethodTypeSeeder::class,
+            OrderSeeder::class,
         ]);
 
 

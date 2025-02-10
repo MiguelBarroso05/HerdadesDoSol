@@ -18,6 +18,6 @@ class AccommodationTypeSeeder extends Seeder
             ['name' => 'Bungalow', 'img' => 'accommodation_type/2_Bungalow.jpg', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Cabin', 'img' => 'accommodation_type/3_Cabin.png', 'created_at' => now(), 'updated_at' => now()],
         ]);
-        AccommodationType::factory(3)->create();
+        //AccommodationType::factory(3)->create();
     }
 }

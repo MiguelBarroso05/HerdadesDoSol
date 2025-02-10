@@ -6,21 +6,38 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\accommodation\AccommodationRequest;
 use App\Models\accommodation\Accommodation;
 use App\Models\accommodation\AccommodationType;
+use Illuminate\Http\Request;
 
 class AccommodationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        if  (auth()->user() && auth()->user()->hasRole('admin')) {
-        $accommodations = Accommodation::with('accommodation_types')->paginate(8);
-        return view('pages.accommodations.accommodations', compact('accommodations'));
+        $search_param = $request->query('search_acommodations');
 
+        if ($search_param) {
+            $accommodations = Accommodation::with('accommodation_types')
+                ->where('type', 'like', '%' . $search_param . '%')
+                ->orWhere('size', 'like', '%' . $search_param . '%')
+                ->paginate(6);
+
+            if ($accommodations->isEmpty()){
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('accommodations.index');
+            }
+            return view('pages.accommodations.accommodations', compact('accommodations', 'search_param'));
+
+        } else {
+            $accommodations = Accommodation::with('accommodation_types')->paginate(6);
+            return view('pages.accommodations.accommodations', compact('accommodations'));
         }
-        $accommodations = accommodation::with('accommodation_types')->get();
+<<<<<<< HEAD
+        $accommodations = AccommodationType::all();
         return view('pages.client.accommodations.index', compact('accommodations'));
+=======
+>>>>>>> 568d04d336f4b077bb1965fbb305cd58b3407950
     }
 
     /**

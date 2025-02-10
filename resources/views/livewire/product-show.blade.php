@@ -1,7 +1,7 @@
-<x-custom-alert type="warning" :session="session('warning')" />
-<x-custom-alert type="success" :session="session('success')" />
-<x-custom-alert type="error" :session="session('error')" />
 <div class="hs-mt-10 hs-flex-grow-1">
+    <x-custom-alert type="warning" :session="session('warning')" />
+    <x-custom-alert type="success" :session="session('success')" />
+    <x-custom-alert type="error" :session="session('error')" />
     <a href="{{route('products.index')}}" class="hs-bg-card hs-rounded-3 hs-py-1 hs-px-3" style="position: fixed;top: 145px;left: 350px;"><i class="bi bi-arrow-left"></i></a>
     <div class="hs-d-flex hs-flex-row justify-center">
 

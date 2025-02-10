@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\accommodation\Accommodation;
+use App\Models\accommodation\AccommodationType;
 use App\Models\activity\Activity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -37,25 +38,7 @@ class Reservation extends Model
         'price',
         'status',
     ];
-    public function create($request)
-    {
-        $request->validate([
-            'entry_date' => 'required | date',
-            'exit_date' => 'required | date',
-            'user_id' => 'required',
-            'estate_id' => 'required',
-            'accommodation_id' => 'required',
-            'groupsize' => 'required,numeric, min:1, max:8',
-            'children' => 'required,numeric, min:0, max:8',
-        ]);
-        $reservation = new Reservation();
-        $reservation->fill($request->all());
-        $reservation->save();
-        foreach ($request->activities as $activity) {
-            $reservation->activities()->attach($activity);
-        }
-        return $reservation;
-    }
+   
     public function activities()
     {
         return $this->belongsToMany(Activity::class, 'reservation_activities', 'reservation_id', 'activity_id')->withTimestamps();
@@ -69,5 +52,10 @@ class Reservation extends Model
         return $this->belongsTo(Invoice::class, 'invoice_id');
     }
 
-
+    public function estate(){
+        return $this->belongsTo(Estate::class);
+    }
+    public function accommodationType(){
+        return $this->belongsTo(AccommodationType::class);
+    }
 }

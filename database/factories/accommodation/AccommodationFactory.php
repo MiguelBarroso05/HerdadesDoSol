@@ -22,6 +22,7 @@ class AccommodationFactory extends Factory
         return [
             'accommodation_type_id' => $accommodationTypes->random()->id,
             'estate_id' => $this->faker->numberBetween(1, 4),
+            'name' => $this->faker->name(),
             'size' => $this->faker->numberBetween(1, 6),
             'price' => $this->faker->numberBetween(50, 200),
         ];

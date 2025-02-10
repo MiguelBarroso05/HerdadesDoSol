@@ -5,16 +5,34 @@ namespace App\Http\Controllers\accommodation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\accommodation\AccommodationTypeRequest;
 use App\Models\accommodation\AccommodationType;
+use App\Models\activity\ActivityType;
+use Illuminate\Http\Request;
 
 class AccommodationTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $accommodation_types = AccommodationType::withoutTrashed()->paginate(8);
-        return view('pages.accommodation_types.accommodation_types', compact('accommodation_types') );
+        $search_param = $request->query('search_accommodation_types');
+
+        if ($search_param) {
+
+            $accommodation_types = AccommodationType::withoutTrashed()
+                ->where('name', 'like', '%' . $search_param . '%')
+                ->paginate(6);
+
+            if ($accommodation_types->isEmpty()){
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('accommodation_types.index');
+            }
+            return view('pages.accommodation_types.accommodation_types', compact('accommodation_types', 'search_param'));
+        }
+        else{
+            $accommodation_types = ActivityType::withoutTrashed()->paginate(6);
+            return view('pages.accommodation_types.accommodation_types', compact('accommodation_types'));
+        }
     }
 
     /**

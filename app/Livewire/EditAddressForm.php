@@ -90,7 +90,12 @@ class EditAddressForm extends Component
             }
 
             session()->flash('success', 'Address successfully updated!');
+            if (auth()->user()->hasRole('admin')) {
+                return redirect()->to(route('users.show', $this->user));
+
+            }
             return redirect()->to(route('personal-info'));
+
             $this->resetForm();
 
         } catch (\Exception $e) {

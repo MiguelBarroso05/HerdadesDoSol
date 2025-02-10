@@ -25,9 +25,6 @@
                             </div>
                         </div>
 
-                        <!-- Error Messages -->
-                        <x-general-errors />
-
                         <!-- Activity Information Card -->
                         <div class="hs-card">
                             <div class="hs-card-header hs-pb-0">
