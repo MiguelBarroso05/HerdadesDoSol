@@ -78,7 +78,7 @@
             <!-- Accommodations Link -->
             <li>
                 <a href="{{ route('accommodations.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::is('accommodations.index') || Route::is('accommodations.edit') || Route::is('accommodations.show') || Route::is('accommodations.create') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
-                    <i class="bi bi-houses-fill text-danger text-lg"></i>
+                    <i class="bi bi-houses-fill text-lg"></i>
                     <span class="ml-3">Accommodations</span>
                 </a>
             </li>
@@ -94,8 +94,16 @@
             <!-- Categories Link -->
             <li>
                 <a href="{{ route('categories.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::is('categories.index') || Route::is('categories.edit') || Route::is('categories.create') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
-                    <i class="bi bi-houses-fill text-secondary text-lg"></i>
+                    <i class="bi bi-tag text-lg"></i>
                     <span class="ml-3">Categories</span>
+                </a>
+            </li>
+
+            <!-- Products Link -->
+            <li>
+                <a href="{{ route('products.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::is('products.index') || Route::is('products.edit') || Route::is('products.create') || Route::is('products.show') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
+                    <i class="bi bi-basket2-fill text-lg"></i>
+                    <span class="ml-3">Products</span>
                 </a>
             </li>
         </ul>

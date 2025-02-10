@@ -93,7 +93,7 @@
                 <div class="hs-w-15 hs-form-group">
                     <label class="hs-form-control-label" for="children">Children</label>
                     <livewire:NumberInput class="hs-form-control" wire:model="children" wire:change="loadData"
-                                          :name="'children'" :value="$children" :max="8"/>
+                                          :name="'children'" :value="$children" :max="8"/> <!-- TODO: ATENCAO ATENCAO REVER -->
                 </div>
             </div>
             <div class=" hs-w-100">
@@ -128,7 +128,7 @@
                         :set="'selectedAccommodation'"
                         :call="null"
                         :paramter="$selectedAccommodation"
-                        :optionText="'size'"
+                        :optionText="'name'"
                     />
                 </div>
                 <div class="hs-form-group">

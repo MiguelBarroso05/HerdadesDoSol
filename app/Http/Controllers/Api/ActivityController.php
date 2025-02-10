@@ -5,18 +5,16 @@ namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 use App\Models\activity\Activity;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class ActivityController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        $activities = Activity::with('activityType', 'estate')->get();
-
-        return response()->json([
-            'activities' => $activities
-        ]);
+        $activities = Activity::select('id', 'name', 'description', 'img', 'price')->get();
+        return response()->json($activities);
     }
 
     public function getActivitiesByEstateAndDate(Request $request)

@@ -25,15 +25,15 @@ class OrderSeeder extends Seeder
         $billingIds = DB::table('billings')->pluck('id')->toArray();
         $paymentMethodTypeIds = DB::table('payment_method_types')->pluck('id')->toArray();
         $productIds = DB::table('products')->pluck('id')->toArray();
-        
+
         // Validate necessary data
         if (empty($userIds) || empty($addressIds) || empty($billingIds) || empty($paymentMethodTypeIds) || empty($productIds)) {
             $this->outputMissingDataCount($userIds, $addressIds, $billingIds, $paymentMethodTypeIds, $productIds);
             return;
         }
-        
-        
-        
+
+
+
         // Insert Payment Methods
         $paymentMethodIds = $this->seedPaymentMethods($userIds, $paymentMethodTypeIds, $faker);
         // Insert Invoices
@@ -135,6 +135,8 @@ class OrderSeeder extends Seeder
                 'price' => 0, // Updated after adding products
                 'invoice_id' => $faker->randomElement($invoiceIds),
                 'delivered_at' => $faker->optional()->date(),
+                'created_at' => now(),
+                'updated_at' => now(),
 
             ]);
 

@@ -11,10 +11,26 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::withoutTrashed()->paginate(6);
-        return view('pages.categories.index', compact('categories'));
+        $search_param = $request->query('search_categories');
+
+        if ($search_param) {
+            $categories = Category::withoutTrashed()
+                ->where('name', 'like', '%' . $search_param . '%')
+                ->paginate(6)
+                ->appends(['search_categories' => $search_param]);
+
+            if ($categories->isEmpty()) {
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('categories.index');
+            }
+            return view('pages.categories.index', compact('categories', 'search_param'));
+
+        } else {
+            $categories = Category::withoutTrashed()->paginate(6);
+            return view('pages.categories.index', compact('categories'));
+        }
     }
 
     /**
@@ -32,8 +48,8 @@ class CategoryController extends Controller
     {
         $validated = $request->validated();
         try{
-            $activity_type = new Category($validated);
-            $activity_type->save();
+            $category = new Category($validated);
+            $category->save();
             return redirect()->route('categories.index')->with('success', 'Category created successfully');
         }
         catch(\Exception $e){
@@ -57,7 +73,7 @@ class CategoryController extends Controller
         $category = Category::all()->findOrFail($id);
         try{
             $category->update($request->validated());
-            return redirect()->route('category.index')->with('success', 'Category updated successfully');
+            return redirect()->route('categories.index')->with('success', 'Category updated successfully');
         }
         catch(\Exception $e){
             return redirect()->back()->with('error', 'error while updating category');
@@ -70,6 +86,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return redirect()->route('category.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
     }
 }

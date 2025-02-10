@@ -13,8 +13,16 @@
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
                             <h6>Categories Table</h6>
+
+                            <!-- Search Bar -->
+                            <x-search-bar :searchbarName="'search_categories'" />
+
                             <!-- Button Create New -->
-                            <x-custom-button type="createNew" route="{{ route('categories.create') }}"/>
+                            <a href="{{ route('categories.create') }}"
+                               class="hs-mx-2"
+                               data-toggle="tooltip">
+                                <i class="bi bi-bookmark-plus hs-fs-3"></i>
+                            </a>
                         </div>
                         <!-- Category Table -->
                         <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">

@@ -45,7 +45,7 @@ Route::get('/', function () {
             ->orderByDesc('total_sold')
             ->take(9)
             ->get(),
-    
+
     ]);
 })->name('home');
 
@@ -83,7 +83,7 @@ Route::prefix('email')->group(function () {
     })->middleware(['signed'])->name('verification.verify');
     Route::post('/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
-     
+
         return back()->with('success', 'Verification link sent!');
     })->middleware([ 'throttle:6,1'])->name('verification.send');
 });
@@ -118,7 +118,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::resource('products', ProductController::class)->except(['index']);
-    
+
     Route::get('/checkout', function () {
         return view('pages.checkout.index', ['isReservation' => request('isReservation', false)]);
     })->name('checkout');
@@ -173,7 +173,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         #Routes Categories
         Route::resource('categories', CategoryController::class)->except(['show']);
 
-        #Routes Products
-        Route::resource('admin/products', ProductController::class);
+
     });
 });

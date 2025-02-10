@@ -13,7 +13,7 @@ Route::post('/register', [UserController::class, 'register'])->name('api.registe
 
 #Routes Reservation Methods
 Route::get('/estates', [EstateController::class, 'index']);
-Route::get('/accommodations', [AccommodationController::class, 'index']);
+Route::get('/accommodation-types', [AccommodationController::class, 'index']);
 Route::get('/activities', [ActivityController::class, 'index']);
 Route::get('/accommodations/types', [AccommodationController::class, 'getAvailableAccommodationTypes']);
 Route::get('/accommodations/available', [AccommodationController::class, 'getAvailableAccommodations']);

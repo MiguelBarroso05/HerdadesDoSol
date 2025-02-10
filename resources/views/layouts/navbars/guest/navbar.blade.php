@@ -76,7 +76,7 @@
                                         <div class="absolute top-0 right-1 w-4 h-4 rounded-full bg-red-600 flex justify-center items-center" style="top: 97px;right: 82px;">
                                             <p class="text-white m-0" style="font-size: 10px">{{ auth()->user()->unreadNotifications->count() }}</p>
                                         </div>
-                                            
+
                                         @endif
                                     </x-dropdown.item>
                                     <x-dropdown.item icon="book-open" href="{{ route('orders.index') }}">
@@ -110,7 +110,7 @@
                                     </div>
                                     <ul style="list-style-type:disc;">
                                         @if (auth()->user()->unreadNotifications->count() > 0)
-                                            
+
                                             @foreach (auth()->user()->unreadNotifications as $notification)
                                                 @php
                                                     $notification->markAsRead();
@@ -126,7 +126,7 @@
                                             <li class="hs-py-2 hs-pe-1">
                                                 <h6 class="hs-m-0" style="font-size: 15px">
                                                     You don't have any unread notifications</h6>
-                                                    
+
                                             </li>
                                         @endif
                                     </ul>

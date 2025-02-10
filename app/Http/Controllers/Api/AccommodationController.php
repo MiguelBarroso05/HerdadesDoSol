@@ -4,19 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\accommodation\Accommodation;
 use App\Http\Controllers\Controller;
+use App\Models\accommodation\AccommodationType;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AccommodationController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        $accommodations = Accommodation::with('accommodationType', 'estate')->get();
-
-        return response()->json([
-            'accommodations' => $accommodations
-        ]);
+        $accommodationTypes = AccommodationType::select('id', 'name', 'description', 'img')->get();
+        return response()->json($accommodationTypes);
     }
 
     public function getAvailableAccommodationTypes(Request $request)

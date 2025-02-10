@@ -22,7 +22,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         $id = null;
-        if ($this->routeIs('users.update')) {
+        if ($this->routeIs('users.update') || $this->routeIs('personal-info.update')) {
             $id = $this->route('user');
         }
         $nationalityRule = $this->input('api_failed') ? 'nullable' : 'required';

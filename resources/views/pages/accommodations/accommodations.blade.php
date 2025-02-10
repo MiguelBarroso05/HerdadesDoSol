@@ -18,7 +18,11 @@
                             <x-search-bar :searchbarName="'search_accommodations'" />
 
                             <!-- Create New button -->
-                            <x-custom-button type="createNew" route="{{ route('accommodations.create') }}"/>
+                            <a href="{{ route('accommodations.create') }}"
+                               class="hs-mx-2"
+                               data-toggle="tooltip">
+                                <i class="bi bi-house-add-fill hs-fs-3"></i>
+                            </a>
                         </div>
                         <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">
                             <div class="hs-table-responsive hs-p-0">
@@ -51,19 +55,19 @@
                                                     <!-- Image -->
                                                     <div>
                                                         <img
-                                                            src="{{ $accommodation->accommodation_types->img ? asset('storage/'.$accommodation->accommodation_types->img) : asset('/imgs/users/no-image.png') }}"
+                                                            src="{{ $accommodation->accommodationType->img ? asset('storage/'.$accommodation->accommodationType->img) : asset('/imgs/users/no-image.png') }}"
                                                             class="hs-avatar hs-avatar-sm hs-me-3" alt="User image">
                                                     </div>
                                                     <!-- Id -->
                                                     <div class="hs-d-flex hs-flex-column hs-justify-content-center">
-                                                        <h6 class="hs-mb-0 hs-text-sm">Accommodation #{{ $accommodation->id }}</h6>
+                                                        <h6 class="hs-mb-0 hs-text-sm">{{ $accommodation->name }}</h6>
                                                     </div>
                                                 </div>
                                             </td>
                                             <!-- Type Name -->
                                             <td class="hs-align-middle hs-text-center">
                                                 <span
-                                                    class="hs-text-secondary hs-text-xs hs-font-weight-bold">{{$accommodation->accommodation_types->name}}</span>
+                                                    class="hs-text-secondary hs-text-xs hs-font-weight-bold">{{$accommodation->accommodationType->name}}</span>
                                             </td>
                                             <!-- Size -->
                                             <td class="hs-align-middle hs-text-center">
@@ -93,7 +97,7 @@
                                 </table>
                                 <!-- Pagination -->
                                 <div class="hs-d-flex hs-justify-content-center hs-mt-4">
-                                    {{ $accommodations->links('vendor.pagination.custom') }}
+                                    {{ $accommodations->appends(request()->query())->links('vendor.pagination.custom') }}
                                 </div>
                             </div>
                         </div>

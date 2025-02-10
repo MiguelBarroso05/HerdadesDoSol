@@ -11,12 +11,12 @@
   "optionTemplate": "<div><div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div class=\"text-gray-800 dark:text-neutral-200 \" data-title></div></div></div>",
   "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
 }' class="hidden hs-form-control" name="{{$name}}">
-    <option value="" disabled selected>Select your country...</option>
+        <option value="" disabled selected>Select your country...</option>
     @if(isset($countries[0]['name']) && isset($countries[0]['flag']))
         @foreach($countries as $country)
             <option value="{{ $country['name'] }}" data-hs-select-option='{
         "icon": "<img class=\"inline-block size-4 rounded-full\" src=\"{{ $country['flag'] }}\" />"}'
-                {{ $user->nationality == $country['name'] ? 'selected' : '' }}>
+                @if($user) {{$user->nationality == $country['name'] ? 'selected' : ''}} @endif>
                 {{ limit_word($country['name'], 16, true) }}
             </option>
         @endforeach

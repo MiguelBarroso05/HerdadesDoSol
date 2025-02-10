@@ -18,7 +18,11 @@
                             <x-search-bar :searchbarName="'search_activity_types'" />
 
                             <!-- Button Create New -->
-                            <x-custom-button type="createNew" route="{{ route('activity_types.create') }}"/>
+                            <a href="{{ route('activity_types.create') }}"
+                               class="hs-mx-2"
+                               data-toggle="tooltip">
+                                <i class="bi bi-plus-circle hs-fs-3"></i>
+                            </a>
                         </div>
                         <!-- Activity Type Table -->
                         <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">

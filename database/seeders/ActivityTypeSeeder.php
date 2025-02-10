@@ -16,6 +16,9 @@ class ActivityTypeSeeder extends Seeder
             ['name' => 'Outdoor', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Indoor', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'Adventure', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Nocturne', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Aquatic', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Routes', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
     }

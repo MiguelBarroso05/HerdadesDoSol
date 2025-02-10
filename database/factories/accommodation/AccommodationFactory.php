@@ -19,11 +19,14 @@ class AccommodationFactory extends Factory
     public function definition(): array
     {
         $accommodationTypes = AccommodationType::all();
+        $type = $accommodationTypes->random();
+        $size = $this->faker->numberBetween(1, 6);
+
         return [
-            'accommodation_type_id' => $accommodationTypes->random()->id,
+            'accommodation_type_id' => $type->id,
             'estate_id' => $this->faker->numberBetween(1, 4),
-            'name' => $this->faker->name(),
-            'size' => $this->faker->numberBetween(1, 6),
+            'name' => "{$type->name} for {$size}",
+            'size' => $size,
             'price' => $this->faker->numberBetween(50, 200),
         ];
     }

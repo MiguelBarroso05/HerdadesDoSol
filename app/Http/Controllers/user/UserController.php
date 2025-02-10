@@ -72,7 +72,6 @@ class UserController extends Controller
         try {
             $validated = $request->validated();
             $role = Role::findById($request->role);
-
             $user = User::create($validated)->assignRole($role);
 
             $this->userstoreimg($request, $user);
@@ -131,8 +130,6 @@ class UserController extends Controller
             $validated = $request->validated();
             $dataToUpdate = $validated;
             $user->update($dataToUpdate);
-
-
 
             $this->userstoreimg($request, $user);
 

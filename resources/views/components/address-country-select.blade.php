@@ -1,4 +1,4 @@
-<select wire:model.defer="address.country" data-hs-select='{
+<select wire:model.defer="{{$model}}" data-hs-select='{
   "hasSearch": true,
   "searchPlaceholder": "Search...",
   "searchClasses": "block w-full text-sm border-gray-200 rounded-lg focus:ring-2 focus:ring-primary before:absolute before:inset-0 before:z-[1] dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-2 px-3 hs-form-control",

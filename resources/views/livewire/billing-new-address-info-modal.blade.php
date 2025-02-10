@@ -1,5 +1,4 @@
-<div wire:ignore.self class="modal fade" id="{{$modalIdName}}" tabindex="-1"
-     @if ($errors->any()) style="display: block;" @endif>
+<div wire:ignore.self class="modal fade" id="{{$modalIdName}}" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 40%">
         <form wire:submit.prevent="submit">
             <div class="modal-content">
@@ -18,9 +17,9 @@
                         <div class="hs-row">
                             <!-- Country Input -->
                             <div class="hs-col-md-4">
-                                <div class="hs-form-group">
+                                <div class="hs-form-group" wire:ignore>
                                     <label for="country" class="hs-form-control-label">Country</label>
-                                        <x-address-country-select :user="auth()->user()" :countries='$countries'/>
+                                    <x-address-country-select :user="auth()->user()" :countries="$countries" :model="'country'"/>
                                     @error('country')
                                     <div class="hs-invalid-feedback">{{ $message }}</div> @enderror
                                 </div>

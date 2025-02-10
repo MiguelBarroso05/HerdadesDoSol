@@ -8,7 +8,7 @@
         <div class="hs-d-flex hs-justify-content-between">
             <x-client-side-bar/>
             <div style="width: 78%;"
-                 class="bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
+                 class="hs-bg-card hs-rounded-3 hs-p-5 hs-d-flex hs-flex-column hs-justify-content-between">
                 <div>
                     <div class="hs-d-flex hs-justify-content-between hs-w-100">
                         <p class="text-secondary">BASIC INFORMATION</p>

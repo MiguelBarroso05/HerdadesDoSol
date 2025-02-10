@@ -17,7 +17,11 @@
                             <!-- Search Bar -->
                             <x-search-bar :searchbarName="'search_activities'" />
                             <!-- Button to create a new activity -->
-                            <x-custom-button type="createNew" route="{{ route('activities.create') }}"/>
+                            <a href="{{ route('activities.create') }}"
+                               class="hs-mx-2"
+                               data-toggle="tooltip">
+                                <i class="bi bi-plus-circle hs-fs-3"></i>
+                            </a>
                         </div>
                         <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">
                             <div class="hs-table-responsive hs-p-0">

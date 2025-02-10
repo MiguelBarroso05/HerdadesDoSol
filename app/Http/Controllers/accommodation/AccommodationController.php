@@ -15,29 +15,30 @@ class AccommodationController extends Controller
      */
     public function index(Request $request)
     {
-        $search_param = $request->query('search_acommodations');
+        if  (auth()->user() && auth()->user()->hasRole('admin')) {
+            $search_param = $request->query('search_accommodations');
 
-        if ($search_param) {
-            $accommodations = Accommodation::with('accommodation_types')
-                ->where('type', 'like', '%' . $search_param . '%')
-                ->orWhere('size', 'like', '%' . $search_param . '%')
-                ->paginate(6);
+            if ($search_param) {
+                $accommodations = Accommodation::with('accommodationType')
+                    ->where('name', 'like', '%' . $search_param . '%')
+                    ->paginate(6)
+                    ->appends(['search_accommodations' => $search_param]);
 
-            if ($accommodations->isEmpty()){
-                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
-                return redirect()->route('accommodations.index');
+                if ($accommodations->isEmpty()) {
+                    session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                    return redirect()->route('accommodations.index');
+                }
+                return view('pages.accommodations.accommodations', compact('accommodations', 'search_param'));
+
+            } else {
+                $accommodations = Accommodation::with('accommodationType')->paginate(6);
+                return view('pages.accommodations.accommodations', compact('accommodations'));
             }
-            return view('pages.accommodations.accommodations', compact('accommodations', 'search_param'));
-
-        } else {
-            $accommodations = Accommodation::with('accommodation_types')->paginate(6);
-            return view('pages.accommodations.accommodations', compact('accommodations'));
         }
-<<<<<<< HEAD
+
         $accommodations = AccommodationType::all();
         return view('pages.client.accommodations.index', compact('accommodations'));
-=======
->>>>>>> 568d04d336f4b077bb1965fbb305cd58b3407950
+
     }
 
     /**
@@ -56,12 +57,11 @@ class AccommodationController extends Controller
     {
         $validated = $request->validated();
 
-        try{
+        try {
             $accommodation = new Accommodation($validated);
             $accommodation->save();
             return redirect()->route('accommodations.index')->with('success', 'accommodation created successfully');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -80,7 +80,7 @@ class AccommodationController extends Controller
     public function edit(Accommodation $accommodation)
     {
         $accommodation_types = AccommodationType::withoutTrashed()->get();
-        return view('pages.accommodations.edit', compact('accommodation','accommodation_types'));
+        return view('pages.accommodations.edit', compact('accommodation', 'accommodation_types'));
     }
 
     /**
@@ -89,11 +89,10 @@ class AccommodationController extends Controller
     public function update(AccommodationRequest $request, $id)
     {
         $accommodation = Accommodation::all()->findOrFail($id);
-        try{
+        try {
             $accommodation->update($request->validated());
             return redirect()->route('accommodations.index')->with('success', 'accommodation updated successfully');
-        }
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
@@ -105,5 +104,12 @@ class AccommodationController extends Controller
     {
         $accommodation->delete();
         return redirect()->route('accommodations.index');
+    }
+
+
+    public function indexClient()
+    {
+        $accommodations = Accommodation::with('accommodationType');
+        return view('pages.client.accommodations.index');
     }
 }

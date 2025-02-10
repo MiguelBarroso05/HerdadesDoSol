@@ -4,7 +4,7 @@
         @csrf
         <div class="hs-w-80 hs-bg-card hs-p-5 hs-rounded-3 hs-d-flex hs-flex-row hs-justify-content-between">
             <div class="scroll-container hs-w-70 hs-pe-2" style="max-height: 580px; overflow-y: scroll;">
-              
+
                 <h6>Chose a payment method</h6>
                 <div class="hs-d-flex hs-flex-row hs-align-items-center">
                     @if (auth()->user()->paymentMethods->count() == 0)
@@ -166,7 +166,7 @@
         <div class=" hs-w-25">
             @if (session('cart') > 0 && !$isReservation)
             <h5>Basket</h5>
- 
+
             @foreach (session('cart') as $id => $product)
                 <div class="hs-d-flex hs-flex-row hs-justify-content-between ">
                     <div class="hs-py-2">
@@ -182,7 +182,7 @@
                     </div>
                 </div>
                 @if (!$loop->last)
-                    
+
                 @endif
                 <hr>
                 @php
@@ -194,7 +194,7 @@
             <p>
                 You have a reservation at <span class="hs-fw-bold">{{ $reservation->estate->name }}</span> from
                 <span class="hs-fw-bold">{{ $reservation->entry_date }}</span> to <span class="hs-fw-bold">{{ $reservation->exit_date }}</span> in a
-                <span class="hs-fw-bold">{{ $reservation->accommodation->accommodation_types->name }}</span> accommodation with a size of
+                <span class="hs-fw-bold">{{ $reservation->accommodation->accommodationType->name }}</span> accommodation with a size of
                 <span class="hs-fw-bold">{{ $reservation->accommodation->size }}</span> people.
             </p>
             @if (count($reservation->activities) > 0)
@@ -213,8 +213,8 @@
         <div class="hs-form-group">
             <label for="cvv">Please enter your CVV</label>
             <input class="hs-form-control hs-w-45" name="cvv" type="text"  oninput="this.value = this.value
-            .replace(/\D/g, '') 
-            .trim() 
+            .replace(/\D/g, '')
+            .trim()
             .substring(0, 3)" placeholder="xxx" maxlength="3" required>
         </div>
             <div><button type="submit" class="hs-btn hs-btn-primary hs-w-100">Buy</button></div>

@@ -10,7 +10,6 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
-        // Criar categorias
         $categories = [
             'Wines & Beverages',
             'Olive Oils & Preserves',
@@ -24,7 +23,6 @@ class ProductSeeder extends Seeder
             Category::firstOrCreate(['name' => $category]);
         }
 
-        // Criar produtos com distribuição controlada
         Product::factory()
             ->count(100)
             ->sequence(fn ($sequence) => [

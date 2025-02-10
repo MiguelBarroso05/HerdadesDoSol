@@ -63,9 +63,8 @@ class CreateReservation extends Component
                                ->where('entry_date', '<', $exit);
                 });
             })->get()->map(function ($accommodation) {
-                return $accommodation->accommodation_types;
+                return $accommodation->accommodationType;
             })->unique('id');
-
         }
 
         if (!$this->accommodationTypes->isEmpty()) {
@@ -148,7 +147,7 @@ class CreateReservation extends Component
         session()->put('reservation', $data);
         redirect()->route('checkout', ['isReservation' => true]);
 
-        
+
 
         //$this->reset();
         $this->dispatch('error');

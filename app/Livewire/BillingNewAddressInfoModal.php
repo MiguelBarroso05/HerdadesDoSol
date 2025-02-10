@@ -34,7 +34,6 @@ class BillingNewAddressInfoModal extends Component
 
     public function submit()
     {
-        dd($this->country, $this->city, $this->zipcode, $this->street);
         try {
             $billingRequest = new BillingRequest();
             $rules = $billingRequest->rulesFor('address-info');

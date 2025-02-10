@@ -10,6 +10,15 @@ body {
     background-position: center;
 }
 
+.hs-form-check-input:checked {
+    background-color: #f56036 !important;
+    border-color: #f56036 !important;
+}
+
+.hs-form-check-input:checked::after {
+    content: "✔" !important;
+}
+
 [type="radio"]:checked {
     border-color: transparent;
     background-color: #ffbf65;

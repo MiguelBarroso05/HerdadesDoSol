@@ -250,7 +250,6 @@
                                                     :object="\App\Models\Estate::all()"
                                                     :user="$user"
                                                     :paramter="$user->fav_estate"
-                                                    :optionText="'name'"
                                                 />
                                                 @error('fav_estate')
                                                 <div class="hs-invalid-feedback">{{ $message }}</div>
