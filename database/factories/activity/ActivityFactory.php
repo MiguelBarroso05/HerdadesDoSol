@@ -26,10 +26,9 @@ class ActivityFactory extends Factory
             'max_participants' => $this->faker->numberBetween(10, 30),
             'participants' => $this->faker->numberBetween(0, 30),
             'adult_activity' => $this->faker->boolean(),
-            'date' => $this->faker->date(),
+            'date' => $this->faker->dateTimeBetween('now', '+1 week')->format('Y-m-d'),
             'time' => $this->faker->time(),
             'duration' => $this->faker->numberBetween(30, 120),
-            
             'description' => $this->faker->sentence(15),
             'img' => null,
         ];

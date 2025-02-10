@@ -57,9 +57,9 @@ class ProductFactory extends Factory
     {
         $types = ['Red', 'White', 'Rosé', 'Sparkling', 'Dessert'];
         $vintage = $this->faker->numberBetween(2015, 2023);
-        
+
         $product->name = "{$this->faker->lastName} Estate {$this->faker->randomElement($types)} {$vintage}";
-        $product->description = "Premium {$this->faker->randomElement($types)} wine with notes of " . 
+        $product->description = "Premium {$this->faker->randomElement($types)} wine with notes of " .
                               $this->faker->randomElement(['blackberries', 'citrus', 'vanilla', 'oak', 'spices']);
         $product->price = $this->faker->numberBetween(15, 80);
     }
@@ -68,7 +68,7 @@ class ProductFactory extends Factory
     {
         $infusion = $this->faker->randomElement(['Lemon', 'Garlic', 'Chili', 'Truffle', 'Herbs']);
         $product->name = "Extra Virgin Olive Oil with {$infusion}";
-        $product->description = "Cold-pressed olive oil infused with " . 
+        $product->description = "Cold-pressed olive oil infused with " .
                               $this->faker->randomElement(['organic', 'fresh', 'natural']) . " {$infusion}";
         $product->price = $this->faker->numberBetween(10, 40);
     }
@@ -77,7 +77,7 @@ class ProductFactory extends Factory
     {
         $types = ['Wildflower', 'Lavender', 'Eucalyptus', 'Orange Blossom', 'Acacia'];
         $formats = ['Raw Honey', 'Creamed Honey', 'Comb Honey', 'Infused Honey'];
-        
+
         $product->name = "{$this->faker->randomElement($types)} {$this->faker->randomElement($formats)}";
         $product->description = "Unprocessed honey harvested from {$this->faker->randomElement(['mountain', 'valley', 'forest'])} regions, " .
                               "containing natural {$this->faker->randomElement(['pollen', 'propolis', 'royal jelly'])}";
@@ -88,7 +88,7 @@ class ProductFactory extends Factory
     {
         $items = ['Coaster Set', 'Cork Bowl', 'Wall Art', 'Journal', 'Placemat'];
         $details = ['Hand-carved', 'Sustainable', 'Artisanal', 'Recycled'];
-        
+
         $product->name = "{$this->faker->randomElement($details)} Cork {$this->faker->randomElement($items)}";
         $product->description = "Eco-friendly cork product featuring {$this->faker->randomElement(['traditional patterns', 'modern design', 'natural texture'])} " .
                               "made by {$this->faker->randomElement(['local artisans', 'master craftsmen', 'family workshops'])}";
@@ -99,7 +99,7 @@ class ProductFactory extends Factory
     {
         $products = ['Body Butter', 'Soap Bar', 'Face Cream', 'Lip Balm', 'Shampoo Bar'];
         $ingredients = ['Argan Oil', 'Shea Butter', 'Aloe Vera', 'Essential Oils', 'Beeswax'];
-        
+
         $product->name = "Organic {$this->faker->randomElement($products)} with {$this->faker->randomElement($ingredients)}";
         $product->description = "Chemical-free cosmetic made with {$this->faker->randomElement(['cold-pressed', 'wild-harvested', 'fair-trade'])} " .
                               "ingredients for {$this->faker->randomElement(['sensitive skin', 'deep hydration', 'natural glow'])}";
@@ -110,10 +110,11 @@ class ProductFactory extends Factory
     {
         $items = ['Wooden Tray', 'Linen Set', 'Ceramic Vase', 'Candle Holder', 'Throw Pillow'];
         $styles = ['Rustic', 'Farmhouse', 'Mediterranean', 'Bohemian'];
-        
+
         $product->name = "{$this->faker->randomElement($styles)} Style {$this->faker->randomElement($items)}";
         $product->description = "Handcrafted decor piece combining {$this->faker->randomElement(['natural materials', 'traditional techniques', 'modern functionality'])} " .
                               "with {$this->faker->randomElement(['earth tones', 'textured finishes', 'artisanal details'])}";
         $product->price = $this->faker->numberBetween(20, 100);
     }
+
 }
