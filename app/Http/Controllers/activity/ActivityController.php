@@ -17,15 +17,16 @@ class ActivityController extends Controller
         if ($search_param) {
             $activities = Activity::with('activity_types')
                 ->where('name', 'like', '%' . $search_param . '%')
-                ->paginate(8);
+                ->paginate(6);
 
             if ($activities->isEmpty()){
-                session()->flash('warning_activities', 'Nothing to show with "' . $search_param . '".');
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('activities.index');
             }
             return view('pages.activities.activities', compact('activities', 'search_param'));
 
         } else {
-            $activities = Activity::with('activity_types')->paginate(8);
+            $activities = Activity::with('activity_types')->paginate(6);
             return view('pages.activities.activities', compact('activities'));
         }
     }
@@ -52,7 +53,7 @@ class ActivityController extends Controller
             }
             return redirect()->route('activities.index')->with('success', 'Activity Type created successfully');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'error while creating activity');
         }
     }
 
@@ -90,6 +91,6 @@ class ActivityController extends Controller
     public function destroy(Activity $activity)
     {
         $activity->delete();
-        return redirect()->route('activities.index');
+        return redirect()->route('activities.index')->with('success', 'Activity deleted successfully');
     }
 }

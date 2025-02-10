@@ -24,6 +24,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('accommodation_type_id')->constrained();
             $table->foreignId('estate_id')->constrained();
+            $table->string('name');
             $table->integer('size');
             $table->decimal('price', 8, 2);
             $table->timestamps();

@@ -47,11 +47,11 @@
 <x-confirm-deletion modalId="confirmDeletion{{$address->id}}"
                     title="CONFIRM DELETION"
                     message="Are you sure you want to delete {{$address->pivot->addressIdentifier}} address?"
-                    route="{{route('users.destroyUserAddress', ['user'=>auth()->user(), 'address'=>$address])}}"
+                    route="{{route('users.destroyUserAddress', ['user'=>$user, 'address'=>$address])}}"
                     prevModalId="addressModal{{$address->id}}"/>
 
 <livewire:edit-address-form
-    :user="auth()->user()"
+    :user="$user"
     :address="$address"/>
 @push('js')
     <script>

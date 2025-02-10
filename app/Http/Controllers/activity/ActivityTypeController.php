@@ -5,16 +5,33 @@ namespace App\Http\Controllers\activity;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\activity\ActivityTypeRequest;
 use App\Models\activity\ActivityType;
+use Illuminate\Http\Request;
 
 class ActivityTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $activity_types = ActivityType::withoutTrashed()->paginate(8);
-        return view('pages.activity_types.activity_types', compact('activity_types'));
+        $search_param = $request->query('search_activity_types');
+
+        if ($search_param) {
+
+            $activity_types = ActivityType::withoutTrashed()
+                ->where('name', 'like', '%' . $search_param . '%')
+                ->paginate(6);
+
+            if ($activity_types->isEmpty()){
+                session()->flash('warning', 'Nothing to show with "' . $search_param . '".');
+                return redirect()->route('activity_types.index');
+            }
+            return view('pages.activity_types.activity_types', compact('activity_types', 'search_param'));
+        }
+        else{
+            $activity_types = ActivityType::withoutTrashed()->paginate(6);
+            return view('pages.activity_types.activity_types', compact('activity_types'));
+        }
     }
 
     /**
@@ -37,7 +54,7 @@ class ActivityTypeController extends Controller
             return redirect()->route('activity_types.index')->with('success', 'Activity Type created successfully');
         }
         catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'error while creating activity type');
         }
     }
 
@@ -68,7 +85,7 @@ class ActivityTypeController extends Controller
             return redirect()->route('activity_types.index')->with('success', 'Activity Type updated successfully');
         }
         catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'error while updating the activity type');
         }
     }
 
@@ -78,6 +95,6 @@ class ActivityTypeController extends Controller
     public function destroy(ActivityType $activity_type)
     {
         $activity_type->delete();
-        return redirect()->route('activity_types.index');
+        return redirect()->route('activity_types.index')->with('success', 'Activity Type deleted successfully');
     }
 }

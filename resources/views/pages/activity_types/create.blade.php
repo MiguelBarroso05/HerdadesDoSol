@@ -8,7 +8,7 @@
     <div class="col-admin">
         <div class="hs-container-fluid hs-py-4 hs-mt-8">
             <div class="hs-row hs-justify-content-center">
-                <div class="hs-col-md-8">
+                <div class="hs-col-md-6">
                     <form method="POST" action="{{route('activity_types.store')}}"
                           enctype="multipart/form-data">
                         @csrf
@@ -27,21 +27,13 @@
                             </div>
                         </div>
 
-                        <!-- Error Messages -->
-                        <x-general-errors />
-
                         <!-- Activity Type Information Card -->
                         <div class="hs-card">
                             <div class="hs-card-header hs-pb-0">
                                 <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
                                     <p class="hs-mb-0">Create Activity Type</p>
-                                    <!-- Action Buttons -->
-                                    <div>
-                                        <!-- Create button -->
-                                        <x-custom-button type="create" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('activity_types.index') }}"/>
-                                    </div>
+                                        <x-custom-button type="cancelIcon" route="{{ route('activity_types.index') }}"/>
                                 </div>
                             </div>
 
@@ -62,6 +54,10 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="hs-col-md-6">
+                                    <!-- Create button -->
+                                    <x-custom-button type="create" route={{null}}/>
                                 </div>
                             </div>
                         </div>

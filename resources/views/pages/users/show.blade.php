@@ -2,9 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'User'])
-    <x-custom-alert type="warning" :session="session('warning')" />
-    <x-custom-alert type="success" :session="session('success')" />
-    <x-custom-alert type="error" :session="session('error')" />
+    <x-custom-alert type="warning" :session="session('warning')"/>
+    <x-custom-alert type="success" :session="session('success')"/>
+    <x-custom-alert type="error" :session="session('error')"/>
     <div class="col-admin">
         <!-- Profile Card Section -->
         <div class="hs-card hs-shadow-lg hs-mx-4 hs-card-profile-bottom">
@@ -53,70 +53,104 @@
                         <div class="hs-card-body hs-d-flex hs-align-items-center hs-justify-content-center">
                             <div class="hs-w-100">
                                 <p class="hs-text-uppercase hs-text-sm">Basic Information</p>
-                                <div class="hs-row">
+                                <div class="row flex justify-between">
+                                    <!-- First name -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>First name:</strong> {{ $user->firstname }}</p>
+                                    </div>
+                                    <!-- Last name -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Last name:</strong> {{ $user->lastname }}</p>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Phone:</strong> {{ $user->phone ?? 'none' }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row flex justify-between">
+                                    <!-- Nationality -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Nationality:</strong> {{ $user->nationality }}</p>
+                                    </div>
+
+                                    <!-- Nif -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Nif:</strong> {{ $user->nif }}</p>
+                                    </div>
+
+                                    <!-- Birth Date -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Birth Date:</strong> {{ $user->birthdate->format('d-m-Y') }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row flex justify-between">
                                     <!-- Email -->
                                     <div class="hs-col-md-6">
                                         <p><strong>Email:</strong> {{ $user->email }}</p>
                                     </div>
-                                    <!-- Nif -->
+
+                                    <!-- Allergies -->
                                     <div class="hs-col-md-6">
-                                        <p><strong>Nif:</strong> {{ $user->nif ?? 'none' }}</p>
+                                        <p>
+                                            <strong>Allergies:</strong> {{ $user->allergies->isNotEmpty() ? $user->allergies->pluck('name')->implode(', ') : 'none' }}
+                                        </p>
                                     </div>
 
-                                    <!-- First name -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>First name:</strong> {{ $user->firstname }}</p>
+                                </div>
+
+                                <div class="row flex justify-between">
+                                    <!-- Prefered Language -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Prefered language:</strong> {{ $user->language()->name }}</p>
                                     </div>
-                                    <!-- Last name -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Last name:</strong> {{ $user->lastname }}</p>
+
+                                    <!-- Group Size -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Group Size:</strong> {{ $user->standard_group }}</p>
                                     </div>
-                                    <!-- Birth Date -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Birth Date:</strong> {{ $user->birthdate->format('d-m-Y') }}</p>
+
+                                    <!-- Childreen -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Children:</strong> {{ $user->children }}</p>
                                     </div>
-                                    <!-- Phone -->
-                                    <div class="hs-col-md-6">
-                                        <p><strong>Phone:</strong> {{ $user->phone ?? 'none' }}</p>
+                                </div>
+
+                                <div class="row flex justify-between">
+                                    <!-- Favorite estate -->
+                                    <div class="hs-col-md-3">
+                                        <p><strong>Favorite Estate:</strong> {{ $user->fav_estate() ??  'none' }}</p>
                                     </div>
+
                                     @if($user->user_roles->first()->name != 'admin')
                                         <!-- Balance -->
-                                        <div class="hs-col-md-6">
+                                        <div class="hs-col-md-3">
                                             <p><strong>Balance:</strong> {{ $user->balance }}</p>
                                         </div>
                                     @endif
+
+                                    <div class="hs-col-md-3">
+                                    </div>
                                 </div>
 
                                 <!-- Divider -->
                                 <hr class="hs-horizontal hs-dark">
-
-                                <p class="hs-text-uppercase hs-text-sm">Address Information</p>
-                                @if($user->addresses->count() >= 1)
-                                    <div class="hs-row">
-                                        <!-- Country -->
-                                        <div class="hs-col-md-6">
-                                            <p><strong>Country:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->country ?? auth()->user()->addresses()->first()->country }}</p>
-                                        </div>
-                                        <!-- City -->
-                                        <div class="hs-col-md-6">
-                                            <p><strong>City:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->city ?? auth()->user()->addresses()->first()->city}}</p>
-                                        </div>
-                                        <!-- Address -->
-                                        <div class="hs-col-md-6">
-                                            <p><strong>Street:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first() ?
-                                                    limit_word(auth()->user()->addresses()->wherePivot('isFavorite', true)->first()->street, 35, false) :
-                                                    limit_word(auth()->user()->addresses()->first()->street, 35, false) }}</p>
-                                        </div>
-                                        <!-- Postal code -->
-                                        <div class="hs-col-md-6">
-                                            <p><strong>Postal code:</strong> {{$user->addresses()->wherePivot('isFavorite', true)->first()->zipcode ?? auth()->user()->addresses()->first()->zipcode}}
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="hs-row">
-                                        <p>Address not defined</p>
-                                    </div>
-                                @endif
+                                <livewire:show-addresses :user="$user"/>
+                                @foreach($user->addresses as $address)
+                                    <x-show-address-modal :address="$address" :user="$user"/>
+                                    @push('js')
+                                        <script>
+                                            document.getElementById('clickableDiv{{$address->id}}').addEventListener('click', function () {
+                                                let modal = new bootstrap.Modal(document.getElementById('addressModal{{$address->id}}'));
+                                                modal.show();
+                                            });
+                                        </script>
+                                    @endpush
+                                @endforeach
+                                <livewire:address-form :user="$user" :modalIdName="'clientAddAddressModal'"
+                                                       :redirectUrl="url()->current()"/>
                             </div>
                         </div>
                     </div>

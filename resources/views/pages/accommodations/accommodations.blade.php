@@ -13,6 +13,10 @@
                     <div class="hs-card hs-mb-4">
                         <div class="hs-card-header hs-pb-0 hs-d-flex hs-justify-content-between">
                             <h6>Accommodations Table</h6>
+
+                            <!-- Search Bar -->
+                            <x-search-bar :searchbarName="'search_accommodations'" />
+
                             <!-- Create New button -->
                             <x-custom-button type="createNew" route="{{ route('accommodations.create') }}"/>
                         </div>
