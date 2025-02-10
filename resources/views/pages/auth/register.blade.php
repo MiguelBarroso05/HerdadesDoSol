@@ -64,7 +64,7 @@
                                             <label class="hs-form-check-label">
                                                 Birth Date:
                                             </label>
-                                            <input type="date" name="birthdate" class="hs-form-control" placeholder="Birth Date" aria-label="Birth Date" value="{{ old('birthdate') }}">
+                                            <input type="date" name="birthdate" class="hs-form-control"  min="1900-01-01" max="2999-12-31" placeholder="Birth Date" aria-label="Birth Date" value="{{ old('birthdate') }}">
                                             @error('birthdate') <p class='hs-text-danger hs-text-xs hs-pt-1'>{{ $message }}</p> @enderror
                                         </div>
                                     </div>

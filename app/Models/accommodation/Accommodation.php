@@ -4,6 +4,7 @@ namespace App\Models\accommodation;
 
 use App\Models\Estate;
 use App\Models\Reservation;
+use App\Models\Accommodation\AccommodationType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

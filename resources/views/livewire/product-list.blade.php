@@ -1,4 +1,4 @@
-<div class="hs-bg-card hs-p-4 hs-px-9 hs-rounded-3">
+<div class="hs-bg-card hs-p-4 hs-px-9 hs-rounded-3 mb-3">
     <h3>Products</h3>
     <div class="grid grid-cols-4 gap-8 ">
         @foreach ($products as $product)

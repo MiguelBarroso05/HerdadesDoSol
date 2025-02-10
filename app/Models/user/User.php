@@ -108,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function billing()
     {
-        return $this->hasOne(Billing::class);
+        return $this->hasOne(Billing::class)->where('status', 0);
     }
 
     public function paymentMethods(){
@@ -117,7 +117,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function orders()
     {
-        return $this->hasMany(Order::class)
-            ->whereHas('products');
+        return $this->hasMany(Order::class);
+    }
+
+    public function reservations(){
+        return $this->hasMany(Reservation::class);
     }
 }

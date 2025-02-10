@@ -30,7 +30,7 @@ class AccommodationTypeController extends Controller
             return view('pages.accommodation_types.accommodation_types', compact('accommodation_types', 'search_param'));
         }
         else{
-            $accommodation_types = ActivityType::withoutTrashed()->paginate(6);
+            $accommodation_types = AccommodationType::withoutTrashed()->paginate(6);
             return view('pages.accommodation_types.accommodation_types', compact('accommodation_types'));
         }
     }
@@ -55,7 +55,7 @@ class AccommodationTypeController extends Controller
             if ($request->hasFile('img')) {
                 $img = $request->file('img');
                 $filename = $accommodation_type->id . '_' . preg_replace('/\s+/', '', $accommodation_type->name) . '.' . $img->getClientOriginalExtension();
-                $url = $img->storeAs('accommodation_types', $filename, 'public');
+                $url = $img->storeAs('accommodation_type', $filename, 'public');
                 $accommodation_type->img = $url;
                 $accommodation_type->save();
             }

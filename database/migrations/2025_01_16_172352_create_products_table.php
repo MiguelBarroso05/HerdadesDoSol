@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->integer('stock');
             $table->string('image')->nullable();
-            $table->string('category_id')->constrained('categories');
+            $table->string('category_id')->constrained('categories')->onDelete('cascade');
             $table->unsignedInteger('estate_id')->constrained('estates');
             $table->timestamps();
             $table->softDeletes();

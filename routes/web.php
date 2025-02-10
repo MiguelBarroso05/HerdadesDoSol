@@ -66,7 +66,9 @@ Route::prefix('cart')->group(function () {
 | General Routes
 |--------------------------------------------------------------------------
 */
+Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
 Route::get('/accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
+Route::get('/activities', [ActivityController::class, 'clientIndex'])->name('activities.client.index');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/account/verify/{id}', [UserController::class, 'verify'])->name('account.verify');
 
@@ -80,12 +82,12 @@ Route::prefix('email')->group(function () {
     Route::get('/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
         return redirect('/');
-    })->middleware(['signed'])->name('verification.verify');
+    })->middleware(['signed', 'auth'])->name('verification.verify');
     Route::post('/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('success', 'Verification link sent!');
-    })->middleware([ 'throttle:6,1'])->name('verification.send');
+    })->middleware(['throttle:6,1'])->name('verification.send');
 });
 
 /*
@@ -115,9 +117,9 @@ Route::middleware('guest')->group(function () {
 */
 Route::middleware(['auth', 'verified'])->group(function () {
     # Reservations and Checkout
-    Route::get('/reservation', [ReservationController::class, 'create'])->name('reservation.create');
     Route::resource('orders', OrderController::class)->except(['index']);
     Route::resource('products', ProductController::class)->except(['index']);
+    Route::get('order-confirmation', fn() => view('auth.order-confirmation'))->name('order-confirmation');
 
     Route::get('/checkout', function () {
         return view('pages.checkout.index', ['isReservation' => request('isReservation', false)]);
@@ -130,6 +132,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/personal-info/{user}', [UserController::class, 'update'])->name('personal-info.update');
     Route::get('/payment-methods', fn() => view('pages.client.payment-methods'))->name('payment-methods');
     Route::get('/orders', fn() => view('pages.client.orders'))->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::get('/wishlist', fn() => view('pages.client.wishlist'))->name('wishlist');
     Route::get('/history', fn() => view('pages.client.history'))->name('history');
     Route::get('/reviews', fn() => view('pages.client.reviews'))->name('reviews');
@@ -167,12 +171,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('accommodation_types', AccommodationTypeController::class);
 
         # Activity Management
-        Route::resource('activities', ActivityController::class);
+        Route::resource('admin/activities', ActivityController::class);
         Route::resource('activity_types', ActivityTypeController::class);
 
         #Routes Categories
         Route::resource('categories', CategoryController::class)->except(['show']);
 
+        #Routes Products
+        Route::get('/admin/products', [ProductController::class, 'adminIndex'])->name('products.admin.index');
+        Route::get('/admin/products/create', [ProductController::class, 'adminCreate'])->name('products.admin.create');
+        Route::post('/admin/products', [ProductController::class, 'adminStore'])->name('products.admin.store');
+        Route::get('/admin/products/{product}', [ProductController::class, 'adminShow'])->name('products.admin.show');
+        Route::get('/admin/products/{product}/edit', [ProductController::class, 'adminEdit'])->name('products.admin.edit');
+        Route::put('/admin/products/{product}', [ProductController::class, 'adminUpdate'])->name('products.admin.update');
+        Route::delete('/admin/products/{product}', [ProductController::class, 'adminDestroy'])->name('products.admin.destroy');
 
     });
 });

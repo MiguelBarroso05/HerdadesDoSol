@@ -96,7 +96,8 @@ class CreateReservation extends Component
     public function mount()
     {
         $this->user = auth()->user();
-        if ($this->user->fav_estate) {
+
+        if ($this->user && $this->user->fav_estate) {
             $this->favEstate = $this->user->fav_estate;
         }
         $this->estates = Estate::all();
@@ -124,6 +125,7 @@ class CreateReservation extends Component
                 'activities' => $this->selectedActivities,
             ];
         } catch (\Exception $e) {
+
             $this->dispatch('error');
            return redirect()->back()->with('error', $e->getMessage());
 
@@ -137,7 +139,6 @@ class CreateReservation extends Component
             'group_size' => 'required|numeric|min:1|max:8',
             'children' => 'required|numeric|min:0|max:8',
             'activities' => 'nullable|array',
-            'activities.*' => 'exists:activities,id'
         ]);
 
         if ($validator->fails()) {

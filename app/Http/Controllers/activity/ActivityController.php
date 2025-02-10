@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    public function clientIndex()
+    {
+        $activities = Activity::all();
+        return view('pages.client.activities.index', compact('activities'));
+    }
     public function index(Request $request)
     {
         $search_param = $request->query('search_activities');
@@ -42,6 +47,7 @@ class ActivityController extends Controller
         $validated = $request->validated();
         try {
             $activity = new Activity($validated);
+            $activity->fill($request->all());
             $activity->save();
 
             if ($request->hasFile('img')) {
@@ -70,6 +76,7 @@ class ActivityController extends Controller
 
     public function update(ActivityRequest $request, $id)
     {
+        dd($request);
         $activity = Activity::findOrFail($id);
         try {
             $validated = $request->validated();
@@ -80,6 +87,7 @@ class ActivityController extends Controller
                 $url = $img->storeAs('activities', $filename, 'public');
                 $dataToUpdate['img'] = $url;
             }
+
             $activity->update($dataToUpdate);
 
             return redirect()->route('activities.index')->with('success', 'Activity updated successfully');

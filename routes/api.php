@@ -4,7 +4,9 @@ use App\Http\Controllers\Api\EstateController;
 use App\Http\Controllers\Api\AccommodationController;
 use App\Http\Controllers\Api\ActivityController;
 use App\Http\Controllers\Api\PaymentMethodController;
+use App\Http\Controllers\Api\ReservationController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 #Routes !Auth
@@ -36,4 +38,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/payment-methods', [PaymentMethodController::class, 'store']);
     Route::delete('/payment-methods/{id}', [PaymentMethodController::class, 'destroy']);
     Route::post('/payment-methods/{id}/set-default', [PaymentMethodController::class, 'setDefault']);
+
+    #Routes Book
+    Route::middleware('auth:sanctum')->post('/book-reservation', [ReservationController::class, 'book']);
+    Route::middleware('auth:sanctum')->get('/trips', [ReservationController::class, 'getUserTrips']);
+
+    #Routes Notifications
+    Route::get('/notifications', [NotificationController::class, 'getUnreadNotifications']);
+    Route::post('/notifications/mark-read', [NotificationController::class, 'markNotificationsAsRead']);
 });

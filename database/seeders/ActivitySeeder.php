@@ -31,22 +31,6 @@ class ActivitySeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'activity_type_id' => 1,
-                'name' => 'Hiking2',
-                'description' => 'Explore beautiful trails',
-                'img' => '/activities/1_Hiking.jpg',
-                'estate_id' => 1,
-                'price' => 50.00,
-                'max_participants' => 10,
-                'participants' => 0,
-                'adult_activity' => true,
-                'date' => '2025-02-10',
-                'time' => '19:00',
-                'duration' => 30,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'activity_type_id' => 2,
                 'name' => 'Cooking Class',
                 'description' => 'Learn to cook amazing dishes',

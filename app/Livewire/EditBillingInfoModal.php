@@ -34,7 +34,9 @@ class EditBillingInfoModal extends Component
 
     public function mount()
     {
-        $this->userBillingInfo = Billing::where('user_id', auth()->id())->first();
+        $this->userBillingInfo = Billing::where('user_id', auth()->id())
+            ->where('status', 0)
+            ->first();
         if (!$this->userBillingInfo) {
             return;
         }

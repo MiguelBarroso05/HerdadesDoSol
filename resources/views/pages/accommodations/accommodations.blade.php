@@ -21,7 +21,7 @@
                             <a href="{{ route('accommodations.create') }}"
                                class="hs-mx-2"
                                data-toggle="tooltip">
-                                <i class="bi bi-house-add-fill hs-fs-3"></i>
+                                <i class="bi bi-plus-circle hs-fs-3"></i>
                             </a>
                         </div>
                         <div class="hs-card-body hs-px-0 hs-pt-0 hs-pb-2">
@@ -32,6 +32,9 @@
                                     <tr>
                                         <th class="hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                             Accommodation
+                                        </th>
+                                        <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
+                                            Estate
                                         </th>
                                         <th class="hs-text-center hs-text-uppercase hs-text-secondary hs-text-xxs hs-font-weight-bolder hs-opacity-7">
                                             Type
@@ -63,6 +66,11 @@
                                                         <h6 class="hs-mb-0 hs-text-sm">{{ $accommodation->name }}</h6>
                                                     </div>
                                                 </div>
+                                            </td>
+                                            <!-- Estate Name -->
+                                            <td class="hs-align-middle hs-text-center">
+                                                <span
+                                                    class="hs-text-secondary hs-text-xs hs-font-weight-bold">{{$accommodation->estate->name}}</span>
                                             </td>
                                             <!-- Type Name -->
                                             <td class="hs-align-middle hs-text-center">
@@ -106,23 +114,4 @@
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script>
-            <!-- Script to auto-hide the success message -->
-            document.addEventListener('DOMContentLoaded', function () {
-                const successAlert = document.getElementById('success-alert');
-
-                if (successAlert) {
-                    setTimeout(() => {
-                        successAlert.classList.remove('show');
-                        successAlert.classList.add('fade');
-                        setTimeout(() => {
-                            successAlert.remove();
-                        }, 300); // Fade-out animation
-                    }, 3000); // 3 seconds
-                }
-            });
-        </script>
-    @endpush
 @endsection

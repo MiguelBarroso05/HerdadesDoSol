@@ -29,7 +29,7 @@
                         <!-- Edit button -->
                         <x-custom-button type="edit" route="{{ route('activities.edit', $activity) }}"/>
                         <!-- Cancel button -->
-                        <x-custom-button type="cancel" route="{{ route('activities.index') }}"/>
+                        <x-custom-button type="cancelIcon" route="{{ route('activities.index') }}"/>
                     </div>
                 </div>
             </div>

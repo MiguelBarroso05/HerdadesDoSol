@@ -17,7 +17,7 @@ class Invoice extends Model
     ];
 
     public function billing(){
-        return $this->belongsTo(Billing::class, 'billing_id');
+        return $this->belongsTo(Billing::class, 'billing_id')->where('status',0);
     }
 
     public function payment_method(){

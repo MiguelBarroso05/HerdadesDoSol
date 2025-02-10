@@ -2,9 +2,9 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Activity'])
-    <x-custom-alert type="warning" :session="session('warning')" />
-    <x-custom-alert type="success" :session="session('success')" />
-    <x-custom-alert type="error" :session="session('error')" />
+    <x-custom-alert type="warning" :session="session('warning')"/>
+    <x-custom-alert type="success" :session="session('success')"/>
+    <x-custom-alert type="error" :session="session('error')"/>
 
     <div class="col-admin">
         <div class="hs-container-fluid hs-py-4 hs-mt-8">
@@ -33,10 +33,8 @@
 
                                     <!-- Action Buttons -->
                                     <div>
-                                        <!-- Create button -->
-                                        <x-custom-button type="create" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('activities.index') }}"/>
+                                        <x-custom-button type="cancelIcon" route="{{ route('activities.index') }}"/>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +61,8 @@
                                                 class="hs-form-control hs-custom-dropdown @error('activity_type_id') hs-is-invalid @enderror"
                                                 name="activity_type_id" id="activity-select">
                                                 @foreach($activity_types as $activity_type)
-                                                    <option value="{{$activity_type->id}}" {{ old('activity_type_id') == $activity_type->id ? 'selected' : '' }}>{{ $activity_type->name }}</option>
+                                                    <option
+                                                        value="{{$activity_type->id}}" {{ old('activity_type_id') == $activity_type->id ? 'selected' : '' }}>{{ $activity_type->name }}</option>
                                                 @endforeach
                                             </select>
                                             @error('activity_type_id')
@@ -87,6 +86,8 @@
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <!-- Create button -->
+
                                     </div>
 
                                     <!-- Activity Description Input -->
@@ -101,6 +102,32 @@
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="hs-col-md-6">
+                                        <div class="hs-form-group">
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Activity Description</label>
+                                            <input type="date"
+                                                class="hs-form-control hs-auto-resize @error('description') hs-is-invalid @enderror"
+                                                name="date" >
+                                            @error('description')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="hs-col-md-6">
+                                        <div class="hs-form-group">
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Activity Description</label>
+                                            <input type="time"
+                                                   class="hs-form-control hs-auto-resize @error('description') hs-is-invalid @enderror"
+                                                   name="time" >
+                                            @error('description')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                        <x-custom-button type="create" route={{null}}/>
                                     </div>
                                 </div>
                             </div>

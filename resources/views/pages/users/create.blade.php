@@ -9,33 +9,34 @@
     <div class="hs-container-fluid hs-py-4 hs-mt-8">
         <div class="hs-row hs-justify-content-center">
             <div class="hs-col-md-8 hs-card">
-                <div class=" hs-card-body hs-p-3">
-                    <div class="hs-row hs-gx-4">
-                        <!-- User Image Section -->
-                        <div class="hs-col-auto">
-                            <div class="hs-avatar hs-avatar-xl hs-position-relative">
-                                <!-- Display default image if not available -->
-                                <img
-                                    src="{{ asset('/imgs/users/no-image.png') }}"
-                                    alt="profile_image" id="userImagePreview"
-                                    class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- User Information Card -->
                 <div>
                     <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="hs-card-header hs-py-0">
+                        <div class="hs-card-header hs-py-3">
                             <div class="hs-d-flex hs-align-items-center hs-justify-content-between">
                                 <p class="hs-mb-0">Create User</p>
                                 <x-custom-button type="cancelIcon" route="{{ route('users.index') }}"/>
                             </div>
                         </div>
 
-                        <div class="hs-card-body hs-py-5">
+                        <div class=" hs-card-body hs-p-4">
+                            <div class="hs-row hs-gx-4">
+                                <!-- User Image Section -->
+                                <div class="hs-col-auto">
+                                    <div class="hs-avatar hs-avatar-xl hs-position-relative">
+                                        <!-- Display default image if not available -->
+                                        <img
+                                            src="{{ asset('/imgs/users/no-image.png') }}"
+                                            alt="profile_image" id="userImagePreview"
+                                            class="hs-w-100 hs-border-radius-lg hs-shadow-sm">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hs-card-body hs-py-3">
                             <!-- User Information Section -->
                             <p class="hs-text-uppercase hs-text-sm">User Information</p>
                             <div class="hs-row">

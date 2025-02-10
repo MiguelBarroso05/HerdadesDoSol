@@ -54,6 +54,7 @@ return new class extends Migration
             $table->string('nif')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->integer('status')->default(0)->nullable();
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');

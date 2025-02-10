@@ -19,6 +19,7 @@ class Billing extends Model
         'email',
         'phone',
         'nif',
+        'status'
     ];
 
     public function address()

@@ -22,10 +22,19 @@ class BillingAddressInfo extends Component
     {
         $addressId = $this->user->addresses()->first()->id;
 
-        Billing::updateOrCreate(['user_id' => $this->user->id], [
-            'address_id' => $addressId,
-        ]);
+        $billing = Billing::where('user_id', $this->user->id)
+            ->where('status', 0)
+            ->first();
 
+        if (!$billing) {
+            $newBilling = new Billing();
+            $newBilling->address_id = $addressId;
+            $newBilling->save();
+        }
+        else{
+            $billing->address_id = $addressId;
+            $billing->save();
+        }
 
         return redirect()->route('payment-methods');
     }

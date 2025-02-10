@@ -38,7 +38,7 @@
 
 <!-- Create Button -->
 @if($type == "create" )
-    <button type="submit" class="hs-btn hs-btn-sm hs-col-md-4" style="border: 1px solid #437546; background-color: #E0EBDC;">
+    <button type="submit" class="hs-btn hs-btn-sm hs-col-md-4" style="border: 1px solid #437546; background-color: #E0EBDC; width: 190px">
         Create
     </button>
 @endif

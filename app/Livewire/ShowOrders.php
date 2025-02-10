@@ -12,20 +12,20 @@ class ShowOrders extends Component
     public $bookings;
     public $expandedOrderId = null;
 
+    public $expandedBookingId = null;
+
     public function mount(){
         $this->seeBookings = true;
-        $this->orders = auth()->user()->bookingOrders ?? null;
-        $this->bookings = null;
+        $this->orders = auth()->user()->orders ?? null;
+        $this->bookings = auth()->user()->reservations ?? null;
     }
 
     public function showBookings(){
         $this->seeBookings = true;
-        //$this->orders = auth()->user()->bookingOrders ?? null;
     }
 
     public function showOrders(){
         $this->seeBookings = false;
-        $this->orders = auth()->user()->orders ?? null;
     }
 
     public function toggleOrderDetails($orderId)
@@ -33,6 +33,10 @@ class ShowOrders extends Component
         $this->expandedOrderId = $this->expandedOrderId === $orderId ? null : $orderId;
     }
 
+    public function toggleBookingDetails($bookingId)
+    {
+        $this->expandedBookingId = $this->expandedBookingId === $bookingId ? null : $bookingId;
+    }
     public function render()
     {
         return view('livewire.show-orders');

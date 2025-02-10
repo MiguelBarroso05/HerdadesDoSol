@@ -101,7 +101,7 @@
 
             <!-- Products Link -->
             <li>
-                <a href="{{ route('products.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::is('products.index') || Route::is('products.edit') || Route::is('products.create') || Route::is('products.show') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
+                <a href="{{ route('products.admin.index') }}" class="flex items-center hs-p-3 hs-rounded-lg transition-colors {{ Route::is('products.admin.index') || Route::is('products.admin.create') || Route::is('products.admin.show') || Route::is('products.admin.edit') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }} rounded-lg">
                     <i class="bi bi-basket2-fill text-lg"></i>
                     <span class="ml-3">Products</span>
                 </a>

@@ -48,10 +48,8 @@
 
                                     <!-- Action Buttons -->
                                     <div>
-                                        <!-- Update button -->
-                                        <x-custom-button type="update" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('activities.index') }}"/>
+                                        <x-custom-button type="cancelIcon" route="{{ route('activities.index') }}"/>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +114,32 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="hs-col-md-6">
+                                        <div class="hs-form-group">
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Activity Description</label>
+                                            <input type="date"
+                                                   class="hs-form-control hs-auto-resize @error('date') hs-is-invalid @enderror"
+                                                   name="date" value="{{$activity->date}}">
+                                            @error('date')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="hs-col-md-6">
+                                        <div class="hs-form-group">
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Activity Description</label>
+                                            <input type="time"
+                                                   class="hs-form-control hs-auto-resize @error('time') hs-is-invalid @enderror"
+                                                   name="time" value="{{$activity->time}}">
+                                            @error('time')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                        <!-- Update button -->
+                                        <x-custom-button type="update" route={{null}}/>
                                 </div>
                             </div>
                         </div>

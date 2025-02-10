@@ -13,7 +13,7 @@
                     <!-- accommodation image -->
                     <div class="hs-col-auto">
                         <div class="hs-avatar hs-avatar-xl hs-position-relative">
-                            <img src="{{ $accommodation->accommodation_types->img ? asset('storage/'.$accommodation->accommodation_types->img) : asset('/imgs/users/no-image.png') }} "
+                            <img src="{{ $accommodation->accommodationType->img ? asset('storage/'.$accommodation->accommodationType->img) : asset('/imgs/users/no-image.png') }} "
                                  alt="profile_image" class="w-100 hs-border-radius-lg hs-shadow-sm">
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <!-- Edit button-->
                         <x-custom-button type="edit" route="{{ route('accommodations.edit', $accommodation) }}"/>
                         <!-- Cancel -->
-                        <x-custom-button type="cancel" route="{{ route('accommodations.index') }}"/>
+                        <x-custom-button type="cancelIcon" route="{{ route('accommodations.index') }}"/>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                                     </div>
                                     <!-- Type -->
                                     <div class="hs-col-md-6">
-                                        <p><strong>Type:</strong> {{ $accommodation->accommodation_types->name }}</p>
+                                        <p><strong>Type:</strong> {{ $accommodation->accommodationType->name }}</p>
                                     </div>
                                     <!-- Size -->
                                     <div class="hs-col-md-6">

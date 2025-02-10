@@ -34,10 +34,8 @@
                                     <p class="hs-mb-0">Create Accommodation Type</p>
                                     <!-- Action Buttons -->
                                     <div>
-                                        <!-- Create button -->
-                                        <x-custom-button type="create" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{ route('accommodation_types.index') }}"/>
+                                        <x-custom-button type="cancelIcon" route="{{ route('accommodation_types.index') }}"/>
                                     </div>
                                 </div>
                             </div>
@@ -63,6 +61,10 @@
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div>
+                                        <!-- Create button -->
+                                        <x-custom-button type="create" route={{null}}/>
                                     </div>
                                 </div>
                             </div>

@@ -45,8 +45,6 @@
                             <div class="hs-card-header hs-pb-0 rounded-2xl">
                                 <div class="hs-d-flex hs-align-items-center justify-between">
                                     <p class="hs-mb-0">Edit Profile</p>
-                                    <!-- Submit button -->
-                                    <x-custom-button type="update" route="{{null}}" />
                                 </div>
                             </div>
 
@@ -86,6 +84,8 @@
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <!-- Submit button -->
+                                        <x-custom-button type="update" route="{{null}}" />
                                     </div>
                                     <!-- Last name input -->
                                     <div class="hs-col-md-6">

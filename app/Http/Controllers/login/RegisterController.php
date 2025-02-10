@@ -32,7 +32,7 @@ class RegisterController extends Controller
 
         $user = User::create($attributes)->assignRole('client');
 
- 
+
         event(new Registered($user));
 
         return redirect()->route('login');

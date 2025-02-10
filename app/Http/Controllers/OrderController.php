@@ -44,6 +44,7 @@ class OrderController extends Controller
         $invoice->payment_method_id = $request->paymentMethod;
         $invoice->payment_date = now();
         $invoice->save();
+
         $order->user_id = $request->user;
         $order->address_id = $request->address;
         $order->price = $request->total;
@@ -54,16 +55,16 @@ class OrderController extends Controller
                 $order->products()->attach($product['product'], ['quantity' => $product['quantity']]);
             }
         }
-        redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.'); 
+        redirect()->route('orders.index')->with('success', 'Order made successfully.\nWe will contact you soon.');
     }
-    
+
 
     /**
      * Display the specified resource.
      */
     public function show(Order $order)
     {
-        //
+        return view('pages.client.order-detail', compact('order'));
     }
 
     /**

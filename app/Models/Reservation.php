@@ -37,8 +37,9 @@ class Reservation extends Model
         'exit_date',
         'price',
         'status',
+        'invoice_id',
     ];
-   
+
     public function activities()
     {
         return $this->belongsToMany(Activity::class, 'reservation_activities', 'reservation_id', 'activity_id')->withTimestamps();

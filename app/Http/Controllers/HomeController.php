@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\user\User;
 use Illuminate\Support\Facades\DB;
 
@@ -19,11 +20,25 @@ class HomeController extends Controller
         $totalActivities = DB::table('activities')->count();
         $totalAccommodations = DB::table('accommodations')->count();
         $currentYear = now()->year;
-        $lastYearSales = DB::table('sales')->whereYear('created_at', $currentYear - 1)->sum('price');
-        $currentYearSales = DB::table('sales')->whereYear('created_at', $currentYear)->sum('price');
-        $salesIncreasePercentage = $lastYearSales > 0 ? round((($currentYearSales - $lastYearSales) / $lastYearSales) * 100) : 0;
+        $mostReservedAccommodationTypes = DB::table('reservations')
+            ->join('accommodations', 'reservations.accommodation_id', '=', 'accommodations.id')
+            ->join('accommodation_types', 'accommodations.accommodation_type_id', '=', 'accommodation_types.id')
+            ->select('accommodation_types.name', DB::raw('COUNT(*) as total_reservations'))
+            ->groupBy('accommodation_types.name')
+            ->orderByDesc('total_reservations')
+            ->get();
 
-        return view('pages.dashboard', compact('totalUsers', 'newClientsToday', 'totalActivities', 'totalAccommodations', 'salesIncreasePercentage', 'currentYear'));
+        $usersNationalities = User::select('nationality')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('nationality')
+            ->get();
+        $mostSoldProducts = Product::select('products.id', 'products.name', DB::raw('SUM(orders_products.quantity) as total_sold'))
+            ->join('orders_products', 'products.id', '=', 'orders_products.product_id')
+            ->groupBy('products.id', 'products.name')
+            ->orderByDesc('total_sold')
+            ->limit(10)
+            ->get();
+        return view('pages.dashboard', compact('mostSoldProducts','usersNationalities', 'mostReservedAccommodationTypes', 'totalUsers', 'newClientsToday', 'totalActivities', 'totalAccommodations', 'currentYear'));
     }
 
 
@@ -34,18 +49,28 @@ class HomeController extends Controller
      */
     public function salesOverview()
     {
-        $salesData = DB::table('sales')
-            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(price) as total'))
+        // Agrega as vendas (soma de price) por mês, utilizando a tabela 'orders'
+        $ordersData = DB::table('orders')
+            ->select(
+                DB::raw('MONTH(created_at) as month'),
+                DB::raw('SUM(price) as total')
+            )
             ->groupBy('month')
             ->orderBy('month')
+            ->limit(10) // se quiseres limitar a 10 meses (opcional)
             ->get();
 
-        $labels = $salesData->pluck('month')->map(function ($month) {
-            return date('M', mktime(0, 0, 0, $month, 1)); // Convert to (Jan, Feb, etc.)
+        // Converte o número do mês para abreviação (Jan, Feb, etc.)
+        $labels = $ordersData->pluck('month')->map(function ($month) {
+            return date('M', mktime(0, 0, 0, $month, 1));
         });
 
-        $totals = $salesData->pluck('total');
+        // Extrai os totais de vendas por mês
+        $totals = $ordersData->pluck('total');
 
-        return response()->json(['labels' => $labels, 'totals' => $totals,]);
+        return response()->json([
+            'labels' => $labels,
+            'totals' => $totals,
+        ]);
     }
 }

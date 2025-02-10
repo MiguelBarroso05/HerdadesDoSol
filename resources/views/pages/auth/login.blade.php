@@ -44,20 +44,6 @@
                                                 </button>
                                             </div>
                                         </form>
-                                        <form action="{{ route('login.admin') }}">
-                                            <div class="hs-text-center">
-                                                <button type="submit" class="hs-btn hs-btn-lg hs-btn-success hs-w-100 hs-mt-4 hs-mb-0">
-                                                    Admin login
-                                                </button>
-                                            </div>
-                                        </form>
-                                        <form action="{{ route('login.client') }}">
-                                            <div class="hs-text-center">
-                                                <button type="submit" class="hs-btn hs-btn-lg hs-btn-danger hs-w-100 hs-mt-4 hs-mb-0">
-                                                    Client login
-                                                </button>
-                                            </div>
-                                        </form>
                                     </div>
 
                                     <!-- Reset password -->

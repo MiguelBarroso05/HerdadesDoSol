@@ -48,10 +48,8 @@
 
                                     <!-- Action Buttons -->
                                     <div>
-                                        <!-- Update button -->
-                                        <x-custom-button type="update" route={{null}}/>
                                         <!-- Cancel button -->
-                                        <x-custom-button type="cancel" route="{{route('accommodation_types.index')}}"/>
+                                        <x-custom-button type="cancelIcon" route="{{route('accommodation_types.index')}}"/>
                                     </div>
                                 </div>
                             </div>
@@ -67,6 +65,7 @@
                                                accept="image/*">
                                     </div>
 
+
                                     <!-- Accommodation Type Name Input -->
                                     <div class="hs-col-md-6">
                                         <div class="hs-form-group">
@@ -77,6 +76,10 @@
                                             <div class="hs-invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div>
+                                        <!-- Update button -->
+                                        <x-custom-button type="update" route={{null}}/>
                                     </div>
                                 </div>
                             </div>

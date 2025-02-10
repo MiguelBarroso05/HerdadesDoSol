@@ -24,16 +24,16 @@
         </div>
     </div>
     @if($seeBookings && $bookings)
-        @foreach($orders as $order)
-            @php $isExpanded = $expandedOrderId === $order->id;
+        @foreach($bookings as $booking)
+            @php $isExpanded = $expandedBookingId === $booking->id;
             $checkedIn = false;
             $checkedOut = false;
-            if ($order->status != 0 && $order->accommodation->pivot->date_in > now()){
+            if ($booking->status != 0 && $booking->exit_date > now()){
                 $checkedIn = true;
             }
-            if ($order->accommodation->pivot->date_out <= now()){
-                $order->status = 2;
-                $order->save();
+            if ($booking->date_out <= now()){
+                $booking->status = 2;
+                $booking->save();
                 $checkedOut = true;
             }
             @endphp
@@ -42,22 +42,22 @@
                 <div class="hs-col-md-5 hs-d-flex hs-flex-column hs-justify-content-between">
                     <div class="hs-d-flex hs-justify-content-between">
                         <div class="hs-fw-bold hs-fs-5">
-                            <span class="text-secondary">Order nº</span> <span class="uppercase">{{$order->id}}</span>
+                            <span class="text-secondary">Order nº</span> <span class="uppercase">{{$booking->id}}</span>
                         </div>
                         <div>
-                            <p>{{$order->created_at}}</p>
+                            <p>{{$booking->created_at}}</p>
                         </div>
                     </div>
-                    <span class="text-secondary">{{$order->estate->name}}</span>
+                    <span class="text-secondary">{{$booking->estate->name}}</span>
                     <div>
-                        @if($order->status == 0)
+                        @if($booking->status == 0)
                             <x-custom-badge text="Canceled" backgroundColor="#FFCACA" color="#D70000"/>
-                        @elseif($order->status == 1)
+                        @elseif($booking->status == 1)
                             <x-custom-badge text="In Progress" backgroundColor="#FFEBC6" color="#FFB427"/>
-                        @elseif($order->status == 2)
-                            <x-custom-badge text="Completed" backgroundColor="#E0EBDC" color="#437546"/>
-                        @elseif($order->status == 3)
+                        @elseif($booking->status == 2)
                             <x-custom-badge text="Reserved" backgroundColor="white" color="black"/>
+                        @elseif($booking->status == 3)
+                            <x-custom-badge text="Completed" backgroundColor="#E0EBDC" color="#437546"/>
                         @endif
                     </div>
                     @if($isExpanded)
@@ -101,7 +101,8 @@
 
                 <div class="hs-col-md-5">
                     <div class="hs-d-flex hs-justify-content-end">
-                        <a type="button" wire:click="toggleOrderDetails('{{ $order->id }}')" style="margin-left: 20px;">
+                        <a type="button" wire:click="toggleBookingDetails('{{ $booking->id }}')"
+                           style="margin-left: 20px;">
                             <i class="bi @if($isExpanded) bi-dash @else bi-plus @endif hs-box-icon"></i>
                         </a>
                     </div>
@@ -110,26 +111,26 @@
                             <div class="hs-row">
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Estate Address</p>
-                                    <p class="text-xs mb-1">{{$order->estate->name}}</p>
-                                    <p class="text-xs mb-1">{{$order->estate->address->zipcode}}
-                                        , {{$order->estate->address->city}}</p>
-                                    <p class="text-xs mb-1">{{$order->estate->address->country}}</p>
+                                    <p class="text-xs mb-1">{{$booking->estate->name}}</p>
+                                    <p class="text-xs mb-1">{{$booking->estate->address->zipcode}}
+                                        , {{$booking->estate->address->city}}</p>
+                                    <p class="text-xs mb-1">{{$booking->estate->address->country}}</p>
                                 </div>
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Billing Address</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->street}}</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->zipcode}}
-                                        , {{$order->invoice->billing->address->city}}</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->billing->address->country}}</p>
+                                    <p class="text-xs mb-1">{{$booking->invoice->billing->address->street}}</p>
+                                    <p class="text-xs mb-1">{{$booking->invoice->billing->address->zipcode}}
+                                        , {{$booking->invoice->billing->address->city}}</p>
+                                    <p class="text-xs mb-1">{{$booking->invoice->billing->address->country}}</p>
                                 </div>
                             </div>
                             <div class="hs-row">
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Order Amount</p>
-                                    <p class="text-xs mb-1">{{$order->price}} €</p>
-                                    <p class="text-xs mb-1">{{$order->invoice->payment_method->type}} ending
-                                        in {{$order->invoice->payment_method->last4}}</p>
-                                    <p class="text-xs mb-1 uppercase">{{$order->invoice->payment_method->name}}</p>
+                                    <p class="text-xs mb-1">{{$booking->price}} €</p>
+                                    <p class="text-xs mb-1">{{$booking->invoice->payment_method->type->name}} ending
+                                        in {{$booking->invoice->payment_method->last4}}</p>
+                                    <p class="text-xs mb-1 uppercase">{{$booking->invoice->payment_method->name}}</p>
                                 </div>
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Actions & Modifications</p>
@@ -180,49 +181,58 @@
                     </div>
                     @if($isExpanded)
                         <div class="hs-d-flex hs-justify-content-between">
-                            <div class="relative">
-                                <div class="border-l-4 border-purple-300 absolute h-36 left-4 top-2"></div>
+                            <div class="flex">
+                                <div class="relative">
+                                    <div class="border-l-4 border-purple-300 absolute h-36 left-4 top-2"></div>
 
-                                <div class="flex items-center mb-4">
-                                    <div
-                                        class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 1 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
-                                        1
-                                    </div>
-                                    <div class="ml-4 flex align-items-center">
+                                    <div class="flex items-center mb-4">
+                                        <div
+                                            class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 1 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
+                                            1
+                                        </div>
+                                        <div class="ml-4 flex align-items-center">
                                         <span
                                             class="font-semibold">Validated at {{$order->created_at->format('d-m-Y')}}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="flex items-center mb-4">
-                                    <div
-                                        class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 2 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
-                                        2
+                                    <div class="flex items-center mb-4">
+                                        <div
+                                            class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 2 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
+                                            2
+                                        </div>
+                                        <div class="ml-4">
+                                            <span class="font-semibold">Prepared</span>
+                                        </div>
                                     </div>
-                                    <div class="ml-4">
-                                        <span class="font-semibold">Prepared</span>
-                                    </div>
-                                </div>
 
-                                <div class="flex items-center mb-4">
-                                    <div
-                                        class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 3 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
-                                        3
-                                    </div>
-                                    <div class="ml-4">
+                                    <div class="flex items-center mb-4">
+                                        <div
+                                            class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 3 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
+                                            3
+                                        </div>
+                                        <div class="ml-4">
                                         <span
                                             class="font-semibold">{{$order->delivered_at ? 'Issued at '. $order->delivered_at->format('d-m-Y') : 'For issuing'}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center">
+                                        <div
+                                            class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 4 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
+                                            4
+                                        </div>
+                                        <div class="ml-4">
+                                            <span class="font-semibold">Delivered</span>
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="ms-8">
+                                    <p class="text-base mb-3">Products List</p>
+                                    @foreach($order->products as $product)
 
-                                <div class="flex items-center">
-                                    <div
-                                        class="w-8 h-8 flex items-center justify-center rounded-full {{ $order->status == 4 ? 'bg-[#437546]' : 'bg-[#1E1E1E]' }} text-white font-bold z-10">
-                                        4
-                                    </div>
-                                    <div class="ml-4">
-                                        <span class="font-semibold">Delivered</span>
-                                    </div>
+                                        <p>{{$product->name}}</p>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -263,14 +273,14 @@
                                 <div class="hs-col-6 content-center">
                                     <p class="text-base mb-3">Actions & Modifications</p>
                                     <div class="w-full">
-                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white"
+                                        <button type="button" class="hs-btn hs-btn-sm  bg-white"
                                                 style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
                                             Print Invoice
                                         </button>
-                                        <button type="submit" class="hs-btn hs-btn-sm  bg-white"
+                                        <a href="{{route('orders.show',$order)}}" class="hs-btn hs-btn-sm  bg-white"
                                                 style="border: solid #D9D9D9 1px; color: black; line-height: 0.5; width: 70%">
                                             Show Details
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

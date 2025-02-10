@@ -17,7 +17,6 @@ class ReservationSelect extends Component
         public string $fixed,
         public string $name,
         public $object,
-        public User $user,
         public $paramter,
         public $optionText,
         public $set,

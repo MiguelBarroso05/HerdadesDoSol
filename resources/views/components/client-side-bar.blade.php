@@ -37,13 +37,13 @@
         <a href="{{ route('wishlist') }}" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('wishlist') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
             <i class="bi bi-star hs-me-3 hs-fs-5"></i>Wishlist
         </a>
-        <a href="{{ route('history') }}" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('history') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+        <a href="" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('history') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
             <i class="bi bi-bookmark hs-me-3 hs-fs-5"></i>History
         </a>
         <a href="{{ route('reviews') }}" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('reviews') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
             <i class="bi bi-chat-left hs-me-3 hs-fs-5"></i>Reviews
         </a>
-        <a href="{{ route('support') }}" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('support') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+        <a href="" class="hs-py-3 hs-px-3 rounded-lg {{ Route::is('support') ? 'bg-primary text-gray-900 hover:bg-primary !important' : 'hover:hs-bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
             <i class="bi bi-wrench hs-me-3 hs-fs-5"></i>Support
         </a>
     </div>

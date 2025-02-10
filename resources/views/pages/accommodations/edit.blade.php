@@ -118,7 +118,21 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="hs-row">
+                                    <!-- Accommodation Description Input -->
+                                    <div class="hs-col-md-12">
+                                        <div class="hs-form-group">
+                                            <label for="example-text-input"
+                                                   class="hs-form-control-label">Description</label>
+                                            <textarea
+                                                class="hs-form-control hs-auto-resize @error('description') is-invalid @enderror"
+                                                name="description" rows="3">{{old('description')}}</textarea>
+                                            @error('description')
+                                            <div class="hs-invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="hs-col-md-6">
                                     <x-custom-button type="update" route={{null}}/>

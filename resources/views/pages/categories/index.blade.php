@@ -21,7 +21,7 @@
                             <a href="{{ route('categories.create') }}"
                                class="hs-mx-2"
                                data-toggle="tooltip">
-                                <i class="bi bi-bookmark-plus hs-fs-3"></i>
+                                <i class="bi bi-plus-circle hs-fs-3"></i>
                             </a>
                         </div>
                         <!-- Category Table -->
