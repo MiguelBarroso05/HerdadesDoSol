@@ -5,6 +5,7 @@ namespace App\Http\Controllers\login;
 // use App\Http\Requests\RegisterRequest;
 use App\Http\Controllers\Controller;
 use App\Models\user\User;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -32,8 +33,9 @@ class RegisterController extends Controller
 
         $user = User::create($attributes)->assignRole('client');
 
-        auth()->login($user);
+ 
+        event(new Registered($user));
 
-        return redirect()->route('account');
+        return redirect()->route('login');
     }
 }

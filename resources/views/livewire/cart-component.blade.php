@@ -1,7 +1,11 @@
 <div x-data="{ open: false }" class="position-relative">
     <!-- Cart Icon that toggles dropdown -->
     <i class="bi bi-cart3" style="cursor:pointer;" wire:click="toggleCart"></i>
-
+    @if (session('cart') &&count(session('cart')) > 0)
+    <div class="absolute top-0 right-1 w-4 h-4 rounded-full bg-red-600 flex justify-center items-center">
+        <p class="text-white m-0" style="font-size: 10px">{{ count(session('cart')) }}</p>
+    </div>
+    @endif
     <!-- Dropdown content -->
     @if ($showCart)
 

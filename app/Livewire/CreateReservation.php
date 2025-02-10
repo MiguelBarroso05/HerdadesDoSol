@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\accommodation\Accommodation;
 use App\Models\activity\Activity;
 use App\Models\Estate;
 use App\Models\Reservation;
@@ -52,10 +53,21 @@ class CreateReservation extends Component
         if (!$estate) {
             return [];
         }
+        if ($this->entryDate && $this->exitDate) {
+            $entry = Carbon::createFromFormat('d/m/Y', $this->entryDate)->format('Y-m-d');
+            $exit = Carbon::createFromFormat('d/m/Y', $this->exitDate)->format('Y-m-d');
 
-        $this->accommodationTypes = $estate->accommodations->map(function ($accommodation) {
-            return $accommodation->accommodation_types;
-        })->unique('id');
+            $this->accommodationTypes = $estate->accommodations()->whereDoesntHave('reservations', function ($q) use ($entry, $exit) {
+                $q->where(function ($innerQuery) use ($entry, $exit) {
+                    $innerQuery->where('exit_date', '>', $entry)
+                               ->where('entry_date', '<', $exit);
+                });
+            })->get()->map(function ($accommodation) {
+                return $accommodation->accommodation_types;
+            })->unique('id');
+
+        }
+
         if (!$this->accommodationTypes->isEmpty()) {
             $this->selectedAccommodationTypeId = $this->accommodationTypes[0]->id;
         }
@@ -133,44 +145,19 @@ class CreateReservation extends Component
             $this->dispatch('error');
             return redirect()->back()->withInput()->with('error', $validator->errors()->first());
         }
+        session()->put('reservation', $data);
+        redirect()->route('checkout', ['isReservation' => true]);
 
-        try {
-            $reservation = new Reservation();
-            $reservation->fill([
-                'estate_id' => $data['estate'],
-                'accommodation_id' => $data['accommodation'],
-                'groupsize' => $data['group_size'],
-                'children' => $data['children'],
-                'entry_date' => $data['entry_date'],
-                'exit_date' => $data['exit_date'],
-                'user_id' => auth()->id(),
-            ]);
-            $total = 0;
-            foreach ($data['activities'] as $activity) {
-                 $activity = Activity::find($activity);
-                 $total += $activity->price;
-            }
-            $reservation->price = $total;
-            $reservation->save();
-        } catch (\Exception $e) {
-            $this->dispatch('error');
-            return redirect()->back()->withInput()->with('error', $e->getMessage());
+        
 
-        }
-        // Adicionar atividades à reserva
-        if (!empty($data['activities'])) {
-            foreach ($data['activities'] as $activity) {
-                $reservation->activities()->attach($activity);
-            }
-        }
-
-        $this->reset();
+        //$this->reset();
         $this->dispatch('error');
         return redirect()->back()->with('success', 'Reservation created successfully');
     }
 
     public function loadData()
     {
+
         if ($this->entryDate == null || $this->exitDate == null || $this->selectedEstateId == null) {
             return;
         }

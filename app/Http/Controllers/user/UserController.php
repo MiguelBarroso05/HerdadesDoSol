@@ -219,4 +219,17 @@ class UserController extends Controller
             $user->save();
         }
     }
+    public function verifyAccount(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+
+        if (!$user) {
+            return redirect()->route('home')->with('error', 'Token invalid');
+        }
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        return redirect()->route('login')->with('success', 'Account verified successfully!');
+    }
 }

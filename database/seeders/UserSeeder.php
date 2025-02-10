@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'birthdate' => '2002-08-13',
             'nationality' => 2,
             'language' => 2,
+            'email_verified_at' => now(),
         ]);
 
         DB::table('users')->insert([
@@ -34,7 +35,8 @@ class UserSeeder extends Seeder
             'language' => 2,
             'standard_group' => 2,
             'children' => 0,
-            'fav_estate' => 1
+            'fav_estate' => 1,
+            'email_verified_at' => now(),
         ]);
 
         User::all()->first()->addresses()->attach(Address::all()->first()->id);
